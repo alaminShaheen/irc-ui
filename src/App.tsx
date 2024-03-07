@@ -8,8 +8,7 @@ function App() {
 
     return (
         <Fragment>
-            <div className="text-red-50 bg-red-500">Tu Madre</div>
-            <div className="">
+            <div className="flex justify-center">
                 <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
                     <img src={viteLogo} className="logo" alt="Vite logo" />
                 </a>
