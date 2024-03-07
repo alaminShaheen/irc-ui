@@ -1,4 +1,5 @@
-import { Fragment, useState } from "react";
+import { useState } from "react";
+import { BrowserRouter, Routes } from "react-router-dom";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
@@ -7,7 +8,11 @@ function App() {
     const [count, setCount] = useState(0);
 
     return (
-        <Fragment>
+        <BrowserRouter>
+            <Routes>
+                {/* Declare Routes here */}
+            </Routes>
+
             <div className="flex justify-center">
                 <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
                     <img src={viteLogo} className="logo" alt="Vite logo" />
@@ -28,7 +33,7 @@ function App() {
             <p className="read-the-docs">
                 Click on the Vite and React logos to learn more
             </p>
-        </Fragment>
+        </BrowserRouter>
     );
 }
 
