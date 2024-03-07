@@ -8,7 +8,8 @@ function App() {
 
     return (
         <Fragment>
-            <div>
+            <div className="text-red-50 bg-red-500">Tu Madre</div>
+            <div className="">
                 <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
                     <img src={viteLogo} className="logo" alt="Vite logo" />
                 </a>
