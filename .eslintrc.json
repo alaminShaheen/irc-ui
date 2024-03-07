@@ -1,0 +1,60 @@
+{
+    "env": {
+        "browser": true,
+        "es2021": true,
+        "node": true,
+        "jest": true
+      },
+    "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:react-hooks/recommended",
+        "plugin:react/recommended",
+        "prettier",
+    ],
+    "ignorePatterns": ["dist", ".eslintrc.cjs"],
+    "parser": "@typescript-eslint/parser",
+    "plugins": ["react-refresh", "@typescript-eslint", "react", "prettier"],
+    "rules": {
+        "react-refresh/only-export-components": ["warn", { "allowConstantExport": true }],
+        "react/react-in-jsx-scope": "off",
+        "no-use-before-define": "off",
+        "@typescript-eslint/no-use-before-define": ["error"],
+        "react/no-unescaped-entities": 0,
+        "react/jsx-filename-extension": [
+        1,
+        {
+            "extensions": [".tsx", ".ts"] // Add .ts extension
+        }
+        ],
+        "no-plusplus": [
+        2,
+        {
+            "allowForLoopAfterthoughts": true
+        }
+        ],
+        "react/jsx-props-no-spreading": "off",
+        "jsx-a11y/no-noninteractive-tabindex": "off",
+        "semi": [1, "always"],
+        "no-trailing-spaces": "error",
+        "react-hooks/rules-of-hooks": "error",
+        "react-hooks/exhaustive-deps": "warn",
+        "no-console": [
+        "error",
+        {
+            "allow": ["warn", "error"]
+        }
+        ],
+        "prettier/prettier": [
+        "error",
+        {
+            "endOfLine": "auto"
+        }
+        ],
+    },
+    "settings": {
+        "import/resolver": {
+            "typescript": {}
+        }
+    }
+}
