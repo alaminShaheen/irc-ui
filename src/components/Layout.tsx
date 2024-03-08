@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { Fragment, ReactNode } from "react";
 import Sidebar from "@/components/Sidebar/Sidebar.tsx";
 
 interface LayoutProps {
@@ -8,10 +8,16 @@ interface LayoutProps {
 const Layout = (props: LayoutProps) => {
   const { children } = props;
   return (
-    <div>
-      <Sidebar/>
-      {children}
-    </div>
+    <Fragment>
+      <div className="grid grid-cols-[120px_1fr] bg-secondary h-screen p-6">
+        <Sidebar/>
+        <div className="w-full px-6">
+          {children}
+        </div>
+      </div>
+
+    {/*  Footer goes here*/}
+    </Fragment>
   );
 };
 

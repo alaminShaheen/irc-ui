@@ -1,42 +1,35 @@
+import { MouseEvent, useCallback, useRef } from "react";
 import { RxHamburgerMenu } from "react-icons/rx";
-import { MouseEvent, useCallback, useRef, useState } from "react";
+
+import Button from "@/components/ui/Button.tsx";
 import SidebarContents from "@/components/Sidebar/SidebarContents.tsx";
 
 const Sidebar = () => {
 
-  const [sidebarOpen, setSidebarOpen] = useState(false);
   const checkboxRef = useRef<HTMLInputElement>(null);
 
   const toggleSidebar = useCallback((event: MouseEvent<HTMLElement>) => {
     event.preventDefault();
-    setSidebarOpen(prev => {
-      if (checkboxRef.current) {
-        checkboxRef.current.checked = !prev;
-        return !prev;
-      }
-      return prev;
-    });
+    if (checkboxRef.current) {
+      checkboxRef.current.checked = !checkboxRef.current.checked;
+    }
   }, []);
 
   return (
-    <div>
-
-      <div className="drawer">
-        <input id="my-drawer" type="checkbox" className="drawer-toggle" ref={checkboxRef} />
-        <div className="drawer-content">
-          {/* Page content here */}
-          <label htmlFor="my-drawer"
-                 className="btn btn-primary flex items-center gap-2 rounded-l-none drawer-button"
-                 onClick={toggleSidebar}>
-            Menu
-            <RxHamburgerMenu size={30} />
-          </label>
-        </div>
-        <div className="drawer-side">
-          <label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay"
-                 onClick={toggleSidebar}></label>
-          <SidebarContents />
-        </div>
+    <div className="drawer w-full">
+      <input id="my-drawer" type="checkbox" className="drawer-toggle" ref={checkboxRef} />
+      <div className="drawer-content">
+        {/* Page content here */}
+        <Button className={"btn-sm btn-primary flex justify-center items-center rounded-r drawer-button w-full px-0 gap-x-2"}
+                onClick={toggleSidebar}>
+          <span>Menu</span>
+          <RxHamburgerMenu size={25} />
+        </Button>
+      </div>
+      <div className="drawer-side">
+        <label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay"
+               onClick={toggleSidebar}></label>
+        <SidebarContents />
       </div>
     </div>
   );
