@@ -56,7 +56,8 @@
 	  "@/utils/*": [
 		"utils/*"
 	  ]
-	}
+	},
+	"allowSyntheticDefaultImports": true
   },
   "include": [
 	"src"

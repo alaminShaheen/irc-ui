@@ -2,6 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+.btn {
+	@apply py-2 px-5 font-bold border-transparent !important;
+}
+
+.btn-primary {
+	@apply bg-primary !important;
+}
 
 :root {
 	font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
