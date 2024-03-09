@@ -18,7 +18,7 @@ const EventCard = () => {
   return (
     <div
       className="event-card border-2 border-primary rounded-md gap-y-3 lg:gap-x-3 flex flex-col lg:flex-row items-start p-3 w-full">
-      <span className="w-12 h-10 bg-gray-300 hidden lg:flex justify-center items-center rounded-md">
+      <span className="w-12 h-10 bg-primary-50 hidden lg:flex justify-center items-center rounded-md">
         <img src={calendar} alt="calendar" width={22} height={22} />
       </span>
 
@@ -26,7 +26,7 @@ const EventCard = () => {
         <div className="w-12 h-10 bg-gray-300 flex justify-center items-center rounded-md">
           <img src={calendar} alt="calendar" width={22} height={22} />
         </div>
-        <div className="flex gap-x-6 text-xs underline">
+        <div className="flex gap-x-6 text-base underline text-primary">
           <Button>Edit</Button>
           <Button>Remove policy</Button>
         </div>
@@ -35,8 +35,8 @@ const EventCard = () => {
 
       <div className="event-details w-full">
         <div className="flex justify-between items-start">
-          <p className="font-bold text-primary">[Event name] - reocuring activity</p>
-          <div className="hidden lg:flex gap-x-3 text-sm underline ">
+          <p className="font-bold text-primary text-xl">[Event name] - reocuring activity</p>
+          <div className="hidden lg:flex gap-x-3 text-base underline text-primary">
             <Button>Edit</Button>
             <Button>Remove policy</Button>
           </div>
@@ -46,7 +46,7 @@ const EventCard = () => {
           <span className="mr-1">
             <img src={calendarTime} alt="calendar" width={20} height={20} />
           </span>
-          <span className="space-x-1 text-xs lg:text-base">
+          <span className="space-x-1 text-base">
             <span className="font-bold text-primary underline">Every Friday</span>
             <span className="text-sm font-thin">from</span>
             <span className="font-bold text-primary underline">10:00 AM</span>
@@ -61,7 +61,7 @@ const EventCard = () => {
           <span className="mr-1">
             <img src={clock} alt="clock" width={20} height={20} />
           </span>
-          <span className="text-primary text-xs lg:text-base">3 hours each</span>
+          <span className="text-primary">3 hours each</span>
         </div>
 
         <div className="border-t border-primary w-full my-1" />
@@ -70,7 +70,7 @@ const EventCard = () => {
           <span className="mr-1">
             <img src={door} alt="door" width={20} height={20} />
           </span>
-          <span className="text-primary text-xs lg:text-base">
+          <span className="text-primary">
             <span className="underline">[Facility name]</span>,
             <span className="underline">[Facility name]</span>,
             <span className="underline">[Facility name]</span>,

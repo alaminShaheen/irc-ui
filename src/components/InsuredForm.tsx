@@ -48,7 +48,7 @@ const InsuredForm = (props: InsuredFormProps) => {
         editModeEnabled ? (
           <form className="flex flex-col gap-y-4" onSubmit={handleSubmit(onFormSubmit)}>
             <div className="flex flex-col">
-              <label htmlFor="name" className="text-xl text-gray-500">Name of Insured:</label>
+              <label htmlFor="name" className="text-xl text-graphite-700">Name of Insured:</label>
               <input  {...register("name", { required: "Name is required" })}
                       id="name"
                       className="input-sm rounded-lg py-5 border-gray-200 border-2 w-full lg:w-1/2"
@@ -62,7 +62,7 @@ const InsuredForm = (props: InsuredFormProps) => {
             </div>
 
             <div className="flex flex-col">
-              <label htmlFor="address" className="text-xl text-gray-500">Address of Insured:</label>
+              <label htmlFor="address" className="text-xl text-graphite-700">Address of Insured:</label>
               <input  {...register("address", { required: "Address is required" })}
                       id="address"
                       className="input-sm rounded-lg py-5 border-gray-200 border-2 w-full lg:w-1/2"
@@ -76,7 +76,7 @@ const InsuredForm = (props: InsuredFormProps) => {
             </div>
 
             <div className="flex flex-col">
-              <label htmlFor="telephone" className="text-xl text-gray-500">Telephone number:</label>
+              <label htmlFor="telephone" className="text-xl text-graphite-700">Telephone number:</label>
               <input  {...register("telephone", { required: "Telephone number is required" })}
                       id="telephone"
                       className="input-sm rounded-lg py-5 border-gray-200 border-2 w-full lg:w-1/2"
@@ -90,7 +90,7 @@ const InsuredForm = (props: InsuredFormProps) => {
             </div>
 
             <div className="flex flex-col">
-              <label htmlFor="email" className="text-xl text-gray-500">Email address:</label>
+              <label htmlFor="email" className="text-xl text-graphite-700">Email address:</label>
               <input  {...register("email", { required: "Email is required" })}
                       id="email"
                       className="input-sm rounded-lg py-5 border-gray-200 border-2 w-full lg:w-1/2"
@@ -114,22 +114,22 @@ const InsuredForm = (props: InsuredFormProps) => {
         ) : (
           <div className="flex flex-col gap-y-4">
             <div className="flex flex-col">
-              <span className="text-xl text-gray-500">Name of Insured:</span>
+              <span className="text-xl text-graphite-700">Name of Insured:</span>
               <div className="text-primary text-base">{insuredFormValues.name}</div>
             </div>
 
             <div className="flex flex-col">
-              <span className="text-xl text-gray-500">Address of Insured:</span>
+              <span className="text-xl text-graphite-700">Address of Insured:</span>
               <div className="text-primary text-base">{insuredFormValues.address}</div>
             </div>
 
             <div className="flex flex-col">
-              <span className="text-xl text-gray-500">Telephone number:</span>
+              <span className="text-xl text-graphite-700">Telephone number:</span>
               <div className="text-primary text-base">{insuredFormValues.telephone}</div>
             </div>
 
             <div className="flex flex-col">
-              <span className="text-xl text-gray-500">Email address:</span>
+              <span className="text-xl text-graphite-700">Email address:</span>
               <div className="text-primary text-base">{insuredFormValues.email}</div>
             </div>
           </div>

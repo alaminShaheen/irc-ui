@@ -1,9 +1,9 @@
 import { useCallback, useState } from "react";
-import clsx from "clsx";
 
 import market from "@/assets/icons/market-icon.svg";
 import addEventIcon from "@/assets/icons/add-event.svg";
 import EventCard from "@/components/EventCard.tsx";
+import { twMerge } from "tailwind-merge";
 
 interface PolicyCardProps {
   title: string,
@@ -30,16 +30,15 @@ const PolicyCard = (props: PolicyCardProps) => {
           <img src={market} alt="market" width={40} height={40} className=" " />
         </div>
         <div className="truncate title-section min-w-0 w-full">
-          <p className="text-primary text-wrap font-semibold policy-title">Multiple Vendors or Inflatables Lorem ipsum
-            dolor sit amet,
-            consectetur adipisicing elit. At, cumque?
+          <p className="text-primary text-wrap font-semibold policy-title text-xl">
+            Multiple Vendors or Inflatables Lorem ipsum dolor sit amet, consectetur adipisicing elit. At, cumque?
           </p>
-          <div className={clsx("text-wrap", !showMoreSubtitle && "flex", "policy-subtitle")}>
-            <p className={clsx(!showMoreSubtitle && "w-2/3 truncate", "text-gray-600")}>Lorem ipsum dolor sit amet,
-              consectetur adipisicing elit. Alias amet dicta eum expedita ipsum iusto
-              libero odio odit velit veritatis.
+          <div className={twMerge("text-wrap text-base", !showMoreSubtitle && "flex", "policy-subtitle")}>
+            <p className={twMerge(!showMoreSubtitle && "w-2/3 truncate", "text-graphite-700")}>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+              Alias amet dicta eum expedita ipsum iusto libero odio odit velit veritatis.
             </p>
-            <span className="text-sm underline cursor-pointer text-primary ml-1" onClick={toggleShowSubtitle}>
+            <span className="underline cursor-pointer text-primary ml-1" onClick={toggleShowSubtitle}>
               {showMoreSubtitle ? "show less" : "show more"}
             </span>
           </div>

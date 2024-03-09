@@ -30,7 +30,7 @@ const Quote = () => {
           <InsuredForm editModeEnabled={editMode} onCancel={toggleEditMode} onSave={toggleEditMode} />
 
           {/*Your policies*/}
-          <div className="text-primary text-xl font-bold my-6">
+          <div className="text-primary text-2xl font-bold my-6">
             Your Policies
           </div>
 
