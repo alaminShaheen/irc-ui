@@ -7,6 +7,9 @@ const EventConfirmationCard = () => {
 
     <div
       className="mx-0 lg:mx-4 mt-8 lg:mt-0 w-full h-full bg-[url('src/assets/images/event-checkout-bg.png')] bg-contain bg-no-repeat p-4">
+      <div>
+        <img src="" alt="" />
+      </div>
       <div className="flex justify-between">
         <p className="text-gray-500">Number of events:</p>
         <p className="text-primary font-bold">2</p>

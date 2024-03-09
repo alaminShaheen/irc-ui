@@ -46,7 +46,7 @@ const InsuredForm = (props: InsuredFormProps) => {
     <div className="mt-4">
       {
         editModeEnabled ? (
-          <form className="flex flex-col gap-y-6" onSubmit={handleSubmit(onFormSubmit)}>
+          <form className="flex flex-col gap-y-4" onSubmit={handleSubmit(onFormSubmit)}>
             <div className="flex flex-col">
               <label htmlFor="name" className="text-sm text-gray-500">Name of Insured:</label>
               <input  {...register("name", { required: "Name is required" })}
@@ -112,7 +112,7 @@ const InsuredForm = (props: InsuredFormProps) => {
             </div>
           </form>
         ) : (
-          <div className="flex flex-col gap-y-6">
+          <div className="flex flex-col gap-y-4">
             <div className="flex flex-col">
               <span className="text-sm text-gray-500">Name of Insured:</span>
               <div className="text-primary text-sm">{insuredFormValues.name}</div>

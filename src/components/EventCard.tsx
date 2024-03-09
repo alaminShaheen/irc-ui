@@ -17,7 +17,7 @@ const EventCard = () => {
 
   return (
     <div
-      className="event-card border-2 border-primary rounded-md gap-x-3 flex flex-col lg:flex-row items-start p-3 w-full">
+      className="event-card border-2 border-primary rounded-md gap-y-3 lg:gap-x-3 flex flex-col lg:flex-row items-start p-3 w-full">
       <span className="w-12 h-10 bg-gray-300 hidden lg:flex justify-center items-center rounded-md">
         <img src={calendar} alt="calendar" width={22} height={22} />
       </span>
@@ -26,7 +26,7 @@ const EventCard = () => {
         <div className="w-12 h-10 bg-gray-300 flex justify-center items-center rounded-md">
           <img src={calendar} alt="calendar" width={22} height={22} />
         </div>
-        <div className="flex gap-x-3 text-xs underline">
+        <div className="flex gap-x-6 text-xs underline">
           <Button>Edit</Button>
           <Button>Remove policy</Button>
         </div>
@@ -35,12 +35,13 @@ const EventCard = () => {
 
       <div className="event-details w-full">
         <div className="flex justify-between items-start">
-          <p className="font-bold text-primary pt-4">[Event name] - reocuring activity</p>
+          <p className="font-bold text-primary">[Event name] - reocuring activity</p>
           <div className="hidden lg:flex gap-x-3 text-sm underline ">
             <Button>Edit</Button>
             <Button>Remove policy</Button>
           </div>
         </div>
+
         <div className="mt-3 flex space-x-1 items-center">
           <span className="mr-1">
             <img src={calendarTime} alt="calendar" width={20} height={20} />
@@ -57,8 +58,8 @@ const EventCard = () => {
         <div className="border-t border-primary w-full my-1" />
 
         <div className="flex items-center">
-          <span className="mr-2">
-            <img src={clock} alt="clock" className="w-[16px] h-[16px] lg:w-[20px] lg:h-[20px]" />
+          <span className="mr-1">
+            <img src={clock} alt="clock" width={20} height={20} />
           </span>
           <span className="text-primary text-xs lg:text-base">3 hours each</span>
         </div>
@@ -66,8 +67,8 @@ const EventCard = () => {
         <div className="border-t border-primary w-full my-1" />
 
         <div className="flex items-center">
-          <span className="mr-2">
-            <img src={door} alt="door" className="w-[28px] h-[28px] lg:w-[20px] lg:h-[20px]" />
+          <span className="mr-1">
+            <img src={door} alt="door" width={20} height={20} />
           </span>
           <span className="text-primary text-xs lg:text-base">
             <span className="underline">[Facility name]</span>,
@@ -77,7 +78,8 @@ const EventCard = () => {
           </span>
         </div>
 
-        <p onClick={toggleEventDetails} className="text-primary underline font-bold mt-3 cursor-pointer text-sm lg:text-base">
+        <p onClick={toggleEventDetails}
+           className="text-primary underline font-bold mt-4 cursor-pointer text-sm lg:text-base">
           {showMoreEventDetails ? "Show less details" : "Show more details"}
         </p>
 
