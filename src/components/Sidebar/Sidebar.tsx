@@ -17,7 +17,7 @@ const Sidebar = () => {
 
   return (
     <div
-      className="drawer w-full bg-primary lg:bg-secondary h-20 lg:h-auto sticky lg:static top-0 lg:top-auto p-4 lg:p-0">
+      className="drawer w-full bg-primary lg:bg-secondary h-20 lg:h-auto sticky lg:static top-0 lg:top-auto p-4 lg:p-0 z-50">
       <input id="my-drawer" type="checkbox" className="drawer-toggle" ref={checkboxRef} />
       <div className="drawer-content flex lg:block">
         {/* Page content here */}
