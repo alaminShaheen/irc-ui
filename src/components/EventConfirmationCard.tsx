@@ -41,15 +41,19 @@ const EventConfirmationCard = () => {
         </div>
 
 
-        <div className="flex mt-6">
-          <Checkbox className="mr-2" id="coverage-exclusions" />
+        <div className="flex mt-6 items-center">
+          <div>
+            <Checkbox className="mr-2" id="coverage-exclusions" />
+          </div>
           <label htmlFor="coverage-exclusions" className="text-sm border-b pb-3 pt-1 border-gray-300">
             I understand the coverage and exclusions of this policy
           </label>
         </div>
 
         <div className="flex mt-4 items-end">
-          <Checkbox className="mr-2 flex-grow mb-3" id="responsible" />
+          <div>
+            <Checkbox className="mr-2 mb-3" id="responsible" />
+          </div>
           <label htmlFor="responsible" className="text-sm border-b pb-3 pt-1 border-gray-300 w-full">
               <span className="font-light block">
                   In the event of a claim against you, this policy contains a $1,500 deductible / self insured retention. You as the named insured will be responsible to pay this if a claim is filed.
@@ -58,8 +62,10 @@ const EventConfirmationCard = () => {
           </label>
         </div>
 
-        <div className="flex mt-4">
-          <Checkbox className="mr-2" id="coverage-exclusions" />
+        <div className="flex mt-4 items-center">
+          <div>
+            <Checkbox className="mr-2" id="coverage-exclusions" />
+          </div>
           <label htmlFor="coverage-exclusions" className="text-sm pt-1 border-gray-300">
             I understand that this policy does not cover Professional Liability
           </label>
