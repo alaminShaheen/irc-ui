@@ -2,7 +2,7 @@ import { useCallback, useState } from "react";
 
 import door from "@/assets/icons/door.svg";
 import clock from "@/assets/icons/clock.svg";
-import Button from "@/components/ui/Button.tsx";
+import Button from "@/components/ui/Button/Button";
 import calendar from "@/assets/icons/calendar-1.svg";
 import calendarTime from "@/assets/icons/calendar-time.svg";
 

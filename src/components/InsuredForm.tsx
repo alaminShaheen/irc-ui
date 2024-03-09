@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
-import Button from "@/components/ui/Button.tsx";
-import { InsuredFormModel } from "@/models/form/InsuredFormModel.ts";
+import Button from "@/components/ui/Button/Button";
+import { InsuredFormModel } from "@/models/form/InsuredFormModel";
 
 interface InsuredFormProps {
   editModeEnabled: boolean;

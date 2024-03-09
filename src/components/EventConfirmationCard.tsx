@@ -1,5 +1,5 @@
-import Checkbox from "@/components/ui/Checkbox.tsx";
-import Button from "@/components/ui/Button.tsx";
+import Checkbox from "@/components/ui/Checkbox/Checkbox";
+import Button from "@/components/ui/Button/Button";
 import checkout from "@/assets/icons/checkout.svg";
 import bgCard from "@/assets/images/event-checkout-bg.png";
 
@@ -53,7 +53,7 @@ const EventConfirmationCard = () => {
           <div>
             <Checkbox className="mr-2 mb-3" id="responsible" />
           </div>
-          <label htmlFor="responsible" className="border-b pb-3 pt-1 border-primary-300 w-full text-black w-full">
+          <label htmlFor="responsible" className="border-b pb-3 pt-1 border-primary-300 text-black w-full">
               <span className="font-light block">
                   In the event of a claim against you, this policy contains a $1,500 deductible / self insured retention. You as the named insured will be responsible to pay this if a claim is filed.
                 </span>

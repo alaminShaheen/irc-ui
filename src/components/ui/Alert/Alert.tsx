@@ -1,12 +1,10 @@
-import { isValidElement, ReactNode } from "react";
+import { isValidElement } from "react";
+
 import alertInfo from "@/assets/icons/alert-info.svg";
+import { IAlertProps } from "@/components/ui/Alert/Alert.d";
 
 
-interface AlertProps {
-  alertMessage: string | ReactNode;
-}
-
-const Alert = (props: AlertProps) => {
+const Alert = (props: IAlertProps) => {
   const { alertMessage } = props;
   return (
     <div role="alert" className="inline-flex items-start p-3 bg-primary text-white rounded gap-x-2 w-full">

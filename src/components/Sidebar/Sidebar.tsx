@@ -1,8 +1,8 @@
 import { MouseEvent, useCallback, useRef } from "react";
 import hamburger from "@/assets/icons/hamburger.svg";
 
-import Button from "@/components/ui/Button.tsx";
-import SidebarContents from "@/components/Sidebar/SidebarContents.tsx";
+import Button from "@/components/ui/Button/Button";
+import SidebarContents from "@/components/Sidebar/SidebarContents";
 
 const Sidebar = () => {
 

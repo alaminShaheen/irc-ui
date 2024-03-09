@@ -1,11 +1,8 @@
-import { InputHTMLAttributes } from "react";
 import { twMerge } from "tailwind-merge";
 
-interface CheckboxProps extends InputHTMLAttributes<HTMLInputElement> {
+import { ICheckboxProps } from "@/components/ui/Checkbox/Checkbox.d";
 
-}
-
-const Checkbox = (props: CheckboxProps) => {
+const Checkbox = (props: ICheckboxProps) => {
   const { className, ...rest } = props;
   return (
     <input {...rest} type="checkbox"
