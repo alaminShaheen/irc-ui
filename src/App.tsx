@@ -2,6 +2,7 @@ import { BrowserRouter, Routes } from "react-router-dom";
 
 // Custom imports
 import BodyContent from "./components/BodyContent";
+import Footer from "./components/Footer/Footer"
 import { AppContextProvider } from "@/context/AppContext.tsx";
 import { ThemeProvider } from "@/context/ThemeContext.tsx";
 
@@ -19,6 +20,7 @@ function App() {
                     </Routes>
 
                     <BodyContent />
+                    <Footer />
                 </ThemeProvider>
             </AppContextProvider>
         </BrowserRouter>
