@@ -1,5 +1,5 @@
 import { isValidElement, ReactNode } from "react";
-import { FaInfoCircle } from "react-icons/fa";
+import alertInfo from "@/assets/icons/alert-info.svg";
 
 
 interface AlertProps {
@@ -9,11 +9,11 @@ interface AlertProps {
 const Alert = (props: AlertProps) => {
   const { alertMessage } = props;
   return (
-    <div role="alert" className="inline-flex items-start p-3 bg-primary text-white rounded gap-x-2">
+    <div role="alert" className="inline-flex items-start p-3 bg-primary text-white rounded gap-x-2 w-full">
       <span>
-        <FaInfoCircle className="fill-white text-primary my-1" size={18} />
+        <img src={alertInfo} alt="alert-info" width={24} height={24} />
       </span>
-      <span className="text-sm">
+      <span className="text-base w-full">
         {
           isValidElement(alertMessage) ? alertMessage : <span>{alertMessage}</span>
         }

@@ -21,8 +21,8 @@ const Quote = () => {
         <div className="mt-6">
 
           <div className="text-primary">
-            <span className="text-xl font-bold mr-2">Insured</span>
-            <span className="text-xs underline cursor-pointer" onClick={toggleEditMode}>
+            <span className="text-2xl font-bold mr-2">Insured</span>
+            <span className="text-sm underline cursor-pointer" onClick={toggleEditMode}>
               {editMode ? "Cancel" : "Edit"}
             </span>
           </div>

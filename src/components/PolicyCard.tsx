@@ -24,7 +24,7 @@ const PolicyCard = (props: PolicyCardProps) => {
 
 
   return (
-    <li className="rounded-md px-4 py-6 gap-x-3 items-start bg-off-white w-full flex flex-col gap-y-4">
+    <li className="rounded-md px-4 py-6 gap-x-3 items-start bg-primary-5 w-full flex flex-col gap-y-4">
       <div className="grid grid-cols-[60px_1fr] w-full items-start gap-x-4">
         <div className="bg-primary rounded-md flex justify-center items-center px-3 py-2">
           <img src={market} alt="market" width={40} height={40} className=" " />
@@ -51,7 +51,7 @@ const PolicyCard = (props: PolicyCardProps) => {
           {/*/!* TODO: Will be a list of event cards *!/*/}
           <EventCard />
 
-          <li className="border-dashed border-gray-400 border-2 rounded mt-4 p-4 flex bg-tertiary cursor-pointer"
+          <li className="border-dashed border-gray-400 border-2 rounded mt-4 p-4 flex bg-primary-25 cursor-pointer"
               onClick={addEvent}>
             <span><img src={addEventIcon} alt="add event" width={24} height={24} /></span>
             <span className="text-primary font-semibold ml-1">Add another event</span>
