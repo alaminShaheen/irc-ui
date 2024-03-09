@@ -9,9 +9,9 @@ const Layout = (props: LayoutProps) => {
   const { children } = props;
   return (
     <Fragment>
-      <div className="grid grid-cols-[120px_1fr] bg-secondary h-screen p-6">
+      <div className="lg:grid lg:grid-cols-[120px_1fr] sm:flex sm:flex-col bg-secondary py-3 pr-6">
         <Sidebar/>
-        <div className="w-full px-6">
+        <div className="w-full px-6 py-8">
           {children}
         </div>
       </div>

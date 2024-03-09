@@ -20,7 +20,7 @@ const Sidebar = () => {
       <input id="my-drawer" type="checkbox" className="drawer-toggle" ref={checkboxRef} />
       <div className="drawer-content">
         {/* Page content here */}
-        <Button className={"btn-sm btn-primary flex justify-center items-center rounded-r drawer-button w-full px-0 gap-x-2"}
+        <Button className={"btn-primary flex justify-center items-center rounded-r drawer-button  px-2 py-1 gap-x-2 sticky top-2"}
                 onClick={toggleSidebar}>
           <span>Menu</span>
           <RxHamburgerMenu size={25} />

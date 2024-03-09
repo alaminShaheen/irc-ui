@@ -2,6 +2,8 @@ import { useCallback, useState } from "react";
 
 import Alert from "@/components/ui/Alert.tsx";
 import InsuredForm from "@/components/InsuredForm.tsx";
+import PolicyCard from "@/components/PolicyCard.tsx";
+import EventConfirmationCard from "@/components/EventConfirmationCard.tsx";
 
 const Quote = () => {
   const [editMode, setEditMode] = useState(false);
@@ -11,8 +13,8 @@ const Quote = () => {
   }, []);
 
   return (
-    <div className="grid grid-cols-2 gap-x-6">
-      <div>
+    <div className="grid grid-cols-5">
+      <div className="col-span-3">
         <Alert
           alertMessage={"The below information forms part of your policy. Any incorrect information could null and void your policy. Is all information above correct? If not please go edit the application to reflect the correct information. "} />
 
@@ -26,9 +28,26 @@ const Quote = () => {
           </div>
 
           <InsuredForm editModeEnabled={editMode} onCancel={toggleEditMode} onSave={toggleEditMode} />
+
+          {/*Your policies*/}
+          <div className="text-primary text-xl font-bold my-10 ">
+            Your Policies
+          </div>
+
+          <ul className="space-y-6">
+            {new Array(3).fill(3).map((_, index) => (
+              <PolicyCard key={index}
+                          title={"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam, aspernatur."}
+                          subtitle={"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus ad aspernatur consequuntur debitis distinctio ducimus eos esse excepturi impedit, minima odit officiis provident, quae rem reprehenderit repudiandae rerum ullam voluptatem?"}
+              />
+            ))}
+          </ul>
+
         </div>
       </div>
-      <div>World</div>
+      <div className="col-span-2">
+        <EventConfirmationCard/>
+      </div>
     </div>
   );
 };
