@@ -16,11 +16,11 @@ const Sidebar = () => {
   }, []);
 
   return (
-    <div className="drawer w-full">
+    <div className="drawer w-full bg-primary lg:bg-secondary h-[60px] lg:h-auto sticky lg:static top-0 lg:top-auto">
       <input id="my-drawer" type="checkbox" className="drawer-toggle" ref={checkboxRef} />
-      <div className="drawer-content">
+      <div className="drawer-content flex lg:block">
         {/* Page content here */}
-        <Button className={"btn-primary flex justify-center items-center rounded-r drawer-button  px-2 py-1 gap-x-2 sticky top-2"}
+        <Button className={"btn-primary flex justify-center items-center rounded-r drawer-button  px-2 py-1 gap-x-2 sticky top-2 ml-auto lg:ml-0"}
                 onClick={toggleSidebar}>
           <span>Menu</span>
           <RxHamburgerMenu size={25} />

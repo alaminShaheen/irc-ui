@@ -51,7 +51,7 @@ const InsuredForm = (props: InsuredFormProps) => {
               <label htmlFor="name" className="text-sm text-gray-500">Name of Insured:</label>
               <input  {...register("name", { required: "Name is required" })}
                       id="name"
-                      className="input-sm rounded-lg py-5 border-gray-200 border-2 w-1/2"
+                      className="input-sm rounded-lg py-5 border-gray-200 border-2 w-full lg:w-1/2"
                       type="text"
                       disabled={false} />
               {errors.name?.message && (
@@ -65,7 +65,7 @@ const InsuredForm = (props: InsuredFormProps) => {
               <label htmlFor="address" className="text-sm text-gray-500">Address of Insured:</label>
               <input  {...register("address", { required: "Address is required" })}
                       id="address"
-                      className="input-sm rounded-lg py-5 border-gray-200 border-2 w-1/2"
+                      className="input-sm rounded-lg py-5 border-gray-200 border-2 w-full lg:w-1/2"
                       type="text"
                       disabled={false} />
               {errors.address?.message && (
@@ -79,7 +79,7 @@ const InsuredForm = (props: InsuredFormProps) => {
               <label htmlFor="telephone" className="text-sm text-gray-500">Telephone number:</label>
               <input  {...register("telephone", { required: "Telephone number is required" })}
                       id="telephone"
-                      className="input-sm rounded-lg py-5 border-gray-200 border-2 w-1/2"
+                      className="input-sm rounded-lg py-5 border-gray-200 border-2 w-full lg:w-1/2"
                       type="tel"
                       disabled={false} />
               {errors.telephone?.message && (
@@ -93,7 +93,7 @@ const InsuredForm = (props: InsuredFormProps) => {
               <label htmlFor="email" className="text-sm text-gray-500">Email address:</label>
               <input  {...register("email", { required: "Email is required" })}
                       id="email"
-                      className="input-sm rounded-lg py-5 border-gray-200 border-2 w-1/2"
+                      className="input-sm rounded-lg py-5 border-gray-200 border-2 w-full lg:w-1/2"
                       type="email"
                       disabled={false} />
               {errors.email?.message && (

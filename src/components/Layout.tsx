@@ -1,4 +1,5 @@
 import { Fragment, ReactNode } from "react";
+
 import Sidebar from "@/components/Sidebar/Sidebar.tsx";
 
 interface LayoutProps {
@@ -9,9 +10,9 @@ const Layout = (props: LayoutProps) => {
   const { children } = props;
   return (
     <Fragment>
-      <div className="lg:grid lg:grid-cols-[120px_1fr] sm:flex sm:flex-col bg-secondary py-3 pr-6">
+      <div className="lg:grid lg:grid-cols-[120px_1fr] flex flex-col bg-secondary lg:py-3 lg:pr-6">
         <Sidebar/>
-        <div className="w-full px-6 py-8">
+        <div className="w-full p-4 lg:px-6 lg:py-8">
           {children}
         </div>
       </div>
