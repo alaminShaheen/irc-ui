@@ -18,7 +18,6 @@ function App() {
                     <Routes>
                         {/* Declare Routes here */}
                     </Routes>
-
                     <BodyContent />
                     <Footer />
                 </ThemeProvider>
