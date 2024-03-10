@@ -1,4 +1,5 @@
 /** @type {import("tailwindcss").Config} */
+
 import defaultTailwindColors from "tailwindcss/colors";
 
 export default {
