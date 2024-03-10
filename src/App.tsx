@@ -1,28 +1,29 @@
-import { BrowserRouter, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 // Custom imports
-import BodyContent from "./components/BodyContent";
-import { AppContextProvider } from "@/context/AppContext.tsx";
-import { ThemeProvider } from "@/context/ThemeContext.tsx";
+import Quote from "@/pages/Quote";
+import ROUTES from "@/constants/Routes";
+import Layout from "@/components/Layout/Layout";
+import { ThemeProvider } from "@/context/ThemeContext";
+import { AppContextProvider } from "@/context/AppContext";
 
 // Custom styling
 import "./styles/global.css";
 
-
 function App() {
-    return (
-        <BrowserRouter>
-            <AppContextProvider>
-                <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
-                    <Routes>
-                        {/* Declare Routes here */}
-                    </Routes>
-
-                    <BodyContent />
-                </ThemeProvider>
-            </AppContextProvider>
-        </BrowserRouter>
-    );
+  return (
+    <BrowserRouter>
+      <AppContextProvider>
+        <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
+          <Layout>
+            <Routes>
+              <Route path={ROUTES.QUOTE} element={<Quote />} />
+            </Routes>
+          </Layout>
+        </ThemeProvider>
+      </AppContextProvider>
+    </BrowserRouter>
+  );
 }
 
 export default App;
