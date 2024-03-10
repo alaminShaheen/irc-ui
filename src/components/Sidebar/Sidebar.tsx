@@ -3,6 +3,7 @@ import hamburger from "@/assets/icons/hamburger.svg";
 
 import Button from "@/components/ui/Button/Button";
 import SidebarContents from "@/components/SidebarContents/SidebarContents";
+import Icon from "@/components/ui/Icon";
 
 const Sidebar = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -26,7 +27,7 @@ const Sidebar = () => {
           className="btn-primary flex justify-center items-center rounded-r drawer-button px-2 py-4 gap-x-2 sticky top-2 ml-auto lg:ml-0 w-auto lg:w-full h-11 lg:text-lg text-base focus-visible:outline-yellow-400 focus:outline-focus"
           onClick={toggleSidebar}>
           <span>Menu</span>
-          <img src={hamburger} alt="hamburger" width={32} height={24} />
+          <Icon src={hamburger} alt="hamburger" width={32} height={24} />
         </Button>
       </div>
       <div className="drawer-side">

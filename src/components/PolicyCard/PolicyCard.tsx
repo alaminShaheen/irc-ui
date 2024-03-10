@@ -5,6 +5,7 @@ import market from "@/assets/icons/market-icon.svg";
 import addEventIcon from "@/assets/icons/add-event.svg";
 import EventCard from "@/components/EventCard/EventCard";
 import { IPolicyCard } from "@/components/PolicyCard/PolicyCard.d";
+import Icon from "@/components/ui/Icon";
 
 
 const PolicyCard = (props: IPolicyCard) => {
@@ -24,7 +25,7 @@ const PolicyCard = (props: IPolicyCard) => {
     <li className="rounded-md px-4 py-6 gap-x-3 items-start bg-primary-5 w-full flex flex-col gap-y-4">
       <div className="grid grid-cols-[60px_1fr] w-full items-start gap-x-4">
         <div className="bg-primary rounded-md flex justify-center items-center px-3 py-2">
-          <img src={market} alt="market" width={40} height={40} className=" " />
+          <Icon src={market} alt="market" width={40} height={40} className=" " />
         </div>
         <div className="truncate title-section min-w-0 w-full">
           <p className="text-primary text-wrap font-semibold policy-title text-xl">
@@ -50,7 +51,7 @@ const PolicyCard = (props: IPolicyCard) => {
 
           <li className="border-dashed border-gray-400 border-2 rounded mt-4 p-4 flex bg-primary-25 cursor-pointer"
               onClick={addEvent} tabIndex={0}>
-            <span><img src={addEventIcon} alt="add event" width={24} height={24} /></span>
+            <span><Icon src={addEventIcon} alt="add event" width={24} height={24} /></span>
             <span className="text-primary font-semibold ml-1">Add another event</span>
           </li>
         </ul>

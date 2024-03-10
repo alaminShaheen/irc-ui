@@ -4,13 +4,14 @@ import checkout from "@/assets/icons/checkout.svg";
 import bgCard from "@/assets/images/event-checkout-bg.png";
 import { twMerge } from "tailwind-merge";
 import AppConstants from "@/constants/AppConstants";
+import Icon from "@/components/ui/Icon";
 
 const EventConfirmationCard = () => {
   return (
 
     <div className="mx-0 lg:mx-4 mt-8 lg:mt-0 w-full h-auto px-6 py-6 pb-11 relative">
       <div className="absolute top-0 left-0 z-0 w-full h-full">
-        <img src={bgCard} alt="card" className="w-full h-full" />
+        <Icon src={bgCard} alt="card" className="w-full h-full" />
       </div>
       <div className="relative z-10">
 
@@ -94,7 +95,7 @@ const EventConfirmationCard = () => {
 
         <Button
           className="w-full p-4 bg-primary text-white text-xl font-bold inline-flex justify-center items-center gap-x-3 rounded-md">
-          <img src={checkout} alt="checkout" />
+          <Icon src={checkout} alt="checkout" />
           Checkout
         </Button>
       </div>

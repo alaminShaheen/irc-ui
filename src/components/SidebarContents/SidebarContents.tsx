@@ -1,7 +1,8 @@
 import cross from "@/assets/icons/cross.svg";
+import Icon from "@/components/ui/Icon";
 import Button from "@/components/ui/Button";
-import { ISidebarContentProps } from "@/components/SidebarContents/SidebarContents.d";
 import FocusTrap from "@/components/FocusTrap";
+import { ISidebarContentProps } from "@/components/SidebarContents/SidebarContents.d";
 
 const SidebarContents = (props: ISidebarContentProps) => {
   const { onClose, sidebarOpen } = props;
@@ -13,7 +14,7 @@ const SidebarContents = (props: ISidebarContentProps) => {
           <Button className="text-lg flex text-white font-semibold items-center gap-x-1" onClick={onClose}
                   tabIndex={sidebarOpen ? 0 : -1}>
             <span>Close</span>
-            <img src={cross} alt="close" width={26} height={26} />
+            <Icon src={cross} alt="close" width={26} height={26} />
           </Button>
         </li>
         <li className="flex flex-row justify-between w-full pt-10 lg:pt-0">
@@ -25,7 +26,7 @@ const SidebarContents = (props: ISidebarContentProps) => {
           <Button className="text-lg hidden lg:flex text-white font-semibold items-center gap-x-1" onClick={onClose}
                   tabIndex={sidebarOpen ? 0 : -1}>
             <span>Close</span>
-            <img src={cross} alt="close" width={26} height={26} />
+            <Icon src={cross} alt="close" width={26} height={26} />
           </Button>
         </li>
 
