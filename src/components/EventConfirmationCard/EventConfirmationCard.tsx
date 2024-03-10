@@ -2,11 +2,13 @@ import Checkbox from "@/components/ui/Checkbox/Checkbox";
 import Button from "@/components/ui/Button/Button";
 import checkout from "@/assets/icons/checkout.svg";
 import bgCard from "@/assets/images/event-checkout-bg.png";
+import { twMerge } from "tailwind-merge";
+import AppConstants from "@/constants/AppConstants";
 
 const EventConfirmationCard = () => {
   return (
 
-    <div className="mx-0 lg:mx-4 mt-8 lg:mt-0 w-full h-auto p-6 relative">
+    <div className="mx-0 lg:mx-4 mt-8 lg:mt-0 w-full h-auto px-6 py-6 pb-11 relative">
       <div className="absolute top-0 left-0 z-0 w-full h-full">
         <img src={bgCard} alt="card" className="w-full h-full" />
       </div>
@@ -41,31 +43,49 @@ const EventConfirmationCard = () => {
 
 
         <div className="flex mt-6 items-center">
-          <div>
+          <div className="flex items-center justify-center">
             <Checkbox className="mr-2" id="coverage-exclusions" />
           </div>
-          <label htmlFor="coverage-exclusions" className="border-b pb-3 pt-1 border-primary-300 text-black w-full">
+          <label htmlFor="coverage-exclusions" className="text-black w-full">
             I understand the coverage and exclusions of this policy
           </label>
         </div>
 
-        <div className="flex mt-4 items-end">
-          <div>
-            <Checkbox className="mr-2 mb-3" id="responsible" />
+        <div
+          className={twMerge(
+            "h-1 border-t border-primary-300 ml-auto my-4",
+            `w-[calc(100%-${AppConstants.CHECKBOX_SIZE}px)]`)}
+        />
+
+        <div className="flex flex-col items-end w-full">
+          <div className="flex w-full">
+            <div className="min-w-[30px] mr-2"/>
+            <span className="font-light">
+              In the event of a claim against you, this policy contains a $1,500 deductible / self insured retention.
+              You as the named insured will be responsible to pay this if a claim is filed.
+            </span>
           </div>
-          <label htmlFor="responsible" className="border-b pb-3 pt-1 border-primary-300 text-black w-full">
-              <span className="font-light block">
-                  In the event of a claim against you, this policy contains a $1,500 deductible / self insured retention. You as the named insured will be responsible to pay this if a claim is filed.
-                </span>
-            {" "} I agree that I will be responsible for the deductible
-          </label>
+          <div className="flex items-center w-full">
+            <div className="flex items-center justify-center">
+              <Checkbox className="mr-2" id="responsible" />
+            </div>
+            <label htmlFor="responsible" className="text-black w-full">
+              {" "} I agree that I will be responsible for the deductible
+            </label>
+          </div>
         </div>
 
-        <div className="flex mt-4 items-center">
-          <div>
+        <div
+          className={twMerge(
+            "h-1 border-t border-primary-300 ml-auto my-4",
+            `w-[calc(100%-${AppConstants.CHECKBOX_SIZE}px)]`)}
+        />
+
+        <div className="flex items-center">
+          <div className="flex items-center justify-center">
             <Checkbox className="mr-2" id="coverage-exclusions" />
           </div>
-          <label htmlFor="coverage-exclusions" className="pt-1 border-primary-300 text-black">
+          <label htmlFor="coverage-exclusions" className="border-primary-300 text-black">
             I understand that this policy does not cover Professional Liability
           </label>
         </div>
