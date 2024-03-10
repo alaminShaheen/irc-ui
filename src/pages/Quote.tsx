@@ -5,6 +5,7 @@ import PolicyCard from "@/components/PolicyCard/PolicyCard";
 import InsuredForm from "@/components/InsuredForm/InsuredForm";
 import EventConfirmationCard from "@/components/EventConfirmationCard/EventConfirmationCard";
 import Button from "@/components/ui/Button";
+import { ButtonVariant } from "@/models/enums/ButtonVariant";
 
 const Quote = () => {
   const [editMode, setEditMode] = useState(false);
@@ -23,7 +24,7 @@ const Quote = () => {
 
           <div className="text-primary">
             <span className="text-2xl font-bold mr-2">Insured</span>
-            <Button className="underline cursor-pointer" onClick={toggleEditMode}>
+            <Button className="underline cursor-pointer" variant={ButtonVariant.TRANSPARENT} onClick={toggleEditMode}>
               {editMode ? "Cancel" : "Edit"}
             </Button>
           </div>

@@ -31,7 +31,8 @@ const Sidebar = () => {
       </div>
       <div className="drawer-side">
         <label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay"
-               onClick={toggleSidebar}></label>
+               onClick={toggleSidebar} />
+        {/*{sidebarOpen && <SidebarContents onClose={toggleSidebar} sidebarOpen={sidebarOpen} />}*/}
         <SidebarContents onClose={toggleSidebar} sidebarOpen={sidebarOpen} />
       </div>
     </div>

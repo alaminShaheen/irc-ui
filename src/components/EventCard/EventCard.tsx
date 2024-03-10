@@ -5,6 +5,7 @@ import clock from "@/assets/icons/clock.svg";
 import Button from "@/components/ui/Button/Button";
 import calendar from "@/assets/icons/calendar-1.svg";
 import calendarTime from "@/assets/icons/calendar-time.svg";
+import { ButtonVariant } from "@/models/enums/ButtonVariant";
 
 const EventCard = () => {
   const [showMoreEventDetails, setShowMoreEventDetails] = useState(false);
@@ -27,8 +28,8 @@ const EventCard = () => {
           <img src={calendar} alt="calendar" width={22} height={22} />
         </div>
         <div className="flex gap-x-6 text-base underline text-primary">
-          <Button>Edit</Button>
-          <Button>Remove policy</Button>
+          <Button variant={ButtonVariant.TRANSPARENT}>Edit</Button>
+          <Button variant={ButtonVariant.TRANSPARENT}>Remove policy</Button>
         </div>
       </div>
 
@@ -37,8 +38,8 @@ const EventCard = () => {
         <div className="flex justify-between items-start">
           <p className="font-bold text-primary text-xl">[Event name] - reocuring activity</p>
           <div className="hidden lg:flex gap-x-3 text-base underline text-primary">
-            <Button>Edit</Button>
-            <Button>Remove policy</Button>
+            <Button variant={ButtonVariant.TRANSPARENT}>Edit</Button>
+            <Button variant={ButtonVariant.TRANSPARENT}>Remove policy</Button>
           </div>
         </div>
 

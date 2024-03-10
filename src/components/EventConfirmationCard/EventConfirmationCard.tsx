@@ -59,7 +59,7 @@ const EventConfirmationCard = () => {
 
         <div className="flex flex-col items-end w-full">
           <div className="flex w-full">
-            <div className="min-w-[30px] mr-2"/>
+            <div className="min-w-[30px] mr-2" />
             <span className="font-light">
               In the event of a claim against you, this policy contains a $1,500 deductible / self insured retention.
               You as the named insured will be responsible to pay this if a claim is filed.

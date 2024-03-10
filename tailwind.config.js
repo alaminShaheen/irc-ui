@@ -5,10 +5,13 @@ import defaultTailwindColors from "tailwindcss/colors";
 export default {
   content: [
     "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}"
+    "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ["Roboto", "system-ui", "sans-serif"],
+      },
       colors: {
         ...defaultTailwindColors,
         primary: {
@@ -24,7 +27,7 @@ export default {
           700: "#3A6377",
           800: "#225066",
           900: "#093C55",
-          DEFAULT: "#093C55"
+          DEFAULT: "#093C55",
         },
         secondary: {
           5: "#FFFCFB",
@@ -39,7 +42,7 @@ export default {
           700: "#F58952",
           800: "#F47B3D",
           900: "#F36C27",
-          DEFAULT: "#F36C27"
+          DEFAULT: "#F36C27",
         },
         graphite: {
           5: "#FBFBFB",
@@ -54,7 +57,7 @@ export default {
           700: "#676668",
           800: "#545355",
           900: "#414042",
-          DEFAULT: "#414042"
+          DEFAULT: "#414042",
         },
         white: {
           5: "#050505",
@@ -69,15 +72,15 @@ export default {
           700: "#CCCCCC",
           800: "#E5E5E5",
           900: "#FFFFFF",
-          DEFAULT: "#FFFFFF"
+          DEFAULT: "#FFFFFF",
         },
-        focus: "#F8D177"
-      }
-    }
+        focus: "#F8D177",
+      },
+    },
   },
   plugins: [require("daisyui")],
   daisyui: {
-    themes: []
-  }
+    themes: [],
+  },
 };
 

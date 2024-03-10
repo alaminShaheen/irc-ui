@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import Button from "@/components/ui/Button/Button";
 import { InsuredFormModel } from "@/models/form/InsuredFormModel";
 import { IInsuredFormProps } from "@/components/InsuredForm/InsuredForm.d";
+import { ButtonVariant } from "@/models/enums/ButtonVariant";
 
 
 const InsuredForm = (props: IInsuredFormProps) => {
@@ -99,7 +100,7 @@ const InsuredForm = (props: IInsuredFormProps) => {
               )}
             </div>
             <div className="flex gap-x-2">
-              <Button className="border border-primary rounded-md p-4 bg-transparent" onClick={onCancel}>
+              <Button className="p-4" onClick={onCancel} variant={ButtonVariant.SECONDARY}>
                 Cancel
               </Button>
               <Button className="bg-primary rounded-md text-white px-20 py-4" onClick={onSave}>

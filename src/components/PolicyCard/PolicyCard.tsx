@@ -8,7 +8,7 @@ import { IPolicyCard } from "@/components/PolicyCard/PolicyCard.d";
 
 
 const PolicyCard = (props: IPolicyCard) => {
-  const { title, subtitle } = props;
+  const {} = props;
   const [showMoreSubtitle, setShowMoreSubtitle] = useState(false);
 
   const toggleShowSubtitle = useCallback(() => {
@@ -35,7 +35,8 @@ const PolicyCard = (props: IPolicyCard) => {
               Lorem ipsum dolor sit amet, consectetur adipisicing elit.
               Alias amet dicta eum expedita ipsum iusto libero odio odit velit veritatis.
             </p>
-            <span className="underline cursor-pointer text-primary ml-1 focus-visible:outline-focus" onClick={toggleShowSubtitle} tabIndex={0}>
+            <span className="underline cursor-pointer text-primary ml-1 focus-visible:outline-focus"
+                  onClick={toggleShowSubtitle} tabIndex={0}>
               {showMoreSubtitle ? "show less" : "show more"}
             </span>
           </div>
