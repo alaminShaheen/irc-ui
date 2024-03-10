@@ -5,7 +5,7 @@ import { ThemeProvider } from "@/context/ThemeContext.tsx";
 import { AppContextProvider } from "@/context/AppContext.tsx";
 import Quote from "@/pages/Quote.tsx";
 import ROUTES from "@/constants/Routes.ts";
-import Layout from "@/components/Layout.tsx";
+import Layout from "@/components/Layout/Layout.tsx";
 
 // Custom styling
 import "./styles/global.css";

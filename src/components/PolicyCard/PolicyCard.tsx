@@ -1,16 +1,13 @@
 import { useCallback, useState } from "react";
+import { twMerge } from "tailwind-merge";
 
 import market from "@/assets/icons/market-icon.svg";
 import addEventIcon from "@/assets/icons/add-event.svg";
-import EventCard from "@/components/EventCard.tsx";
-import { twMerge } from "tailwind-merge";
+import EventCard from "@/components/EventCard/EventCard";
+import { IPolicyCard } from "@/components/PolicyCard/PolicyCard.d";
 
-interface PolicyCardProps {
-  title: string,
-  subtitle: string
-}
 
-const PolicyCard = (props: PolicyCardProps) => {
+const PolicyCard = (props: IPolicyCard) => {
   const { title, subtitle } = props;
   const [showMoreSubtitle, setShowMoreSubtitle] = useState(false);
 

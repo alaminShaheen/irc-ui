@@ -3,14 +3,10 @@ import { useForm } from "react-hook-form";
 
 import Button from "@/components/ui/Button/Button";
 import { InsuredFormModel } from "@/models/form/InsuredFormModel";
+import { IInsuredFormProps } from "@/components/InsuredForm/InsuredForm.d";
 
-interface InsuredFormProps {
-  editModeEnabled: boolean;
-  onCancel: () => void;
-  onSave: () => void;
-}
 
-const InsuredForm = (props: InsuredFormProps) => {
+const InsuredForm = (props: IInsuredFormProps) => {
   const { editModeEnabled, onCancel, onSave } = props;
   const {
     register,

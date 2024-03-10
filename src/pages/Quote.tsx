@@ -1,9 +1,9 @@
 import { useCallback, useState } from "react";
 
 import Alert from "@/components/ui/Alert/Alert";
-import PolicyCard from "@/components/PolicyCard";
-import InsuredForm from "@/components/InsuredForm";
-import EventConfirmationCard from "@/components/EventConfirmationCard";
+import PolicyCard from "@/components/PolicyCard/PolicyCard";
+import InsuredForm from "@/components/InsuredForm/InsuredForm";
+import EventConfirmationCard from "@/components/EventConfirmationCard/EventConfirmationCard";
 
 const Quote = () => {
   const [editMode, setEditMode] = useState(false);
