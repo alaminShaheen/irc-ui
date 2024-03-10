@@ -1,33 +1,38 @@
-import { twMerge } from "tailwind-merge";
-
 import { IButtonProps } from "@/components/ui/Button/Button.d";
-import { ButtonVariant } from "@/models/enums/ButtonVariant";
+import {
+  ButtonVariant,
+  ButtonType,
+  ICON_POSITION,
+} from "@/models/enums/ButtonVariant";
+import { cn } from "@/utils/helper";
+
+const DEFAULT_BUTTON_STYLE = "px-4 py-3";
 
 const Button = (props: IButtonProps) => {
   const {
     className = "",
     variant = ButtonVariant.PRIMARY,
+    buttonType = ButtonType.BUTTON,
     icon,
-    iconPosition = "left",
+    iconPosition = ICON_POSITION.LEFT,
     ...rest
   } = props;
 
   return (
-    <button {...rest} className={twMerge(
-      className,
-      variant === ButtonVariant.PRIMARY && "btn-primary",
-      variant === ButtonVariant.SECONDARY && "btn-secondary",
-      variant === ButtonVariant.DISABLED && "btn-disabled",
-      variant === ButtonVariant.TRANSPARENT && "btn-transparent",
-    )} type={props.type || "button"}>
-      {
-        icon ? props.children : iconPosition === "left" ? (
-          <>{icon} {props.children}</>
-        ) : (
-          <>{props.children}{icon}</>
-        )
-      }
+    <button
+      className={cn(DEFAULT_BUTTON_STYLE, className, {
+        "btn-primary text-xl": variant === ButtonVariant.PRIMARY,
+        "btn-secondary text-md": variant === ButtonVariant.SECONDARY,
+        "btn-disabled": variant === ButtonVariant.DISABLED,
+        "btn-transparent": variant === ButtonVariant.TRANSPARENT,
+      })}
+      type={buttonType}
+      {...rest}
+    >
+      {icon && iconPosition === ICON_POSITION.LEFT && icon}
+      {props.children}
 
+      {icon && iconPosition === ICON_POSITION.RIGHT && icon}
     </button>
   );
 };

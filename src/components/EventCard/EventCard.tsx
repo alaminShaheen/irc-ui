@@ -12,32 +12,30 @@ const EventCard = () => {
   const [showMoreEventDetails, setShowMoreEventDetails] = useState(false);
 
   const toggleEventDetails = useCallback(() => {
-    setShowMoreEventDetails(prev => !prev);
-
+    setShowMoreEventDetails((prev) => !prev);
   }, []);
 
-
   return (
-    <div
-      className="event-card border-2 border-primary rounded-md gap-y-3 lg:gap-x-3 flex flex-col lg:flex-row items-start p-3 w-full">
-      <span className="w-12 h-10 bg-primary-50 hidden lg:flex justify-center items-center rounded-md">
+    <div className="event-card border-2 border-primary rounded-md gap-y-3 lg:gap-x-3 flex flex-col lg:flex-row items-start p-4 w-full">
+      <span className="w-9 h-9 sm:w-12 sm:h-10 bg-primary-50 hidden lg:flex justify-center items-center rounded-md border border-primary">
         <Icon src={calendar} alt="calendar" size={22} />
       </span>
 
-      <div className="flex justify-between lg:hidden w-full">
-        <div className="w-12 h-10 bg-gray-300 flex justify-center items-center rounded-md">
+      <div className="flex items-center justify-between lg:hidden w-full">
+        <span className="w-9 h-9 sm:w-12 sm:h-12 bg-gray-300 flex justify-center items-center rounded-md border border-primary">
           <Icon src={calendar} alt="calendar" size={22} />
-        </div>
+        </span>
         <div className="flex gap-x-6 text-base underline text-primary">
           <Button variant={ButtonVariant.TRANSPARENT}>Edit</Button>
           <Button variant={ButtonVariant.TRANSPARENT}>Remove policy</Button>
         </div>
       </div>
 
-
       <div className="event-details w-full">
-        <div className="flex justify-between items-start">
-          <p className="font-bold text-primary text-xl">[Event name] - reocuring activity</p>
+        <div className="flex justify-between items-center">
+          <h3 className="font-bold text-primary text-xl">
+            [Event name] - reocuring activity
+          </h3>
           <div className="hidden lg:flex gap-x-3 text-base underline text-primary">
             <Button variant={ButtonVariant.TRANSPARENT}>Edit</Button>
             <Button variant={ButtonVariant.TRANSPARENT}>Remove policy</Button>
@@ -49,7 +47,9 @@ const EventCard = () => {
             <Icon src={calendarTime} alt="calendar" size={20} />
           </span>
           <span className="space-x-1 text-base">
-            <span className="font-bold text-primary underline">Every Friday</span>
+            <span className="font-bold text-primary underline">
+              Every Friday
+            </span>
             <span className="text-sm font-thin">from</span>
             <span className="font-bold text-primary underline">10:00 AM</span>
             <span className="text-sm font-thin">to</span>
@@ -80,11 +80,13 @@ const EventCard = () => {
           </span>
         </div>
 
-        <p onClick={toggleEventDetails} tabIndex={0}
-           className="text-primary underline font-bold mt-4 cursor-pointer text-sm lg:text-base focus-visible:outline-focus">
+        <p
+          onClick={toggleEventDetails}
+          tabIndex={0}
+          className="text-primary underline font-bold mt-4 cursor-pointer text-sm lg:text-base focus-visible:outline-focus"
+        >
           {showMoreEventDetails ? "Show less details" : "Show more details"}
         </p>
-
       </div>
     </div>
   );
