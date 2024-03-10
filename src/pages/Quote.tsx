@@ -40,8 +40,7 @@ const Quote = () => {
             {new Array(3).fill(3).map((_, index) => (
               <PolicyCard key={index}
                           title={"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam, aspernatur."}
-                          subtitle={"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus ad aspernatur consequuntur debitis distinctio ducimus eos esse excepturi impedit, minima odit officiis provident, quae rem reprehenderit repudiandae rerum ullam voluptatem?"}
-              />
+                          subtitle={"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus ad aspernatur consequuntur debitis distinctio ducimus eos esse excepturi impedit, minima odit officiis provident, quae rem reprehenderit repudiandae rerum ullam voluptatem?"} />
             ))}
           </ul>
 

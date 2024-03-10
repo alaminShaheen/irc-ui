@@ -1,12 +1,13 @@
+import { twMerge } from "tailwind-merge";
+
 import { IButtonProps } from "@/components/ui/Button/Button.d";
 import { ButtonVariant } from "@/models/enums/ButtonVariant";
-import { twMerge } from "tailwind-merge";
 
 const Button = (props: IButtonProps) => {
   const {
     className = "",
     variant = ButtonVariant.PRIMARY,
-    hasIcon = false,
+    icon,
     iconPosition = "left",
     ...rest
   } = props;
@@ -18,8 +19,15 @@ const Button = (props: IButtonProps) => {
       variant === ButtonVariant.SECONDARY && "btn-secondary",
       variant === ButtonVariant.DISABLED && "btn-disabled",
       variant === ButtonVariant.TRANSPARENT && "btn-transparent",
-    )} type={props.type || 'button'}>
-      {props.children}
+    )} type={props.type || "button"}>
+      {
+        icon ? props.children : iconPosition === "left" ? (
+          <>{icon} {props.children}</>
+        ) : (
+          <>{props.children}{icon}</>
+        )
+      }
+
     </button>
   );
 };

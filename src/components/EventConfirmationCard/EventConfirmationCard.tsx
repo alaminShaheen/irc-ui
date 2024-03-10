@@ -94,8 +94,8 @@ const EventConfirmationCard = () => {
         <div className="border-t border-dashed border-white-700 my-8" />
 
         <Button
-          className="w-full p-4 bg-primary text-white text-xl font-bold inline-flex justify-center items-center gap-x-3 rounded-md">
-          <Icon src={checkout} alt="checkout" />
+          className="w-full p-4 bg-primary text-white text-xl font-bold inline-flex justify-center items-center gap-x-3 rounded-md"
+          icon={<Icon src={checkout} alt="checkout" />}>
           Checkout
         </Button>
       </div>

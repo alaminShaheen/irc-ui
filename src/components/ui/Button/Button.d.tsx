@@ -1,4 +1,4 @@
-import { ButtonHTMLAttributes } from "react";
+import { ButtonHTMLAttributes, ReactNode } from "react";
 
 import { ButtonVariant } from "@/models/enums/ButtonVariant";
 
@@ -8,10 +8,10 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 type ButtonIconProps = | {
-  hasIcon: true;
+  icon: ReactNode
   iconPosition?: "left" | "right"
 } | {
-  hasIcon?: false;
+  icon?: never;
   iconPosition?: never;
 }
 

@@ -11,10 +11,12 @@ const SidebarContents = (props: ISidebarContentProps) => {
     <FocusTrap>
       <ul className="p-8 w-[360px] lg:w-[715px] min-h-full text-base-content bg-primary text-left">
         <li className="flex lg:hidden justify-end">
-          <Button className="text-lg flex text-white font-semibold items-center gap-x-1" onClick={onClose}
-                  tabIndex={sidebarOpen ? 0 : -1}>
-            <span>Close</span>
-            <Icon src={cross} alt="close" width={26} height={26} />
+          <Button className="text-lg flex text-white font-semibold items-center gap-x-1"
+                  icon={<Icon src={cross} alt="close" size={26} className="mr-1" />}
+                  onClick={onClose}
+                  tabIndex={sidebarOpen ? 0 : -1}
+                  iconPosition="right">
+            Close
           </Button>
         </li>
         <li className="flex flex-row justify-between w-full pt-10 lg:pt-0">
@@ -23,10 +25,12 @@ const SidebarContents = (props: ISidebarContentProps) => {
             EN
           </div>
 
-          <Button className="text-lg hidden lg:flex text-white font-semibold items-center gap-x-1" onClick={onClose}
-                  tabIndex={sidebarOpen ? 0 : -1}>
-            <span>Close</span>
-            <Icon src={cross} alt="close" width={26} height={26} />
+          <Button className="text-lg hidden lg:flex text-white font-semibold items-center gap-x-1"
+                  icon={<Icon src={cross} alt="close" size={26} className="mr-1" />}
+                  onClick={onClose}
+                  tabIndex={sidebarOpen ? 0 : -1}
+                  iconPosition="right">
+            Close
           </Button>
         </li>
 
