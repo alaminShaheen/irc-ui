@@ -99,10 +99,10 @@ const InsuredForm = (props: IInsuredFormProps) => {
               )}
             </div>
             <div className="flex gap-x-2">
-              <Button className="btn btn-ghost" onClick={onCancel}>
+              <Button className="border border-primary rounded-md p-4 bg-transparent" onClick={onCancel}>
                 Cancel
               </Button>
-              <Button className="btn btn-primary px-14" onClick={onSave}>
+              <Button className="bg-primary rounded-md text-white px-20 py-4" onClick={onSave}>
                 Save
               </Button>
             </div>

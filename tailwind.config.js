@@ -69,7 +69,8 @@ export default {
           800: "#E5E5E5",
           900: "#FFFFFF",
           DEFAULT: "#FFFFFF"
-        }
+        },
+        focus: "#F8D177"
       }
     }
   },

@@ -4,6 +4,7 @@ import Alert from "@/components/ui/Alert/Alert";
 import PolicyCard from "@/components/PolicyCard/PolicyCard";
 import InsuredForm from "@/components/InsuredForm/InsuredForm";
 import EventConfirmationCard from "@/components/EventConfirmationCard/EventConfirmationCard";
+import Button from "@/components/ui/Button";
 
 const Quote = () => {
   const [editMode, setEditMode] = useState(false);
@@ -22,9 +23,9 @@ const Quote = () => {
 
           <div className="text-primary">
             <span className="text-2xl font-bold mr-2">Insured</span>
-            <span className="text-sm underline cursor-pointer" onClick={toggleEditMode}>
+            <Button className="underline cursor-pointer" onClick={toggleEditMode}>
               {editMode ? "Cancel" : "Edit"}
-            </span>
+            </Button>
           </div>
 
           <InsuredForm editModeEnabled={editMode} onCancel={toggleEditMode} onSave={toggleEditMode} />

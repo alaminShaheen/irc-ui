@@ -35,7 +35,7 @@ const PolicyCard = (props: IPolicyCard) => {
               Lorem ipsum dolor sit amet, consectetur adipisicing elit.
               Alias amet dicta eum expedita ipsum iusto libero odio odit velit veritatis.
             </p>
-            <span className="underline cursor-pointer text-primary ml-1" onClick={toggleShowSubtitle}>
+            <span className="underline cursor-pointer text-primary ml-1 focus-visible:outline-focus" onClick={toggleShowSubtitle} tabIndex={0}>
               {showMoreSubtitle ? "show less" : "show more"}
             </span>
           </div>
@@ -48,7 +48,7 @@ const PolicyCard = (props: IPolicyCard) => {
           <EventCard />
 
           <li className="border-dashed border-gray-400 border-2 rounded mt-4 p-4 flex bg-primary-25 cursor-pointer"
-              onClick={addEvent}>
+              onClick={addEvent} tabIndex={0}>
             <span><img src={addEventIcon} alt="add event" width={24} height={24} /></span>
             <span className="text-primary font-semibold ml-1">Add another event</span>
           </li>

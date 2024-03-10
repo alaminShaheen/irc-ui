@@ -78,8 +78,8 @@ const EventCard = () => {
           </span>
         </div>
 
-        <p onClick={toggleEventDetails}
-           className="text-primary underline font-bold mt-4 cursor-pointer text-sm lg:text-base">
+        <p onClick={toggleEventDetails} tabIndex={0}
+           className="text-primary underline font-bold mt-4 cursor-pointer text-sm lg:text-base focus-visible:outline-focus">
           {showMoreEventDetails ? "Show less details" : "Show more details"}
         </p>
 
