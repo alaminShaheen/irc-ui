@@ -1,5 +1,6 @@
 import Sidebar from "@/components/Sidebar/Sidebar";
 import BypassBlock from "../BypassBlock";
+import Footer from "../Footer";
 import { ILayoutProps } from "@/components/Layout/Layout.d";
 
 const Layout = (props: ILayoutProps) => {
@@ -24,7 +25,7 @@ const Layout = (props: ILayoutProps) => {
         <div className="w-full p-4 lg:p-11">{children}</div>
       </div>
 
-      {/*  Footer goes here*/}
+      <Footer />
     </>
   );
 };
