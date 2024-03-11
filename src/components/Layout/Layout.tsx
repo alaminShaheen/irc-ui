@@ -17,13 +17,13 @@ const Layout = (props: ILayoutProps) => {
         bypassStyle="bg-primary text-white"
       />
 
-      <div
+      <main
         id="main-content"
         className="lg:grid lg:grid-cols-[110px_1fr] flex flex-col bg-primary-25"
       >
         <Sidebar />
         <div className="w-full p-4 lg:p-11">{children}</div>
-      </div>
+      </main>
 
       <Footer />
     </>
