@@ -1,13 +1,19 @@
-import Checkbox from "@/components/ui/Checkbox/Checkbox";
-import Button from "@/components/ui/Button/Button";
-import { cn } from "@/utils/helper";
-import checkout from "@/assets/icons/checkout.svg";
-import bgCard from "@/assets/images/event-checkout-bg.png";
-import AppConstants from "@/constants/AppConstants";
 import Icon from "@/components/ui/Icon";
+import { cn } from "@/utils/helper";
+import Button from "@/components/ui/Button/Button";
+import bgCard from "@/assets/images/event-checkout-bg.png";
+import checkout from "@/assets/icons/checkout.svg";
+import Checkbox from "@/components/ui/Checkbox/Checkbox";
+import AppConstants from "@/constants/AppConstants";
+import { useToggle } from "@/hooks/useToggle";
 import { ButtonVariant } from "@/models/enums/ButtonVariant";
 
 const EventConfirmationCard = () => {
+  const [coverageExclusionChecked, toggleCoverageExclusionCheckbox] = useToggle(false);
+  const [deductibleResponsibilityChecked, toggleDeductibleResponsibilityCheckbox] = useToggle(false);
+  const [professionalLiabilityChecked, toggleProfessionalLiabilityCheckbox] = useToggle(false);
+  const allChecked = coverageExclusionChecked && deductibleResponsibilityChecked && professionalLiabilityChecked;
+
   return (
     <div className="mx-0 lg:mx-4 mt-8 lg:mt-0 w-full h-auto px-6 py-6 pb-11 relative">
       <div className="absolute top-0 left-0 z-0 w-full h-full">
@@ -53,7 +59,9 @@ const EventConfirmationCard = () => {
 
         <div className="flex mt-6 items-center">
           <div className="flex items-center justify-center">
-            <Checkbox className="mr-2" id="coverage-exclusions" />
+            <Checkbox className="mr-2" id="coverage-exclusions"
+                      checked={coverageExclusionChecked}
+                      onChange={toggleCoverageExclusionCheckbox} />
           </div>
           <label htmlFor="coverage-exclusions" className="text-black w-full">
             I understand the coverage and exclusions of this policy
@@ -77,7 +85,9 @@ const EventConfirmationCard = () => {
           </div>
           <div className="flex items-center w-full">
             <div className="flex items-center justify-center">
-              <Checkbox className="mr-2" id="responsible" />
+              <Checkbox className="mr-2" id="responsible"
+                        checked={deductibleResponsibilityChecked}
+                        onChange={toggleDeductibleResponsibilityCheckbox} />
             </div>
             <label htmlFor="responsible" className="text-black w-full">
               {" "}
@@ -94,7 +104,9 @@ const EventConfirmationCard = () => {
 
         <div className="flex items-center">
           <div className="flex items-center justify-center">
-            <Checkbox className="mr-2" id="coverage-exclusions" />
+            <Checkbox className="mr-2" id="coverage-exclusions"
+                      checked={professionalLiabilityChecked}
+                      onChange={toggleProfessionalLiabilityCheckbox} />
           </div>
           <label
             htmlFor="coverage-exclusions"
@@ -107,12 +119,11 @@ const EventConfirmationCard = () => {
         <div className="border-t border-dashed border-white-700 my-8" />
 
         <Button
-          className="w-full p-4 bg-primary text-white text-xl font-bold inline-flex justify-center items-center gap-x-3 rounded-md"
-          icon={<Icon src={checkout} alt="checkout" />}
-          variant={ButtonVariant.DISABLED}
-          disabled
-        >
-          Checkout
+          className="w-full p-4 text-xl font-bold inline-flex justify-center items-center gap-x-3 rounded-md"
+          icon={allChecked && <Icon src={checkout} alt="checkout" />}
+          variant={allChecked ? ButtonVariant.PRIMARY : ButtonVariant.DISABLED}
+          disabled={!allChecked}>
+          {allChecked ? "Checkout" : "Confirm above"}
         </Button>
       </div>
     </div>

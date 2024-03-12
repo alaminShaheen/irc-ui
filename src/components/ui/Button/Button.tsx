@@ -6,7 +6,7 @@ import {
 } from "@/models/enums/ButtonVariant";
 import { cn } from "@/utils/helper";
 
-const DEFAULT_BUTTON_STYLE = "px-4 py-3";
+const DEFAULT_BUTTON_STYLE = "px-4 py-3 cursor-pointer";
 
 const Button = (props: IButtonProps) => {
   const {
