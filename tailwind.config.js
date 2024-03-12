@@ -3,10 +3,7 @@
 import defaultTailwindColors from "tailwindcss/colors";
 
 export default {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
       fontFamily: {
@@ -76,6 +73,9 @@ export default {
         },
         focus: "#F8D177",
       },
+      maxHeight: {
+        calc: "calc(100vh - (2*32px + 52px + 40px))",
+      },
     },
   },
   plugins: [require("daisyui")],
@@ -83,4 +83,3 @@ export default {
     themes: [],
   },
 };
-
