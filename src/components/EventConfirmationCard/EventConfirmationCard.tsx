@@ -6,7 +6,6 @@ import checkout from "@/assets/icons/checkout.svg";
 import Checkbox from "@/components/ui/Checkbox/Checkbox";
 import useToggle from "@/hooks/useToggle";
 import AppConstants from "@/constants/AppConstants";
-
 import { ButtonVariant } from "@/models/enums/ButtonVariant";
 
 const EventConfirmationCard = () => {
@@ -16,11 +15,11 @@ const EventConfirmationCard = () => {
   const allChecked = coverageExclusionChecked && deductibleResponsibilityChecked && professionalLiabilityChecked;
 
   return (
-    <div className="mx-0 lg:mx-4 mt-8 lg:mt-0 w-full h-auto px-6 py-6 pb-11 relative lg:sticky lg:top-2">
-      <div className="absolute top-0 left-0 z-0 w-full h-full">
+    <div className="mt-8 lg:mt-0 w-full p-6 relative lg:sticky lg:top-[100px] z-0">
+      <div className="absolute top-0 left-0 w-full h-full">
         <Icon src={bgCard} alt="card" className="w-full h-full" />
       </div>
-      <div className="relative z-10">
+      <div className="relative">
         <div className="flex justify-between text-lg font-semibold">
           <h2 className="text-graphite-700">Number of events:</h2>
           <p aria-live="polite" className="text-primary">

@@ -18,7 +18,7 @@ const Quote = () => {
   }, []);
 
   return (
-    <div className="flex flex-col lg:grid lg:grid-cols-5">
+    <div className="flex flex-col lg:grid lg:grid-cols-5 gap-x-6">
       <div className="lg:col-span-3">
         <Alert
           alertMessage={

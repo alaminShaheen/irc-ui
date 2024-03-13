@@ -1,16 +1,18 @@
 import { useCallback } from "react";
 
-import market from "@/assets/icons/market-icon.svg";
-import addEventIcon from "@/assets/icons/add-event.svg";
-import EventCard from "@/components/EventCard/EventCard";
-import { cn } from "@/utils/helper";
-import { IPolicyCard } from "@/components/PolicyCard/PolicyCard.d";
 import Icon from "@/components/ui/Icon";
+import { cn } from "@/utils/helper";
+import market from "@/assets/icons/market-icon.svg";
 import useToggle from "@/hooks/useToggle";
+import EventCard from "@/components/EventCard/EventCard";
+import addEventIcon from "@/assets/icons/add-event.svg";
+import AddEventModal from "@/components/AddEventModal";
+import { IPolicyCard } from "@/components/PolicyCard/PolicyCard.d";
 
 const PolicyCard = (props: IPolicyCard) => {
   const {} = props;
   const [showMoreSubtitle, toggleShowMoreSubtitle] = useToggle(false);
+  const [showAddEventModal, toggleAddEventModal] = useToggle(false);
 
   const addEvent = useCallback(() => {
     // TODO: Add event functionality
@@ -65,7 +67,7 @@ const PolicyCard = (props: IPolicyCard) => {
 
           <li
             className="border-dashed border-gray-400 border-2 rounded mt-4 p-4 flex bg-primary-25 cursor-pointer"
-            onClick={addEvent}
+            onClick={toggleAddEventModal}
             role="button"
             tabIndex={0}
           >
@@ -78,6 +80,7 @@ const PolicyCard = (props: IPolicyCard) => {
           </li>
         </ul>
       </div>
+      <AddEventModal onConfirm={() => {}} isOpen={showAddEventModal} toggle={toggleAddEventModal}/>
     </li>
   );
 };
