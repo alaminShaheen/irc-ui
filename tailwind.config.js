@@ -73,9 +73,6 @@ export default {
         },
         focus: "#F8D177",
       },
-      maxHeight: {
-        calc: "calc(100vh - (2*32px + 52px + 40px))",
-      },
     },
   },
   plugins: [require("daisyui")],
