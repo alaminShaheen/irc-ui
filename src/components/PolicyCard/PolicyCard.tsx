@@ -6,7 +6,6 @@ import market from "@/assets/icons/market-icon.svg";
 import useToggle from "@/hooks/useToggle";
 import EventCard from "@/components/EventCard/EventCard";
 import addEventIcon from "@/assets/icons/add-event.svg";
-import AddEventModal from "@/components/AddEventModal";
 import { IPolicyCard } from "@/components/PolicyCard/PolicyCard.d";
 
 const PolicyCard = (props: IPolicyCard) => {
@@ -80,7 +79,6 @@ const PolicyCard = (props: IPolicyCard) => {
           </li>
         </ul>
       </div>
-      <AddEventModal onConfirm={() => {}} isOpen={showAddEventModal} toggle={toggleAddEventModal}/>
     </li>
   );
 };
