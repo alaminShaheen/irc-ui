@@ -1,21 +1,20 @@
-import { useCallback, useState, useEffect } from "react";
+import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
 import Alert from "@/components/ui/Alert/Alert";
+import Button from "@/components/ui/Button";
 import PolicyCard from "@/components/PolicyCard/PolicyCard";
 import InsuredForm from "@/components/InsuredForm/InsuredForm";
-import EventConfirmationCard from "@/components/EventConfirmationCard/EventConfirmationCard";
-import Button from "@/components/ui/Button";
+import { useToggle } from "@/hooks/index";
 import { ButtonVariant } from "@/models/enums/ButtonVariant";
+import EventConfirmationCard from "@/components/EventConfirmationCard/EventConfirmationCard";
 
 const Quote = () => {
-  const [editMode, setEditMode] = useState(false);
+  const [editMode, toggleEditMode] = useToggle(false);
+  const { t } = useTranslation();
 
   useEffect(() => {
     document.title = "IRC Quote page";
-  }, []);
-
-  const toggleEditMode = useCallback(() => {
-    setEditMode((prev) => !prev);
   }, []);
 
   return (
@@ -30,14 +29,14 @@ const Quote = () => {
         <div className="mt-6">
           <div className="flex text-primary items-center">
             <h1 className="text-2xl font-bold mr-2">Insured</h1>
-
-            <Button
-              className="underline cursor-pointer px-0"
-              variant={ButtonVariant.TRANSPARENT}
-              onClick={toggleEditMode}
-            >
-              {editMode ? "Cancel" : "Edit"}
-            </Button>
+            {
+              !editMode &&
+              <Button className="underline cursor-pointer px-0"
+                      variant={ButtonVariant.TRANSPARENT}
+                      onClick={toggleEditMode}>
+                Edit
+              </Button>
+            }
           </div>
 
           <InsuredForm
@@ -48,7 +47,7 @@ const Quote = () => {
 
           {/*Your policies*/}
           <h1 className="text-primary text-2xl font-bold my-8">
-            Your Policies
+            {t("your-policies")}
           </h1>
 
           <ul className="space-y-6">

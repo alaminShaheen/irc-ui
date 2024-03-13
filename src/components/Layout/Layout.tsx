@@ -1,7 +1,7 @@
-import Sidebar from "@/components/Sidebar/Sidebar";
-import BypassBlock from "../BypassBlock";
-import Footer from "../Footer";
 import { ILayoutProps } from "@/components/Layout/Layout.d";
+import Sidebar from "@/components/Sidebar/Sidebar";
+import BypassBlock from "@/components/BypassBlock";
+import Footer from "@/components/Footer";
 
 const Layout = (props: ILayoutProps) => {
   const { children } = props;
@@ -24,7 +24,6 @@ const Layout = (props: ILayoutProps) => {
         <Sidebar />
         <div className="w-full p-4 lg:p-11">{children}</div>
       </main>
-
       <Footer />
     </>
   );

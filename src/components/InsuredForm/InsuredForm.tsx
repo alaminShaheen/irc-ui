@@ -4,8 +4,9 @@ import { useForm } from "react-hook-form";
 import Button from "@/components/ui/Button/Button";
 import { InsuredFormModel } from "@/models/form/InsuredFormModel";
 import { IInsuredFormProps } from "@/components/InsuredForm/InsuredForm.d";
-import { ButtonVariant } from "@/models/enums/ButtonVariant";
+import { ButtonType, ButtonVariant } from "@/models/enums/ButtonVariant";
 import { formatPhoneNumber } from "@/utils/helper";
+import { twMerge } from "tailwind-merge";
 
 const InsuredForm = (props: IInsuredFormProps) => {
   const { editModeEnabled, onCancel, onSave } = props;
@@ -58,12 +59,13 @@ const InsuredForm = (props: IInsuredFormProps) => {
             <input
               {...register("name", { required: "Name is required" })}
               id="name"
-              className="input py-5 w-full lg:w-1/2"
+              className={twMerge("input py-5 w-full lg:w-1/2", errors.name?.message && "has-error")}
               type="text"
-              disabled={false}
+              readOnly={true}
+              disabled={true}
             />
             {errors.name?.message && (
-              <span className="text-xs text-red-500 my-2">
+              <span className="text-sm text-red-500 my-2">
                 {errors.name.message}
               </span>
             )}
@@ -76,12 +78,13 @@ const InsuredForm = (props: IInsuredFormProps) => {
             <input
               {...register("address", { required: "Address is required" })}
               id="address"
-              className="input py-5 w-full lg:w-1/2"
+              className={twMerge("input py-5 w-full lg:w-1/2", errors.address?.message && "has-error")}
               type="text"
-              disabled={false}
+              readOnly={true}
+              disabled={true}
             />
             {errors.address?.message && (
-              <span className="text-xs text-red-500 my-2">
+              <span className="text-sm text-red-500 my-2">
                 {errors.address.message}
               </span>
             )}
@@ -96,12 +99,12 @@ const InsuredForm = (props: IInsuredFormProps) => {
                 required: "Telephone number is required",
               })}
               id="telephone"
-              className="input py-5 w-full lg:w-1/2"
+              className={twMerge("input py-5 w-full lg:w-1/2", errors.telephone?.message && "has-error")}
               type="tel"
               disabled={false}
             />
             {errors.telephone?.message && (
-              <span className="text-xs text-red-500 my-2">
+              <span className="text-sm text-red-500 my-2">
                 {errors.telephone.message}
               </span>
             )}
@@ -114,12 +117,12 @@ const InsuredForm = (props: IInsuredFormProps) => {
             <input
               {...register("email", { required: "Email is required" })}
               id="email"
-              className="input py-5 w-full lg:w-1/2"
+              className={twMerge("input py-5 w-full lg:w-1/2", errors.email?.message && "has-error")}
               type="email"
               disabled={false}
             />
             {errors.email?.message && (
-              <span className="text-xs text-red-500 my-2">
+              <span className="text-sm text-red-500 my-2">
                 {errors.email.message}
               </span>
             )}
@@ -128,10 +131,7 @@ const InsuredForm = (props: IInsuredFormProps) => {
             <Button onClick={onCancel} variant={ButtonVariant.SECONDARY}>
               Cancel
             </Button>
-            <Button
-              className="bg-primary rounded-md text-white px-20"
-              onClick={onSave}
-            >
+            <Button className="bg-primary rounded-md text-white px-20" type={ButtonType.SUBMIT}>
               Save
             </Button>
           </div>

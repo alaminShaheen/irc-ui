@@ -23,9 +23,7 @@ const PolicyCard = (props: IPolicyCard) => {
           <Icon
             src={market}
             alt="market"
-            width={40}
-            height={40}
-            className=" "
+            size={40}
           />
         </div>
         <div className="truncate title-section min-w-0 w-full">
@@ -48,7 +46,9 @@ const PolicyCard = (props: IPolicyCard) => {
               veritatis.
             </p>
             <span
-              className="underline cursor-pointer text-primary ml-1 focus-visible:outline-focus"
+              className={cn("underline cursor-pointer text-primary focus-visible:outline-focus", {
+                "ml-1": !showMoreSubtitle,
+              })}
               onClick={toggleShowMoreSubtitle}
               tabIndex={0}
             >

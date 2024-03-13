@@ -1,38 +1,38 @@
-import cross from "@/assets/icons/cross.svg";
 import Icon from "@/components/ui/Icon";
+import cross from "@/assets/icons/cross.svg";
 import Button from "@/components/ui/Button";
 import FocusTrap from "@/components/FocusTrap";
-import { ISidebarContentProps } from "@/components/SidebarContents/SidebarContents.d";
+import LanguageToggle from "@/components/LanguageToggle";
 import { ICON_POSITION } from "@/models/enums/ButtonVariant";
+import { ISidebarContentProps } from "@/components/SidebarContents/SidebarContents.d";
 
 const SidebarContents = (props: ISidebarContentProps) => {
   const { onClose, sidebarOpen } = props;
 
   return (
-    <FocusTrap>
-      <ul className="p-8 w-[360px] lg:w-[715px] min-h-full text-base-content bg-primary text-left">
+    <FocusTrap className="h-full">
+      <ul
+        className="p-8 w-[360px] lg:w-[715px] min-h-full text-base-content bg-primary text-left overflow-y-auto h-full">
         <li className="flex lg:hidden justify-end">
           <Button
             className="text-lg flex text-white font-semibold items-center gap-x-1"
             icon={<Icon src={cross} alt="close" size={26} className="mr-1" />}
             onClick={onClose}
             tabIndex={sidebarOpen ? 0 : -1}
-            iconPosition={ICON_POSITION.RIGHT}
+            iconPosition={ICON_POSITION.LEFT}
           >
             Close
           </Button>
         </li>
-        <li className="flex flex-row justify-between w-full pt-10 lg:pt-0">
-          <div className="h-12 w-12 rounded-lg text-primary-5 border-2 border-secondary-25 flex justify-center items-center font-bold">
-            EN
-          </div>
+        <li className="flex flex-row justify-between w-full mt-8 lg:mt-0">
+          <LanguageToggle />
 
           <Button
             className="text-lg hidden lg:flex text-white font-semibold items-center gap-x-1"
             icon={<Icon src={cross} alt="close" size={26} className="mr-1" />}
             onClick={onClose}
             tabIndex={sidebarOpen ? 0 : -1}
-            iconPosition={ICON_POSITION.RIGHT}
+            iconPosition={ICON_POSITION.LEFT}
           >
             Close
           </Button>
