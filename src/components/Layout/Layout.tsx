@@ -6,7 +6,7 @@ import { ILayoutProps } from "@/components/Layout/Layout.d";
 const Layout = (props: ILayoutProps) => {
   const { children } = props;
   return (
-    <>
+    <div className="bg-primary-25">
       <BypassBlock
         bypassLink="main-content"
         bypassStyle="bg-primary text-white"
@@ -19,14 +19,14 @@ const Layout = (props: ILayoutProps) => {
 
       <main
         id="main-content"
-        className="lg:grid lg:grid-cols-[110px_1fr] flex flex-col bg-primary-25"
+        className="lg:grid lg:grid-cols-[110px_1fr] flex flex-col"
       >
         <Sidebar />
         <div className="w-full p-4 lg:p-11">{children}</div>
       </main>
 
       <Footer />
-    </>
+    </div>
   );
 };
 
