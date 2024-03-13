@@ -1,12 +1,8 @@
 import { IButtonProps } from "@/components/ui/Button/Button.d";
-import {
-  ButtonVariant,
-  ButtonType,
-  ICON_POSITION,
-} from "@/models/enums/ButtonVariant";
+import { ButtonType, ButtonVariant, ICON_POSITION } from "@/models/enums/ButtonVariant";
 import { cn } from "@/utils/helper";
 
-const DEFAULT_BUTTON_STYLE = "px-4 py-3";
+const DEFAULT_BUTTON_STYLE = "px-4 py-3 cursor-pointer";
 
 const Button = (props: IButtonProps) => {
   const {
@@ -25,14 +21,15 @@ const Button = (props: IButtonProps) => {
         "btn-secondary text-md": variant === ButtonVariant.SECONDARY,
         "btn-disabled": variant === ButtonVariant.DISABLED,
         "btn-transparent": variant === ButtonVariant.TRANSPARENT,
+        "btn": variant === ButtonVariant.VANILLA
       })}
       type={buttonType}
       {...rest}
     >
-      {icon && iconPosition === ICON_POSITION.LEFT && icon}
+      {!!icon && iconPosition === ICON_POSITION.LEFT && icon}
       {props.children}
 
-      {icon && iconPosition === ICON_POSITION.RIGHT && icon}
+      {!!icon && iconPosition === ICON_POSITION.RIGHT && icon}
     </button>
   );
 };

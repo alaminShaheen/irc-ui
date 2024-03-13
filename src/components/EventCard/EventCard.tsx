@@ -1,19 +1,16 @@
-import { useCallback, useState } from "react";
-
 import door from "@/assets/icons/door.svg";
 import Icon from "@/components/ui/Icon";
 import clock from "@/assets/icons/clock.svg";
 import Button from "@/components/ui/Button/Button";
 import calendar from "@/assets/icons/calendar-1.svg";
+import useToggle from "@/hooks/useToggle";
 import calendarTime from "@/assets/icons/calendar-time.svg";
 import { ButtonVariant } from "@/models/enums/ButtonVariant";
+import { IEventCardProps } from "./EventCard.d";
 
-const EventCard = () => {
-  const [showMoreEventDetails, setShowMoreEventDetails] = useState(false);
-
-  const toggleEventDetails = useCallback(() => {
-    setShowMoreEventDetails((prev) => !prev);
-  }, []);
+const EventCard = ({ content }: IEventCardProps) => {
+  const { edit, removePolicy } = content;
+  const [showMoreEventDetails, toggleShowMoreEventDetails] = useToggle(false);
 
   return (
     <div className="event-card border-2 border-primary rounded-md gap-y-3 lg:gap-x-3 flex flex-col lg:flex-row items-start p-4 w-full">
@@ -26,21 +23,28 @@ const EventCard = () => {
           <Icon src={calendar} alt="calendar" size={22} />
         </span>
         <div className="flex gap-x-6 text-base underline text-primary">
-          <Button variant={ButtonVariant.TRANSPARENT}>Edit</Button>
-          <Button variant={ButtonVariant.TRANSPARENT}>Remove policy</Button>
+          <Button className="p-0" variant={ButtonVariant.TRANSPARENT}>
+            {edit}
+          </Button>
+          <Button className="p-0" variant={ButtonVariant.TRANSPARENT}>
+            {removePolicy}
+          </Button>
         </div>
       </div>
 
       <div className="event-details w-full">
-        <div className="flex justify-between items-center">
-          <h3 className="font-bold text-primary text-xl">
-            [Event name] - reocuring activity
-          </h3>
-          <div className="hidden lg:flex gap-x-3 text-base underline text-primary">
-            <Button variant={ButtonVariant.TRANSPARENT}>Edit</Button>
-            <Button variant={ButtonVariant.TRANSPARENT}>Remove policy</Button>
-          </div>
+        <div className="hidden lg:flex justify-end gap-x-3 text-base underline text-primary">
+          <Button className="p-0" variant={ButtonVariant.TRANSPARENT}>
+            {edit}
+          </Button>
+          <Button className="p-0" variant={ButtonVariant.TRANSPARENT}>
+            {removePolicy}
+          </Button>
         </div>
+
+        <h3 className="text-primary text-xl">
+          [Event name] - reocuring activity
+        </h3>
 
         <div className="mt-3 flex space-x-1 items-center">
           <span className="mr-1">
@@ -68,7 +72,7 @@ const EventCard = () => {
 
         <div className="flex items-center">
           <span className="mr-1">
-            <Icon src={door} alt="door" size={20} />
+            <Icon src={door} alt="door" size={24} />
           </span>
           <span className="text-primary">
             <span>[Facility name]</span>,<span>[Facility name]</span>,
@@ -78,7 +82,7 @@ const EventCard = () => {
         </div>
 
         <p
-          onClick={toggleEventDetails}
+          onClick={toggleShowMoreEventDetails}
           tabIndex={0}
           className="text-primary underline font-bold mt-4 cursor-pointer text-sm lg:text-base focus-visible:outline-focus"
         >

@@ -9,6 +9,12 @@ export default {
       fontFamily: {
         sans: ["Roboto", "system-ui", "sans-serif"],
       },
+      width: {
+        checkbox: "30px"
+      },
+      height: {
+        checkbox: "30px"
+      },
       colors: {
         ...defaultTailwindColors,
         primary: {
@@ -74,9 +80,5 @@ export default {
         focus: "#F8D177",
       },
     },
-  },
-  plugins: [require("daisyui")],
-  daisyui: {
-    themes: [],
   },
 };

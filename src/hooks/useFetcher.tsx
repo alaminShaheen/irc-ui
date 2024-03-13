@@ -35,7 +35,7 @@ function fetchReducer<T>(state: TFetchState<T>, action: TFetchAction<T>): TFetch
   }
 }
 
-const fetchUrl = `https://graphql.contentful.com/content/v1/spaces/${process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID}/`;
+const fetchUrl = `https://graphql.contentful.com/content/v1/spaces/`;
 
 const useFetcher = <T,>(query: any): TFetchState<T> => {
   const initialState: TFetchState<T> = {

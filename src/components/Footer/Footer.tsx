@@ -1,10 +1,11 @@
-import socialMedia from "../../assets/socialMedia.svg";
-import logo from "../../assets/logo.svg";
+import socialMedia from "@/assets/socialMedia.svg";
+import logo from "@/assets/logo.svg";
 
 const Footer = () => {
   return (
     <footer id="footer-content" className="bg-primary text-white font-Roboto">
-      <div className="pt-[51px] max-sm:px-4 sm:max-md:px-8 max-sm:pb-[62px] sm:max-md:pb-[67px] md:pt-[92px] md:pb-[54px]">
+      <div
+        className="pt-[51px] max-sm:px-4 sm:max-md:px-8 max-sm:pb-[62px] sm:max-md:pb-[67px] md:pt-[92px] md:pb-[54px]">
         <p className="text-sm text-left text-primary-25 font-light md:ml-[156px]">
           Powered by:
         </p>
@@ -50,7 +51,7 @@ const Footer = () => {
             Privacy policy
           </a>
           <p className="mt-[27px] md:mt-[33px] text-base font-medium">
-            © 2022 instantriskcoverage
+            © {new Date().getFullYear()} instantriskcoverage
           </p>
         </div>
       </div>

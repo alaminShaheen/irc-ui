@@ -1,43 +1,27 @@
-import cross from "@/assets/icons/cross.svg";
 import Icon from "@/components/ui/Icon";
+import cross from "@/assets/icons/cross.svg";
 import Button from "@/components/ui/Button";
 import FocusTrap from "@/components/FocusTrap";
 import { ISidebarContentProps } from "@/components/SidebarContents/SidebarContents.d";
-import { ICON_POSITION } from "@/models/enums/ButtonVariant";
+import { ButtonVariant, ICON_POSITION } from "@/models/enums/ButtonVariant";
 
 const SidebarContents = (props: ISidebarContentProps) => {
   const { onClose, sidebarOpen } = props;
 
   return (
-    <FocusTrap>
-      <ul className="p-8 w-[360px] lg:w-[715px] min-h-full text-base-content bg-primary text-left">
-        <li className="flex lg:hidden justify-end">
-          <Button
-            className="text-lg flex text-white font-semibold items-center gap-x-1"
-            icon={<Icon src={cross} alt="close" size={26} className="mr-1" />}
-            onClick={onClose}
-            tabIndex={sidebarOpen ? 0 : -1}
-            iconPosition={ICON_POSITION.RIGHT}
-          >
-            Close
-          </Button>
-        </li>
-        <li className="flex flex-row justify-end w-full pt-10 lg:pt-0">
-          <div className="h-12 w-12 rounded-lg text-primary-5 border-2 border-secondary-25 flex justify-center items-center font-bold">
-            EN
-          </div>
-          <Button
-            className="text-lg hidden lg:flex text-white font-semibold items-center gap-x-1"
-            icon={<Icon src={cross} alt="close" size={26} className="mr-1" />}
-            onClick={onClose}
-            tabIndex={sidebarOpen ? 0 : -1}
-            iconPosition={ICON_POSITION.RIGHT}
-          >
-            Close
-          </Button>
-        </li>
+    <FocusTrap className="h-full ">
+      <div className="p-4 lg:p-8 w-[360px] lg:w-[715px] min-h-full text-base-content bg-primary text-left h-full">
+        <Button
+          className="flex text-white font-semibold items-center gap-x-1 ml-auto btn h-[5%] p-3 text-base"
+          icon={<Icon src={cross} alt="close" size={26} className="mr-1" />}
+          onClick={onClose}
+          variant={ButtonVariant.VANILLA}
+          tabIndex={sidebarOpen ? 0 : -1}
+          iconPosition={ICON_POSITION.LEFT}>
+          Close
+        </Button>
 
-        <div className="overflow-y-auto max-h-calc">
+        <ul className="overflow-y-auto h-[95%]">
           <li className="pl-0 ml-0 mt-6">
             <div className="text-primary-200 p-0 ml-0" id="policyInfo">
               Policy Information
@@ -185,8 +169,8 @@ const SidebarContents = (props: ISidebarContentProps) => {
               Large Event Application Form
             </a>
           </li>
-        </div>
-      </ul>
+        </ul>
+      </div>
     </FocusTrap>
   );
 };
