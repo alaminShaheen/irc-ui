@@ -5,7 +5,7 @@
 @tailwind utilities;
 
 .btn {
-	@apply font-bold border-transparent h-10 min-h-10 !important;
+	@apply font-bold !important;
 }
 
 .btn-primary {

@@ -1,19 +1,14 @@
-import { useCallback, useState } from "react";
-
 import door from "@/assets/icons/door.svg";
 import Icon from "@/components/ui/Icon";
 import clock from "@/assets/icons/clock.svg";
 import Button from "@/components/ui/Button/Button";
 import calendar from "@/assets/icons/calendar-1.svg";
+import useToggle from "@/hooks/useToggle";
 import calendarTime from "@/assets/icons/calendar-time.svg";
 import { ButtonVariant } from "@/models/enums/ButtonVariant";
 
 const EventCard = () => {
-  const [showMoreEventDetails, setShowMoreEventDetails] = useState(false);
-
-  const toggleEventDetails = useCallback(() => {
-    setShowMoreEventDetails((prev) => !prev);
-  }, []);
+  const [showMoreEventDetails, toggleShowMoreEventDetails] = useToggle(false);
 
   return (
     <div className="event-card border-2 border-primary rounded-md gap-y-3 lg:gap-x-3 flex flex-col lg:flex-row items-start p-4 w-full">
@@ -81,7 +76,7 @@ const EventCard = () => {
         </div>
 
         <p
-          onClick={toggleEventDetails}
+          onClick={toggleShowMoreEventDetails}
           tabIndex={0}
           className="text-primary underline font-bold mt-4 cursor-pointer text-sm lg:text-base focus-visible:outline-focus"
         >

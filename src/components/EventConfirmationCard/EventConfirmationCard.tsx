@@ -4,8 +4,9 @@ import Button from "@/components/ui/Button/Button";
 import bgCard from "@/assets/images/event-checkout-bg.png";
 import checkout from "@/assets/icons/checkout.svg";
 import Checkbox from "@/components/ui/Checkbox/Checkbox";
+import useToggle from "@/hooks/useToggle";
 import AppConstants from "@/constants/AppConstants";
-import { useToggle } from "@/hooks/useToggle";
+
 import { ButtonVariant } from "@/models/enums/ButtonVariant";
 
 const EventConfirmationCard = () => {

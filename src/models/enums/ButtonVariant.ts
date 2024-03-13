@@ -3,6 +3,7 @@ export enum ButtonVariant {
   SECONDARY = "SECONDARY",
   DISABLED = "DISABLED",
   TRANSPARENT = "TRANSPARENT",
+  VANILLA = "VANILLA"
 }
 
 export enum ButtonType {

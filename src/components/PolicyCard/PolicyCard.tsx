@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback } from "react";
 
 import market from "@/assets/icons/market-icon.svg";
 import addEventIcon from "@/assets/icons/add-event.svg";
@@ -6,14 +6,11 @@ import EventCard from "@/components/EventCard/EventCard";
 import { cn } from "@/utils/helper";
 import { IPolicyCard } from "@/components/PolicyCard/PolicyCard.d";
 import Icon from "@/components/ui/Icon";
+import useToggle from "@/hooks/useToggle";
 
 const PolicyCard = (props: IPolicyCard) => {
   const {} = props;
-  const [showMoreSubtitle, setShowMoreSubtitle] = useState(false);
-
-  const toggleShowSubtitle = useCallback(() => {
-    setShowMoreSubtitle((prev) => !prev);
-  }, []);
+  const [showMoreSubtitle, toggleShowMoreSubtitle] = useToggle(false);
 
   const addEvent = useCallback(() => {
     // TODO: Add event functionality
@@ -52,7 +49,7 @@ const PolicyCard = (props: IPolicyCard) => {
             </p>
             <span
               className="underline cursor-pointer text-primary ml-1 focus-visible:outline-focus"
-              onClick={toggleShowSubtitle}
+              onClick={toggleShowMoreSubtitle}
               tabIndex={0}
             >
               {showMoreSubtitle ? "show less" : "show more"}
