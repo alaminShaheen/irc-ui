@@ -47,7 +47,7 @@ const Quote = () => {
 
           {/*Your policies*/}
           <h1 className="text-primary text-2xl font-bold my-8">
-            {t("your-policies")}
+            {t("pages.quote.your-policies")}
           </h1>
 
           <ul className="space-y-6">
