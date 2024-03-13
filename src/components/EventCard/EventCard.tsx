@@ -11,31 +11,33 @@ const EventCard = () => {
   const [showMoreEventDetails, toggleShowMoreEventDetails] = useToggle(false);
 
   return (
-    <div className="event-card border-2 border-primary rounded-md gap-y-3 lg:gap-x-3 flex flex-col lg:flex-row items-start p-4 w-full">
-      <span className="w-9 h-9 sm:w-12 sm:h-10 bg-primary-50 hidden lg:flex justify-center items-center rounded-md border border-primary">
+    <div
+      className="event-card border-2 border-primary rounded-md gap-y-3 lg:gap-x-3 flex flex-col lg:flex-row items-start p-4 w-full">
+      <span
+        className="w-9 h-9 sm:w-12 sm:h-10 bg-primary-50 hidden lg:flex justify-center items-center rounded-md border border-primary">
         <Icon src={calendar} alt="calendar" size={22} />
       </span>
 
       <div className="flex items-center justify-between lg:hidden w-full">
-        <span className="w-9 h-9 sm:w-12 sm:h-12 bg-gray-300 flex justify-center items-center rounded-md border border-primary">
+        <span
+          className="w-9 h-9 sm:w-12 sm:h-12 bg-gray-300 flex justify-center items-center rounded-md border border-primary">
           <Icon src={calendar} alt="calendar" size={22} />
         </span>
         <div className="flex gap-x-6 text-base underline text-primary">
-          <Button variant={ButtonVariant.TRANSPARENT}>Edit</Button>
-          <Button variant={ButtonVariant.TRANSPARENT}>Remove policy</Button>
+          <Button className="p-0" variant={ButtonVariant.TRANSPARENT}>Edit</Button>
+          <Button className="p-0" variant={ButtonVariant.TRANSPARENT}>Remove policy</Button>
         </div>
       </div>
 
       <div className="event-details w-full">
-        <div className="flex justify-between items-center">
-          <h3 className="font-bold text-primary text-xl">
-            [Event name] - reocuring activity
-          </h3>
-          <div className="hidden lg:flex gap-x-3 text-base underline text-primary">
-            <Button variant={ButtonVariant.TRANSPARENT}>Edit</Button>
-            <Button variant={ButtonVariant.TRANSPARENT}>Remove policy</Button>
-          </div>
+        <div className="hidden lg:flex justify-end gap-x-3 text-base underline text-primary">
+          <Button className="p-0" variant={ButtonVariant.TRANSPARENT}>Edit</Button>
+          <Button className="p-0" variant={ButtonVariant.TRANSPARENT}>Remove policy</Button>
         </div>
+
+        <h3 className="text-primary text-xl">
+          [Event name] - reocuring activity
+        </h3>
 
         <div className="mt-3 flex space-x-1 items-center">
           <span className="mr-1">
@@ -65,7 +67,7 @@ const EventCard = () => {
 
         <div className="flex items-center">
           <span className="mr-1">
-            <Icon src={door} alt="door" size={20} />
+            <Icon src={door} alt="door" size={24} />
           </span>
           <span className="text-primary">
             <span className="underline">[Facility name]</span>,

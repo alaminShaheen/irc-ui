@@ -16,7 +16,7 @@ const EventConfirmationCard = () => {
   const allChecked = coverageExclusionChecked && deductibleResponsibilityChecked && professionalLiabilityChecked;
 
   return (
-    <div className="mx-0 lg:mx-4 mt-8 lg:mt-0 w-full h-auto px-6 py-6 pb-11 relative">
+    <div className="mx-0 lg:mx-4 mt-8 lg:mt-0 w-full h-auto px-6 py-6 pb-11 relative lg:sticky lg:top-2">
       <div className="absolute top-0 left-0 z-0 w-full h-full">
         <Icon src={bgCard} alt="card" className="w-full h-full" />
       </div>
