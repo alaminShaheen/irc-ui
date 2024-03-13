@@ -9,7 +9,17 @@ import { formatPhoneNumber } from "@/utils/helper";
 import { twMerge } from "tailwind-merge";
 
 const InsuredForm = (props: IInsuredFormProps) => {
-  const { editModeEnabled, onCancel, onSave } = props;
+  const {
+    editModeEnabled,
+    onCancel,
+    onSave,
+    content: {
+      nameOfInsuredLabel,
+      addressOfInsuredLabel,
+      telephoneNumLabel,
+      emailAddressLabel,
+    },
+  } = props;
   const {
     register,
     handleSubmit,
@@ -54,12 +64,15 @@ const InsuredForm = (props: IInsuredFormProps) => {
         >
           <div className="flex flex-col gap-y-1">
             <label htmlFor="name" className="text-white-5">
-              Name of Insured:
+              {nameOfInsuredLabel}
             </label>
             <input
               {...register("name", { required: "Name is required" })}
               id="name"
-              className={twMerge("input py-5 w-full lg:w-1/2", errors.name?.message && "has-error")}
+              className={twMerge(
+                "input py-5 w-full lg:w-1/2",
+                errors.name?.message && "has-error",
+              )}
               type="text"
               readOnly={true}
               disabled={true}
@@ -73,12 +86,15 @@ const InsuredForm = (props: IInsuredFormProps) => {
 
           <div className="flex flex-col gap-y-1">
             <label htmlFor="address" className="text-white-5">
-              Address of Insured:
+              {addressOfInsuredLabel}
             </label>
             <input
               {...register("address", { required: "Address is required" })}
               id="address"
-              className={twMerge("input py-5 w-full lg:w-1/2", errors.address?.message && "has-error")}
+              className={twMerge(
+                "input py-5 w-full lg:w-1/2",
+                errors.address?.message && "has-error",
+              )}
               type="text"
               readOnly={true}
               disabled={true}
@@ -92,14 +108,17 @@ const InsuredForm = (props: IInsuredFormProps) => {
 
           <div className="flex flex-col gap-y-1">
             <label htmlFor="telephone" className="text-white-5">
-              Telephone number:
+              {telephoneNumLabel}
             </label>
             <input
               {...register("telephone", {
                 required: "Telephone number is required",
               })}
               id="telephone"
-              className={twMerge("input py-5 w-full lg:w-1/2", errors.telephone?.message && "has-error")}
+              className={twMerge(
+                "input py-5 w-full lg:w-1/2",
+                errors.telephone?.message && "has-error",
+              )}
               type="tel"
               disabled={false}
             />
@@ -112,12 +131,15 @@ const InsuredForm = (props: IInsuredFormProps) => {
 
           <div className="flex flex-col gap-y-1">
             <label htmlFor="email" className="text-white-5">
-              Email address:
+              {emailAddressLabel}
             </label>
             <input
               {...register("email", { required: "Email is required" })}
               id="email"
-              className={twMerge("input py-5 w-full lg:w-1/2", errors.email?.message && "has-error")}
+              className={twMerge(
+                "input py-5 w-full lg:w-1/2",
+                errors.email?.message && "has-error",
+              )}
               type="email"
               disabled={false}
             />
@@ -131,7 +153,10 @@ const InsuredForm = (props: IInsuredFormProps) => {
             <Button onClick={onCancel} variant={ButtonVariant.SECONDARY}>
               Cancel
             </Button>
-            <Button className="bg-primary rounded-md text-white px-20" type={ButtonType.SUBMIT}>
+            <Button
+              className="bg-primary rounded-md text-white px-20"
+              type={ButtonType.SUBMIT}
+            >
               Save
             </Button>
           </div>
@@ -139,28 +164,28 @@ const InsuredForm = (props: IInsuredFormProps) => {
       ) : (
         <div className="flex flex-col gap-y-4">
           <div className="flex flex-col gap-y-1">
-            <span className="text-graphite-700">Name of Insured:</span>
+            <span className="text-graphite-700">{nameOfInsuredLabel}</span>
             <div className="text-primary text-base">
               {insuredFormValues.name}
             </div>
           </div>
 
           <div className="flex flex-col gap-y-1">
-            <span className="text-graphite-700">Address of Insured:</span>
+            <span className="text-graphite-700">{addressOfInsuredLabel}</span>
             <div className="text-primary text-base">
               {insuredFormValues.address}
             </div>
           </div>
 
           <div className="flex flex-col gap-y-1">
-            <span className="text-graphite-700">Telephone number:</span>
+            <span className="text-graphite-700">{telephoneNumLabel}</span>
             <div className="text-primary text-base">
               {formatPhoneNumber(insuredFormValues.telephone)}
             </div>
           </div>
 
           <div className="flex flex-col gap-y-1">
-            <span className="text-graphite-700">Email address:</span>
+            <span className="text-graphite-700">{emailAddressLabel}</span>
             <div className="text-primary text-base">
               {insuredFormValues.email}
             </div>
