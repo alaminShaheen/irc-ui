@@ -1,3 +1,8 @@
 {
-  "your-policies": "Your Policies"
+  "pages": {
+	"quote": {
+	  "your-policies": "Your Policies"
+	}
+  },
+  "common": {}
 }
