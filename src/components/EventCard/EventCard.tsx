@@ -44,13 +44,11 @@ const EventCard = () => {
             <Icon src={calendarTime} alt="calendar" size={20} />
           </span>
           <span className="space-x-1 text-base">
-            <span className="font-bold text-primary underline">
-              Every Friday
-            </span>
+            <span className="font-bold text-primary">Every Friday</span>
             <span className="text-sm font-thin">from</span>
-            <span className="font-bold text-primary underline">10:00 AM</span>
+            <span className="font-bold text-primary">10:00 AM</span>
             <span className="text-sm font-thin">to</span>
-            <span className="font-bold text-primary underline">3:00 PM</span>
+            <span className="font-bold text-primary">3:00 PM</span>
           </span>
         </div>
 
@@ -70,9 +68,8 @@ const EventCard = () => {
             <Icon src={door} alt="door" size={24} />
           </span>
           <span className="text-primary">
-            <span className="underline">[Facility name]</span>,
-            <span className="underline">[Facility name]</span>,
-            <span className="underline">[Facility name]</span>,
+            <span>[Facility name]</span>,<span>[Facility name]</span>,
+            <span>[Facility name]</span>,
             <span className="text-primary font-bold">+3 other</span>
           </span>
         </div>

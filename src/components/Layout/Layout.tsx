@@ -13,7 +13,7 @@ const Layout = (props: ILayoutProps) => {
   const [sidebarOpen, toggleSidebarOpen] = useToggle(false);
 
   return (
-    <>
+    <div className="bg-primary-25">
       <BypassBlock
         bypassLink="main-content"
         bypassStyle="bg-primary text-white"
@@ -41,7 +41,7 @@ const Layout = (props: ILayoutProps) => {
         </div>
       </main>
       <Footer />
-    </>
+    </div>
   );
 };
 
