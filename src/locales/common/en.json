@@ -4,9 +4,5 @@
   "menu": "Menu",
   "edit": "Edit",
   "showMore": "show more",
-  "showLess": "show less",
-  "poweredBy": "Powered by:",
-  "footerBody": "Instant Risk Coverage is a trademark of Instant Risk Coverage Inc. Refer to your policy for the most detailed and accurate information about your coverage and terms of insurance. Your policy, which serves as your insurance contract, will always prevail if there's ever a conflict with the information found on this site.",
-  "privacyPolicy": "Privacy policy",
-  "copyright": "© {{year}} instantriskcoverage"
+  "showLess": "show less"
 }

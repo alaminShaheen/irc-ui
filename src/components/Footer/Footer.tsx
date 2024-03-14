@@ -1,21 +1,18 @@
-import { useTranslation } from "react-i18next";
-
+import { IFooterProps } from "./Footer.d";
 import { FaFacebookF } from "react-icons/fa6";
 import { FaInstagram } from "react-icons/fa6";
 import { FaXTwitter } from "react-icons/fa6";
-
-import socialMedia from "@/assets/socialMedia.svg";
 import logo from "@/assets/logo.svg";
 
-const Footer = () => {
-  const { t } = useTranslation();
-  const currentYear = new Date().getFullYear();
+const Footer = ({ content }: IFooterProps) => {
+  const { poweredBy, body, privacyPolicy, copyright } = content;
+  const currentYear = new Date().getFullYear().toString();
 
   return (
     <footer id="footer-content" className="bg-primary text-white font-Roboto">
       <div className="pt-[51px] max-sm:px-4 sm:max-md:px-8 max-sm:pb-[62px] sm:max-md:pb-[67px] md:pt-[92px] md:pb-[54px]">
         <p className="text-sm text-left text-primary-25 font-light md:ml-[156px]">
-          {t("common.poweredBy")}
+          {poweredBy}
         </p>
         <img
           className="w-[302px] h-[39px] md:w-[377px] md:h-[49px] mt-1 md:ml-[151px]"
@@ -24,17 +21,8 @@ const Footer = () => {
         />
 
         <p className="text-sm md:text-lg mt-5 lg:mt-4 md:ml-[156px] md:mr-[152px] text-start font-normal">
-          {t("common.footerBody")}
+          {body}
         </p>
-        {/* <div className="flex justify-start md:justify-end mt-[47.5px] md:mr-[130px]">
-          <a href="" target="_blank">
-            <img
-              className="w-[128px] h-[33.49px]"
-              src={socialMedia}
-              alt="Social Media"
-            />
-          </a>
-        </div> */}
         <div className="flex justify-start md:justify-end mt-[47.5px] md:mr-[130px]">
           <div className="flex justify-evenly w-28">
             <a href="#" target="_blank">
@@ -72,10 +60,10 @@ const Footer = () => {
             href=""
             target="_blank"
           >
-            {t("common.privacyPolicy")}
+            {privacyPolicy}
           </a>
           <p className="mt-[27px] md:mt-[33px] text-base font-medium">
-            {t("common.copyright", { year: currentYear })}
+            {copyright.replace("{{year}}", currentYear)}
           </p>
         </div>
       </div>
