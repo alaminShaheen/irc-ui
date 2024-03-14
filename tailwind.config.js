@@ -10,10 +10,10 @@ export default {
         sans: ["Roboto", "system-ui", "sans-serif"],
       },
       width: {
-        checkbox: "30px"
+        checkbox: "30px",
       },
       height: {
-        checkbox: "30px"
+        checkbox: "30px",
       },
       colors: {
         ...defaultTailwindColors,

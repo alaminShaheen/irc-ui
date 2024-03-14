@@ -2,7 +2,7 @@ import { ReactNode, useEffect, useRef } from "react";
 
 interface FocusTrapProps {
   children: ReactNode;
-	className?: string
+  className?: string;
 }
 
 const FocusTrap = ({ children, className }: FocusTrapProps) => {
@@ -28,6 +28,10 @@ const FocusTrap = ({ children, className }: FocusTrapProps) => {
     const lastFocusableElement = visibleFocusableElements?.[
       visibleFocusableElements?.length - 1
     ] as HTMLElement;
+
+    if (firstFocusableElement) {
+      firstFocusableElement.focus();
+    }
 
     const handleKeyDown = (event: KeyboardEvent) => {
       const isTabPressed = event.key === "Tab" || event.keyCode === 9;
@@ -56,7 +60,11 @@ const FocusTrap = ({ children, className }: FocusTrapProps) => {
     };
   }, []);
 
-	return <div ref={trapRef} className={className}>{children}</div>;
+  return (
+    <div ref={trapRef} className={className}>
+      {children}
+    </div>
+  );
 };
 
 export default FocusTrap;

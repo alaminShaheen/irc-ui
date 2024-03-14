@@ -9,7 +9,7 @@ const SidebarContents = (props: ISidebarContentProps) => {
   const { onClose, sidebarOpen } = props;
 
   return (
-    <FocusTrap className="h-full ">
+    <FocusTrap className="h-full">
       <div className="p-4 lg:p-8 w-[360px] lg:w-[715px] min-h-full text-base-content bg-primary text-left h-full">
         <Button
           className="flex text-white font-semibold items-center gap-x-1 ml-auto btn h-[5%] p-3 text-base"
@@ -17,7 +17,8 @@ const SidebarContents = (props: ISidebarContentProps) => {
           onClick={onClose}
           variant={ButtonVariant.VANILLA}
           tabIndex={sidebarOpen ? 0 : -1}
-          iconPosition={ICON_POSITION.LEFT}>
+          iconPosition={ICON_POSITION.LEFT}
+        >
           Close
         </Button>
 
