@@ -17,9 +17,12 @@ const Sidebar = (props: ISidebarProps) => {
         enterTo="opacity-100"
         leave="transition-opacity ease-linear duration-300"
         leaveFrom="opacity-100"
-        leaveTo="opacity-0">
-        <div className="overlay h-full w-full fixed top-0 cursor-pointer left-0 z-10 bg-black/40"
-             onClick={toggleSidebar} />
+        leaveTo="opacity-0"
+      >
+        <div
+          className="overlay h-full w-full fixed top-0 cursor-pointer left-0 z-10 bg-black/40"
+          onClick={toggleSidebar}
+        />
       </Transition.Child>
 
       {/* Sliding sidebar */}
@@ -30,11 +33,11 @@ const Sidebar = (props: ISidebarProps) => {
         enterTo="translate-x-0"
         leave="transition ease-in-out duration-400 transform"
         leaveFrom="translate-x-0"
-        leaveTo="-translate-x-full">
+        leaveTo="-translate-x-full"
+      >
         <SidebarContents sidebarOpen={sidebarOpen} onClose={toggleSidebar} />
       </Transition.Child>
     </Transition>
-
   );
 };
 

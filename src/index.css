@@ -4,6 +4,8 @@
 @tailwind components;
 @tailwind utilities;
 
+
+
 .btn {
 	@apply font-bold !important;
 }
@@ -24,13 +26,34 @@
 	@apply text-primary-600 border-2 border-dashed border-primary bg-transparent
 }
 
+.form-label {
+	@apply text-white-5 text-base;
+}
 
 .input {
 	@apply h-[55px] bg-white border-2 border-primary-100 rounded-lg py-4 px-3 text-primary read-only:bg-gray-200
 }
 
+input[type='date']::-webkit-calendar-picker-indicator,
+input[type='time']::-webkit-calendar-picker-indicator {
+	background: transparent;
+	bottom: 0;
+	color: transparent;
+	cursor: pointer;
+	height: auto;
+	left: 0;
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: auto;
+}
+
 .input.has-error {
 	@apply border-red-500
+}
+
+.modal.modal-lg .modal-body {
+	@apply min-w-[1134px];
 }
 
 * {

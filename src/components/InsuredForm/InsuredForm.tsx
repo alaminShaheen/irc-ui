@@ -1,12 +1,12 @@
 import { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { twMerge } from "tailwind-merge";
 
 import Button from "@/components/ui/Button/Button";
 import { InsuredFormModel } from "@/models/form/InsuredFormModel";
 import { IInsuredFormProps } from "@/components/InsuredForm/InsuredForm.d";
 import { ButtonType, ButtonVariant } from "@/models/enums/ButtonVariant";
 import { formatPhoneNumber } from "@/utils/helper";
-import { twMerge } from "tailwind-merge";
 
 const InsuredForm = (props: IInsuredFormProps) => {
   const {
@@ -74,8 +74,6 @@ const InsuredForm = (props: IInsuredFormProps) => {
                 errors.name?.message && "has-error",
               )}
               type="text"
-              readOnly={true}
-              disabled={true}
             />
             {errors.name?.message && (
               <span className="text-sm text-red-500 my-2">
@@ -96,8 +94,6 @@ const InsuredForm = (props: IInsuredFormProps) => {
                 errors.address?.message && "has-error",
               )}
               type="text"
-              readOnly={true}
-              disabled={true}
             />
             {errors.address?.message && (
               <span className="text-sm text-red-500 my-2">

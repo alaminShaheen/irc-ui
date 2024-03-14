@@ -7,6 +7,7 @@ import useToggle from "@/hooks/useToggle";
 import EventCard from "@/components/EventCard/EventCard";
 import addEventIcon from "@/assets/icons/add-event.svg";
 import { IPolicyCard } from "@/components/PolicyCard/PolicyCard.d";
+import AddEventModal from "@/components/AddEventModal";
 
 const PolicyCard = (props: IPolicyCard) => {
   const {
@@ -80,6 +81,12 @@ const PolicyCard = (props: IPolicyCard) => {
           </li>
         </ul>
       </div>
+
+      <AddEventModal
+        onConfirm={() => {}}
+        isOpen={showAddEventModal}
+        toggle={toggleAddEventModal}
+      />
     </li>
   );
 };

@@ -29,7 +29,7 @@ const Layout = (props: ILayoutProps) => {
       />
 
       <main id="main-content" className="bg-primary-25 layout flex flex-col">
-        <div className="sticky top-0 z-50">
+        <div className="sticky top-0 z-40">
           <Navbar
             menuText={menuText}
             sidebarOpen={sidebarOpen}
