@@ -1,5 +1,9 @@
 import { IButtonProps } from "@/components/ui/Button/Button.d";
-import { ButtonType, ButtonVariant, IconPosition } from "@/models/enums/ButtonVariant";
+import {
+  ButtonType,
+  ButtonVariant,
+  IconPosition,
+} from "@/models/enums/ButtonVariant";
 import { cn } from "@/utils/helper";
 import { forwardRef } from "react";
 
@@ -30,7 +34,6 @@ const Button = forwardRef<HTMLButtonElement, IButtonProps>((props, ref) => {
     >
       {!!icon && iconPosition === IconPosition.LEFT && icon}
       {props.children}
-
       {!!icon && iconPosition === IconPosition.RIGHT && icon}
     </button>
   );

@@ -54,7 +54,14 @@ const Layout = (props: ILayoutProps) => {
           <div className="w-full px-4 py-6 lg:py-8 lg:px-9">{children}</div>
         </div>
       </main>
-      <Footer />
+      <Footer
+        content={{
+          poweredBy: t("footer.poweredBy"),
+          body: t("footer.body"),
+          privacyPolicy: t("footer.privacyPolicy"),
+          copyright: t("footer.copyright"),
+        }}
+      />
     </div>
   );
 };
