@@ -103,47 +103,17 @@ const InsuredForm = (props: IInsuredFormProps) => {
           </div>
 
           <div className="flex flex-col gap-y-1">
-            <label htmlFor="telephone" className="text-white-5">
-              {telephoneNumLabel}
-            </label>
-            <input
-              {...register("telephone", {
-                required: "Telephone number is required",
-              })}
-              id="telephone"
-              className={twMerge(
-                "input py-5 w-full lg:w-1/2",
-                errors.telephone?.message && "has-error",
-              )}
-              type="tel"
-              disabled={false}
-            />
-            {errors.telephone?.message && (
-              <span className="text-sm text-red-500 my-2">
-                {errors.telephone.message}
-              </span>
-            )}
+            <span className="text-graphite-700">{telephoneNumLabel}</span>
+            <div className="text-primary text-base">
+              {formatPhoneNumber(insuredFormValues.telephone)}
+            </div>
           </div>
 
           <div className="flex flex-col gap-y-1">
-            <label htmlFor="email" className="text-white-5">
-              {emailAddressLabel}
-            </label>
-            <input
-              {...register("email", { required: "Email is required" })}
-              id="email"
-              className={twMerge(
-                "input py-5 w-full lg:w-1/2",
-                errors.email?.message && "has-error",
-              )}
-              type="email"
-              disabled={false}
-            />
-            {errors.email?.message && (
-              <span className="text-sm text-red-500 my-2">
-                {errors.email.message}
-              </span>
-            )}
+            <span className="text-graphite-700">{emailAddressLabel}</span>
+            <div className="text-primary text-base">
+              {insuredFormValues.email}
+            </div>
           </div>
           <div className="flex gap-x-3 mt-2">
             <Button onClick={onCancel} variant={ButtonVariant.SECONDARY}>
