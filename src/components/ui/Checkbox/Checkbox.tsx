@@ -1,4 +1,4 @@
-import { forwardRef, Fragment } from "react";
+import { forwardRef } from "react";
 
 import Icon from "@/components/ui/Icon";
 import tick from "@/assets/icons/tick.svg";
@@ -10,7 +10,7 @@ const Checkbox = forwardRef<HTMLInputElement, ICheckboxProps>(
     const { className, ...rest } = props;
 
     return (
-      <Fragment>
+      <span className="relative">
         <input
           {...rest}
           ref={ref}
@@ -23,9 +23,9 @@ const Checkbox = forwardRef<HTMLInputElement, ICheckboxProps>(
         <Icon
           src={tick}
           size={30}
-          className="absolute hidden peer-checked:block mr-2 pointer-events-none"
+          className="absolute hidden peer-checked:block mr-2 pointer-events-none top-0 left-0"
         />
-      </Fragment>
+      </span>
     );
   },
 );

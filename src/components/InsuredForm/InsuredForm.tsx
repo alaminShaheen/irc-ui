@@ -7,7 +7,6 @@ import { InsuredFormModel } from "@/models/form/InsuredFormModel";
 import { IInsuredFormProps } from "@/components/InsuredForm/InsuredForm.d";
 import { ButtonType, ButtonVariant } from "@/models/enums/ButtonVariant";
 import { formatPhoneNumber } from "@/utils/helper";
-import { twMerge } from "tailwind-merge";
 
 const InsuredForm = (props: IInsuredFormProps) => {
   const {
