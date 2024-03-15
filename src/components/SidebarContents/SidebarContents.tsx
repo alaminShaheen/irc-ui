@@ -4,17 +4,9 @@ import Button from "@/components/ui/Button";
 import FocusTrap from "@/components/FocusTrap";
 import { ISidebarContentProps } from "@/components/SidebarContents/SidebarContents.d";
 import { ButtonVariant, IconPosition } from "@/models/enums/ButtonVariant";
-import { useEffect, useRef } from "react";
 
 const SidebarContents = (props: ISidebarContentProps) => {
   const { onClose, sidebarOpen } = props;
-  const ref = useRef<HTMLButtonElement>(null);
-
-  useEffect(() => {
-    if (ref.current) {
-      ref.current.focus();
-    }
-  }, []);
 
   return (
     <FocusTrap className="h-full">
@@ -23,7 +15,6 @@ const SidebarContents = (props: ISidebarContentProps) => {
           className="flex text-white font-semibold items-center gap-x-1 ml-auto btn h-[5%] p-3 text-base"
           icon={<Icon src={cross} alt="close" size={26} className="mr-1" />}
           onClick={onClose}
-          ref={ref}
           variant={ButtonVariant.VANILLA}
           tabIndex={sidebarOpen ? 0 : -1}
           iconPosition={IconPosition.LEFT}
