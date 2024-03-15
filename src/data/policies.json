@@ -1,0 +1,34 @@
+[
+  {
+	"id": 1,
+	"name": "Multiple Vendors or Inflatables",
+	"name_fr": "Plusieurs vendeurs ou gonflables",
+	"subtitle": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores culpa dolorum ducimus earum error ex fugit harum id illum, maxime natus nemo nesciunt numquam perferendis provident repellendus sequi ullam vitae.",
+	"subtitle_fr": "FR-Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores culpa dolorum ducimus earum error ex fugit harum id illum, maxime natus nemo nesciunt numquam perferendis provident repellendus sequi ullam vitae.",
+	"iconPath": "/policy-icons/market.svg"
+  },
+  {
+	"id": 2,
+	"name": "Room Rental / Banquet Hall / Park Events / Public Events",
+	"name_fr": "Location de salle / Salle de banquet / Événements dans le parc / Événements publics",
+	"subtitle": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores culpa dolorum ducimus earum error ex fugit harum id illum, maxime natus nemo nesciunt numquam perferendis provident repellendus sequi ullam vitae.",
+	"subtitle_fr": "FR-Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores culpa dolorum ducimus earum error ex fugit harum id illum, maxime natus nemo nesciunt numquam perferendis provident repellendus sequi ullam vitae.",
+	"iconPath": "/policy-icons/balloon.svg"
+  },
+  {
+	"id": 3,
+	"name": "Sporting Hourly Events / Leagues/ Seasonal Coverage / Tournaments and Camps",
+	"name_fr": "Événements sportifs horaires / Ligues / Couverture saisonnière / Tournois et camps",
+	"subtitle": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores culpa dolorum ducimus earum error ex fugit harum id illum, maxime natus nemo nesciunt numquam perferendis provident repellendus sequi ullam vitae.",
+	"subtitle_fr": "FR-Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores culpa dolorum ducimus earum error ex fugit harum id illum, maxime natus nemo nesciunt numquam perferendis provident repellendus sequi ullam vitae.",
+	"iconPath": "/policy-icons/tshirt.svg"
+  },
+  {
+	"id": 4,
+	"name": "Sporting Coach / Instructor",
+	"name_fr": "Entraîneur / Instructeur Sportif",
+	"subtitle": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores culpa dolorum ducimus earum error ex fugit harum id illum, maxime natus nemo nesciunt numquam perferendis provident repellendus sequi ullam vitae.",
+	"subtitle_fr": "FR-Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores culpa dolorum ducimus earum error ex fugit harum id illum, maxime natus nemo nesciunt numquam perferendis provident repellendus sequi ullam vitae.",
+	"iconPath": "/policy-icons/user.svg"
+  }
+]

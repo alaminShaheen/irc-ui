@@ -6,8 +6,8 @@ import checkout from "@/assets/icons/checkout.svg";
 import Checkbox from "@/components/ui/Checkbox/Checkbox";
 import useToggle from "@/hooks/useToggle";
 import AppConstants from "@/constants/AppConstants";
-import { ButtonVariant } from "@/models/enums/ButtonVariant";
-import { IEventConfirmationCardProps } from "./EventConfirmationCard.d";
+import { ButtonVariant, IconPosition } from "@/models/enums/ButtonVariant";
+import { IEventConfirmationCardProps } from "@/components/EventConfirmationCard/EventConfirmationCard.d";
 
 const EventConfirmationCard = ({ content }: IEventConfirmationCardProps) => {
   const {
@@ -36,7 +36,7 @@ const EventConfirmationCard = ({ content }: IEventConfirmationCardProps) => {
     professionalLiabilityChecked;
 
   return (
-    <div className="mt-8 lg:mt-0 w-full p-6 relative lg:sticky lg:top-[100px] z-0">
+    <div className="mt-8 lg:mt-0 w-full px-6 pt-6 pb-11 relative lg:sticky lg:top-[100px] z-0">
       <div className="absolute top-0 left-0 w-full h-full">
         <Icon src={bgCard} alt="card" className="w-full h-full" />
       </div>
@@ -146,9 +146,10 @@ const EventConfirmationCard = ({ content }: IEventConfirmationCardProps) => {
 
         <Button
           className="w-full p-4 text-xl font-bold inline-flex justify-center items-center gap-x-3 rounded-md"
-          icon={allChecked && <Icon src={checkout} alt="checkout" />}
+          icon={allChecked && <Icon src={checkout} alt="checkout" size={32} />}
           variant={allChecked ? ButtonVariant.PRIMARY : ButtonVariant.DISABLED}
           disabled={!allChecked}
+          iconPosition={IconPosition.RIGHT}
         >
           {allChecked ? checkoutButtonText : confirmAboveButtonText}
         </Button>

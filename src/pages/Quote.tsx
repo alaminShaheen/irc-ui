@@ -1,17 +1,33 @@
-import { useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import Alert from "@/components/ui/Alert/Alert";
 import Button from "@/components/ui/Button";
+import policies from "@/data/policies.json";
+import { Policy } from "@/models/Policy";
 import PolicyCard from "@/components/PolicyCard/PolicyCard";
 import InsuredForm from "@/components/InsuredForm/InsuredForm";
 import { useToggle } from "@/hooks/index";
+import AddEventModal from "@/components/AddEventModal";
 import { ButtonVariant } from "@/models/enums/ButtonVariant";
 import EventConfirmationCard from "@/components/EventConfirmationCard/EventConfirmationCard";
 
 const Quote = () => {
   const [editMode, toggleEditMode] = useToggle(false);
+  const [showAddEventModal, toggleAddEventModal] = useToggle(false);
+  const [selectedEventName, setSelectedEventName] = useState("");
   const { t } = useTranslation();
+
+  const addEvent = useCallback(() => {
+    // TODO: Add event functionality
+  }, []);
+
+  const onAddEventClick = useCallback((eventName: string) => {
+      setSelectedEventName(eventName);
+      toggleAddEventModal();
+    },
+    [toggleAddEventModal],
+  );
 
   useEffect(() => {
     document.title = t("pages.quote.pageTitle");
@@ -47,6 +63,39 @@ const Quote = () => {
         "pages.quote.eventConfirmation.confirmAboveButtonText",
       ),
       checkoutButtonText: t("pages.quote.eventConfirmation.checkoutButtonText"),
+    },
+    addEventForm: {
+      title: t("addEventForm.title"),
+      basicInfo: t("addEventForm.basicInfo"),
+      nameYourEventLabel: t("addEventForm.nameYourEventLabel"),
+      nameYourEventPlaceholder: t("addEventForm.nameYourEventPlaceholder"),
+      infoText: t("addEventForm.infoText"),
+      rentalFacilityLabel: t("addEventForm.rentalFacilityLabel"),
+      rentalFacilityPlaceholder: t("addEventForm.rentalFacilityPlaceholder"),
+      facilityLabel: t("addEventForm.facilityLabel"),
+      facilityPlaceholder: t("addEventForm.facilityPlaceholder"),
+      repeatLabel: t("addEventForm.repeatLabel"),
+      startDate: t("addEventForm.startDate"),
+      startTime: t("addEventForm.startTime"),
+      endDate: t("addEventForm.endDate"),
+      endTime: t("addEventForm.endTime"),
+      chooseDate: t("addEventForm.chooseDate"),
+      chooseTime: t("addEventForm.chooseTime"),
+      repeatEvent: t("addEventForm.repeatEvent"),
+      addTime: t("addEventForm.addTime"),
+      additionalQuestions: t("addEventForm.additionalQuestions"),
+      insuranceCoverageLabel: t("addEventForm.insuranceCoverageLabel"),
+      foodAndBeverages: t("addEventForm.foodAndBeverages"),
+      foodBeingSoldLabel: t("addEventForm.foodBeingSoldLabel"),
+      foodByThirdPartyLabel: t("addEventForm.foodByThirdPartyLabel"),
+      alcoholCoverageLabel: t("addEventForm.alcoholCoverageLabel"),
+      transport: t("addEventForm.transport"),
+      driverLicenceLabel: t("addEventForm.driverLicenceLabel"),
+      selfTransportation: t("addEventForm.selfTransportation"),
+      rentalVehicleOwnage: t("addEventForm.rentalVehicleOwnage"),
+      yes: t("addEventForm.yes"),
+      no: t("addEventForm.no"),
+      confirm: t("addEventForm.confirm"),
     },
   };
 
@@ -84,16 +133,12 @@ const Quote = () => {
           </h1>
 
           <ul className="space-y-6">
-            {new Array(3).fill(3).map((_, index) => (
+            {(policies as Policy[]).map((policy) => (
               <PolicyCard
-                key={index}
-                title={
-                  "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam, aspernatur."
-                }
-                subtitle={
-                  "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus ad aspernatur consequuntur debitis distinctio ducimus eos esse excepturi impedit, minima odit officiis provident, quae rem reprehenderit repudiandae rerum ullam voluptatem?"
-                }
-                content={pageContent.yourPolicies}
+                onAddEventClick={onAddEventClick}
+                key={policy.id}
+                policy={policy}
+                translationContent={pageContent.yourPolicies}
               />
             ))}
           </ul>
@@ -102,6 +147,14 @@ const Quote = () => {
       <div className="col-span-2">
         <EventConfirmationCard content={pageContent.eventConfirmationContent} />
       </div>
+
+      <AddEventModal
+        eventName={selectedEventName}
+        translationContent={pageContent.addEventForm}
+        onConfirm={() => null}
+        isOpen={showAddEventModal}
+        toggle={toggleAddEventModal}
+      />
     </div>
   );
 };

@@ -58,6 +58,9 @@
 	  ],
 	  "@/locales/*": [
 		"locales/*"
+	  ],
+	  "@/data/*": [
+		"data/*"
 	  ]
 	},
 	"allowSyntheticDefaultImports": true,
