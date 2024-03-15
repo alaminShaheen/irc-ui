@@ -1,28 +1,26 @@
 import { useCallback } from "react";
 import { twMerge } from "tailwind-merge";
+import { compareDesc } from "date-fns";
+import { Controller, useForm } from "react-hook-form";
 
-import {
-  ButtonType,
-  ButtonVariant,
-  IconPosition,
-} from "@/models/enums/ButtonVariant";
-import { useForm } from "react-hook-form";
 import Icon from "@/components/ui/Icon";
 import Modal from "@/components/ui/Modal";
 import Button from "@/components/ui/Button";
 import useIsTab from "@/hooks/useIsTab";
 import Checkbox from "@/components/ui/Checkbox";
+import Datepicker from "@/components/ui/DatePicker";
+import TimePicker from "@/components/ui/TimePicker";
 import eventClock from "@/assets/icons/event-clock.svg";
 import useIsMobile from "@/hooks/useIsMobile";
 import addEventIcon from "@/assets/icons/add-event.svg";
 import { ModalSize } from "@/components/ui/Modal/Modal.d";
-import InputWithIcon from "@/components/ui/InputWithIcon";
 import eventCalendar from "@/assets/icons/event-calendar.svg";
 import RadioButtonGroup from "@/components/ui/RadioButtonGroup";
 import { AddEventModel } from "@/models/form/AddEventModel";
 import graphiteAlertInfo from "@/assets/icons/graphite-alert-info.svg";
 import { IAddEventModalProps } from "@/components/AddEventModal/AddEventModal.d";
 import { EventRepeatFrequency } from "@/models/enums/EventRepeatFrequency";
+import { ButtonType, ButtonVariant } from "@/models/enums/ButtonVariant";
 
 const AddEventModal = (props: IAddEventModalProps) => {
   const { isOpen, toggle, onConfirm } = props;
@@ -30,6 +28,7 @@ const AddEventModal = (props: IAddEventModalProps) => {
     register,
     handleSubmit,
     formState: { errors },
+    control,
   } = useForm<AddEventModel>({
     defaultValues: {
       eventName: "",
@@ -43,13 +42,13 @@ const AddEventModal = (props: IAddEventModalProps) => {
       selfTransportation: true,
       rentalVehicleOwnage: true,
     },
+    mode: "all",
   });
   const isMobile = useIsMobile();
   const isTab = useIsTab();
 
   const onSubmit = useCallback(
     (data: AddEventModel) => {
-      console.log(data);
       onConfirm();
     },
     [onConfirm],
@@ -156,19 +155,23 @@ const AddEventModal = (props: IAddEventModalProps) => {
                 <label htmlFor="startDate" className="form-label">
                   Start date
                 </label>
-                <InputWithIcon
-                  icon={<Icon src={eventCalendar} size={28} />}
-                  iconPosition={IconPosition.LEFT}
-                  {...register("startDate", {
-                    required: "Start date is required.",
-                  })}
-                  id="startDate"
-                  className={twMerge(
-                    "input p-4",
-                    errors.startDate?.message && "has-error",
+                <Controller
+                  render={({ field: { onChange, ref, name, value } }) => (
+                    <Datepicker
+                      icon={<Icon src={eventCalendar} size={28} />}
+                      name={name}
+                      placeholderText="Start date"
+                      dateValue={value}
+                      hasError={!!errors.startDate?.message}
+                      dateOnChange={onChange}
+                      ref={ref}
+                    />
                   )}
-                  placeholder="Choose date"
-                  type="date"
+                  rules={{
+                    required: "Start date is required",
+                  }}
+                  name="startDate"
+                  control={control}
                 />
                 {errors.startDate?.message && (
                   <span className="text-sm text-red-500 my-2">
@@ -181,19 +184,21 @@ const AddEventModal = (props: IAddEventModalProps) => {
                 <label htmlFor="startTime" className="form-label">
                   Start Time
                 </label>
-                <InputWithIcon
-                  icon={<Icon src={eventClock} size={28} />}
-                  iconPosition={IconPosition.LEFT}
-                  {...register("startTime", {
-                    required: "Start time is required.",
-                  })}
-                  id="startTime"
-                  className={twMerge(
-                    "input p-4",
-                    errors.startTime?.message && "has-error",
+                <Controller
+                  render={({ field: { onChange, ref, name, value } }) => (
+                    <TimePicker
+                      icon={<Icon src={eventClock} size={28} />}
+                      name={name}
+                      placeholderText="Start time"
+                      dateValue={value}
+                      hasError={!!errors.endDate?.message}
+                      dateOnChange={onChange}
+                      ref={ref}
+                    />
                   )}
-                  placeholder="Choose time"
-                  type="time"
+                  rules={{ required: "Start time is required" }}
+                  name="startTime"
+                  control={control}
                 />
                 {errors.startTime?.message && (
                   <span className="text-sm text-red-500 my-2">
@@ -203,22 +208,35 @@ const AddEventModal = (props: IAddEventModalProps) => {
               </div>
 
               <div className="flex flex-col gap-y-1">
-                <label htmlFor="facility" className="form-label">
+                <label htmlFor="endDate" className="form-label">
                   End date
                 </label>
-                <InputWithIcon
-                  icon={<Icon src={eventCalendar} size={28} />}
-                  iconPosition={IconPosition.LEFT}
-                  {...register("endDate", {
-                    required: "End date is required.",
-                  })}
-                  id="endDate"
-                  className={twMerge(
-                    "input p-4",
-                    errors.endDate?.message && "has-error",
+                <Controller
+                  render={({ field: { onChange, ref, name, value } }) => (
+                    <Datepicker
+                      icon={<Icon src={eventCalendar} size={28} />}
+                      name={name}
+                      placeholderText="End date"
+                      dateValue={value}
+                      hasError={!!errors.endDate?.message}
+                      dateOnChange={onChange}
+                      ref={ref}
+                    />
                   )}
-                  placeholder="Choose date"
-                  type="date"
+                  rules={{
+                    required: "End date is required",
+                    validate: (value, formValues) => {
+                      if (
+                        !!formValues.startDate &&
+                        compareDesc(formValues.startDate, value) < 0
+                      ) {
+                        return "End date must be a date after Start date";
+                      }
+                    },
+                    deps: ["startDate"],
+                  }}
+                  name="endDate"
+                  control={control}
                 />
                 {errors.endDate?.message && (
                   <span className="text-sm text-red-500 my-2">
@@ -231,19 +249,32 @@ const AddEventModal = (props: IAddEventModalProps) => {
                 <label htmlFor="endTime" className="form-label">
                   End Time
                 </label>
-                <InputWithIcon
-                  icon={<Icon src={eventClock} size={28} />}
-                  iconPosition={IconPosition.LEFT}
-                  {...register("endTime", {
-                    required: "End time is required.",
-                  })}
-                  id="endTime"
-                  className={twMerge(
-                    "input p-4",
-                    errors.endTime?.message && "has-error",
+                <Controller
+                  render={({ field: { onChange, ref, name, value } }) => (
+                    <TimePicker
+                      icon={<Icon src={eventClock} size={28} />}
+                      name={name}
+                      placeholderText="End time"
+                      dateValue={value}
+                      hasError={!!errors.endDate?.message}
+                      dateOnChange={onChange}
+                      ref={ref}
+                    />
                   )}
-                  placeholder="Choose time"
-                  type="time"
+                  rules={{
+                    required: "End time is required",
+                    validate: (value, formValues) => {
+                      if (
+                        !!formValues.startTime &&
+                        compareDesc(formValues.startTime, value) < 0
+                      ) {
+                        return "End time must be a time after Start time";
+                      }
+                    },
+                    deps: ["startTime"],
+                  }}
+                  name="endTime"
+                  control={control}
                 />
                 {errors.endTime?.message && (
                   <span className="text-sm text-red-500 my-2">

@@ -20,7 +20,7 @@ const RadioButtonGroup = forwardRef<HTMLInputElement, IRadioButtonGroupProps>(
                 "py-3 px-4 bg-white rounded-md flex gap-x-3 w-auto border-2 border-primary-50 relative",
                 {
                   "bg-primary-50 border-primary":
-                    radioButton.value === rest.value,
+                    radioButton.value === selectedValue,
                 },
               )}
             >
