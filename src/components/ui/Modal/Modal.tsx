@@ -10,14 +10,7 @@ import Button from "@/components/ui/Button";
 import { ButtonVariant } from "@/models/enums/ButtonVariant";
 
 const Modal = (props: IModalProps) => {
-  const {
-    isOpen,
-    toggle,
-    children,
-    title,
-    subtitle,
-    size = ModalSize.SMALL,
-  } = props;
+  const { isOpen, toggle, children, title, subtitle, size } = props;
   useDisableBodyScroll(isOpen);
 
   return (
@@ -43,8 +36,7 @@ const Modal = (props: IModalProps) => {
           <div className="fixed inset-0 bg-black/25" />
         </Transition.Child>
 
-        {/* InputWithIcon content */}
-        <div className="fixed inset-0 overflow-y-auto">
+        <div className="fixed inset-0">
           <div className="flex min-h-full items-center justify-center p-4 text-center">
             <Transition.Child
               as={"div"}

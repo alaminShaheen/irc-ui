@@ -62,7 +62,7 @@ const AddEventModal = (props: IAddEventModalProps) => {
       toggle={toggle}
       subtitle="Multiple Vendors or inflatables"
     >
-      <div className="flex justify-center">
+      <div className="flex justify-center overflow-y-auto h-[calc(100vh-12rem)] lg:h-[750px]">
         <form className="w-full lg:w-[552px]" onSubmit={handleSubmit(onSubmit)}>
           <h2 className="text-primary font-bold text-2xl">Basic Information</h2>
           <div className="flex flex-col gap-y-1 mt-6">
