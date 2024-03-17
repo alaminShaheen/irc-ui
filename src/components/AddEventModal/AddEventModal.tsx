@@ -1,4 +1,3 @@
-import { twMerge } from "tailwind-merge";
 import { useCallback } from "react";
 import { compareDesc } from "date-fns";
 import { Controller, useForm } from "react-hook-form";
@@ -11,6 +10,7 @@ import {
 } from "@/models/form/AddEventModel";
 import Icon from "@/components/ui/Icon";
 import Modal from "@/components/ui/Modal";
+import { cn } from "@/utils/helper";
 import Button from "@/components/ui/Button";
 import useIsTab from "@/hooks/useIsTab";
 import Checkbox from "@/components/ui/Checkbox";
@@ -115,10 +115,9 @@ const AddEventModal = (props: IAddEventModalProps) => {
             <input
               {...register("eventName", { required: "Name is required" })}
               id="eventName"
-              className={twMerge(
-                "input p-4",
-                errors.eventName?.message && "has-error",
-              )}
+              className={cn("input p-4", {
+                "has-error": !!errors.eventName?.message,
+              })}
               placeholder={nameYourEventPlaceholder}
               type="text"
             />
@@ -153,10 +152,9 @@ const AddEventModal = (props: IAddEventModalProps) => {
                   required: "Rental/facility agreement number(s) required.",
                 })}
                 id="rentalFacilityAgreementNumber"
-                className={twMerge(
-                  "input p-4",
-                  errors.rentalFacilityAgreementNumber?.message && "has-error",
-                )}
+                className={cn("input p-4", {
+                  "has-error": !!errors.eventName?.message,
+                })}
                 placeholder={rentalFacilityPlaceholder}
                 type="text"
               />
@@ -176,10 +174,9 @@ const AddEventModal = (props: IAddEventModalProps) => {
                   required: "Facility is required.",
                 })}
                 id="facility"
-                className={twMerge(
-                  "input p-4",
-                  errors.facility?.message && "has-error",
-                )}
+                className={cn("input p-4", {
+                  "has-error": !!errors.eventName?.message,
+                })}
                 placeholder={facilityPlaceholder}
                 type="text"
               />
