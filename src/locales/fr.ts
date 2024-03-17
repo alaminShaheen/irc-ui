@@ -29,9 +29,6 @@ export const fr_content = {
     chooseDate: "FR-Choose date",
     chooseTime: "FR-Choose time",
     repeatEvent: "FR-Repeat this event",
-    daily: "FR-Daily",
-    weekly: "FR-Weekly",
-    monthly: "FR-Monthly",
     addTime: "FR-Add this time",
     additionalQuestions: "FR-Additional questions",
     insuranceCoverageLabel:
@@ -52,6 +49,9 @@ export const fr_content = {
     yes: "FR-Yes",
     no: "FR-No",
     confirm: "FR-Confirm",
+    daily: "FR-Daily",
+    weekly: "FR-Weekly",
+    monthly: "FR-Monthly",
   },
   pages: {
     quote: Quote,

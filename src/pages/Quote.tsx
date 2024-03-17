@@ -96,6 +96,9 @@ const Quote = () => {
       yes: t("addEventForm.yes"),
       no: t("addEventForm.no"),
       confirm: t("addEventForm.confirm"),
+      daily: t("addEventForm.daily"),
+      weekly: t("addEventForm.weekly"),
+      monthly: t("addEventForm.monthly"),
     },
   };
 

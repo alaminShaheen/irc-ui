@@ -50,6 +50,9 @@ export const en_content = {
     yes: "Yes",
     no: "No",
     confirm: "Confirm",
+    daily: "Daily",
+    weekly: "Weekly",
+    monthly: "Monthly",
   },
   pages: {
     quote: Quote,
