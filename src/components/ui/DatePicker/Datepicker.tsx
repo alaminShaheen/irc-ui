@@ -1,6 +1,5 @@
 import DatePicker from "react-datepicker";
 import ReactDatePicker from "react-datepicker";
-import { twMerge } from "tailwind-merge";
 import { forwardRef } from "react";
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -25,7 +24,7 @@ const Datepicker = forwardRef<ReactDatePicker, IDatePickerProps>(
           )
         }
         placeholderText={props.placeholderText}
-        className={twMerge(props.className, "cursor-pointer")}
+        className={cn(props.className, "cursor-pointer")}
         selected={props.dateValue}
         ref={ref}
         onChange={props.dateOnChange}

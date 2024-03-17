@@ -1,11 +1,11 @@
 import ReactDatePicker from "react-datepicker";
 import { forwardRef } from "react";
-import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
-import InputWithIcon from "@/components/ui/InputWithIcon";
+import "react-datepicker/dist/react-datepicker.css";
+
 import { cn } from "@/utils/helper";
+import InputWithIcon from "@/components/ui/InputWithIcon";
 import { IconPosition } from "@/models/enums/ButtonVariant";
-import { twMerge } from "tailwind-merge";
 import { IDatePickerProps } from "@/components/ui/DatePicker/Datepicker.d";
 
 const TimePicker = forwardRef<ReactDatePicker, IDatePickerProps>(
@@ -27,7 +27,7 @@ const TimePicker = forwardRef<ReactDatePicker, IDatePickerProps>(
         showTimeSelectOnly
         timeIntervals={15}
         placeholderText={props.placeholderText}
-        className={twMerge(props.className, "cursor-pointer")}
+        className={cn(props.className, "cursor-pointer")}
         selected={props.dateValue}
         ref={ref}
         onChange={props.dateOnChange}

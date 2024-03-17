@@ -1,12 +1,11 @@
 import { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { twMerge } from "tailwind-merge";
 
 import Button from "@/components/ui/Button/Button";
 import { InsuredFormModel } from "@/models/form/InsuredFormModel";
 import { IInsuredFormProps } from "@/components/InsuredForm/InsuredForm.d";
 import { ButtonType, ButtonVariant } from "@/models/enums/ButtonVariant";
-import { formatPhoneNumber } from "@/utils/helper";
+import { cn, formatPhoneNumber } from "@/utils/helper";
 
 const InsuredForm = (props: IInsuredFormProps) => {
   const {
@@ -69,10 +68,9 @@ const InsuredForm = (props: IInsuredFormProps) => {
             <input
               {...register("name", { required: "Name is required" })}
               id="name"
-              className={twMerge(
-                "input py-5 w-full lg:w-1/2",
-                errors.name?.message && "has-error",
-              )}
+              className={cn("input py-5 w-full lg:w-1/2", {
+                "has-error": !!errors.name?.message,
+              })}
               type="text"
             />
             {errors.name?.message && (
@@ -89,10 +87,9 @@ const InsuredForm = (props: IInsuredFormProps) => {
             <input
               {...register("address", { required: "Address is required" })}
               id="address"
-              className={twMerge(
-                "input py-5 w-full lg:w-1/2",
-                errors.address?.message && "has-error",
-              )}
+              className={cn("input py-5 w-full lg:w-1/2", {
+                "has-error": !!errors.address?.message,
+              })}
               type="text"
             />
             {errors.address?.message && (
