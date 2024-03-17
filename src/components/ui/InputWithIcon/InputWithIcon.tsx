@@ -6,8 +6,8 @@ import { IInputWithIconProps } from "@/components/ui/InputWithIcon/InputWithIcon
 
 const InputWithIcon = forwardRef<HTMLInputElement, IInputWithIconProps>(
   (props, ref) => {
-    const { icon, iconPosition, className, ...rest } = props;
-
+    const { type, icon, iconPosition, className, ...rest } = props;
+    console.log(rest.id,  rest.name);
     return (
       <span className="relative">
         {!!icon && iconPosition === IconPosition.LEFT && (
@@ -18,6 +18,7 @@ const InputWithIcon = forwardRef<HTMLInputElement, IInputWithIconProps>(
         <input
           {...rest}
           ref={ref}
+          type={type}
           className={cn(className, "w-full", {
             "!pl-14": iconPosition === IconPosition.LEFT,
             "!pr-14": iconPosition === IconPosition.RIGHT,

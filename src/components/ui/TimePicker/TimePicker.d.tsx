@@ -8,4 +8,5 @@ export interface ITimePickerProps {
   icon?: ReactNode;
   placeholderText?: string;
   hasError?: boolean;
+  id?: string;
 }

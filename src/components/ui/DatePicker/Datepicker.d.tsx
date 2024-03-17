@@ -8,4 +8,5 @@ export interface IDatePickerProps {
   icon?: ReactNode;
   placeholderText?: string;
   hasError?: boolean;
+  id?: string;
 }

@@ -11,12 +11,16 @@ import { useToggle } from "@/hooks/index";
 import AddEventModal from "@/components/AddEventModal";
 import { ButtonVariant } from "@/models/enums/ButtonVariant";
 import EventConfirmationCard from "@/components/EventConfirmationCard/EventConfirmationCard";
+import { LanguageCode } from "@/models/enums/LanguageCode";
 
 const Quote = () => {
   const [editMode, toggleEditMode] = useToggle(false);
   const [showAddEventModal, toggleAddEventModal] = useToggle(false);
   const [selectedEventName, setSelectedEventName] = useState("");
-  const { t } = useTranslation();
+  const {
+    t,
+    i18n: { language: currentLanguage },
+  } = useTranslation();
 
   const addEvent = useCallback(() => {
     // TODO: Add event functionality
@@ -143,14 +147,16 @@ const Quote = () => {
           </h1>
 
           <ul className="space-y-6">
-            {(policies as Policy[]).map((policy) => (
-              <PolicyCard
-                onAddEventClick={onAddEventClick}
-                key={policy.id}
-                policy={policy}
-                translationContent={pageContent.yourPolicies}
-              />
-            ))}
+            {(policies[currentLanguage as LanguageCode] as Policy[]).map(
+              (policy) => (
+                <PolicyCard
+                  onAddEventClick={onAddEventClick}
+                  key={policy.id}
+                  policy={policy}
+                  translationContent={pageContent.yourPolicies}
+                />
+              ),
+            )}
           </ul>
         </div>
       </div>

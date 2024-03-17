@@ -198,6 +198,7 @@ const AddEventModal = (props: IAddEventModalProps) => {
                 <Controller
                   render={({ field: { onChange, ref, name, value } }) => (
                     <Datepicker
+                      id={name}
                       icon={<Icon src={eventCalendar} size={28} />}
                       name={name}
                       placeholderText={chooseDate}
@@ -227,6 +228,7 @@ const AddEventModal = (props: IAddEventModalProps) => {
                 <Controller
                   render={({ field: { onChange, ref, name, value } }) => (
                     <TimePicker
+                      id={name}
                       icon={<Icon src={eventClock} size={28} />}
                       name={name}
                       placeholderText={chooseTime}
@@ -254,6 +256,7 @@ const AddEventModal = (props: IAddEventModalProps) => {
                 <Controller
                   render={({ field: { onChange, ref, name, value } }) => (
                     <Datepicker
+                      id={name}
                       icon={<Icon src={eventCalendar} size={28} />}
                       name={name}
                       placeholderText={chooseDate}
@@ -292,6 +295,7 @@ const AddEventModal = (props: IAddEventModalProps) => {
                 <Controller
                   render={({ field: { onChange, ref, name, value } }) => (
                     <TimePicker
+                      id={name}
                       icon={<Icon src={eventClock} size={28} />}
                       name={name}
                       placeholderText={chooseTime}
