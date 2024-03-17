@@ -9,18 +9,24 @@ import { ButtonVariant } from "@/models/enums/ButtonVariant";
 import { IEventCardProps } from "./EventCard.d";
 
 const EventCard = ({ content }: IEventCardProps) => {
-  const { edit, removePolicy } = content;
+  const {
+    edit,
+    removePolicy,
+    calendarIconAltText,
+    clockIconAltText,
+    doorIconAltText,
+  } = content;
   const [showMoreEventDetails, toggleShowMoreEventDetails] = useToggle(false);
 
   return (
     <div className="event-card border-2 border-primary rounded-md gap-y-3 lg:gap-x-3 flex flex-col lg:flex-row items-start p-4 w-full">
       <span className="w-9 h-9 sm:w-12 sm:h-10 bg-primary-50 hidden lg:flex justify-center items-center rounded-md border border-primary">
-        <Icon src={calendar} alt="calendar" size={22} />
+        <Icon src={calendar} alt={calendarIconAltText} size={22} />
       </span>
 
       <div className="flex items-center justify-between lg:hidden w-full">
         <span className="w-9 h-9 sm:w-12 sm:h-12 bg-gray-300 flex justify-center items-center rounded-md border border-primary">
-          <Icon src={calendar} alt="calendar" size={22} />
+          <Icon src={calendar} alt={calendarIconAltText} size={22} />
         </span>
         <div className="flex gap-x-6 text-base underline text-primary">
           <Button className="p-0" variant={ButtonVariant.TRANSPARENT}>
@@ -48,7 +54,7 @@ const EventCard = ({ content }: IEventCardProps) => {
 
         <div className="mt-3 flex space-x-1 items-center">
           <span className="mr-1">
-            <Icon src={calendarTime} alt="calendar" size={20} />
+            <Icon src={calendarTime} alt={calendarIconAltText} size={20} />
           </span>
           <span className="space-x-1 text-base">
             <span className="font-bold text-primary">Every Friday</span>
@@ -63,7 +69,7 @@ const EventCard = ({ content }: IEventCardProps) => {
 
         <div className="flex items-center">
           <span className="mr-1">
-            <Icon src={clock} alt="clock" size={20} />
+            <Icon src={clock} alt={clockIconAltText} size={20} />
           </span>
           <span className="text-primary">3 hours each</span>
         </div>
@@ -72,7 +78,7 @@ const EventCard = ({ content }: IEventCardProps) => {
 
         <div className="flex items-center">
           <span className="mr-1">
-            <Icon src={door} alt="door" size={24} />
+            <Icon src={door} alt={doorIconAltText} size={24} />
           </span>
           <span className="text-primary">
             <span>[Facility name]</span>,<span>[Facility name]</span>,

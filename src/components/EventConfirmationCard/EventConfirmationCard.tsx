@@ -20,6 +20,8 @@ const EventConfirmationCard = ({ content }: IEventConfirmationCardProps) => {
     agreement3,
     confirmAboveButtonText,
     checkoutButtonText,
+    cardBgImageAltText,
+    checkoutIconAltText,
   } = content;
 
   const [coverageExclusionChecked, toggleCoverageExclusionCheckbox] =
@@ -38,7 +40,7 @@ const EventConfirmationCard = ({ content }: IEventConfirmationCardProps) => {
   return (
     <div className="mt-8 lg:mt-0 w-full px-6 pt-6 pb-11 relative lg:sticky lg:top-[100px] z-0">
       <div className="absolute top-0 left-0 w-full h-full">
-        <Icon src={bgCard} alt="card" className="w-full h-full" />
+        <Icon src={bgCard} alt={cardBgImageAltText} className="w-full h-full" />
       </div>
       <div className="relative">
         <div className="flex justify-between text-lg font-semibold">
@@ -146,7 +148,11 @@ const EventConfirmationCard = ({ content }: IEventConfirmationCardProps) => {
 
         <Button
           className="w-full p-4 text-xl font-bold inline-flex justify-center items-center gap-x-3 rounded-md"
-          icon={allChecked && <Icon src={checkout} alt="checkout" size={32} />}
+          icon={
+            allChecked && (
+              <Icon src={checkout} alt={checkoutIconAltText} size={32} />
+            )
+          }
           variant={allChecked ? ButtonVariant.PRIMARY : ButtonVariant.DISABLED}
           disabled={!allChecked}
           iconPosition={IconPosition.RIGHT}

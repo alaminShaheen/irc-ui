@@ -63,6 +63,7 @@ const AddEventModal = (props: IAddEventModalProps) => {
     daily,
     weekly,
     monthly,
+    addEventIconAltText,
   } = translationContent;
   const {
     register,
@@ -366,7 +367,9 @@ const AddEventModal = (props: IAddEventModalProps) => {
               className="border-gray-400 border-2 gap-x-2 rounded mt-8 py-4 px-6 text-xl flex justify-center bg-primary-25 cursor-pointer w-full lg:w-auto"
               variant={ButtonVariant.SECONDARY}
               buttonType={ButtonType.BUTTON}
-              icon={<Icon src={addEventIcon} alt="add event" size={24} />}
+              icon={
+                <Icon src={addEventIcon} alt={addEventIconAltText} size={24} />
+              }
             >
               {addTime}
             </Button>

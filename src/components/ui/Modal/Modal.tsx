@@ -8,9 +8,11 @@ import Icon from "@/components/ui/Icon";
 import modalClose from "@/assets/icons/modal-close.svg";
 import Button from "@/components/ui/Button";
 import { ButtonVariant } from "@/models/enums/ButtonVariant";
+import { useTranslation } from "react-i18next";
 
 const Modal = (props: IModalProps) => {
   const { isOpen, toggle, children, title, subtitle, size } = props;
+  const { t } = useTranslation();
   useDisableBodyScroll(isOpen);
 
   return (
@@ -58,7 +60,13 @@ const Modal = (props: IModalProps) => {
                         variant={ButtonVariant.TRANSPARENT}
                         className="p-0"
                         onClick={toggle}
-                        icon={<Icon src={modalClose} alt="close" size={45} />}
+                        icon={
+                          <Icon
+                            src={modalClose}
+                            alt={t("common.iconAltText.close")}
+                            size={45}
+                          />
+                        }
                       />
                     </div>
                     {subtitle && (

@@ -4,10 +4,12 @@ import Icon from "@/components/ui/Icon";
 import { cn } from "@/utils/helper";
 import radioCheck from "@/assets/icons/radio-check.svg";
 import { IRadioButtonProps } from "@/components/ui/RadioButton/RadioButton.d";
+import { useTranslation } from "react-i18next";
 
 const RadioButton = forwardRef<HTMLInputElement, IRadioButtonProps>(
   (props, ref) => {
     const { label, selected, ...rest } = props;
+    const {t} = useTranslation();
 
     return (
       <span
@@ -22,7 +24,7 @@ const RadioButton = forwardRef<HTMLInputElement, IRadioButtonProps>(
           <Icon
             tabIndex={0}
             src={radioCheck}
-            alt="checked"
+            alt={t("common.iconAltText.checked")}
             size={24}
             className="focus-visible:outline-yellow-400 focus:outline-focus rounded-full"
           />

@@ -5,7 +5,7 @@ import { FaXTwitter } from "react-icons/fa6";
 import logo from "@/assets/logo.svg";
 
 const Footer = ({ content }: IFooterProps) => {
-  const { poweredBy, body, privacyPolicy, copyright } = content;
+  const { poweredBy, body, privacyPolicy, copyright, logoAltText } = content;
   const currentYear = new Date().getFullYear().toString();
 
   return (
@@ -18,7 +18,7 @@ const Footer = ({ content }: IFooterProps) => {
         <img
           className="w-[302px] h-[39px] md:w-[377px] md:h-[49px] mt-1 md:ml-[151px]"
           src={logo}
-          alt="Logo"
+          alt={logoAltText}
         />
 
         <p className="text-sm md:text-lg mt-5 lg:mt-4 md:ml-[156px] md:mr-[152px] text-start font-normal">

@@ -46,6 +46,10 @@ const Quote = () => {
       showLess: t("common.showLess"),
       edit: t("common.edit"),
       removePolicy: t("pages.quote.yourPolicies.removePolicy"),
+      calendarIconAltText: t("common.iconAltText.calendar"),
+      clockIconAltText: t("common.iconAltText.clock"),
+      doorIconAltText: t("common.iconAltText.door"),
+      addEventIconAltText: t("common.iconAltText.addEvent"),
     },
     eventConfirmationContent: {
       numOfEventsTitle: t("pages.quote.eventConfirmation.numOfEventsTitle"),
@@ -63,6 +67,8 @@ const Quote = () => {
         "pages.quote.eventConfirmation.confirmAboveButtonText",
       ),
       checkoutButtonText: t("pages.quote.eventConfirmation.checkoutButtonText"),
+      cardBgImageAltText: t("common.iconAltText.card"),
+      checkoutIconAltText: t("common.iconAltText.checkout"),
     },
     addEventForm: {
       title: t("addEventForm.title"),
@@ -99,6 +105,7 @@ const Quote = () => {
       daily: t("addEventForm.daily"),
       weekly: t("addEventForm.weekly"),
       monthly: t("addEventForm.monthly"),
+      addEventIconAltText: t("common.iconAltText.addEvent"),
     },
   };
 
