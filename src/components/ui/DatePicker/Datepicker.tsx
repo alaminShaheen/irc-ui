@@ -3,31 +3,26 @@ import { forwardRef } from "react";
 import "react-datepicker/dist/react-datepicker.css";
 
 import { cn } from "@/utils/helper";
-import InputWithIcon from "@/components/ui/InputWithIcon";
-import { IconPosition } from "@/models/enums/ButtonVariant";
 import { IDatePickerProps } from "@/components/ui/DatePicker/Datepicker.d";
 
 const Datepicker = forwardRef<DatePicker, IDatePickerProps>((props, ref) => {
   return (
     <DatePicker
-      customInput={
-        props.icon ? (
-          <InputWithIcon
-            icon={props.icon}
-            id={props.id}
-            name={props.name}
-            type="date"
-            className={cn("input", { "input-has-error": props.hasError })}
-            iconPosition={IconPosition.LEFT}
-          />
-        ) : (
-          <input type="date" id={props.id} name={props.name} />
-        )
-      }
       id={props.id}
       name={props.name}
       placeholderText={props.placeholderText}
-      className={cn(props.className, "cursor-pointer")}
+      className={cn(
+        props.className,
+        "cursor-pointer input !pl-14 !py-4 !pr-3 w-full",
+      )}
+      showIcon
+      toggleCalendarOnIconClick
+      wrapperClassName="sakib"
+      icon={
+        <span className="absolute top-1/2 transform -translate-y-1/2 translate-x-1.5 h-7 w-7 cursor-pointer">
+          {props.icon}
+        </span>
+      }
       selected={props.dateValue}
       ref={ref}
       onChange={props.dateOnChange}
