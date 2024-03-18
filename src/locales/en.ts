@@ -53,6 +53,13 @@ export const en_content = {
     daily: "Daily",
     weekly: "Weekly",
     monthly: "Monthly",
+    errors: {
+      fieldRequired: "This field is required.",
+      endDateInvalid: "End date must be a date after Start date.",
+      endTimeInvalid: "End time must be time after Start time.",
+      startDateInvalid: "Start date must be a date before End date.",
+      startTimeInvalid: "Start time must be time before End time.",
+    },
   },
   pages: {
     quote: Quote,

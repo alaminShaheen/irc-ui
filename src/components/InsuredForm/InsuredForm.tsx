@@ -6,6 +6,9 @@ import { InsuredFormModel } from "@/models/form/InsuredFormModel";
 import { IInsuredFormProps } from "@/components/InsuredForm/InsuredForm.d";
 import { ButtonType, ButtonVariant } from "@/models/enums/ButtonVariant";
 import { cn, formatPhoneNumber } from "@/utils/helper";
+import * as yup from "yup";
+import { ObjectSchema } from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 const InsuredForm = (props: IInsuredFormProps) => {
   const {
@@ -17,8 +20,19 @@ const InsuredForm = (props: IInsuredFormProps) => {
       addressOfInsuredLabel,
       telephoneNumLabel,
       emailAddressLabel,
+      fieldRequired,
     },
   } = props;
+
+  const formValidationSchema: ObjectSchema<InsuredFormModel> = yup
+    .object()
+    .shape({
+      name: yup.string().required(fieldRequired),
+      address: yup.string().required(fieldRequired),
+      telephone: yup.string().required(fieldRequired),
+      email: yup.string().required(fieldRequired),
+    });
+
   const {
     register,
     handleSubmit,
@@ -31,6 +45,7 @@ const InsuredForm = (props: IInsuredFormProps) => {
       email: "",
       name: "",
     },
+    resolver: yupResolver(formValidationSchema),
   });
 
   const [insuredFormValues, setInsuredFormValues] = useState<InsuredFormModel>({

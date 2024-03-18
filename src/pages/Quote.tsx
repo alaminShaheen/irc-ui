@@ -9,14 +9,15 @@ import PolicyCard from "@/components/PolicyCard/PolicyCard";
 import InsuredForm from "@/components/InsuredForm/InsuredForm";
 import { useToggle } from "@/hooks/index";
 import AddEventModal from "@/components/AddEventModal";
+import { LanguageCode } from "@/models/enums/LanguageCode";
 import { ButtonVariant } from "@/models/enums/ButtonVariant";
 import EventConfirmationCard from "@/components/EventConfirmationCard/EventConfirmationCard";
-import { LanguageCode } from "@/models/enums/LanguageCode";
 
 const Quote = () => {
   const [editMode, toggleEditMode] = useToggle(false);
   const [showAddEventModal, toggleAddEventModal] = useToggle(false);
   const [selectedEventName, setSelectedEventName] = useState("");
+
   const {
     t,
     i18n: { language: currentLanguage },
@@ -26,7 +27,8 @@ const Quote = () => {
     // TODO: Add event functionality
   }, []);
 
-  const onAddEventClick = useCallback((eventName: string) => {
+  const onAddEventClick = useCallback(
+    (eventName: string) => {
       setSelectedEventName(eventName);
       toggleAddEventModal();
     },
@@ -43,6 +45,7 @@ const Quote = () => {
       addressOfInsuredLabel: t("pages.quote.insured.addressOfInsuredLabel"),
       telephoneNumLabel: t("pages.quote.insured.telephoneNumLabel"),
       emailAddressLabel: t("pages.quote.insured.emailAddressLabel"),
+      fieldRequired: t("addEventForm.errors.fieldRequired"),
     },
     yourPolicies: {
       addAnotherEvent: t("pages.quote.yourPolicies.addAnotherEvent"),
@@ -110,6 +113,11 @@ const Quote = () => {
       weekly: t("addEventForm.weekly"),
       monthly: t("addEventForm.monthly"),
       addEventIconAltText: t("common.iconAltText.addEvent"),
+      fieldRequired: t("addEventForm.errors.fieldRequired"),
+      endDateInvalid: t("addEventForm.errors.endDateInvalid"),
+      endTimeInvalid: t("addEventForm.errors.endTimeInvalid"),
+      startDateInvalid: t("addEventForm.errors.startDateInvalid"),
+      startTimeInvalid: t("addEventForm.errors.startTimeInvalid"),
     },
   };
 

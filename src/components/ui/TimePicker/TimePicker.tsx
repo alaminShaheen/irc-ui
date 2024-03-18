@@ -10,7 +10,6 @@ const TimePicker = forwardRef<DatePicker, IDatePickerProps>((props, ref) => {
     <DatePicker
       id={props.id}
       name={props.name}
-      showTimeSelect
       showIcon
       toggleCalendarOnIconClick
       icon={
@@ -19,7 +18,9 @@ const TimePicker = forwardRef<DatePicker, IDatePickerProps>((props, ref) => {
         </span>
       }
       showTimeSelectOnly
+      showTimeSelect
       timeIntervals={15}
+      dateFormat="h:mm aa"
       placeholderText={props.placeholderText}
       className={cn(
         props.className,

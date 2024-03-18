@@ -1,10 +1,11 @@
+import { useTranslation } from "react-i18next";
+
 import Icon from "@/components/ui/Icon";
 import Button from "@/components/ui/Button";
 import appLogo from "@/assets/images/app-logo.png";
 import hamburger from "@/assets/icons/hamburger.svg";
 import LanguageToggle from "@/components/LanguageToggle";
 import { INavbarProps } from "@/components/ui/Navbar/Navbar.d";
-import { useTranslation } from "react-i18next";
 
 const Navbar = (props: INavbarProps) => {
   const { toggleSidebar } = props;
@@ -25,7 +26,7 @@ const Navbar = (props: INavbarProps) => {
           icon={
             <Icon
               src={hamburger}
-              alt={t("iconAltText.hamburger")}
+              alt={t("common.iconAltText.hamburger")}
               width={32}
               height={24}
             />

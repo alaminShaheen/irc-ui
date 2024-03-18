@@ -6,8 +6,8 @@ export type AddEventModel = {
   startTime: Date;
   endDate: Date;
   endTime: Date;
-  repeatEvent: BinaryResponse;
-  repeatFrequency?: EventRepeatFrequency;
+  repeatEvent: boolean;
+  repeatFrequency: EventRepeatFrequency;
   insuranceCoverageAmount: InsuranceCoverageAmount;
   foodBeverageSale: BinaryResponse;
   thirdPartyFoodPackaging: BinaryResponse;

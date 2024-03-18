@@ -7,7 +7,6 @@ import { IInputWithIconProps } from "@/components/ui/InputWithIcon/InputWithIcon
 const InputWithIcon = forwardRef<HTMLInputElement, IInputWithIconProps>(
   (props, ref) => {
     const { type, icon, iconPosition, className, ...rest } = props;
-    console.log(rest.id,  rest.name);
     return (
       <span className="relative">
         {!!icon && iconPosition === IconPosition.LEFT && (

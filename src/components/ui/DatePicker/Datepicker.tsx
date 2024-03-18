@@ -9,6 +9,7 @@ const Datepicker = forwardRef<DatePicker, IDatePickerProps>((props, ref) => {
   return (
     <DatePicker
       id={props.id}
+      dateFormat="yyyy-MM-dd"
       name={props.name}
       placeholderText={props.placeholderText}
       className={cn(

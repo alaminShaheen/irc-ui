@@ -37,9 +37,14 @@
 	@apply border-red-500
 }
 
+input::-webkit-calendar-picker-indicator{
+	display: none;
+}
+
 /* Remove native HTML date-time picker icon */
 input[type='date']::-webkit-calendar-picker-indicator,
 input[type='time']::-webkit-calendar-picker-indicator {
+	visibility: hidden !important;
 	background: transparent;
 	bottom: 0;
 	color: transparent;
@@ -53,7 +58,7 @@ input[type='time']::-webkit-calendar-picker-indicator {
 }
 
 .modal.modal-lg .modal-body {
-	@apply min-w-[1134px];
+	@apply min-w-[934px];
 }
 
 * {
