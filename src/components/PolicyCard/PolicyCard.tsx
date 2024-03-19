@@ -3,11 +3,14 @@ import { useTranslation } from "react-i18next";
 
 import Icon from "@/components/ui/Icon";
 import { cn } from "@/utils/helper";
+import Button from "@/components/ui/Button";
 import useToggle from "@/hooks/useToggle";
 import EventCard from "@/components/EventCard/EventCard";
 import addEventIcon from "@/assets/icons/add-event.svg";
 import { IPolicyCard } from "@/components/PolicyCard/PolicyCard.d";
 import { LanguageCode } from "@/models/enums/LanguageCode";
+import addEventFilledIcon from "@/assets/icons/add-event-filled.svg";
+import { ButtonVariant, IconPosition } from "@/models/enums/ButtonVariant";
 
 const PolicyCard = (props: IPolicyCard) => {
   const {
@@ -92,22 +95,36 @@ const PolicyCard = (props: IPolicyCard) => {
           />
 
           <li
-            className="mt-4 flex cursor-pointer rounded border-2 border-dashed border-gray-400 bg-primary-25 p-4"
+            className="group mt-4 flex cursor-pointer rounded border-2 border-dashed border-gray-400 bg-primary-25 p-4 hover:border-primary"
             onClick={addEvent}
             role="button"
             tabIndex={0}
           >
-            <span aria-hidden="true">
-              <Icon
-                src={addEventIcon}
-                alt={addEventIconAltText}
-                width={24}
-                height={24}
-              />
-            </span>
-            <span className="ml-1 font-semibold text-primary">
+            <Button
+              className="flex items-center gap-x-1 text-primary group-hover:font-bold group-hover:underline"
+              variant={ButtonVariant.VANILLA}
+              iconPosition={IconPosition.LEFT}
+              icon={
+                <>
+                  <Icon
+                    aria-hidden="true"
+                    src={addEventFilledIcon}
+                    alt={addEventIconAltText}
+                    size={24}
+                    className="hidden group-hover:inline"
+                  />
+                  <Icon
+                    aria-hidden="true"
+                    src={addEventIcon}
+                    className="group-hover:hidden"
+                    alt={addEventIconAltText}
+                    size={24}
+                  />
+                </>
+              }
+            >
               {addAnotherEvent}
-            </span>
+            </Button>
           </li>
         </ul>
       </div>
