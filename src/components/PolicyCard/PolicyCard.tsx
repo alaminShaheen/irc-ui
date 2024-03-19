@@ -98,7 +98,12 @@ const PolicyCard = (props: IPolicyCard) => {
             tabIndex={0}
           >
             <span aria-hidden="true">
-              <Icon src={addEventIcon} alt={addEventIconAltText} width={24} height={24} />
+              <Icon
+                src={addEventIcon}
+                alt={addEventIconAltText}
+                width={24}
+                height={24}
+              />
             </span>
             <span className="text-primary font-semibold ml-1">
               {addAnotherEvent}

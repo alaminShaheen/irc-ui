@@ -65,7 +65,8 @@ const AddEventModal = (props: IAddEventModalProps) => {
     startTimeInvalid,
   } = translationContent;
 
-  const formValidationSchema: ObjectSchema<AddEventModel> = yup.object().shape({
+  const formValidationSchema: ObjectSchema<AddEventModel> = yup.object().shape(
+    {
       eventName: yup.string().required(fieldRequired),
       rentalFacilityAgreementNumber: yup.string().required(fieldRequired),
       facility: yup.string().required(fieldRequired),

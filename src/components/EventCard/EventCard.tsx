@@ -6,9 +6,13 @@ import calendar from "@/assets/icons/calendar-1.svg";
 import useToggle from "@/hooks/useToggle";
 import calendarTime from "@/assets/icons/calendar-time.svg";
 import { ButtonVariant } from "@/models/enums/ButtonVariant";
-import { IEventCardProps } from "./EventCard.d";
+import { IEventCardProps } from "@/components/EventCard/EventCard.d";
 
-const EventCard = ({ content }: IEventCardProps) => {
+const EventCard = ({
+  content,
+  onRemovePolicyClicked,
+  onEditPolicyClicked,
+}: IEventCardProps) => {
   const {
     edit,
     removePolicy,
@@ -29,10 +33,18 @@ const EventCard = ({ content }: IEventCardProps) => {
           <Icon src={calendar} alt={calendarIconAltText} size={22} />
         </span>
         <div className="flex gap-x-6 text-base underline text-primary">
-          <Button className="p-0" variant={ButtonVariant.TRANSPARENT}>
+          <Button
+            className="p-0"
+            variant={ButtonVariant.TRANSPARENT}
+            onClick={onEditPolicyClicked}
+          >
             {edit}
           </Button>
-          <Button className="p-0" variant={ButtonVariant.TRANSPARENT}>
+          <Button
+            className="p-0"
+            variant={ButtonVariant.TRANSPARENT}
+            onClick={onRemovePolicyClicked}
+          >
             {removePolicy}
           </Button>
         </div>
