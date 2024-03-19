@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 
 import { cn } from "@/utils/helper";
 import RadioButton from "@/components/ui/Radio/components/RadioButton";
@@ -18,7 +18,7 @@ const RadioGroup = (props: RadioGroupProps) => {
   const refs = useRef<(HTMLSpanElement | null)[]>([]);
   const selector = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
+  const slideWindow = useCallback(() => {
     if (refs.current && refs.current.length > 0) {
       let leftPosition = 0;
       let topPosition = 0;
@@ -29,18 +29,24 @@ const RadioGroup = (props: RadioGroupProps) => {
 
       for (let index = 0; index < props.radioProps.length; index++) {
         if (props.radioProps[index].checked) {
+          // set slider width & height to width & height of selected radio button
           selector.current!.style.width =
             refs.current[index]!.clientWidth + "px";
           selector.current!.style.height =
             refs.current[index]!.clientHeight + "px";
 
+          // set slider position to position of selected radio button
           if (radioButtonsArrangedVertical) {
             selector.current!.style.top = topPosition + "px";
+            selector.current!.style.left =
+              refs.current[index]!.offsetLeft + "px";
           } else {
             selector.current!.style.left = leftPosition + "px";
+            selector.current!.style.top = refs.current[index]!.offsetTop + "px";
           }
           break;
         } else {
+          // find correct position of slider
           if (radioButtonsArrangedVertical) {
             topPosition += refs.current[index]!.clientHeight + 16;
           } else {
@@ -50,6 +56,10 @@ const RadioGroup = (props: RadioGroupProps) => {
       }
     }
   }, [props.radioProps]);
+
+  useEffect(() => {
+    slideWindow();
+  }, [slideWindow]);
 
   return (
     <div className="lg-gap-y-0 relative flex flex-col items-start gap-y-4 lg:flex-row lg:items-baseline lg:gap-x-4">
