@@ -19,7 +19,7 @@ const Modal = (props: IModalProps) => {
     <Transition appear show={isOpen} as={Fragment}>
       <Dialog
         as="div"
-        className={cn("relative z-50 modal", {
+        className={cn("modal relative z-50", {
           "modal-sm": size === ModalSize.SMALL,
           "modal-lg": size === ModalSize.LARGE,
         })}
@@ -49,11 +49,11 @@ const Modal = (props: IModalProps) => {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel className="transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all modal-body z-50">
+              <Dialog.Panel className="modal-body z-50 transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
                 <Dialog.Title as="div" className="mb-6">
                   <div>
                     <div className="flex items-center justify-between">
-                      <h3 className="text-3xl text-primary font-bold">
+                      <h3 className="text-3xl font-bold text-primary">
                         {title}
                       </h3>
                       <Button
@@ -75,7 +75,7 @@ const Modal = (props: IModalProps) => {
                       </p>
                     )}
                   </div>
-                  <div className="mt-4 lg:mt-6 h-1 w-full border-t border-graphite-200" />
+                  <div className="mt-4 h-1 w-full border-t border-graphite-200 lg:mt-6" />
                 </Dialog.Title>
                 {children}
               </Dialog.Panel>

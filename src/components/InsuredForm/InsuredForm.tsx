@@ -83,13 +83,13 @@ const InsuredForm = (props: IInsuredFormProps) => {
             <input
               {...register("name", { required: "Name is required" })}
               id="name"
-              className={cn("input py-5 w-full lg:w-1/2", {
+              className={cn("input w-full py-5 lg:w-1/2", {
                 "has-error": !!errors.name?.message,
               })}
               type="text"
             />
             {errors.name?.message && (
-              <span className="text-sm text-red-500 my-2">
+              <span className="my-2 text-sm text-red-500">
                 {errors.name.message}
               </span>
             )}
@@ -102,13 +102,13 @@ const InsuredForm = (props: IInsuredFormProps) => {
             <input
               {...register("address", { required: "Address is required" })}
               id="address"
-              className={cn("input py-5 w-full lg:w-1/2", {
+              className={cn("input w-full py-5 lg:w-1/2", {
                 "has-error": !!errors.address?.message,
               })}
               type="text"
             />
             {errors.address?.message && (
-              <span className="text-sm text-red-500 my-2">
+              <span className="my-2 text-sm text-red-500">
                 {errors.address.message}
               </span>
             )}
@@ -116,23 +116,23 @@ const InsuredForm = (props: IInsuredFormProps) => {
 
           <div className="flex flex-col gap-y-1">
             <span className="text-graphite-700">{telephoneNumLabel}</span>
-            <div className="text-primary text-base">
+            <div className="text-base text-primary">
               {formatPhoneNumber(insuredFormValues.telephone)}
             </div>
           </div>
 
           <div className="flex flex-col gap-y-1">
             <span className="text-graphite-700">{emailAddressLabel}</span>
-            <div className="text-primary text-base">
+            <div className="text-base text-primary">
               {insuredFormValues.email}
             </div>
           </div>
-          <div className="flex gap-x-3 mt-2">
+          <div className="mt-2 flex gap-x-3">
             <Button onClick={onCancel} variant={ButtonVariant.SECONDARY}>
               Cancel
             </Button>
             <Button
-              className="bg-primary rounded-md text-white px-20"
+              className="rounded-md bg-primary px-20 text-white"
               type={ButtonType.SUBMIT}
             >
               Save
@@ -143,28 +143,28 @@ const InsuredForm = (props: IInsuredFormProps) => {
         <div className="flex flex-col gap-y-4">
           <div className="flex flex-col gap-y-1">
             <span className="text-graphite-700">{nameOfInsuredLabel}</span>
-            <div className="text-primary text-base">
+            <div className="text-base text-primary">
               {insuredFormValues.name}
             </div>
           </div>
 
           <div className="flex flex-col gap-y-1">
             <span className="text-graphite-700">{addressOfInsuredLabel}</span>
-            <div className="text-primary text-base">
+            <div className="text-base text-primary">
               {insuredFormValues.address}
             </div>
           </div>
 
           <div className="flex flex-col gap-y-1">
             <span className="text-graphite-700">{telephoneNumLabel}</span>
-            <div className="text-primary text-base">
+            <div className="text-base text-primary">
               {formatPhoneNumber(insuredFormValues.telephone)}
             </div>
           </div>
 
           <div className="flex flex-col gap-y-1">
             <span className="text-graphite-700">{emailAddressLabel}</span>
-            <div className="text-primary text-base">
+            <div className="text-base text-primary">
               {insuredFormValues.email}
             </div>
           </div>

@@ -27,7 +27,7 @@ const Layout = (props: ILayoutProps) => {
         bypassStyle="bg-primary text-white"
       />
 
-      <main id="main-content" className="bg-primary-25 layout flex flex-col">
+      <main id="main-content" className="layout flex flex-col bg-primary-25">
         <div className="sticky top-0 z-40">
           <Navbar sidebarOpen={sidebarOpen} toggleSidebar={toggleSidebarOpen} />
           <Sidebar
@@ -35,18 +35,23 @@ const Layout = (props: ILayoutProps) => {
             toggleSidebar={toggleSidebarOpen}
           />
         </div>
-        <div className="lg:grid lg:grid-cols-[110px_1fr] items-start">
+        <div className="items-start lg:grid lg:grid-cols-[110px_1fr]">
           {/* Sidebar toggle ribbon */}
           <Button
-            className="btn-primary hidden lg:flex sticky top-[90px] h-11 items-center rounded-r px-2 mt-2 gap-x-2 ml-auto lg:ml-0 lg:text-lg text-base focus-visible:outline-yellow-400 focus:outline-focus"
+            className="btn-primary sticky top-[90px] ml-auto mt-2 hidden h-11 items-center gap-x-2 rounded-r px-2 text-base focus:outline-focus focus-visible:outline-yellow-400 lg:ml-0 lg:flex lg:text-lg"
             icon={
-              <Icon src={hamburger} alt={t("common.iconAltText.hamburger")} width={32} height={24} />
+              <Icon
+                src={hamburger}
+                alt={t("common.iconAltText.hamburger")}
+                width={32}
+                height={24}
+              />
             }
             onClick={toggleSidebarOpen}
           >
             {t("common.menu")}
           </Button>
-          <div className="w-full px-4 py-6 lg:py-8 lg:px-9">{children}</div>
+          <div className="w-full px-4 py-6 lg:px-9 lg:py-8">{children}</div>
         </div>
       </main>
       <Footer

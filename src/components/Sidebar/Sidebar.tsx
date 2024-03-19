@@ -42,7 +42,7 @@ const Sidebar = (props: ISidebarProps) => {
         leaveTo="opacity-0"
       >
         <div
-          className="overlay h-full w-full fixed top-0 cursor-pointer left-0 z-10 bg-black/40"
+          className="overlay fixed left-0 top-0 z-10 h-full w-full cursor-pointer bg-black/40"
           onClick={toggleSidebar}
         />
       </Transition.Child>

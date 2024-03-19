@@ -11,7 +11,7 @@ const Alert = (props: IAlertProps) => {
   return (
     <div
       role="alert"
-      className="inline-flex items-start p-3 bg-primary text-white rounded gap-x-2 w-full"
+      className="inline-flex w-full items-start gap-x-2 rounded bg-primary p-3 text-white"
     >
       <span>
         <Icon
@@ -20,7 +20,7 @@ const Alert = (props: IAlertProps) => {
           size={24}
         />
       </span>
-      <span className="text-base w-full">
+      <span className="w-full text-base">
         {isValidElement(alertMessage) ? (
           alertMessage
         ) : (

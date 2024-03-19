@@ -13,7 +13,7 @@ const TimePicker = forwardRef<DatePicker, IDatePickerProps>((props, ref) => {
       showIcon
       toggleCalendarOnIconClick
       icon={
-        <span className="absolute top-1/2 transform -translate-y-1/2 translate-x-1.5 h-7 w-7 cursor-pointer">
+        <span className="absolute top-1/2 h-7 w-7 -translate-y-1/2 translate-x-1.5 transform cursor-pointer">
           {props.icon}
         </span>
       }
@@ -24,7 +24,7 @@ const TimePicker = forwardRef<DatePicker, IDatePickerProps>((props, ref) => {
       placeholderText={props.placeholderText}
       className={cn(
         props.className,
-        "cursor-pointer input !pl-14 !py-4 !pr-3 w-full",
+        "input w-full cursor-pointer !py-4 !pl-14 !pr-3",
       )}
       selected={props.dateValue}
       ref={ref}

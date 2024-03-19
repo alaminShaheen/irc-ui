@@ -8,7 +8,7 @@ import { Policy } from "@/models/Policy";
 import PolicyCard from "@/components/PolicyCard/PolicyCard";
 import InsuredForm from "@/components/InsuredForm/InsuredForm";
 import { useToggle } from "@/hooks/index";
-import AddEventModal from "@/components/AddEventModal";
+import AddEventModal from "@/components/AddEvent/components/AddEventModal";
 import { LanguageCode } from "@/models/enums/LanguageCode";
 import { ButtonVariant } from "@/models/enums/ButtonVariant";
 import EventConfirmationCard from "@/components/EventConfirmationCard/EventConfirmationCard";
@@ -78,62 +78,66 @@ const Quote = () => {
       checkoutIconAltText: t("common.iconAltText.checkout"),
     },
     addEventForm: {
-      title: t("addEventForm.title"),
-      basicInfo: t("addEventForm.basicInfo"),
-      nameYourEventLabel: t("addEventForm.nameYourEventLabel"),
-      nameYourEventPlaceholder: t("addEventForm.nameYourEventPlaceholder"),
-      infoText: t("addEventForm.infoText"),
-      rentalFacilityLabel: t("addEventForm.rentalFacilityLabel"),
-      rentalFacilityPlaceholder: t("addEventForm.rentalFacilityPlaceholder"),
-      facilityLabel: t("addEventForm.facilityLabel"),
-      facilityPlaceholder: t("addEventForm.facilityPlaceholder"),
-      repeatLabel: t("addEventForm.repeatLabel"),
-      startDate: t("addEventForm.startDate"),
-      startTime: t("addEventForm.startTime"),
-      endDate: t("addEventForm.endDate"),
-      endTime: t("addEventForm.endTime"),
-      chooseDate: t("addEventForm.chooseDate"),
-      chooseTime: t("addEventForm.chooseTime"),
-      repeatEvent: t("addEventForm.repeatEvent"),
-      addTime: t("addEventForm.addTime"),
-      additionalQuestions: t("addEventForm.additionalQuestions"),
-      insuranceCoverageLabel: t("addEventForm.insuranceCoverageLabel"),
-      foodAndBeverages: t("addEventForm.foodAndBeverages"),
-      foodBeingSoldLabel: t("addEventForm.foodBeingSoldLabel"),
-      foodByThirdPartyLabel: t("addEventForm.foodByThirdPartyLabel"),
-      alcoholCoverageLabel: t("addEventForm.alcoholCoverageLabel"),
-      transport: t("addEventForm.transport"),
-      driverLicenceLabel: t("addEventForm.driverLicenceLabel"),
-      selfTransportation: t("addEventForm.selfTransportation"),
-      rentalVehicleOwnage: t("addEventForm.rentalVehicleOwnage"),
-      yes: t("addEventForm.yes"),
-      no: t("addEventForm.no"),
-      confirm: t("addEventForm.confirm"),
-      daily: t("addEventForm.daily"),
-      weekly: t("addEventForm.weekly"),
-      monthly: t("addEventForm.monthly"),
+      title: t("pages.addEventForm.title"),
+      basicInfo: t("pages.addEventForm.basicInfo"),
+      nameYourEventLabel: t("pages.addEventForm.nameYourEventLabel"),
+      nameYourEventPlaceholder: t(
+        "pages.addEventForm.nameYourEventPlaceholder",
+      ),
+      infoText: t("pages.addEventForm.infoText"),
+      rentalFacilityLabel: t("pages.addEventForm.rentalFacilityLabel"),
+      rentalFacilityPlaceholder: t(
+        "pages.addEventForm.rentalFacilityPlaceholder",
+      ),
+      facilityLabel: t("pages.addEventForm.facilityLabel"),
+      facilityPlaceholder: t("pages.addEventForm.facilityPlaceholder"),
+      repeatLabel: t("pages.addEventForm.repeatLabel"),
+      startDate: t("pages.addEventForm.startDate"),
+      startTime: t("pages.addEventForm.startTime"),
+      endDate: t("pages.addEventForm.endDate"),
+      endTime: t("pages.addEventForm.endTime"),
+      chooseDate: t("pages.addEventForm.chooseDate"),
+      chooseTime: t("pages.addEventForm.chooseTime"),
+      repeatEvent: t("pages.addEventForm.repeatEvent"),
+      addTime: t("pages.addEventForm.addTime"),
+      additionalQuestions: t("pages.addEventForm.additionalQuestions"),
+      insuranceCoverageLabel: t("pages.addEventForm.insuranceCoverageLabel"),
+      foodAndBeverages: t("pages.addEventForm.foodAndBeverages"),
+      foodBeingSoldLabel: t("pages.addEventForm.foodBeingSoldLabel"),
+      foodByThirdPartyLabel: t("pages.addEventForm.foodByThirdPartyLabel"),
+      alcoholCoverageLabel: t("pages.addEventForm.alcoholCoverageLabel"),
+      transport: t("pages.addEventForm.transport"),
+      driverLicenceLabel: t("pages.addEventForm.driverLicenceLabel"),
+      selfTransportation: t("pages.addEventForm.selfTransportation"),
+      rentalVehicleOwnage: t("pages.addEventForm.rentalVehicleOwnage"),
+      yes: t("pages.addEventForm.yes"),
+      no: t("pages.addEventForm.no"),
+      confirm: t("pages.addEventForm.confirm"),
+      daily: t("pages.addEventForm.daily"),
+      weekly: t("pages.addEventForm.weekly"),
+      monthly: t("pages.addEventForm.monthly"),
       addEventIconAltText: t("common.iconAltText.addEvent"),
-      fieldRequired: t("addEventForm.errors.fieldRequired"),
-      endDateInvalid: t("addEventForm.errors.endDateInvalid"),
-      endTimeInvalid: t("addEventForm.errors.endTimeInvalid"),
-      startDateInvalid: t("addEventForm.errors.startDateInvalid"),
-      startTimeInvalid: t("addEventForm.errors.startTimeInvalid"),
+      fieldRequired: t("pages.addEventForm.errors.fieldRequired"),
+      endDateInvalid: t("pages.addEventForm.errors.endDateInvalid"),
+      endTimeInvalid: t("pages.addEventForm.errors.endTimeInvalid"),
+      startDateInvalid: t("pages.addEventForm.errors.startDateInvalid"),
+      startTimeInvalid: t("pages.addEventForm.errors.startTimeInvalid"),
     },
   };
 
   return (
-    <div className="flex flex-col lg:grid lg:grid-cols-5 gap-x-6">
+    <div className="flex flex-col gap-x-6 lg:grid lg:grid-cols-5">
       <div className="lg:col-span-3">
         <Alert alertMessage={t("pages.quote.policyNotification")} />
 
         <div className="mt-6">
-          <div className="flex text-primary items-center">
-            <h1 className="text-2xl font-bold mr-2">
+          <div className="flex items-center text-primary">
+            <h1 className="mr-2 text-2xl font-bold">
               {t("pages.quote.insured.title")}
             </h1>
             {!editMode && (
               <Button
-                className="underline cursor-pointer px-0"
+                className="cursor-pointer px-0 underline"
                 variant={ButtonVariant.TRANSPARENT}
                 onClick={toggleEditMode}
               >
@@ -150,7 +154,7 @@ const Quote = () => {
           />
 
           {/*Your policies*/}
-          <h1 className="text-primary text-2xl font-bold my-8">
+          <h1 className="my-8 text-2xl font-bold text-primary">
             {t("pages.quote.yourPolicies.title")}
           </h1>
 

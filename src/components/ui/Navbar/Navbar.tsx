@@ -12,7 +12,7 @@ const Navbar = (props: INavbarProps) => {
   const { t } = useTranslation();
 
   return (
-    <nav className="h-20 bg-primary flex justify-between items-center px-9">
+    <nav className="flex h-20 items-center justify-between bg-primary px-9">
       <div>
         <a href="#">
           <img src={appLogo} alt={t("common.iconAltText.appLogo")} width={40} />
@@ -22,7 +22,7 @@ const Navbar = (props: INavbarProps) => {
       <div className="flex items-center gap-x-4">
         <LanguageToggle />
         <Button
-          className="btn-primary flex lg:hidden items-center rounded-r px-2 h-auto gap-x-2 text-base focus-visible:outline-yellow-400 focus:outline-focus"
+          className="btn-primary flex h-auto items-center gap-x-2 rounded-r px-2 text-base focus:outline-focus focus-visible:outline-yellow-400 lg:hidden"
           icon={
             <Icon
               src={hamburger}

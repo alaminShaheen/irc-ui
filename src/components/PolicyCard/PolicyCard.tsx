@@ -37,21 +37,21 @@ const PolicyCard = (props: IPolicyCard) => {
   }, [currentLanguage, name, name_fr, onAddEventClick]);
 
   return (
-    <li className="rounded-md px-4 py-6 gap-x-3 items-start bg-primary-5 w-full flex flex-col gap-y-4">
-      <div className="grid grid-cols-[60px_1fr] w-full items-start gap-x-4">
-        <div className="bg-primary rounded-md flex justify-center items-center px-3 py-2">
+    <li className="flex w-full flex-col items-start gap-x-3 gap-y-4 rounded-md bg-primary-5 px-4 py-6">
+      <div className="grid w-full grid-cols-[60px_1fr] items-start gap-x-4">
+        <div className="flex items-center justify-center rounded-md bg-primary px-3 py-2">
           <Icon
             src={iconPath}
             alt={t("common.iconAltText.policyLogo")}
             size={40}
           />
         </div>
-        <div className="truncate title-section min-w-0 w-full">
-          <h2 className="text-primary text-wrap font-semibold policy-title text-[18px]">
+        <div className="title-section w-full min-w-0 truncate">
+          <h2 className="policy-title text-wrap text-[18px] font-semibold text-primary">
             {currentLanguage === LanguageCode.ENGLISH ? name : name_fr}
           </h2>
           <div
-            className={cn("text-wrap text-base policy-subtitle", {
+            className={cn("policy-subtitle text-wrap text-base", {
               flex: !showMoreSubtitle,
             })}
           >
@@ -66,7 +66,7 @@ const PolicyCard = (props: IPolicyCard) => {
             </p>
             <span
               className={cn(
-                "underline cursor-pointer text-primary focus-visible:outline-focus",
+                "cursor-pointer text-primary underline focus-visible:outline-focus",
                 { "ml-1": !showMoreSubtitle },
               )}
               onClick={toggleShowMoreSubtitle}
@@ -77,7 +77,7 @@ const PolicyCard = (props: IPolicyCard) => {
           </div>
         </div>
       </div>
-      <div className="grid grid-cols-1 lg:grid-cols-[60px_1fr] gap-x-4 w-full">
+      <div className="grid w-full grid-cols-1 gap-x-4 lg:grid-cols-[60px_1fr]">
         <div className="hidden lg:block" />
         <ul>
           {/*/!* TODO: Will be a list of event cards *!/*/}
@@ -92,7 +92,7 @@ const PolicyCard = (props: IPolicyCard) => {
           />
 
           <li
-            className="border-dashed border-gray-400 border-2 rounded mt-4 p-4 flex bg-primary-25 cursor-pointer"
+            className="mt-4 flex cursor-pointer rounded border-2 border-dashed border-gray-400 bg-primary-25 p-4"
             onClick={addEvent}
             role="button"
             tabIndex={0}
@@ -105,7 +105,7 @@ const PolicyCard = (props: IPolicyCard) => {
                 height={24}
               />
             </span>
-            <span className="text-primary font-semibold ml-1">
+            <span className="ml-1 font-semibold text-primary">
               {addAnotherEvent}
             </span>
           </li>

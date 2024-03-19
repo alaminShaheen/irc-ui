@@ -10,7 +10,7 @@ const InputWithIcon = forwardRef<HTMLInputElement, IInputWithIconProps>(
     return (
       <span className="relative">
         {!!icon && iconPosition === IconPosition.LEFT && (
-          <span className="absolute top-1/2 transform -translate-y-1/2 translate-x-4">
+          <span className="absolute top-1/2 -translate-y-1/2 translate-x-4 transform">
             {icon}
           </span>
         )}
@@ -24,7 +24,7 @@ const InputWithIcon = forwardRef<HTMLInputElement, IInputWithIconProps>(
           })}
         />
         {!!icon && iconPosition === IconPosition.RIGHT && (
-          <span className="absolute top-1/2 transform -translate-y-1/2 translate-x-4">
+          <span className="absolute top-1/2 -translate-y-1/2 translate-x-4 transform">
             {icon}
           </span>
         )}

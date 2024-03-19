@@ -15,9 +15,9 @@ import useIsTab from "@/hooks/useIsTab";
 import useIsMobile from "@/hooks/useIsMobile";
 import { ModalSize } from "@/components/ui/Modal/Modal.d";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { IAddEventModalProps } from "@/components/AddEventModal/AddEventModal.d";
-import BasicInformationSection from "@/components/BasicInformationSection/BasicInformationSection";
-import AdditionalQuestionsSection from "@/components/AdditionalQuestionsSection/AdditionalQuestionsSection";
+import { IAddEventModalProps } from "@/components/AddEvent/components/AddEventModal/AddEventModal.d";
+import BasicInformationSection from "@/components/AddEvent/components/BasicInformationSection/BasicInformationSection";
+import AdditionalQuestionsSection from "@/components/AddEvent/components/AdditionalQuestionsSection/AdditionalQuestionsSection";
 import { ButtonType, ButtonVariant } from "@/models/enums/ButtonVariant";
 
 const AddEventModal = (props: IAddEventModalProps) => {
@@ -135,6 +135,7 @@ const AddEventModal = (props: IAddEventModalProps) => {
       rentalFacilityAgreementNumber: "",
       facility: "",
       insuranceCoverageAmount: InsuranceCoverageAmount.ONE_MILLION,
+      repeatFrequency: EventRepeatFrequency.MONTHLY,
     },
     mode: "onBlur",
     resolver: yupResolver(formValidationSchema),
@@ -143,12 +144,9 @@ const AddEventModal = (props: IAddEventModalProps) => {
   const isMobile = useIsMobile();
   const isTab = useIsTab();
 
-  const onSubmit = useCallback(
-    (data: AddEventModel) => {
-      onConfirm();
-    },
-    [onConfirm],
-  );
+  const onSubmit = useCallback(() => {
+    onConfirm();
+  }, [onConfirm]);
 
   const onClose = useCallback(() => {
     clearErrors();
@@ -164,7 +162,7 @@ const AddEventModal = (props: IAddEventModalProps) => {
       toggle={onClose}
       subtitle={eventName}
     >
-      <div className="flex justify-center overflow-y-auto h-[calc(100vh-15rem)] lg:h-[calc(100vh-14rem)]">
+      <div className="flex h-[calc(100vh-15rem)] justify-center overflow-y-auto lg:h-[calc(100vh-14rem)]">
         <FormProvider {...methods}>
           <form
             className="w-full lg:w-[552px]"
