@@ -15,6 +15,7 @@ const BypassBlock: ForwardRefRenderFunction<
       ref={ref}
       className={`${DEFAULT_BYPASS_BLOCK_STYLE} ${bypassStyle}`}
       href={`#${bypassLink}`}
+      data-testid="irc-bypassblock"
     >
       {bypassTextContent}
     </a>
