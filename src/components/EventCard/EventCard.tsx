@@ -19,16 +19,16 @@ const EventCard = ({ content }: IEventCardProps) => {
   const [showMoreEventDetails, toggleShowMoreEventDetails] = useToggle(false);
 
   return (
-    <div className="event-card border-2 border-primary rounded-md gap-y-3 lg:gap-x-3 flex flex-col lg:flex-row items-start p-4 w-full">
-      <span className="w-9 h-9 sm:w-12 sm:h-10 bg-primary-50 hidden lg:flex justify-center items-center rounded-md border border-primary">
+    <div className="event-card flex w-full flex-col items-start gap-y-3 rounded-md border-2 border-primary p-4 lg:flex-row lg:gap-x-3">
+      <span className="hidden h-9 w-9 items-center justify-center rounded-md border border-primary bg-primary-50 sm:h-10 sm:w-12 lg:flex">
         <Icon src={calendar} alt={calendarIconAltText} size={22} />
       </span>
 
-      <div className="flex items-center justify-between lg:hidden w-full">
-        <span className="w-9 h-9 sm:w-12 sm:h-12 bg-gray-300 flex justify-center items-center rounded-md border border-primary">
+      <div className="flex w-full items-center justify-between lg:hidden">
+        <span className="flex h-9 w-9 items-center justify-center rounded-md border border-primary bg-gray-300 sm:h-12 sm:w-12">
           <Icon src={calendar} alt={calendarIconAltText} size={22} />
         </span>
-        <div className="flex gap-x-6 text-base underline text-primary">
+        <div className="flex gap-x-6 text-base text-primary underline">
           <Button className="p-0" variant={ButtonVariant.TRANSPARENT}>
             {edit}
           </Button>
@@ -39,7 +39,7 @@ const EventCard = ({ content }: IEventCardProps) => {
       </div>
 
       <div className="event-details w-full">
-        <div className="hidden lg:flex justify-end gap-x-3 text-base underline text-primary">
+        <div className="hidden justify-end gap-x-3 text-base text-primary underline lg:flex">
           <Button className="p-0" variant={ButtonVariant.TRANSPARENT}>
             {edit}
           </Button>
@@ -48,24 +48,24 @@ const EventCard = ({ content }: IEventCardProps) => {
           </Button>
         </div>
 
-        <h3 className="text-primary text-xl">
+        <h3 className="text-xl text-primary">
           [Event name] - reocuring activity
         </h3>
 
-        <div className="mt-3 flex space-x-1 items-center">
+        <div className="mt-3 flex items-center space-x-1">
           <span className="mr-1">
             <Icon src={calendarTime} alt={calendarIconAltText} size={20} />
           </span>
           <span className="space-x-1 text-base">
             <span className="font-bold text-primary">Every Friday</span>
-            <span className="text-sm font-thin">from</span>
+            <span className="text-sm font-normal">from</span>
             <span className="font-bold text-primary">10:00 AM</span>
-            <span className="text-sm font-thin">to</span>
+            <span className="text-sm font-normal">to</span>
             <span className="font-bold text-primary">3:00 PM</span>
           </span>
         </div>
 
-        <div className="border-t border-primary w-full my-1" />
+        <div className="my-1 w-full border-t border-primary" />
 
         <div className="flex items-center">
           <span className="mr-1">
@@ -74,7 +74,7 @@ const EventCard = ({ content }: IEventCardProps) => {
           <span className="text-primary">3 hours each</span>
         </div>
 
-        <div className="border-t border-primary w-full my-1" />
+        <div className="my-1 w-full border-t border-primary" />
 
         <div className="flex items-center">
           <span className="mr-1">
@@ -83,14 +83,14 @@ const EventCard = ({ content }: IEventCardProps) => {
           <span className="text-primary">
             <span>[Facility name]</span>,<span>[Facility name]</span>,
             <span>[Facility name]</span>,
-            <span className="text-primary font-bold">+3 other</span>
+            <span className="font-bold text-primary">+3 other</span>
           </span>
         </div>
 
         <p
           onClick={toggleShowMoreEventDetails}
           tabIndex={0}
-          className="text-primary underline font-bold mt-4 cursor-pointer text-sm lg:text-base focus-visible:outline-focus"
+          className="mt-4 cursor-pointer text-sm font-bold text-primary underline focus-visible:outline-focus lg:text-base"
         >
           {showMoreEventDetails ? "Show less details" : "Show more details"}
         </p>
