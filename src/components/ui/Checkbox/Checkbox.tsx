@@ -1,7 +1,7 @@
 import { forwardRef } from "react";
 
 import Icon from "@/components/ui/Icon";
-import tick from "@/assets/icons/tick.svg";
+import Tick from "../../AppIcons/Tick";
 import { cn } from "@/utils/helper";
 import { ICheckboxProps } from "@/components/ui/Checkbox/Checkbox.d";
 

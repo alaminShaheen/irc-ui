@@ -1,5 +1,7 @@
-import { ImgHTMLAttributes } from "react";
+import { ReactNode, ImgHTMLAttributes } from "react";
 
-export interface IIconProps extends ImgHTMLAttributes<HTMLImageElement> {
+export interface IIconProps
+  extends Omit<ImgHTMLAttributes<HTMLImageElement>, "src"> {
+  src: string | ReactNode;
   size?: number;
 }

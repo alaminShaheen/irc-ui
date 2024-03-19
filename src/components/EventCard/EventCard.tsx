@@ -1,10 +1,12 @@
-import door from "@/assets/icons/door.svg";
 import Icon from "@/components/ui/Icon";
-import clock from "@/assets/icons/clock.svg";
 import Button from "@/components/ui/Button/Button";
-import calendar from "@/assets/icons/calendar-1.svg";
 import useToggle from "@/hooks/useToggle";
-import calendarTime from "@/assets/icons/calendar-time.svg";
+
+import Door from "../AppIcons/Door";
+import Clock from "../AppIcons/Clock";
+import Calender from "../AppIcons/Calendar1";
+import CalenderTime from "../AppIcons/CalendarTime";
+
 import { ButtonVariant } from "@/models/enums/ButtonVariant";
 import { IEventCardProps } from "@/components/EventCard/EventCard.d";
 
@@ -21,12 +23,12 @@ const EventCard = ({ content }: IEventCardProps) => {
   return (
     <div className="event-card flex w-full flex-col items-start gap-y-3 rounded-md border-2 border-primary p-4 lg:flex-row lg:gap-x-3">
       <span className="hidden h-9 w-9 items-center justify-center rounded-md border border-primary bg-primary-50 sm:h-10 sm:w-12 lg:flex">
-        <Icon src={calendar} alt={calendarIconAltText} size={22} />
+        <Icon src={<Calender />} alt={calendarIconAltText} size={22} />
       </span>
 
       <div className="flex w-full items-center justify-between lg:hidden">
         <span className="flex h-9 w-9 items-center justify-center rounded-md border border-primary bg-gray-300 sm:h-12 sm:w-12">
-          <Icon src={calendar} alt={calendarIconAltText} size={22} />
+          <Icon src={<Calender />} alt={calendarIconAltText} size={22} />
         </span>
         <div className="flex gap-x-6 text-base text-primary underline">
           <Button className="p-0" variant={ButtonVariant.TRANSPARENT}>
@@ -54,7 +56,7 @@ const EventCard = ({ content }: IEventCardProps) => {
 
         <div className="mt-3 flex items-center space-x-1">
           <span className="mr-1">
-            <Icon src={calendarTime} alt={calendarIconAltText} size={20} />
+            <Icon src={<CalenderTime />} alt={calendarIconAltText} size={20} />
           </span>
           <span className="space-x-1 text-base">
             <span className="font-bold text-primary">Every Friday</span>
@@ -69,7 +71,7 @@ const EventCard = ({ content }: IEventCardProps) => {
 
         <div className="flex items-center">
           <span className="mr-1">
-            <Icon src={clock} alt={clockIconAltText} size={20} />
+            <Icon src={<Clock />} alt={clockIconAltText} size={20} />
           </span>
           <span className="text-primary">3 hours each</span>
         </div>
@@ -78,7 +80,7 @@ const EventCard = ({ content }: IEventCardProps) => {
 
         <div className="flex items-center">
           <span className="mr-1">
-            <Icon src={door} alt={doorIconAltText} size={24} />
+            <Icon src={<Door />} alt={doorIconAltText} size={24} />
           </span>
           <span className="text-primary">
             <span>[Facility name]</span>,<span>[Facility name]</span>,

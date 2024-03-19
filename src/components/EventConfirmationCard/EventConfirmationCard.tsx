@@ -2,7 +2,7 @@ import Icon from "@/components/ui/Icon";
 import { cn } from "@/utils/helper";
 import Button from "@/components/ui/Button/Button";
 import bgCard from "@/assets/images/event-checkout-bg.png";
-import checkout from "@/assets/icons/checkout.svg";
+import Checkout from "../AppIcons/Checkout";
 import Checkbox from "@/components/ui/Checkbox/Checkbox";
 import useToggle from "@/hooks/useToggle";
 import AppConstants from "@/constants/AppConstants";
@@ -147,7 +147,7 @@ const EventConfirmationCard = ({ content }: IEventConfirmationCardProps) => {
           className="inline-flex w-full items-center justify-center gap-x-3 rounded-md p-4 text-xl font-bold"
           icon={
             allChecked && (
-              <Icon src={checkout} alt={checkoutIconAltText} size={32} />
+              <Icon src={<Checkout />} alt={checkoutIconAltText} size={32} />
             )
           }
           variant={allChecked ? ButtonVariant.PRIMARY : ButtonVariant.DISABLED}

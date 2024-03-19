@@ -6,7 +6,7 @@ import { cn } from "@/utils/helper";
 import Button from "@/components/ui/Button";
 import useToggle from "@/hooks/useToggle";
 import EventCard from "@/components/EventCard/EventCard";
-import addEventIcon from "@/assets/icons/add-event.svg";
+import AddEventIcon from "../AppIcons/AddEvent";
 import { IPolicyCard } from "@/components/PolicyCard/PolicyCard.d";
 import { LanguageCode } from "@/models/enums/LanguageCode";
 import addEventFilledIcon from "@/assets/icons/add-event-filled.svg";

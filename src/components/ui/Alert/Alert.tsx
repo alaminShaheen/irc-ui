@@ -1,6 +1,6 @@
 import { isValidElement } from "react";
 
-import alertInfo from "@/assets/icons/alert-info.svg";
+import AlertInfo from "../../AppIcons/AlertInfo";
 import { IAlertProps } from "@/components/ui/Alert/Alert.d";
 import Icon from "@/components/ui/Icon";
 import { useTranslation } from "react-i18next";
@@ -15,7 +15,7 @@ const Alert = (props: IAlertProps) => {
     >
       <span>
         <Icon
-          src={alertInfo}
+          src={<AlertInfo />}
           alt={t("common.iconAltText.alertInfo")}
           size={24}
         />

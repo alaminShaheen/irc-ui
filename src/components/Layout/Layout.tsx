@@ -6,7 +6,7 @@ import Button from "@/components/ui/Button";
 import Navbar from "@/components/ui/Navbar";
 import Sidebar from "@/components/Sidebar/Sidebar";
 import useToggle from "@/hooks/useToggle";
-import hamburger from "@/assets/icons/hamburger.svg";
+import Hamburger from "../AppIcons/Hamburger";
 import BypassBlock from "@/components/BypassBlock";
 import { ILayoutProps } from "@/components/Layout/Layout.d";
 import { IconPosition } from "@/models/enums/ButtonVariant";
@@ -42,10 +42,15 @@ const Layout = (props: ILayoutProps) => {
             className="btn-primary font-segoe sticky top-[90px] mt-2 hidden h-11 w-auto items-center justify-center gap-x-2 rounded-r-lg p-2 text-base !font-semibold focus:outline-focus focus-visible:outline-yellow-400 lg:flex lg:text-lg"
             icon={
               <Icon
-                src={hamburger}
-                alt={t("common.iconAltText.hamburger")}
+               
+                src={<Hamburger />}
+               
+                alt={t("common.iconAltText.hamburger"
+               )}
                 width={32}
+               
                 height={25}
+             
               />
             }
             iconPosition={IconPosition.RIGHT}

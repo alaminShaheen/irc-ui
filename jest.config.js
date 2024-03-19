@@ -1,4 +1,5 @@
 export default {
+  preset: "ts-jest",
   testEnvironment: "jsdom",
   coverageDirectory: "./coverage",
   collectCoverage: true,
@@ -7,8 +8,8 @@ export default {
   },
 
   moduleNameMapper: {
+    "^@/(.*)$": "<rootDir>/src/$1",
     "\\.(css|less|sass|scss)$": "identity-obj-proxy",
-    "^.+\\.svg$": "jest-transformer-svg",
   },
 
   setupFilesAfterEnv: ["<rootDir>/jest.setup.ts"],

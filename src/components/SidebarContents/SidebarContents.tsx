@@ -1,5 +1,5 @@
 import Icon from "@/components/ui/Icon";
-import cross from "@/assets/icons/cross.svg";
+import Cross from "../AppIcons/Cross";
 import Button from "@/components/ui/Button";
 import FocusTrap from "@/components/FocusTrap";
 import { ISidebarContentProps } from "@/components/SidebarContents/SidebarContents.d";
@@ -32,7 +32,7 @@ const SidebarContents = (props: ISidebarContentProps) => {
       <div className="text-base-content h-full min-h-full w-[360px] bg-primary p-4 text-left lg:w-[715px] lg:p-8">
         <Button
           className="btn ml-auto flex h-[5%] items-center gap-x-1 p-3 text-base font-semibold text-white"
-          icon={<Icon src={cross} alt={close} size={26} className="mr-1" />}
+          icon={<Icon src={<Cross />} alt={close} size={26} className="mr-1" />}
           onClick={onClose}
           variant={ButtonVariant.VANILLA}
           tabIndex={sidebarOpen ? 0 : -1}
