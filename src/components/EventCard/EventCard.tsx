@@ -8,11 +8,7 @@ import calendarTime from "@/assets/icons/calendar-time.svg";
 import { ButtonVariant } from "@/models/enums/ButtonVariant";
 import { IEventCardProps } from "@/components/EventCard/EventCard.d";
 
-const EventCard = ({
-  content,
-  onRemovePolicyClicked,
-  onEditPolicyClicked,
-}: IEventCardProps) => {
+const EventCard = ({ content }: IEventCardProps) => {
   const {
     edit,
     removePolicy,
@@ -33,18 +29,10 @@ const EventCard = ({
           <Icon src={calendar} alt={calendarIconAltText} size={22} />
         </span>
         <div className="flex gap-x-6 text-base underline text-primary">
-          <Button
-            className="p-0"
-            variant={ButtonVariant.TRANSPARENT}
-            onClick={onEditPolicyClicked}
-          >
+          <Button className="p-0" variant={ButtonVariant.TRANSPARENT}>
             {edit}
           </Button>
-          <Button
-            className="p-0"
-            variant={ButtonVariant.TRANSPARENT}
-            onClick={onRemovePolicyClicked}
-          >
+          <Button className="p-0" variant={ButtonVariant.TRANSPARENT}>
             {removePolicy}
           </Button>
         </div>
