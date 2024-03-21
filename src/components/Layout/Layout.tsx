@@ -9,6 +9,7 @@ import useToggle from "@/hooks/useToggle";
 import hamburger from "@/assets/icons/hamburger.svg";
 import BypassBlock from "@/components/BypassBlock";
 import { ILayoutProps } from "@/components/Layout/Layout.d";
+import { IconPosition } from "@/models/enums/ButtonVariant";
 
 const Layout = (props: ILayoutProps) => {
   const { children } = props;
@@ -38,15 +39,16 @@ const Layout = (props: ILayoutProps) => {
         <div className="items-start lg:grid lg:grid-cols-[110px_1fr]">
           {/* Sidebar toggle ribbon */}
           <Button
-            className="btn-primary sticky top-[90px] ml-auto mt-2 hidden h-11 items-center gap-x-2 rounded-r px-2 text-base focus:outline-focus focus-visible:outline-yellow-400 lg:ml-0 lg:flex lg:text-lg"
+            className="btn-primary font-segoe sticky top-[90px] mt-2 hidden h-11 w-auto items-center justify-center gap-x-2 rounded-r-lg p-2 text-base !font-semibold focus:outline-focus focus-visible:outline-yellow-400 lg:flex lg:text-lg"
             icon={
               <Icon
                 src={hamburger}
                 alt={t("common.iconAltText.hamburger")}
                 width={32}
-                height={24}
+                height={25}
               />
             }
+            iconPosition={IconPosition.RIGHT}
             onClick={toggleSidebarOpen}
           >
             {t("common.menu")}

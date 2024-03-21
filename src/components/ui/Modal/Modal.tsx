@@ -53,7 +53,7 @@ const Modal = (props: IModalProps) => {
                 <Dialog.Title as="div" className="mb-6">
                   <div>
                     <div className="flex items-center justify-between">
-                      <h3 className="text-3xl font-bold text-primary">
+                      <h3 className="font-segoe text-3xl font-bold text-primary">
                         {title}
                       </h3>
                       <Button

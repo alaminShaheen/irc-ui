@@ -130,14 +130,14 @@ const Quote = () => {
       <div className="lg:col-span-3">
         <Alert alertMessage={t("pages.quote.policyNotification")} />
 
-        <div className="mt-6">
-          <div className="flex items-center text-primary">
-            <h1 className="mr-2 text-2xl font-bold">
+        <div className="mt-8">
+          <div className="flex items-center gap-x-2 text-primary">
+            <h1 className="text-2xl font-semibold">
               {t("pages.quote.insured.title")}
             </h1>
             {!editMode && (
               <Button
-                className="cursor-pointer px-0 underline"
+                className="font-segoe cursor-pointer p-0 font-normal underline"
                 variant={ButtonVariant.TRANSPARENT}
                 onClick={toggleEditMode}
               >
@@ -154,7 +154,7 @@ const Quote = () => {
           />
 
           {/*Your policies*/}
-          <h1 className="my-8 text-2xl font-bold text-primary">
+          <h1 className="font-segoe my-8 text-2xl font-semibold text-primary">
             {t("pages.quote.yourPolicies.title")}
           </h1>
 

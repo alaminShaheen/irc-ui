@@ -115,14 +115,18 @@ const InsuredForm = (props: IInsuredFormProps) => {
           </div>
 
           <div className="flex flex-col gap-y-1">
-            <span className="text-graphite-700">{telephoneNumLabel}</span>
+            <span className="text-graphite-700">
+              {telephoneNumLabel}
+            </span>
             <div className="text-base text-primary">
               {formatPhoneNumber(insuredFormValues.telephone)}
             </div>
           </div>
 
           <div className="flex flex-col gap-y-1">
-            <span className="text-graphite-700">{emailAddressLabel}</span>
+            <span className="text-graphite-700">
+              {emailAddressLabel}
+            </span>
             <div className="text-base text-primary">
               {insuredFormValues.email}
             </div>
@@ -142,28 +146,36 @@ const InsuredForm = (props: IInsuredFormProps) => {
       ) : (
         <div className="flex flex-col gap-y-4">
           <div className="flex flex-col gap-y-1">
-            <span className="text-graphite-700">{nameOfInsuredLabel}</span>
+            <span className="font-segoe text-graphite-700">
+              {nameOfInsuredLabel}
+            </span>
             <div className="text-base text-primary">
               {insuredFormValues.name}
             </div>
           </div>
 
           <div className="flex flex-col gap-y-1">
-            <span className="text-graphite-700">{addressOfInsuredLabel}</span>
+            <span className="font-segoe text-graphite-700">
+              {addressOfInsuredLabel}
+            </span>
             <div className="text-base text-primary">
               {insuredFormValues.address}
             </div>
           </div>
 
           <div className="flex flex-col gap-y-1">
-            <span className="text-graphite-700">{telephoneNumLabel}</span>
+            <span className="font-segoe text-graphite-700">
+              {telephoneNumLabel}
+            </span>
             <div className="text-base text-primary">
               {formatPhoneNumber(insuredFormValues.telephone)}
             </div>
           </div>
 
           <div className="flex flex-col gap-y-1">
-            <span className="text-graphite-700">{emailAddressLabel}</span>
+            <span className="font-segoe text-graphite-700">
+              {emailAddressLabel}
+            </span>
             <div className="text-base text-primary">
               {insuredFormValues.email}
             </div>

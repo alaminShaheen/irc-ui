@@ -17,13 +17,13 @@ const Checkbox = forwardRef<HTMLInputElement, ICheckboxProps>(
           type="checkbox"
           className={cn(
             className,
-            "disabled:border-steel-400 disabled:bg-steel-400 peer relative h-checkbox w-checkbox cursor-pointer appearance-none rounded-md border border-primary checked:border-0 checked:bg-primary checked:text-white",
+            "disabled:border-steel-400 disabled:bg-steel-400 peer relative h-checkbox w-checkbox cursor-pointer appearance-none rounded border-2 border-primary checked:border-0 checked:bg-primary checked:text-white",
           )}
         />
         <Icon
           src={tick}
-          size={30}
-          className="pointer-events-none absolute left-0 top-0 mr-2 hidden peer-checked:block"
+          size={24}
+          className="pointer-events-none absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-3.5 transform peer-checked:block"
         />
       </span>
     );

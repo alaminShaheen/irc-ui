@@ -61,7 +61,9 @@ const BasicInformationSection = (props: IBasicInformationSectionProps) => {
 
   return (
     <>
-      <h2 className="text-2xl font-bold text-primary">{basicInfo}</h2>
+      <h2 className="font-segoe text-2xl font-bold text-primary">
+        {basicInfo}
+      </h2>
       <div className="mt-6 flex flex-col gap-y-1">
         <label htmlFor="eventName" className="form-label">
           {nameYourEventLabel}

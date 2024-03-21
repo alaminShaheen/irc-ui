@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next";
 
 const Alert = (props: IAlertProps) => {
   const { alertMessage } = props;
-  const {t} = useTranslation()
+  const { t } = useTranslation();
   return (
     <div
       role="alert"

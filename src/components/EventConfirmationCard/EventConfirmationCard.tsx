@@ -38,83 +38,81 @@ const EventConfirmationCard = ({ content }: IEventConfirmationCardProps) => {
     professionalLiabilityChecked;
 
   return (
-    <div className="mt-8 lg:mt-0 w-full px-6 pt-6 pb-11 relative lg:sticky lg:top-[100px] z-0">
-      <div className="absolute top-0 left-0 w-full h-full">
-        <Icon src={bgCard} alt={cardBgImageAltText} className="w-full h-full" />
+    <div className="relative z-0 mt-8 w-full px-6 pb-11 pt-6 lg:sticky lg:top-[100px] lg:mt-0">
+      <div className="absolute left-0 top-0 h-full w-full">
+        <Icon src={bgCard} alt={cardBgImageAltText} className="h-full w-full" />
       </div>
       <div className="relative">
-        <div className="flex justify-between text-lg font-semibold">
+        <div className="font-segoe flex justify-between text-lg font-semibold">
           <h2 className="text-graphite-700">{numOfEventsTitle}</h2>
           <p aria-live="polite" className="text-primary">
             2
           </p>
         </div>
 
-        <div className="flex justify-between text-primary mt-4 items-center">
+        <div className="font-segoe mt-4 flex items-center justify-between text-primary">
           <h2 className="text-2xl font-bold">{totalPolicyCostTitle}</h2>
-          <p aria-live="polite" className="font-bold text-4xl">
+          <p aria-live="polite" className="text-4xl font-bold">
             $168.5
           </p>
         </div>
 
-        <div className="flex justify-between text-primary mt-4 items-center text-lg">
+        <div className="mt-4 flex items-center justify-between text-lg text-primary">
           <h2>[Event name] - reoccurring activity</h2>
           <p aria-live="polite" className="font-bold">
             $120.9
           </p>
         </div>
 
-        <div className="flex justify-between text-primary mt-4 items-center text-lg">
+        <div className="mt-4 flex items-center justify-between text-lg text-primary">
           <h2>Hockey Match</h2>
           <p aria-live="polite" className="font-bold">
             $35.15
           </p>
         </div>
 
-        <div className="border-t border-dashed border-white-700 mt-4" />
+        <div className="mt-4 border-t border-dashed border-white-700" />
 
-        <div className="flex justify-between text-primary mt-4 items-center">
+        <div className="mt-4 flex items-center justify-between text-primary">
           <h2 className="text-lg">{provincialSalesTaxTitle}</h2>
-          <p aria-live="polite" className="font-bold text-xl">
+          <p aria-live="polite" className="text-xl font-bold">
             $12.49
           </p>
         </div>
 
-        <div className="flex mt-6 items-center">
+        <div className="mt-6 flex items-center gap-x-3">
           <div className="flex items-center justify-center">
             <Checkbox
-              className="mr-2"
               id="coverage-exclusions"
               checked={coverageExclusionChecked}
               onChange={toggleCoverageExclusionCheckbox}
             />
           </div>
-          <label htmlFor="coverage-exclusions" className="text-black w-full">
+          <label htmlFor="coverage-exclusions" className="w-full text-black">
             {agreement1}
           </label>
         </div>
 
         <div
           className={cn(
-            `h-1 border-t border-primary-300 ml-auto my-4 w-[calc(100%-${AppConstants.CHECKBOX_SIZE}px)]`,
+            `my-4 ml-auto h-1 border-t border-primary-300 w-[calc(100%-${AppConstants.CHECKBOX_SIZE}px)]`,
           )}
         />
 
-        <div className="flex flex-col items-end w-full">
-          <div className="flex w-full">
-            <div className="min-w-[30px] mr-2" />
+        <div className="flex w-full flex-col items-end">
+          <div className="flex w-full gap-x-3">
+            <div className="min-w-[30px]" />
             <span className="font-light">{agreement2Info}</span>
           </div>
-          <div className="flex items-center w-full">
+          <div className="flex w-full items-center gap-x-3">
             <div className="flex items-center justify-center">
               <Checkbox
-                className="mr-2"
                 id="responsible"
                 checked={deductibleResponsibilityChecked}
                 onChange={toggleDeductibleResponsibilityCheckbox}
               />
             </div>
-            <label htmlFor="responsible" className="text-black w-full">
+            <label htmlFor="responsible" className="w-full text-black">
               {" "}
               {agreement2}
             </label>
@@ -123,31 +121,30 @@ const EventConfirmationCard = ({ content }: IEventConfirmationCardProps) => {
 
         <div
           className={cn(
-            `h-1 border-t border-primary-300 ml-auto my-4 w-[calc(100%-${AppConstants.CHECKBOX_SIZE}px)]`,
+            `my-4 ml-auto h-1 border-t border-primary-300 w-[calc(100%-${AppConstants.CHECKBOX_SIZE}px)]`,
           )}
         />
 
-        <div className="flex items-center">
+        <div className="flex items-center gap-x-3">
           <div className="flex items-center justify-center">
             <Checkbox
-              className="mr-2"
-              id="coverage-exclusions"
+              id="professional-liability"
               checked={professionalLiabilityChecked}
               onChange={toggleProfessionalLiabilityCheckbox}
             />
           </div>
           <label
-            htmlFor="coverage-exclusions"
+            htmlFor="professional-liability"
             className="border-primary-300 text-black"
           >
             {agreement3}
           </label>
         </div>
 
-        <div className="border-t border-dashed border-white-700 my-8" />
+        <div className="my-8 border-t border-dashed border-white-700" />
 
         <Button
-          className="w-full p-4 text-xl font-bold inline-flex justify-center items-center gap-x-3 rounded-md"
+          className="inline-flex w-full items-center justify-center gap-x-3 rounded-md p-4 text-xl font-bold"
           icon={
             allChecked && (
               <Icon src={checkout} alt={checkoutIconAltText} size={32} />

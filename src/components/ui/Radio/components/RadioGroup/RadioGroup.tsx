@@ -65,7 +65,7 @@ const RadioGroup = (props: RadioGroupProps) => {
     <div className="lg-gap-y-0 relative flex flex-col items-start gap-y-4 lg:flex-row lg:items-baseline lg:gap-x-4">
       <div
         className={cn(
-          "absolute left-0 top-0 z-10 rounded-md border-2  transition-all duration-500 ease-in-out",
+          "absolute left-0 top-0 z-10 rounded-md border-2 transition-all duration-500 ease-in-out",
           {
             "border-primary": props.radioProps.some((radio) => radio.checked),
           },

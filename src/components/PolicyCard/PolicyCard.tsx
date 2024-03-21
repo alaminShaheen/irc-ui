@@ -50,7 +50,7 @@ const PolicyCard = (props: IPolicyCard) => {
           />
         </div>
         <div className="title-section w-full min-w-0 truncate">
-          <h2 className="policy-title text-wrap text-[18px] font-semibold text-primary">
+          <h2 className="policy-title font-segoe text-wrap text-lg font-semibold text-primary">
             {currentLanguage === LanguageCode.ENGLISH ? name : name_fr}
           </h2>
           <div
@@ -95,13 +95,13 @@ const PolicyCard = (props: IPolicyCard) => {
           />
 
           <li
-            className="group mt-4 flex cursor-pointer rounded border-2 border-dashed border-gray-400 bg-primary-25 p-4 hover:border-primary"
+            className="group mt-4 flex cursor-pointer rounded border-2 border-dashed border-gray-400 bg-primary-25 hover:border-primary"
             onClick={addEvent}
             role="button"
             tabIndex={0}
           >
             <Button
-              className="flex items-center gap-x-1 text-primary group-hover:font-bold group-hover:underline"
+              className="flex items-center gap-x-1 p-4 font-medium text-primary group-hover:font-bold group-hover:underline"
               variant={ButtonVariant.VANILLA}
               iconPosition={IconPosition.LEFT}
               icon={
