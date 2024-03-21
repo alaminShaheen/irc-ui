@@ -15,6 +15,7 @@ export default {
         checkbox: "30px",
       },
       height: {
+        navbar: "77px",
         checkbox: "30px",
       },
       colors: {
