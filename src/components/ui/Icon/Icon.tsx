@@ -7,7 +7,7 @@ const Icon = (props: IIconProps) => {
     <>
       {isValidElement(src) ? (
         cloneElement(src as ReactElement, {
-          className: className
+          className: className,
         })
       ) : (
         <img

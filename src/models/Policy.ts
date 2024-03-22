@@ -5,4 +5,4 @@ export type Policy = {
   subtitle: string;
   subtitle_fr: string;
   iconPath: string;
-}
+};

@@ -23,9 +23,9 @@ const Quote = () => {
     i18n: { language: currentLanguage },
   } = useTranslation();
 
-  const addEvent = useCallback(() => {
-    // TODO: Add event functionality
-  }, []);
+  // const addEvent = useCallback(() => {
+  //   // TODO: Add event functionality
+  // }, []);
 
   const onAddEventClick = useCallback(
     (eventName: string) => {
@@ -137,7 +137,7 @@ const Quote = () => {
             </h1>
             {!editMode && (
               <Button
-                className="font-segoe cursor-pointer p-0 font-normal underline"
+                className="cursor-pointer p-0 font-segoe font-normal underline"
                 variant={ButtonVariant.TRANSPARENT}
                 onClick={toggleEditMode}
               >
@@ -154,7 +154,7 @@ const Quote = () => {
           />
 
           {/*Your policies*/}
-          <h1 className="font-segoe my-8 text-2xl font-semibold text-primary">
+          <h1 className="my-8 font-segoe text-2xl font-semibold text-primary">
             {t("pages.quote.yourPolicies.title")}
           </h1>
 

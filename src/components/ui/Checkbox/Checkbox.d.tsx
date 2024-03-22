@@ -1,5 +1,3 @@
 import { InputHTMLAttributes } from "react";
 
-export interface ICheckboxProps extends InputHTMLAttributes<HTMLInputElement> {
-
-}
+export interface ICheckboxProps extends InputHTMLAttributes<HTMLInputElement> {}

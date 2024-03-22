@@ -116,18 +116,14 @@ const InsuredForm = (props: IInsuredFormProps) => {
           </div>
 
           <div className="flex flex-col gap-y-1">
-            <span className="text-graphite-700">
-              {telephoneNumLabel}
-            </span>
+            <span className="text-graphite-700">{telephoneNumLabel}</span>
             <div className="text-base text-primary">
               {formatPhoneNumber(insuredFormValues.telephone)}
             </div>
           </div>
 
           <div className="flex flex-col gap-y-1">
-            <span className="text-graphite-700">
-              {emailAddressLabel}
-            </span>
+            <span className="text-graphite-700">{emailAddressLabel}</span>
             <div className="text-base text-primary">
               {insuredFormValues.email}
             </div>
