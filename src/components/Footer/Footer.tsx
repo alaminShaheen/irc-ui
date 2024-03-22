@@ -3,7 +3,8 @@ import { FaFacebookF } from "react-icons/fa6";
 import { FaInstagram } from "react-icons/fa6";
 import { FaXTwitter } from "react-icons/fa6";
 
-import logo from "../../assets/logo.svg";
+import Icon from "@/components/ui/Icon";
+import Logo from "../AppIcons/Logo";
 
 const Footer = ({ content }: IFooterProps) => {
   const { poweredBy, body, privacyPolicy, copyright, logoAltText } = content;
@@ -15,11 +16,19 @@ const Footer = ({ content }: IFooterProps) => {
         <p className="text-left text-sm font-light text-primary-25 md:ml-[156px]">
           {poweredBy}
         </p>
-        <img
+        {/* <img
           className="mt-1 h-[39px] w-[302px] md:ml-[151px] md:h-[49px] md:w-[377px]"
           src={logo}
           alt={logoAltText}
+        /> */}
+        {/* <span className="ml-[151px]"> */}
+        <Icon
+          className="md:ml-[151px]"
+          src={<Logo />}
+          alt={logoAltText}
+          size={200}
         />
+        {/* </span> */}
 
         <p className="mt-5 text-start text-sm font-normal md:ml-[156px] md:mr-[152px] md:text-lg lg:mt-4">
           {body}

@@ -51,7 +51,7 @@ const EventCard = ({ content }: IEventCardProps) => {
         </div>
 
         <h3 className="text-xl text-primary">
-          [Event name] - reocuring activity
+          [Event name] - reoccurring activity
         </h3>
 
         <div className="mt-3 flex items-center space-x-1">

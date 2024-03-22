@@ -12,10 +12,11 @@ const Navbar = (props: INavbarProps) => {
   const { t } = useTranslation();
 
   return (
-    <nav className="h-navbar flex items-center justify-between bg-primary px-9">
+    <nav className="flex h-navbar items-center justify-between bg-primary px-9">
       <div>
         <a href="#">
-          <img src={appLogo} alt={t("common.iconAltText.appLogo")} width={40} />
+          {/* <img src={appLogo} alt={t("common.iconAltText.appLogo")} width={40} /> */}
+          <Icon src={appLogo} alt={t("common.iconAltText.appLogo")} size={40} />
         </a>
       </div>
 
@@ -24,14 +25,12 @@ const Navbar = (props: INavbarProps) => {
         <Button
           className="btn-primary flex h-auto items-center gap-x-2 rounded-r px-2 text-base focus:outline-focus focus-visible:outline-yellow-400 lg:hidden"
           icon={
-            
             <Icon
               src={<Hamburger />}
               alt={t("common.iconAltText.hamburger")}
               width={32}
               height={24}
             />
-          
           }
           onClick={toggleSidebar}
         >

@@ -39,18 +39,13 @@ const Layout = (props: ILayoutProps) => {
         <div className="items-start lg:grid lg:grid-cols-[110px_1fr]">
           {/* Sidebar toggle ribbon */}
           <Button
-            className="btn-primary font-segoe sticky top-[90px] mt-2 hidden h-11 w-auto items-center justify-center gap-x-2 rounded-r-lg p-2 text-base !font-semibold focus:outline-focus focus-visible:outline-yellow-400 lg:flex lg:text-lg"
+            className="btn-primary sticky top-[90px] mt-2 hidden h-11 w-auto items-center justify-center gap-x-2 rounded-r-lg p-2 font-segoe text-base !font-semibold focus:outline-focus focus-visible:outline-yellow-400 lg:flex lg:text-lg"
             icon={
               <Icon
-               
                 src={<Hamburger />}
-               
-                alt={t("common.iconAltText.hamburger"
-               )}
+                alt={t("common.iconAltText.hamburger")}
                 width={32}
-               
                 height={25}
-             
               />
             }
             iconPosition={IconPosition.RIGHT}

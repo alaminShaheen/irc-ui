@@ -5,7 +5,7 @@ import { IModalProps, ModalSize } from "@/components/ui/Modal/Modal.d";
 import { cn } from "@/utils/helper";
 import useDisableBodyScroll from "@/hooks/useDisableBodyScroll";
 import Icon from "@/components/ui/Icon";
-import modalClose from "@/assets/icons/modal-close.svg";
+import ModalClose from "../../AppIcons/ModalClose";
 import Button from "@/components/ui/Button";
 import { ButtonVariant } from "@/models/enums/ButtonVariant";
 import { useTranslation } from "react-i18next";
@@ -62,7 +62,7 @@ const Modal = (props: IModalProps) => {
                         onClick={toggle}
                         icon={
                           <Icon
-                            src={modalClose}
+                            src={<ModalClose />}
                             alt={t("common.iconAltText.close")}
                             size={45}
                           />

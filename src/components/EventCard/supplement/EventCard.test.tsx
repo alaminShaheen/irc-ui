@@ -18,7 +18,7 @@ describe("EventCard", () => {
     expect(editButtons.length).toBeGreaterThan(0);
     expect(removeButtons.length).toBeGreaterThan(0);
     expect(
-      screen.getByText("[Event name] - reocuring activity"),
+      screen.getByText("[Event name] - reoccurring activity"),
     ).toBeInTheDocument();
   });
 

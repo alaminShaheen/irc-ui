@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 
 import Icon from "@/components/ui/Icon";
 import { cn } from "@/utils/helper";
-import radioCheck from "@/assets/icons/radio-check.svg";
+import RadioCheck from "../../../../AppIcons/RadioCheck";
 import { IRadioButtonProps } from "@/components/ui/Radio/components/RadioButton/RadioButton.d";
 
 const RadioButton = forwardRef<HTMLInputElement, IRadioButtonProps>(
@@ -46,7 +46,8 @@ const RadioButton = forwardRef<HTMLInputElement, IRadioButtonProps>(
             leaveTo="opacity-0"
           >
             <Icon
-              src={radioCheck}
+              tabIndex={0}
+              src={<RadioCheck />}
               alt={t("common.iconAltText.checked")}
               size={24}
               className="rounded-full"
