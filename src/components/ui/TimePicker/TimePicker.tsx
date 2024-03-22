@@ -17,6 +17,7 @@ const TimePicker = forwardRef<DatePicker, IDatePickerProps>((props, ref) => {
           {props.icon}
         </span>
       }
+      popperClassName="z-20"
       showTimeSelectOnly
       showTimeSelect
       timeIntervals={15}

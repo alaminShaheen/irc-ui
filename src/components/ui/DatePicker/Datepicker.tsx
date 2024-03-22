@@ -16,6 +16,7 @@ const Datepicker = forwardRef<DatePicker, IDatePickerProps>((props, ref) => {
         props.className,
         "input w-full cursor-pointer !py-4 !pl-14 !pr-3",
       )}
+      popperClassName="z-20"
       showIcon
       toggleCalendarOnIconClick
       wrapperClassName="sakib"
