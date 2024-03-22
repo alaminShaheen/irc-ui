@@ -60,9 +60,9 @@ const AddEventModal = (props: IAddEventModalProps) => {
     addEventIconAltText,
     fieldRequired,
     endDateInvalid,
-    endTimeInvalid,
+    // endTimeInvalid,
     startDateInvalid,
-    startTimeInvalid,
+    // startTimeInvalid,
   } = translationContent;
 
   const formValidationSchema: ObjectSchema<AddEventModel> = yup.object().shape(

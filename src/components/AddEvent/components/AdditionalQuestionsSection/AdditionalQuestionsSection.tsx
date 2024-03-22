@@ -31,7 +31,7 @@ const AdditionalQuestionsSection = (
 
   return (
     <>
-      <p className="font-segoe my-8 text-2xl font-bold text-primary">
+      <p className="my-8 font-segoe text-2xl font-bold text-primary">
         {additionalQuestions}
       </p>
       <div className="flex flex-col gap-y-2">
