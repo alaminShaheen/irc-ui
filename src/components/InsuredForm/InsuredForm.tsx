@@ -75,6 +75,7 @@ const InsuredForm = (props: IInsuredFormProps) => {
         <form
           className="flex flex-col gap-y-4"
           onSubmit={handleSubmit(onFormSubmit)}
+          data-testid="insured-form"
         >
           <div className="flex flex-col gap-y-1">
             <label htmlFor="name" className="text-white-5">

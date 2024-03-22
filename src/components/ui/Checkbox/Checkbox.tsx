@@ -21,7 +21,7 @@ const Checkbox = forwardRef<HTMLInputElement, ICheckboxProps>(
           )}
         />
         <Icon
-          src={tick}
+          src={<Tick />}
           size={24}
           className="pointer-events-none absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-3.5 transform peer-checked:block"
         />

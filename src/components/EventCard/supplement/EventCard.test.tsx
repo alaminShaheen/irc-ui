@@ -1,39 +1,50 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import EventCard from "../EventCard";
 
-// Mock data for the component props
 const mockContent = {
   edit: "Edit",
-  removePolicy: "Remove",
+  removePolicy: "Remove Policy",
 };
 
 describe("EventCard", () => {
-  it("renders correctly", () => {
+  beforeEach(() => {
     render(<EventCard content={mockContent} />);
+  });
 
-    // expect(screen.getByText("Edit")).toBeInTheDocument();
-    // expect(screen.getByText("Remove")).toBeInTheDocument();
+  it("renders correctly", () => {
+    const editButtons = screen.getAllByText("Edit");
+    const removeButtons = screen.getAllByText("Remove Policy");
+
+    expect(editButtons.length).toBeGreaterThan(0);
+    expect(removeButtons.length).toBeGreaterThan(0);
     expect(
       screen.getByText("[Event name] - reocuring activity"),
     ).toBeInTheDocument();
   });
 
-  //   it("toggles more details on click", () => {
-  //     render(<EventCard content={mockContent} />);
-  //     const toggleButton = screen.getByText("Show more details");
-  //     fireEvent.click(toggleButton);
+  it("toggles more details on click", () => {
+    const toggleButton = screen.getByText("Show more details");
+    fireEvent.click(toggleButton);
 
-  //     expect(toggleButton).toHaveTextContent("Show less details");
-  //     fireEvent.click(toggleButton);
-  //     expect(toggleButton).toHaveTextContent("Show more details");
-  //   });
+    expect(screen.getByText("Show less details")).toBeInTheDocument();
+    fireEvent.click(toggleButton);
+    expect(screen.getByText("Show more details")).toBeInTheDocument();
+  });
 
-  //   it("has clickable edit and remove buttons", () => {
-  //     render(<EventCard content={mockContent} />);
-  //     const editButton = screen.getByText("Edit");
-  //     const removeButton = screen.getByText("Remove");
+  it("has clickable edit and remove buttons", () => {
+    const editButtons = screen.getAllByText("Edit");
+    const removeButtons = screen.getAllByText("Remove Policy");
 
-  //     expect(editButton).toBeInTheDocument();
-  //     expect(removeButton).toBeInTheDocument();
-  //   });
+    expect(editButtons.length).toBeGreaterThan(0);
+    editButtons.forEach((button) => {
+      expect(button).toBeInTheDocument();
+      fireEvent.click(button);
+    });
+
+    expect(removeButtons.length).toBeGreaterThan(0);
+    removeButtons.forEach((button) => {
+      expect(button).toBeInTheDocument();
+      fireEvent.click(button);
+    });
+  });
 });

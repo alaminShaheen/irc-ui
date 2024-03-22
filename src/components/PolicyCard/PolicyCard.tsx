@@ -115,7 +115,7 @@ const PolicyCard = (props: IPolicyCard) => {
                   />
                   <Icon
                     aria-hidden="true"
-                    src={addEventIcon}
+                    src={<AddEventIcon />}
                     className="group-hover:hidden"
                     alt={addEventIconAltText}
                     size={24}

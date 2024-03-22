@@ -2,7 +2,8 @@ import { IFooterProps } from "./Footer.d";
 import { FaFacebookF } from "react-icons/fa6";
 import { FaInstagram } from "react-icons/fa6";
 import { FaXTwitter } from "react-icons/fa6";
-import logo from "@/assets/logo.svg";
+
+import logo from "../../assets/logo.svg";
 
 const Footer = ({ content }: IFooterProps) => {
   const { poweredBy, body, privacyPolicy, copyright, logoAltText } = content;
