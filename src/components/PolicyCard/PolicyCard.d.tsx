@@ -1,7 +1,9 @@
+import { Policy } from "@/models/Policy";
+
 export interface IPolicyCard {
-  title: string;
-  subtitle: string;
-  content: {
+  policy: Policy;
+  onAddEventClick: (eventName: string) => void;
+  translationContent: {
     [key: string]: string;
   };
 }

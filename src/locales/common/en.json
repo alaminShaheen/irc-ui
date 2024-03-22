@@ -4,5 +4,39 @@
   "menu": "Menu",
   "edit": "Edit",
   "showMore": "show more",
-  "showLess": "show less"
+  "showLess": "show less",
+  "close": "close",
+  "iconAltText": {
+    "market": "market",
+    "calendar": "calendar",
+    "close": "close",
+    "appLogo": "app logo",
+    "hamburger": "hamburger",
+    "addEvent": "addEvent",
+    "clock": "clock",
+    "door": "door",
+    "card": "card",
+    "checkout": "checkout",
+    "policyLogo": "policy logo",
+    "alertInfo": "alert info",
+    "checked": "checked"
+  },
+  "sidebar": {
+    "policyInformation": "Policy Information",
+    "frequentlyAskedQuestions": "Frequently Asked Questions",
+    "policyWording": "Policy Wording",
+    "summaryOfCoverage": "Summary of Coverage",
+    "activitiesAndEvents": "Activities & Events",
+    "toolsAndForms": "Tools & Forms",
+    "submitExternalCertificate": "Submit External Certificate",
+    "externalCertificate": "External Certificate",
+    "claimForm": "Claim Form",
+    "importanceOfWaivers": "Importance of Waivers",
+    "concussionTraining": "Concussion Training",
+    "concussionManagement": "Concussion Management",
+    "waiverOfMinorParticipants": "Waiver of Minor Participants",
+    "waiverOfAdultParticipants": "Waiver of Adult Participants",
+    "paradeApplicationForm": "Parade Application Form",
+    "largeEventApplicationForm": "Large Event Application Form"
+  }
 }

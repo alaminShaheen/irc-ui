@@ -4,5 +4,39 @@
   "menu": "FR-Menu",
   "edit": "FR-Edit",
   "showMore": "FR-show more",
-  "showLess": "FR-show less"
+  "showLess": "FR-show less",
+  "close": "FR-close",
+  "iconAltText": {
+    "market": "FR-market",
+    "calendar": "FR-calendar",
+    "close": "FR-close",
+    "appLogo": "FR-app logo",
+    "hamburger": "FR-hamburger",
+    "addEvent": "FR-addEvent",
+    "clock": "FR-clock",
+    "door": "FR-door",
+    "card": "FR-card",
+    "checkout": "FR-checkout",
+    "policyLogo": "FR-policy logo",
+    "alertInfo": "FR-alert info",
+    "checked": "FR-checked"
+  },
+  "sidebar": {
+    "policyInformation": "FR-Policy Information",
+    "frequentlyAskedQuestions": "FR-Frequently Asked Questions",
+    "policyWording": "FR-Policy Wording",
+    "summaryOfCoverage": "FR-Summary of Coverage",
+    "activitiesAndEvents": "FR-Activities & Events",
+    "toolsAndForms": "FR-Tools & Forms",
+    "submitExternalCertificate": "FR-Submit External Certificate",
+    "externalCertificate": "FR-External Certificate",
+    "claimForm": "FR-Claim Form",
+    "importanceOfWaivers": "FR-Importance of Waivers",
+    "concussionTraining": "FR-Concussion Training",
+    "concussionManagement": "FR-Concussion Management",
+    "waiverOfMinorParticipants": "FR-Waiver of Minor Participants",
+    "waiverOfAdultParticipants": "FR-Waiver of Adult Participants",
+    "paradeApplicationForm": "FR-Parade Application Form",
+    "largeEventApplicationForm": "FR-Large Event Application Form"
+  }
 }

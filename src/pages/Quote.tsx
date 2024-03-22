@@ -1,17 +1,39 @@
-import { useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import Alert from "@/components/ui/Alert/Alert";
 import Button from "@/components/ui/Button";
+import policies from "@/data/policies.json";
+import { Policy } from "@/models/Policy";
 import PolicyCard from "@/components/PolicyCard/PolicyCard";
 import InsuredForm from "@/components/InsuredForm/InsuredForm";
 import { useToggle } from "@/hooks/index";
+import AddEventModal from "@/components/AddEvent/components/AddEventModal";
+import { LanguageCode } from "@/models/enums/LanguageCode";
 import { ButtonVariant } from "@/models/enums/ButtonVariant";
 import EventConfirmationCard from "@/components/EventConfirmationCard/EventConfirmationCard";
 
 const Quote = () => {
   const [editMode, toggleEditMode] = useToggle(false);
-  const { t } = useTranslation();
+  const [showAddEventModal, toggleAddEventModal] = useToggle(false);
+  const [selectedEventName, setSelectedEventName] = useState("");
+
+  const {
+    t,
+    i18n: { language: currentLanguage },
+  } = useTranslation();
+
+  const addEvent = useCallback(() => {
+    // TODO: Add event functionality
+  }, []);
+
+  const onAddEventClick = useCallback(
+    (eventName: string) => {
+      setSelectedEventName(eventName);
+      toggleAddEventModal();
+    },
+    [toggleAddEventModal],
+  );
 
   useEffect(() => {
     document.title = t("pages.quote.pageTitle");
@@ -23,6 +45,7 @@ const Quote = () => {
       addressOfInsuredLabel: t("pages.quote.insured.addressOfInsuredLabel"),
       telephoneNumLabel: t("pages.quote.insured.telephoneNumLabel"),
       emailAddressLabel: t("pages.quote.insured.emailAddressLabel"),
+      fieldRequired: t("addEventForm.errors.fieldRequired"),
     },
     yourPolicies: {
       addAnotherEvent: t("pages.quote.yourPolicies.addAnotherEvent"),
@@ -30,6 +53,10 @@ const Quote = () => {
       showLess: t("common.showLess"),
       edit: t("common.edit"),
       removePolicy: t("pages.quote.yourPolicies.removePolicy"),
+      calendarIconAltText: t("common.iconAltText.calendar"),
+      clockIconAltText: t("common.iconAltText.clock"),
+      doorIconAltText: t("common.iconAltText.door"),
+      addEventIconAltText: t("common.iconAltText.addEvent"),
     },
     eventConfirmationContent: {
       numOfEventsTitle: t("pages.quote.eventConfirmation.numOfEventsTitle"),
@@ -47,22 +74,70 @@ const Quote = () => {
         "pages.quote.eventConfirmation.confirmAboveButtonText",
       ),
       checkoutButtonText: t("pages.quote.eventConfirmation.checkoutButtonText"),
+      cardBgImageAltText: t("common.iconAltText.card"),
+      checkoutIconAltText: t("common.iconAltText.checkout"),
+    },
+    addEventForm: {
+      title: t("pages.addEventForm.title"),
+      basicInfo: t("pages.addEventForm.basicInfo"),
+      nameYourEventLabel: t("pages.addEventForm.nameYourEventLabel"),
+      nameYourEventPlaceholder: t(
+        "pages.addEventForm.nameYourEventPlaceholder",
+      ),
+      infoText: t("pages.addEventForm.infoText"),
+      rentalFacilityLabel: t("pages.addEventForm.rentalFacilityLabel"),
+      rentalFacilityPlaceholder: t(
+        "pages.addEventForm.rentalFacilityPlaceholder",
+      ),
+      facilityLabel: t("pages.addEventForm.facilityLabel"),
+      facilityPlaceholder: t("pages.addEventForm.facilityPlaceholder"),
+      repeatLabel: t("pages.addEventForm.repeatLabel"),
+      startDate: t("pages.addEventForm.startDate"),
+      startTime: t("pages.addEventForm.startTime"),
+      endDate: t("pages.addEventForm.endDate"),
+      endTime: t("pages.addEventForm.endTime"),
+      chooseDate: t("pages.addEventForm.chooseDate"),
+      chooseTime: t("pages.addEventForm.chooseTime"),
+      repeatEvent: t("pages.addEventForm.repeatEvent"),
+      addTime: t("pages.addEventForm.addTime"),
+      additionalQuestions: t("pages.addEventForm.additionalQuestions"),
+      insuranceCoverageLabel: t("pages.addEventForm.insuranceCoverageLabel"),
+      foodAndBeverages: t("pages.addEventForm.foodAndBeverages"),
+      foodBeingSoldLabel: t("pages.addEventForm.foodBeingSoldLabel"),
+      foodByThirdPartyLabel: t("pages.addEventForm.foodByThirdPartyLabel"),
+      alcoholCoverageLabel: t("pages.addEventForm.alcoholCoverageLabel"),
+      transport: t("pages.addEventForm.transport"),
+      driverLicenceLabel: t("pages.addEventForm.driverLicenceLabel"),
+      selfTransportation: t("pages.addEventForm.selfTransportation"),
+      rentalVehicleOwnage: t("pages.addEventForm.rentalVehicleOwnage"),
+      yes: t("pages.addEventForm.yes"),
+      no: t("pages.addEventForm.no"),
+      confirm: t("pages.addEventForm.confirm"),
+      daily: t("pages.addEventForm.daily"),
+      weekly: t("pages.addEventForm.weekly"),
+      monthly: t("pages.addEventForm.monthly"),
+      addEventIconAltText: t("common.iconAltText.addEvent"),
+      fieldRequired: t("pages.addEventForm.errors.fieldRequired"),
+      endDateInvalid: t("pages.addEventForm.errors.endDateInvalid"),
+      endTimeInvalid: t("pages.addEventForm.errors.endTimeInvalid"),
+      startDateInvalid: t("pages.addEventForm.errors.startDateInvalid"),
+      startTimeInvalid: t("pages.addEventForm.errors.startTimeInvalid"),
     },
   };
 
   return (
-    <div className="flex flex-col lg:grid lg:grid-cols-5 gap-x-6">
+    <div className="flex flex-col gap-x-6 lg:grid lg:grid-cols-5">
       <div className="lg:col-span-3">
         <Alert alertMessage={t("pages.quote.policyNotification")} />
 
-        <div className="mt-6">
-          <div className="flex text-primary items-center">
-            <h1 className="text-2xl font-bold mr-2">
+        <div className="mt-8">
+          <div className="flex items-center gap-x-2 text-primary">
+            <h1 className="text-2xl font-semibold">
               {t("pages.quote.insured.title")}
             </h1>
             {!editMode && (
               <Button
-                className="underline cursor-pointer px-0"
+                className="font-segoe cursor-pointer p-0 font-normal underline"
                 variant={ButtonVariant.TRANSPARENT}
                 onClick={toggleEditMode}
               >
@@ -79,29 +154,35 @@ const Quote = () => {
           />
 
           {/*Your policies*/}
-          <h1 className="text-primary text-2xl font-bold my-8">
+          <h1 className="font-segoe my-8 text-2xl font-semibold text-primary">
             {t("pages.quote.yourPolicies.title")}
           </h1>
 
           <ul className="space-y-6">
-            {new Array(3).fill(3).map((_, index) => (
-              <PolicyCard
-                key={index}
-                title={
-                  "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam, aspernatur."
-                }
-                subtitle={
-                  "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus ad aspernatur consequuntur debitis distinctio ducimus eos esse excepturi impedit, minima odit officiis provident, quae rem reprehenderit repudiandae rerum ullam voluptatem?"
-                }
-                content={pageContent.yourPolicies}
-              />
-            ))}
+            {(policies[currentLanguage as LanguageCode] as Policy[]).map(
+              (policy) => (
+                <PolicyCard
+                  onAddEventClick={onAddEventClick}
+                  key={policy.id}
+                  policy={policy}
+                  translationContent={pageContent.yourPolicies}
+                />
+              ),
+            )}
           </ul>
         </div>
       </div>
       <div className="col-span-2">
         <EventConfirmationCard content={pageContent.eventConfirmationContent} />
       </div>
+
+      <AddEventModal
+        eventName={selectedEventName}
+        translationContent={pageContent.addEventForm}
+        onConfirm={() => null}
+        isOpen={showAddEventModal}
+        toggle={toggleAddEventModal}
+      />
     </div>
   );
 };

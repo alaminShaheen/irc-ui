@@ -1,6 +1,7 @@
 /** @type {import("tailwindcss").Config} */
 
 import defaultTailwindColors from "tailwindcss/colors";
+import theme from "tailwindcss/defaultTheme";
 
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
@@ -8,11 +9,13 @@ export default {
     extend: {
       fontFamily: {
         sans: ["Roboto", "system-ui", "sans-serif"],
+        segoe: ["Segoe UI", ...theme.fontFamily.sans],
       },
       width: {
         checkbox: "30px",
       },
       height: {
+        navbar: "77px",
         checkbox: "30px",
       },
       colors: {

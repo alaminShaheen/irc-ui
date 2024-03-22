@@ -3,171 +3,190 @@ import cross from "@/assets/icons/cross.svg";
 import Button from "@/components/ui/Button";
 import FocusTrap from "@/components/FocusTrap";
 import { ISidebarContentProps } from "@/components/SidebarContents/SidebarContents.d";
-import { ButtonVariant, ICON_POSITION } from "@/models/enums/ButtonVariant";
+import { ButtonVariant, IconPosition } from "@/models/enums/ButtonVariant";
 
 const SidebarContents = (props: ISidebarContentProps) => {
-  const { onClose, sidebarOpen } = props;
+  const { onClose, sidebarOpen, translationContent } = props;
+  const {
+    close,
+    policyInformation,
+    frequentlyAskedQuestions,
+    policyWording,
+    summaryOfCoverage,
+    activitiesAndEvents,
+    toolsAndForms,
+    submitExternalCertificate,
+    externalCertificate,
+    claimForm,
+    importanceOfWaivers,
+    concussionTraining,
+    concussionManagement,
+    waiverOfMinorParticipants,
+    waiverOfAdultParticipants,
+    paradeApplicationForm,
+    largeEventApplicationForm,
+  } = translationContent;
 
   return (
     <FocusTrap className="h-full">
-      <div className="p-4 lg:p-8 w-[360px] lg:w-[715px] min-h-full text-base-content bg-primary text-left h-full">
+      <div className="text-base-content h-full min-h-full w-[360px] bg-primary p-4 text-left lg:w-[715px] lg:p-8">
         <Button
-          className="flex text-white font-semibold items-center gap-x-1 ml-auto btn h-[5%] p-3 text-base"
-          icon={<Icon src={cross} alt="close" size={26} className="mr-1" />}
+          className="btn ml-auto flex h-[5%] items-center gap-x-1 p-3 text-base font-semibold text-white"
+          icon={<Icon src={cross} alt={close} size={26} className="mr-1" />}
           onClick={onClose}
           variant={ButtonVariant.VANILLA}
           tabIndex={sidebarOpen ? 0 : -1}
-          iconPosition={ICON_POSITION.LEFT}
+          iconPosition={IconPosition.LEFT}
         >
-          Close
+          {close}
         </Button>
 
-        <ul className="overflow-y-auto h-[95%]">
-          <li className="pl-0 ml-0 mt-6">
-            <div className="text-primary-200 p-0 ml-0" id="policyInfo">
-              Policy Information
+        <ul className="h-[95%] overflow-y-auto">
+          <li className="ml-0 mt-6 pl-0">
+            <div className="ml-0 p-0 text-primary-200" id="policyInfo">
+              {policyInformation}
             </div>
-            <ul className="text-left pl-0 ml-0 mt-6 text-lg text-white space-y-4">
+            <ul className="ml-0 mt-6 space-y-4 pl-0 text-left text-lg text-white">
               <li className="cursor-pointer">
                 <a
                   href="#"
-                  className="hover:underline underline-offset-4"
+                  className="underline-offset-4 hover:underline"
                   aria-describedby="policyInfo"
                 >
-                  Frequently Asked Questions
+                  {frequentlyAskedQuestions}
                 </a>
               </li>
               <li className="cursor-pointer">
                 <a
                   href="#"
-                  className="hover:underline underline-offset-4"
+                  className="underline-offset-4 hover:underline"
                   aria-describedby="policyInfo"
                 >
-                  Policy Wording
+                  {policyWording}
                 </a>
               </li>
               <li className="cursor-pointer">
                 <a
                   href="#"
-                  className="hover:underline underline-offset-4"
+                  className="underline-offset-4 hover:underline"
                   aria-describedby="policyInfo"
                 >
-                  Summary of Coverage
+                  {summaryOfCoverage}
                 </a>
               </li>
               <li className="cursor-pointer">
                 <a
                   href="#"
-                  className="hover:underline underline-offset-4"
+                  className="underline-offset-4 hover:underline"
                   aria-describedby="policyInfo"
                 >
-                  Activities & Events
+                  {activitiesAndEvents}
                 </a>
               </li>
             </ul>
           </li>
 
           <li>
-            <div className="text-primary-200 pl-0 ml-0 mt-8" id="toolsAndForms">
-              Tools & Forms
+            <div className="ml-0 mt-8 pl-0 text-primary-200" id="toolsAndForms">
+              {toolsAndForms}
             </div>
-            <ul className="text-left pl-0 ml-0 mt-6 text-lg text-white space-y-4">
+            <ul className="ml-0 mt-6 space-y-4 pl-0 text-left text-lg text-white">
               <li className="cursor-pointer">
                 <a
                   href="#"
-                  className="hover:underline underline-offset-4"
+                  className="underline-offset-4 hover:underline"
                   aria-describedby="toolsAndForms"
                 >
-                  Submit External Certificate
+                  {submitExternalCertificate}
                 </a>
               </li>
               <li className="cursor-pointer">
                 <a
                   href="#"
-                  className="hover:underline underline-offset-4"
+                  className="underline-offset-4 hover:underline"
                   aria-describedby="toolsAndForms"
                 >
-                  External Certificate
+                  {externalCertificate}
                 </a>
               </li>
               <li className="cursor-pointer">
                 <a
                   href="#"
-                  className="hover:underline underline-offset-4"
+                  className="underline-offset-4 hover:underline"
                   aria-describedby="toolsAndForms"
                 >
-                  Claim Form
+                  {claimForm}
                 </a>
               </li>
             </ul>
           </li>
 
-          <li className="border border-primary-400 my-4" />
+          <li className="my-4 border border-primary-400" />
 
           <li className="cursor-pointer text-lg text-white">
             <a
               href="#"
-              className="hover:underline underline-offset-4"
+              className="underline-offset-4 hover:underline"
               aria-describedby="toolsAndForms"
             >
-              Importance of Waivers
+              {importanceOfWaivers}
             </a>
           </li>
-          <li className="cursor-pointer mt-4 text-lg text-white">
+          <li className="mt-4 cursor-pointer text-lg text-white">
             <a
               href="#"
-              className="hover:underline underline-offset-4"
+              className="underline-offset-4 hover:underline"
               aria-describedby="toolsAndForms"
             >
-              Concussion Training
+              {concussionTraining}
             </a>
           </li>
-          <li className="cursor-pointer mt-4 text-lg text-white">
+          <li className="mt-4 cursor-pointer text-lg text-white">
             <a
               href="#"
-              className="hover:underline underline-offset-4"
+              className="underline-offset-4 hover:underline"
               aria-describedby="toolsAndForms"
             >
-              Concussion Management
+              {concussionManagement}
             </a>
           </li>
-          <li className="cursor-pointer mt-4 text-lg text-white">
+          <li className="mt-4 cursor-pointer text-lg text-white">
             <a
               href="#"
-              className="hover:underline underline-offset-4"
+              className="underline-offset-4 hover:underline"
               aria-describedby="toolsAndForms"
             >
-              Waiver of Minor Participants
+              {waiverOfMinorParticipants}
             </a>
           </li>
-          <li className="cursor-pointer mt-4 text-lg text-white">
+          <li className="mt-4 cursor-pointer text-lg text-white">
             <a
               href="#"
-              className="hover:underline underline-offset-4"
+              className="underline-offset-4 hover:underline"
               aria-describedby="toolsAndForms"
             >
-              Waiver of Adult Participants
+              {waiverOfAdultParticipants}
             </a>
           </li>
 
-          <li className="border border-primary-400 my-4" />
+          <li className="my-4 border border-primary-400" />
 
           <li className="cursor-pointer text-lg text-white">
             <a
               href="#"
-              className="hover:underline underline-offset-4"
+              className="underline-offset-4 hover:underline"
               aria-describedby="toolsAndForms"
             >
-              Parade Application Form
+              {paradeApplicationForm}
             </a>
           </li>
-          <li className="cursor-pointer mt-4 text-lg text-white">
+          <li className="mt-4 cursor-pointer text-lg text-white">
             <a
               href="#"
-              className="hover:underline underline-offset-4"
+              className="underline-offset-4 hover:underline"
               aria-describedby="toolsAndForms"
             >
-              Large Event Application Form
+              {largeEventApplicationForm}
             </a>
           </li>
         </ul>

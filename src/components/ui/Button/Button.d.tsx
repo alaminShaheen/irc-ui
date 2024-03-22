@@ -3,7 +3,7 @@ import { ButtonHTMLAttributes, ReactNode } from "react";
 import {
   ButtonVariant,
   ButtonType,
-  ICON_POSITION,
+  IconPosition,
 } from "@/models/enums/ButtonVariant";
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -14,7 +14,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 type ButtonIconProps =
   | {
       icon: ReactNode;
-      iconPosition?: ICON_POSITION;
+      iconPosition?: IconPosition;
     }
   | {
       icon?: never;

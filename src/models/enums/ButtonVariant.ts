@@ -3,7 +3,7 @@ export enum ButtonVariant {
   SECONDARY = "SECONDARY",
   DISABLED = "DISABLED",
   TRANSPARENT = "TRANSPARENT",
-  VANILLA = "VANILLA"
+  VANILLA = "VANILLA",
 }
 
 export enum ButtonType {
@@ -12,7 +12,7 @@ export enum ButtonType {
   RESET = "reset",
 }
 
-export enum ICON_POSITION {
+export enum IconPosition {
   LEFT = "left",
   RIGHT = "right",
 }

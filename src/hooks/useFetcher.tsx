@@ -1,9 +1,9 @@
-import { useCallback, useEffect, useReducer } from 'react';
+import { useCallback, useEffect, useReducer } from "react";
 
 enum EActionTypes {
-  REQUEST = 'REQUEST',
-  SUCCESS = 'SUCCESS',
-  FAILURE = 'FAILURE',
+  REQUEST = "REQUEST",
+  SUCCESS = "SUCCESS",
+  FAILURE = "FAILURE",
 }
 
 type GraphQLResponse<T> = {
@@ -22,7 +22,10 @@ type TFetchAction<T> =
   | { type: EActionTypes.SUCCESS; payLoad: T }
   | { type: EActionTypes.FAILURE; payLoad: any };
 
-function fetchReducer<T>(state: TFetchState<T>, action: TFetchAction<T>): TFetchState<T> {
+function fetchReducer<T>(
+  state: TFetchState<T>,
+  action: TFetchAction<T>,
+): TFetchState<T> {
   switch (action.type) {
     case EActionTypes.REQUEST:
       return { ...state, isLoading: true };
@@ -35,12 +38,12 @@ function fetchReducer<T>(state: TFetchState<T>, action: TFetchAction<T>): TFetch
   }
 }
 
-const fetchUrl = `https://graphql.contentful.com/content/v1/spaces/`;
+const fetchUrl = `BASE_URL`;
 
 const useFetcher = <T,>(query: any): TFetchState<T> => {
   const initialState: TFetchState<T> = {
     isLoading: true,
-    data: null,
+    data: undefined,
     error: undefined,
   };
 
@@ -64,10 +67,10 @@ const useFetcher = <T,>(query: any): TFetchState<T> => {
 
     try {
       const response = await fetch(fetchUrl, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${process.env.NEXT_PUBLIC_CONTENTFUL_DELIVERY_TOKEN}`,
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${process.env.AUTHORIZATION_TOKEN}`,
         },
         body: JSON.stringify({ query }),
         signal,
@@ -90,11 +93,11 @@ const useFetcher = <T,>(query: any): TFetchState<T> => {
       if (!data) {
         dispatch({
           type: EActionTypes.FAILURE,
-          payLoad: 'No data returned',
+          payLoad: "No data returned",
         });
       }
     } catch (error) {
-      if (error.name !== 'AbortError') {
+      if (error.name !== "AbortError") {
         dispatch({ type: EActionTypes.FAILURE, payLoad: error });
       }
     }

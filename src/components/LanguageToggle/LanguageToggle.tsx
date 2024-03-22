@@ -19,7 +19,7 @@ const LanguageToggle = () => {
 
   return (
     <Button
-      className="h-12 w-12 rounded-lg text-primary-5 border-2 border-secondary-25 flex justify-center items-center font-bold"
+      className="flex h-12 w-12 items-center justify-center rounded-lg border-2 border-secondary-25 font-bold text-primary-5"
       variant={ButtonVariant.VANILLA}
       onClick={toggleLanguage}
     >

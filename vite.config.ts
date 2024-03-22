@@ -22,6 +22,7 @@ export default defineConfig({
       "@/hooks": path.resolve(__dirname, "./src/hooks"),
       "@/utils": path.resolve(__dirname, "./src/utils"),
       "@/locales": path.resolve(__dirname, "./src/locales"),
+      "@/data": path.resolve(__dirname, "./src/data"),
     },
     extensions: [".js", ".ts", ".tsx", ".jsx"],
   },
