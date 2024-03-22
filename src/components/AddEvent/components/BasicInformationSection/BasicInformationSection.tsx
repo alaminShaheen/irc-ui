@@ -120,7 +120,7 @@ const BasicInformationSection = (props: IBasicInformationSectionProps) => {
             {...register("facility")}
             id="facility"
             className={cn("input p-4", {
-              "has-error": !!errors.eventName?.message,
+              "has-error": !!errors.facility?.message,
             })}
             placeholder={facilityPlaceholder}
             type="text"
