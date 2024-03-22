@@ -2,7 +2,9 @@ import { IFooterProps } from "./Footer.d";
 import { FaFacebookF } from "react-icons/fa6";
 import { FaInstagram } from "react-icons/fa6";
 import { FaXTwitter } from "react-icons/fa6";
-import logo from "@/assets/logo.svg";
+
+import Icon from "@/components/ui/Icon";
+import footerLogo from "../../assets/images/footer-logo.png";
 
 const Footer = ({ content }: IFooterProps) => {
   const { poweredBy, body, privacyPolicy, copyright, logoAltText } = content;
@@ -14,9 +16,9 @@ const Footer = ({ content }: IFooterProps) => {
         <p className="text-left text-sm font-light text-primary-25 md:ml-[156px]">
           {poweredBy}
         </p>
-        <img
+        <Icon
           className="mt-1 h-[39px] w-[302px] md:ml-[151px] md:h-[49px] md:w-[377px]"
-          src={logo}
+          src={footerLogo}
           alt={logoAltText}
         />
 

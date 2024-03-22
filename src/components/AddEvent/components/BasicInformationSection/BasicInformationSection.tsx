@@ -18,11 +18,11 @@ import Button from "@/components/ui/Button";
 import Checkbox from "@/components/ui/Checkbox";
 import Datepicker from "@/components/ui/DatePicker";
 import TimePicker from "@/components/ui/TimePicker";
-import eventClock from "@/assets/icons/event-clock.svg";
+import EventClock from "../../../AppIcons/EventClock";
 import RadioGroup from "@/components/ui/Radio/components/RadioGroup/RadioGroup";
-import addEventIcon from "@/assets/icons/add-event.svg";
-import eventCalendar from "@/assets/icons/event-calendar.svg";
-import graphiteAlertInfo from "@/assets/icons/graphite-alert-info.svg";
+import AddEventIcon from "../../../AppIcons/AddEvent";
+import EventCalendar from "../../../AppIcons/EventCalendar";
+import GraphiteAlertInfo from "../../../AppIcons/GraphiteAlertInfo";
 import { ButtonType, ButtonVariant } from "@/models/enums/ButtonVariant";
 import { IBasicInformationSectionProps } from "@/components/AddEvent/components/BasicInformationSection/BasicInformationSection.d";
 
@@ -86,7 +86,11 @@ const BasicInformationSection = (props: IBasicInformationSectionProps) => {
 
       <div className="mt-2 flex">
         <div>
-          <Icon src={graphiteAlertInfo} size={24} className="text-primary" />
+          <Icon
+            src={<GraphiteAlertInfo />}
+            size={24}
+            className="text-primary"
+          />
         </div>
         <span className="ml-2 text-graphite-700">{infoText}</span>
       </div>
@@ -143,7 +147,7 @@ const BasicInformationSection = (props: IBasicInformationSectionProps) => {
               render={({ field: { onChange, ref, name, value, onBlur } }) => (
                 <Datepicker
                   id={name}
-                  icon={<Icon src={eventCalendar} size={38} />}
+                  icon={<Icon src={<EventCalendar />} size={38} />}
                   name={name}
                   placeholderText={chooseDate}
                   dateValue={value}
@@ -173,7 +177,7 @@ const BasicInformationSection = (props: IBasicInformationSectionProps) => {
               render={({ field: { onChange, ref, name, value, onBlur } }) => (
                 <TimePicker
                   id={name}
-                  icon={<Icon src={eventClock} size={28} />}
+                  icon={<Icon src={<EventClock />} size={28} />}
                   name={name}
                   placeholderText={chooseTime}
                   dateValue={value}
@@ -213,7 +217,7 @@ const BasicInformationSection = (props: IBasicInformationSectionProps) => {
               render={({ field: { onChange, ref, name, value, onBlur } }) => (
                 <Datepicker
                   id={name}
-                  icon={<Icon src={eventCalendar} size={28} />}
+                  icon={<Icon src={<EventCalendar />} size={28} />}
                   name={name}
                   placeholderText={chooseDate}
                   dateValue={value}
@@ -243,7 +247,7 @@ const BasicInformationSection = (props: IBasicInformationSectionProps) => {
               render={({ field: { onChange, ref, name, value } }) => (
                 <TimePicker
                   id={name}
-                  icon={<Icon src={eventClock} size={28} />}
+                  icon={<Icon src={<EventClock />} size={28} />}
                   name={name}
                   placeholderText={chooseTime}
                   dateValue={value}
@@ -302,7 +306,9 @@ const BasicInformationSection = (props: IBasicInformationSectionProps) => {
           className="mt-8 flex w-full cursor-pointer justify-center gap-x-2 rounded border-2 border-gray-400 bg-primary-25 px-6 py-4 text-xl lg:w-auto"
           variant={ButtonVariant.SECONDARY}
           buttonType={ButtonType.BUTTON}
-          icon={<Icon src={addEventIcon} alt={addEventIconAltText} size={24} />}
+          icon={
+            <Icon src={<AddEventIcon />} alt={addEventIconAltText} size={24} />
+          }
         >
           {addTime}
         </Button>

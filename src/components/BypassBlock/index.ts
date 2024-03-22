@@ -1,1 +1,1 @@
-export { default } from './BypassBlock';
+export { default } from "./BypassBlock";

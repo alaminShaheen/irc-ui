@@ -1,7 +1,7 @@
 import { forwardRef } from "react";
 
 import Icon from "@/components/ui/Icon";
-import tick from "@/assets/icons/tick.svg";
+import Tick from "../../AppIcons/Tick";
 import { cn } from "@/utils/helper";
 import { ICheckboxProps } from "@/components/ui/Checkbox/Checkbox.d";
 
@@ -21,7 +21,7 @@ const Checkbox = forwardRef<HTMLInputElement, ICheckboxProps>(
           )}
         />
         <Icon
-          src={tick}
+          src={<Tick />}
           size={24}
           className="pointer-events-none absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-3.5 transform peer-checked:block"
         />

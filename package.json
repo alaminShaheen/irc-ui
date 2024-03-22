@@ -5,8 +5,11 @@
   "type": "module",
   "scripts": {
     "build": "tsc && vite build",
+    "svg-to-react": "npx @svgr/cli --typescript --svg-props role=img --jsx-runtime=automatic --out-dir  src/components/AppIcons --no-prettier src/assets/svgs/*.svg",
+    "convert-svg": "npm run svg-to-react && npm run lint:fix",
     "dev": "vite",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "lint:fix": "eslint --ext .js,.ts,.tsx --fix .",
     "preview": "vite preview",
     "test": "jest",
     "test:coverage": "jest test --coverage --watchAll=false --reporters=default --reporters=jest-junit --reporters=jest-stare"
@@ -30,6 +33,7 @@
     "yup": "^1.4.0"
   },
   "devDependencies": {
+    "@svgr/cli": "^8.1.0",
     "@testing-library/jest-dom": "^6.4.2",
     "@testing-library/react": "^14.2.1",
     "@testing-library/user-event": "^14.5.2",

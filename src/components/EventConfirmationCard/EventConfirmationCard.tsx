@@ -1,8 +1,8 @@
 import Icon from "@/components/ui/Icon";
 import { cn } from "@/utils/helper";
 import Button from "@/components/ui/Button/Button";
-import bgCard from "@/assets/images/event-checkout-bg.png";
-import checkout from "@/assets/icons/checkout.svg";
+import bgCard from "../../assets/images/event-checkout-bg.png";
+import Checkout from "../AppIcons/Checkout";
 import Checkbox from "@/components/ui/Checkbox/Checkbox";
 import useToggle from "@/hooks/useToggle";
 import AppConstants from "@/constants/AppConstants";
@@ -43,14 +43,14 @@ const EventConfirmationCard = ({ content }: IEventConfirmationCardProps) => {
         <Icon src={bgCard} alt={cardBgImageAltText} className="h-full w-full" />
       </div>
       <div className="relative">
-        <div className="font-segoe flex justify-between text-lg font-semibold">
+        <div className="flex justify-between font-segoe text-lg font-semibold">
           <h2 className="text-graphite-700">{numOfEventsTitle}</h2>
           <p aria-live="polite" className="text-primary">
             2
           </p>
         </div>
 
-        <div className="font-segoe mt-4 flex items-center justify-between text-primary">
+        <div className="mt-4 flex items-center justify-between font-segoe text-primary">
           <h2 className="text-2xl font-bold">{totalPolicyCostTitle}</h2>
           <p aria-live="polite" className="text-4xl font-bold">
             $168.5
@@ -147,7 +147,7 @@ const EventConfirmationCard = ({ content }: IEventConfirmationCardProps) => {
           className="inline-flex w-full items-center justify-center gap-x-3 rounded-md p-4 text-xl font-bold"
           icon={
             allChecked && (
-              <Icon src={checkout} alt={checkoutIconAltText} size={32} />
+              <Icon src={<Checkout />} alt={checkoutIconAltText} size={32} />
             )
           }
           variant={allChecked ? ButtonVariant.PRIMARY : ButtonVariant.DISABLED}

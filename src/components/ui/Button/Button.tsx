@@ -26,7 +26,7 @@ const Button = forwardRef<HTMLButtonElement, IButtonProps>((props, ref) => {
         "btn-secondary text-md": variant === ButtonVariant.SECONDARY,
         "btn-disabled": variant === ButtonVariant.DISABLED,
         "btn-transparent": variant === ButtonVariant.TRANSPARENT,
-        "btn": variant === ButtonVariant.VANILLA,
+        btn: variant === ButtonVariant.VANILLA,
       })}
       ref={ref}
       type={buttonType}

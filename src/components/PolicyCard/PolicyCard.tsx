@@ -6,10 +6,10 @@ import { cn } from "@/utils/helper";
 import Button from "@/components/ui/Button";
 import useToggle from "@/hooks/useToggle";
 import EventCard from "@/components/EventCard/EventCard";
-import addEventIcon from "@/assets/icons/add-event.svg";
+import AddEventIcon from "../AppIcons/AddEvent";
 import { IPolicyCard } from "@/components/PolicyCard/PolicyCard.d";
 import { LanguageCode } from "@/models/enums/LanguageCode";
-import addEventFilledIcon from "@/assets/icons/add-event-filled.svg";
+import AddEventFilledIcon from "../AppIcons/AddEventFilled";
 import { ButtonVariant, IconPosition } from "@/models/enums/ButtonVariant";
 
 const PolicyCard = (props: IPolicyCard) => {
@@ -50,7 +50,7 @@ const PolicyCard = (props: IPolicyCard) => {
           />
         </div>
         <div className="title-section w-full min-w-0 truncate">
-          <h2 className="policy-title font-segoe text-wrap text-lg font-semibold text-primary">
+          <h2 className="policy-title text-wrap font-segoe text-lg font-semibold text-primary">
             {currentLanguage === LanguageCode.ENGLISH ? name : name_fr}
           </h2>
           <div
@@ -108,14 +108,14 @@ const PolicyCard = (props: IPolicyCard) => {
                 <>
                   <Icon
                     aria-hidden="true"
-                    src={addEventFilledIcon}
+                    src={<AddEventFilledIcon />}
                     alt={addEventIconAltText}
                     size={24}
                     className="hidden group-hover:inline"
                   />
                   <Icon
                     aria-hidden="true"
-                    src={addEventIcon}
+                    src={<AddEventIcon />}
                     className="group-hover:hidden"
                     alt={addEventIconAltText}
                     size={24}
