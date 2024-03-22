@@ -4,6 +4,7 @@ export interface IRadioGroupProps {
     value: string | number | readonly string[];
     label: string;
     checked: boolean;
+    id?: string;
   }[];
   className?: string;
 }

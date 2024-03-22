@@ -21,9 +21,19 @@ const RadioButton = forwardRef<HTMLInputElement, IRadioButtonProps>(
           },
         )}
       >
+        <input
+          {...rest}
+          type="radio"
+          checked={rest.checked}
+          className={cn(
+            rest.className,
+            "peer absolute left-0 top-0 h-full w-full cursor-pointer opacity-0",
+          )}
+          ref={ref}
+        />
         <span
           className={cn(
-            "h-6 w-6 rounded-full border border-graphite-300 focus:outline-focus focus-visible:outline-yellow-400",
+            "h-6 w-6 rounded-full border border-graphite-300 peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-yellow-400",
           )}
         >
           <Transition
@@ -36,25 +46,13 @@ const RadioButton = forwardRef<HTMLInputElement, IRadioButtonProps>(
             leaveTo="opacity-0"
           >
             <Icon
-              tabIndex={0}
               src={radioCheck}
               alt={t("common.iconAltText.checked")}
               size={24}
-              className="rounded-full focus:outline-focus focus-visible:outline-yellow-400"
+              className="rounded-full"
             />
           </Transition>
         </span>
-        <input
-          {...rest}
-          type="radio"
-          checked={rest.checked}
-          tabIndex={-1}
-          className={cn(
-            rest.className,
-            "absolute left-0 top-0 h-full w-full cursor-pointer opacity-0",
-          )}
-          ref={ref}
-        />
         <label htmlFor={rest.id}>{label}</label>
       </span>
     );

@@ -1,20 +1,11 @@
+import { Controller } from "react-hook-form";
 import { useCallback, useEffect, useRef } from "react";
 
 import { cn } from "@/utils/helper";
 import RadioButton from "@/components/ui/Radio/components/RadioButton";
-import { Controller } from "react-hook-form";
+import { IRadioGroupProps } from "@/components/ui/Radio/components/RadioGroup/RadioGroup.d";
 
-interface RadioGroupProps {
-  name: string;
-  radioProps: {
-    value: string | number | readonly string[];
-    label: string;
-    checked: boolean;
-  }[];
-  className?: string;
-}
-
-const RadioGroup = (props: RadioGroupProps) => {
+const RadioGroup = (props: IRadioGroupProps) => {
   const refs = useRef<(HTMLSpanElement | null)[]>([]);
   const selector = useRef<HTMLDivElement>(null);
 
@@ -76,12 +67,14 @@ const RadioGroup = (props: RadioGroupProps) => {
         return (
           <span key={index} ref={(element) => refs.current.push(element)}>
             <Controller
-              render={({ field: { onChange, value, ref } }) => (
+              render={({ field: { onChange, value, ref, name } }) => (
                 <RadioButton
                   value={radio.value}
                   label={radio.label}
                   onChange={onChange}
                   ref={ref}
+                  name={name}
+                  id={radio.id}
                   checked={value === radio.value}
                 />
               )}
