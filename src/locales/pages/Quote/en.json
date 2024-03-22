@@ -1,0 +1,27 @@
+{
+  "pageTitle": "IRC Quote page",
+  "policyNotification": "The below information forms part of your policy. Any incorrect information could null and void your policy. Is all information above correct? If not please go edit the application to reflect the correct information.",
+  "insured": {
+    "title": "Insured",
+    "nameOfInsuredLabel": "Name of Insured:",
+    "addressOfInsuredLabel": "Address of Insured:",
+    "telephoneNumLabel": "Telephone number:",
+    "emailAddressLabel": "Email address:"
+  },
+  "yourPolicies": {
+    "title": "Your Policies",
+    "addAnotherEvent": "Add another event",
+    "removePolicy": "Remove policy"
+  },
+  "eventConfirmation": {
+    "numOfEventsTitle": "Number of events:",
+    "totalPolicyCostTitle": "Total cost of policies",
+    "provincialSalesTaxTitle": "Provincial Sales Tax:",
+    "agreement1": "I understand the coverage and exclusions of this policy",
+    "agreement2Info": "In the event of a claim against you, this policy contains a $1,500 deductible / self insured retention. You as the named insured will be responsible to pay this if a claim is filed.",
+    "agreement2": "I agree that I will be responsible for the deductible",
+    "agreement3": "I understand that this policy does not cover Professional Liability",
+    "confirmAboveButtonText": "Confirm above",
+    "checkoutButtonText": "Checkout"
+  }
+}

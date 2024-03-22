@@ -1,5 +1,6 @@
 const ROUTES = {
 	// Add app router routes here
+  QUOTE: "/quote"
 
 	// LOGIN: "/login",
 	// HOME: "/home",

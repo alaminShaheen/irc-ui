@@ -1,78 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-
-:root {
-	font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-	line-height: 1.5;
-	font-weight: 400;
-
-	color-scheme: light dark;
-	color: rgba(255, 255, 255, 0.87);
-	background-color: #242424;
-
-	font-synthesis: none;
-	text-rendering: optimizeLegibility;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
+@font-face {
+	font-family: "Segoe UI";
+	font-style: normal;
+	font-weight: normal;
+	src: url("fonts/Segoe UI/Segoe UI.ttf");
 }
 
-a {
-	font-weight: 500;
-	color: #646cff;
-	text-decoration: inherit;
+@font-face {
+	font-family: "Segoe UI";
+	font-style: normal;
+	font-weight: bold;
+	src: url("fonts/Segoe UI/Segoe UI Bold.ttf");
 }
 
-a:hover {
-	color: #535bf2;
+.btn {
 }
 
-body {
-	margin: 0;
-	display: flex;
-	place-items: center;
-	min-width: 320px;
-	min-height: 100vh;
+.btn-primary {
+	@apply bg-primary text-white !important;
+	@apply font-bold;
 }
 
-h1 {
-	font-size: 3.2em;
-	line-height: 1.1;
+.btn-secondary {
+	@apply border-2 border-primary rounded-md text-primary bg-transparent font-bold !important;
 }
 
-button {
-	border-radius: 8px;
-	border: 1px solid transparent;
-	padding: 0.6em 1.2em;
-	font-size: 1em;
-	font-weight: 500;
-	font-family: inherit;
-	background-color: #1a1a1a;
+.btn-transparent {
+	@apply bg-transparent text-primary !important;
+}
+
+.btn-disabled {
+	@apply text-primary-600 border-2 border-dashed border-primary bg-transparent
+}
+
+.form-label {
+	@apply text-white-5 text-base;
+}
+
+.input {
+	@apply h-[55px] bg-white border-2 border-primary-100 rounded-lg py-4 px-3 text-primary read-only:bg-gray-200;
+}
+
+.input.has-error {
+	@apply border-red-500
+}
+
+input::-webkit-calendar-picker-indicator {
+	display: none;
+}
+
+/* Remove native HTML date-time picker icon */
+input[type='date']::-webkit-calendar-picker-indicator,
+input[type='time']::-webkit-calendar-picker-indicator {
+	visibility: hidden !important;
+	background: transparent;
+	bottom: 0;
+	color: transparent;
 	cursor: pointer;
-	transition: border-color 0.25s;
+	height: auto;
+	left: 0;
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: auto;
 }
 
-button:hover {
-	border-color: #646cff;
+.modal.modal-lg .modal-body {
+	@apply min-w-[934px];
 }
 
-button:focus,
-button:focus-visible {
-	outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-	:root {
-		color: #213547;
-		background-color: #ffffff;
-	}
-
-	a:hover {
-		color: #747bff;
-	}
-
-	button {
-		background-color: #f9f9f9;
-	}
+* {
+	padding: 0;
+	margin: 0;
 }

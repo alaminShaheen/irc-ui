@@ -12,7 +12,14 @@ dist
 dist-ssr
 *.local
 
+# local env files
+.env*
+!.env.example
+
 # Editor directories and files
+/coverage
+/jest-stare
+/junit.xml
 .vscode/*
 !.vscode/extensions.json
 .idea
