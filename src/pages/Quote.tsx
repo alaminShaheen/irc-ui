@@ -126,7 +126,7 @@ const Quote = () => {
   };
 
   return (
-    <div className="flex flex-col gap-x-6 lg:grid lg:grid-cols-5">
+    <div className="flex flex-col gap-x-6 px-4 py-6 lg:grid lg:grid-cols-5 lg:px-9 lg:py-8">
       <div className="lg:col-span-3">
         <Alert alertMessage={t("pages.quote.policyNotification")} />
 

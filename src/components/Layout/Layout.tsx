@@ -27,8 +27,10 @@ const Layout = (props: ILayoutProps) => {
         bypassText={t("common.skipToFooter")}
         bypassStyle="bg-primary text-white"
       />
-
-      <main id="main-content" className="layout flex flex-col bg-primary-25">
+      <main
+        id="main-content"
+        className="layout flex h-full flex-col bg-primary-25"
+      >
         <div className="sticky top-0 z-40">
           <Navbar sidebarOpen={sidebarOpen} toggleSidebar={toggleSidebarOpen} />
           <Sidebar
@@ -53,7 +55,7 @@ const Layout = (props: ILayoutProps) => {
           >
             {t("common.menu")}
           </Button>
-          <div className="w-full px-4 py-6 lg:px-9 lg:py-8">{children}</div>
+          <div className="w-full">{children}</div>
         </div>
       </main>
       <Footer
