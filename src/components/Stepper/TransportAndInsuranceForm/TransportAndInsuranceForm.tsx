@@ -1,6 +1,5 @@
-
 const TransportAndInsuranceForm = () => {
-  return <div>Transport & Insurance Form</div>;
+  return <div className="h-screen">Transport & Insurance Form</div>;
 };
 
 export default TransportAndInsuranceForm;

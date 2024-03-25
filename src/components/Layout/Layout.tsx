@@ -1,15 +1,10 @@
 import { useTranslation } from "react-i18next";
-
-import Icon from "@/components/ui/Icon";
 import Footer from "@/components/Footer";
-import Button from "@/components/ui/Button";
 import Navbar from "@/components/ui/Navbar";
 import Sidebar from "@/components/Sidebar/Sidebar";
 import useToggle from "@/hooks/useToggle";
-import Hamburger from "../AppIcons/Hamburger";
 import BypassBlock from "@/components/BypassBlock";
 import { ILayoutProps } from "@/components/Layout/Layout.d";
-import { IconPosition } from "@/models/enums/ButtonVariant";
 
 const Layout = (props: ILayoutProps) => {
   const { children } = props;
@@ -38,25 +33,7 @@ const Layout = (props: ILayoutProps) => {
             toggleSidebar={toggleSidebarOpen}
           />
         </div>
-        <div className="items-start lg:grid lg:grid-cols-[110px_1fr]">
-          {/* Sidebar toggle ribbon */}
-          <Button
-            className="btn-primary sticky top-[90px] mt-2 hidden h-11 w-auto items-center justify-center gap-x-2 rounded-r-lg p-2 font-segoe text-base !font-semibold focus:outline-focus focus-visible:outline-yellow-400 lg:flex lg:text-lg"
-            icon={
-              <Icon
-                src={<Hamburger />}
-                alt={t("common.iconAltText.hamburger")}
-                width={32}
-                height={25}
-              />
-            }
-            iconPosition={IconPosition.RIGHT}
-            onClick={toggleSidebarOpen}
-          >
-            {t("common.menu")}
-          </Button>
-          <div className="w-full">{children}</div>
-        </div>
+        <div className="w-full">{children}</div>
       </main>
       <Footer
         content={{

@@ -1,6 +1,5 @@
-
 const AddEventForm = () => {
-  return <div>Add event form</div>;
+  return <div className="h-screen">Add event form</div>;
 };
 
 export default AddEventForm;

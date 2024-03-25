@@ -1,6 +1,5 @@
-
 const ReviewAndSubmitSection = () => {
-  return <div>Review & Submit section</div>;
+  return <div className="h-screen">Review & Submit section</div>;
 };
 
 export default ReviewAndSubmitSection;

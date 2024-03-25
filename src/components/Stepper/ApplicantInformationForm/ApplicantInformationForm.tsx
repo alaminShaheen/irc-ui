@@ -1,6 +1,5 @@
-
 const ApplicantInformationForm = () => {
-  return <div>Applicant information form</div>;
+  return <div className="h-screen">Applicant information form</div>;
 };
 
 export default ApplicantInformationForm;
