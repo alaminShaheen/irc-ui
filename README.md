@@ -28,3 +28,12 @@ export default {
 - Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
 - Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
 - Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+
+# SVG to React Component
+We are using `svgr` library to convert `svg` file to `React` component. Please follow below steps
+
+- Keep all the `svg` files under `src > assets > svgs` folder.
+- In your terminal, run `npm run convert-svg`. This command will convert all `svg` files first and then apply linting on the newly created components. Components can be found inside `src > components > AppIcons` folder
+- Import the necessary SVG component from `AppIcons` folder
+
+
