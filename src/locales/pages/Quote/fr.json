@@ -6,7 +6,7 @@
     "nameOfInsuredLabel": "FR-Name of Insured:",
     "addressOfInsuredLabel": "FR-Address of Insured:",
     "telephoneNumLabel": "FR-Telephone number:",
-    "emailAddressLabel": "FR-Email address:"
+    "fieldRequired": "FR-This field is required."
   },
   "yourPolicies": {
     "title": "Vos Politiques",

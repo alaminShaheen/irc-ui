@@ -1,0 +1,22 @@
+{
+  "applicationAgreement": {
+    "title": "Application Agreement",
+    "subtitle": "lorem ipsum"
+  },
+  "applicantInformation": {
+    "title": "Applicant Information",
+    "subtitle": "lorem ipsum"
+  },
+  "transportAndInsurance": {
+    "title": "Transport & Insurance",
+    "subtitle": "lorem ipsum"
+  },
+  "addEvents": {
+    "title": "Add Events",
+    "subtitle": "lorem ipsum"
+  },
+  "reviewAndSubmit": {
+    "title": "Review & Submit",
+    "subtitle": "lorem ipsum"
+  }
+}

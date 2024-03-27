@@ -25,7 +25,7 @@ describe("InsuredForm", () => {
   });
 
   it("fills and submits the form", async () => {
-    const nameInput = screen.getByLabelText("Name of Insured");
+    const nameInput = screen.getAllByLabelText("Name of Insured")[0];
 
     userEvent.type(nameInput, "John");
 

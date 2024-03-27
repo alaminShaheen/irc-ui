@@ -6,7 +6,8 @@
     "nameOfInsuredLabel": "Name of Insured:",
     "addressOfInsuredLabel": "Address of Insured:",
     "telephoneNumLabel": "Telephone number:",
-    "emailAddressLabel": "Email address:"
+    "emailAddressLabel": "Email address:",
+    "fieldRequired": "This field is required."
   },
   "yourPolicies": {
     "title": "Your Policies",

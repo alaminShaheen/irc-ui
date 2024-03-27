@@ -1,14 +1,15 @@
-import { useCallback, useEffect, useState } from "react";
+import * as yup from "yup";
 import { useForm } from "react-hook-form";
+import { InputMask } from "@react-input/mask";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { ObjectSchema } from "yup";
+import { useCallback, useEffect, useState } from "react";
 
 import Button from "@/components/ui/Button/Button";
 import { InsuredFormModel } from "@/models/form/InsuredFormModel";
 import { IInsuredFormProps } from "@/components/InsuredForm/InsuredForm.d";
-import { ButtonType, ButtonVariant } from "@/models/enums/ButtonVariant";
 import { cn, formatPhoneNumber } from "@/utils/helper";
-import * as yup from "yup";
-import { ObjectSchema } from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
+import { ButtonType, ButtonVariant } from "@/models/enums/ButtonVariant";
 
 const InsuredForm = (props: IInsuredFormProps) => {
   const {
@@ -45,6 +46,7 @@ const InsuredForm = (props: IInsuredFormProps) => {
       email: "",
       name: "",
     },
+    mode: "onBlur",
     resolver: yupResolver(formValidationSchema),
   });
 
@@ -82,7 +84,7 @@ const InsuredForm = (props: IInsuredFormProps) => {
               {nameOfInsuredLabel}
             </label>
             <input
-              {...register("name", { required: "Name is required" })}
+              {...register("name")}
               id="name"
               className={cn("input w-full py-5 lg:w-1/2", {
                 "has-error": !!errors.name?.message,
@@ -101,7 +103,7 @@ const InsuredForm = (props: IInsuredFormProps) => {
               {addressOfInsuredLabel}
             </label>
             <input
-              {...register("address", { required: "Address is required" })}
+              {...register("address")}
               id="address"
               className={cn("input w-full py-5 lg:w-1/2", {
                 "has-error": !!errors.address?.message,
@@ -116,18 +118,46 @@ const InsuredForm = (props: IInsuredFormProps) => {
           </div>
 
           <div className="flex flex-col gap-y-1">
-            <span className="text-graphite-700">{telephoneNumLabel}</span>
-            <div className="text-base text-primary">
-              {formatPhoneNumber(insuredFormValues.telephone)}
-            </div>
+            <label htmlFor="telephone" className="text-white-5">
+              {telephoneNumLabel}
+            </label>
+            <InputMask
+              mask="(999) 999-9999"
+              replacement={{ 9: /\d/ }}
+              {...register("telephone")}
+              id="telephone"
+              className={cn("input w-full py-5 lg:w-1/2", {
+                "has-error": !!errors.telephone?.message,
+              })}
+              type="tel"
+            />
+
+            {errors.telephone?.message && (
+              <span className="my-2 text-sm text-red-500">
+                {errors.telephone.message}
+              </span>
+            )}
           </div>
 
           <div className="flex flex-col gap-y-1">
-            <span className="text-graphite-700">{emailAddressLabel}</span>
-            <div className="text-base text-primary">
-              {insuredFormValues.email}
-            </div>
+            <label htmlFor="email" className="text-white-5">
+              {nameOfInsuredLabel}
+            </label>
+            <input
+              {...register("email")}
+              id="email"
+              className={cn("input w-full py-5 lg:w-1/2", {
+                "has-error": !!errors.email?.message,
+              })}
+              type="email"
+            />
+            {errors.email?.message && (
+              <span className="my-2 text-sm text-red-500">
+                {errors.email.message}
+              </span>
+            )}
           </div>
+
           <div className="mt-2 flex gap-x-3">
             <Button onClick={onCancel} variant={ButtonVariant.SECONDARY}>
               Cancel

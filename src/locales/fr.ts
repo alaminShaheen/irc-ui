@@ -4,6 +4,7 @@ import Common from "./common/fr.json";
 // Page level language files
 import Quote from "./pages/Quote/fr.json";
 import AddEventForm from "@/locales/pages/AddEvent/fr.json";
+import StepperForm from "@/locales/pages/StepperForm/fr.json";
 
 export const fr_content = {
   common: Common,
@@ -16,5 +17,6 @@ export const fr_content = {
   pages: {
     quote: Quote,
     addEventForm: AddEventForm,
+    stepperForm: StepperForm,
   },
 };

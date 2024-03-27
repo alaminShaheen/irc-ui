@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 
 import Icon from "@/components/ui/Icon";
 import { cn } from "@/utils/helper";
-import RadioCheck from "../../../../AppIcons/RadioCheck";
+import RadioCheck from "@/components/AppIcons/RadioCheck";
 import { IRadioButtonProps } from "@/components/ui/Radio/components/RadioButton/RadioButton.d";
 
 const RadioButton = forwardRef<HTMLInputElement, IRadioButtonProps>(

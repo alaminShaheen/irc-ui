@@ -45,7 +45,7 @@ const Quote = () => {
       addressOfInsuredLabel: t("pages.quote.insured.addressOfInsuredLabel"),
       telephoneNumLabel: t("pages.quote.insured.telephoneNumLabel"),
       emailAddressLabel: t("pages.quote.insured.emailAddressLabel"),
-      fieldRequired: t("addEventForm.errors.fieldRequired"),
+      fieldRequired: t("pages.quote.insured.fieldRequired"),
     },
     yourPolicies: {
       addAnotherEvent: t("pages.quote.yourPolicies.addAnotherEvent"),
@@ -126,7 +126,7 @@ const Quote = () => {
   };
 
   return (
-    <div className="flex flex-col gap-x-6 lg:grid lg:grid-cols-5">
+    <div className="flex flex-col gap-x-6 px-4 py-6 lg:grid lg:grid-cols-5 lg:px-9 lg:py-8">
       <div className="lg:col-span-3">
         <Alert alertMessage={t("pages.quote.policyNotification")} />
 
