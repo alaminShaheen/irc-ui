@@ -3,18 +3,18 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Quote from "@/pages/Quote";
 import ROUTES from "@/constants/Routes";
 import Layout from "@/components/Layout/Layout";
-import { ThemeProvider } from "@/context/ThemeContext";
-import { AppContextProvider } from "@/context/AppContext";
-
-// Custom styling
-import "./styles/global.css";
 import AddEventForm from "@/components/Stepper/AddEventForm/AddEventForm";
 import StepperContainer from "@/components/Stepper/StepperContainer/StepperContainer";
+import { ThemeProvider } from "@/context/ThemeContext";
+import { AppContextProvider } from "@/context/AppContext";
 import ReviewAndSubmitSection from "@/components/Stepper/ReviewAndSubmitSection/ReviewAndSubmitSection";
 import ApplicationAgreementForm from "@/components/Stepper/ApplicationAgreementForm/ApplicationAgreementForm";
 import ApplicantInformationForm from "@/components/Stepper/ApplicantInformationForm/ApplicantInformationForm";
 import TransportAndInsuranceForm from "@/components/Stepper/TransportAndInsuranceForm/TransportAndInsuranceForm";
 import { StepperStepInformation } from "@/models/StepperStepInformation";
+
+// Custom styling
+import "./styles/global.css";
 
 function App() {
   const stepperSteps: StepperStepInformation[] = [
