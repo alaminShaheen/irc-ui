@@ -18,7 +18,7 @@ import "./styles/global.css";
 import { useTranslation } from "react-i18next";
 
 function App() {
-  const {t} = useTranslation();
+  const { t } = useTranslation();
   const stepperSteps: StepperStepInformation[] = [
     {
       title: t("pages.stepperForm.applicationAgreement.title"),
@@ -39,8 +39,8 @@ function App() {
       Component: TransportAndInsuranceForm,
     },
     {
-      title: t("pages.stepperForm.addEvent.title"),
-      subtitle: t("pages.stepperForm.addEvent.subtitle"),
+      title: t("pages.stepperForm.addEvents.title"),
+      subtitle: t("pages.stepperForm.addEvents.subtitle"),
       route: ROUTES.STEPPER_FORM.ADD_EVENTS,
       Component: AddEventForm,
     },
