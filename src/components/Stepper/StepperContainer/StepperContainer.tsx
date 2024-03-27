@@ -52,7 +52,7 @@ const StepperContainer = (props: IStepperContainerProps) => {
             className="rounded-md"
             onClick={onConfirm}
           >
-            Confirm
+            {t("common.confirm")}
           </Button>
         </div>
       </div>

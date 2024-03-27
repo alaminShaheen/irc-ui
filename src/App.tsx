@@ -15,36 +15,38 @@ import { StepperStepInformation } from "@/models/StepperStepInformation";
 
 // Custom styling
 import "./styles/global.css";
+import { useTranslation } from "react-i18next";
 
 function App() {
+  const {t} = useTranslation();
   const stepperSteps: StepperStepInformation[] = [
     {
-      title: "Application Agreement",
-      subtitle: "lorem ipsum",
+      title: t("pages.stepperForm.applicationAgreement.title"),
+      subtitle: t("pages.stepperForm.applicationAgreement.subtitle"),
       route: ROUTES.STEPPER_FORM.APPLICATION_AGREEMENT,
       Component: ApplicationAgreementForm,
     },
     {
-      title: "Applicant Information",
-      subtitle: "lorem ipsum",
+      title: t("pages.stepperForm.applicantInformation.title"),
+      subtitle: t("pages.stepperForm.applicantInformation.subtitle"),
       route: ROUTES.STEPPER_FORM.APPLICANT_INFORMATION,
       Component: ApplicantInformationForm,
     },
     {
-      title: "Transport & Insurance",
-      subtitle: "lorem ipsum",
+      title: t("pages.stepperForm.transportAndInsurance.title"),
+      subtitle: t("pages.stepperForm.transportAndInsurance.subtitle"),
       route: ROUTES.STEPPER_FORM.TRANSPORT_AND_INSURANCE,
       Component: TransportAndInsuranceForm,
     },
     {
-      title: "Add Events",
-      subtitle: "lorem ipsum",
+      title: t("pages.stepperForm.addEvent.title"),
+      subtitle: t("pages.stepperForm.addEvent.subtitle"),
       route: ROUTES.STEPPER_FORM.ADD_EVENTS,
       Component: AddEventForm,
     },
     {
-      title: "Review & Submit",
-      subtitle: "lorem ipsum",
+      title: t("pages.stepperForm.reviewAndSubmit.title"),
+      subtitle: t("pages.stepperForm.reviewAndSubmit.subtitle"),
       route: ROUTES.STEPPER_FORM.REVIEW_AND_SUBMIT,
       Component: ReviewAndSubmitSection,
     },

@@ -1,0 +1,22 @@
+{
+  "applicationAgreement": {
+    "title": "FR-Application Agreement",
+    "subtitle": "FR-lorem ipsum"
+  },
+  "applicantInformation": {
+    "title": "FR-Applicant Information",
+    "subtitle": "FR-lorem ipsum"
+  },
+  "transportAndInsurance": {
+    "title": "FR-Transport & Insurance",
+    "subtitle": "FR-lorem ipsum"
+  },
+  "addEvents": {
+    "title": "FR-Add Events",
+    "subtitle": "FR-lorem ipsum"
+  },
+  "reviewAndSubmit": {
+    "title": "FR-Review & Submit",
+    "subtitle": "FR-lorem ipsum"
+  }
+}
