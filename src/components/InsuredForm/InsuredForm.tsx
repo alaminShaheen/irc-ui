@@ -125,7 +125,7 @@ const InsuredForm = (props: IInsuredFormProps) => {
               mask="(999) 999-9999"
               replacement={{ 9: /\d/ }}
               {...register("telephone")}
-              id="address"
+              id="telephone"
               className={cn("input w-full py-5 lg:w-1/2", {
                 "has-error": !!errors.telephone?.message,
               })}
