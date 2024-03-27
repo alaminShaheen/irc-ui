@@ -45,7 +45,7 @@ const Quote = () => {
       addressOfInsuredLabel: t("pages.quote.insured.addressOfInsuredLabel"),
       telephoneNumLabel: t("pages.quote.insured.telephoneNumLabel"),
       emailAddressLabel: t("pages.quote.insured.emailAddressLabel"),
-      fieldRequired: t("addEventForm.errors.fieldRequired"),
+      fieldRequired: t("pages.quote.insured.fieldRequired"),
     },
     yourPolicies: {
       addAnotherEvent: t("pages.quote.yourPolicies.addAnotherEvent"),

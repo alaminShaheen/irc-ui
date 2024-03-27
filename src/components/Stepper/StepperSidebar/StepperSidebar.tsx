@@ -12,8 +12,6 @@ const StepperSidebar = (props: IStepperSidebar) => {
   const [hoveredIndex, setHoveredIndex] = useState(-1);
   const completedPercentage = ((activeStepIndex + 1) / steps.length) * 100;
 
-
-
   return (
     <div className={cn("h-full bg-primary", className)}>
       {/* LG version */}
