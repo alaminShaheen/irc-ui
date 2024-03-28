@@ -44,6 +44,7 @@ const Sidebar = (props: ISidebarProps) => {
         <div
           className="overlay fixed right-0 top-0 z-10 h-full w-full cursor-pointer bg-black/40"
           onClick={toggleSidebar}
+          data-testid="overlay"
         />
       </Transition.Child>
 

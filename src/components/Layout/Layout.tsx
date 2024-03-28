@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/ui/Navbar";
-import Sidebar from "@/components/Sidebar/Sidebar";
+import Sidebar from "@/components/Sidebar";
 import useToggle from "@/hooks/useToggle";
 import BypassBlock from "@/components/BypassBlock";
 import { ILayoutProps } from "@/components/Layout/Layout.d";
