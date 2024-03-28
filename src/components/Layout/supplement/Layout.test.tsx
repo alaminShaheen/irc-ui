@@ -12,22 +12,39 @@ type ButtonProps = {
 };
 
 // Mock components
-jest.mock("@/components/Footer", () => () => <div>Footer content</div>);
-jest.mock("@/components/ui/Navbar", () => () => <div>Navbar content</div>);
-jest.mock("@/components/BypassBlock", () => () => (
-  <div>Bypass block content</div>
-));
+jest.mock("@/components/Footer", () => {
+  const FooterMock = () => <div>Footer content</div>;
+  FooterMock.displayName = "Footer";
+  return FooterMock;
+});
 
-jest.mock("@/components/Sidebar", () => ({ sidebarOpen }: SidebarProps) => (
-  <div>Sidebar content {sidebarOpen ? "open" : "closed"}</div>
-));
-jest.mock(
-  "@/components/ui/Button",
-  () =>
-    ({ onClick, children }: ButtonProps) => (
-      <button onClick={onClick}>{children}</button>
-    ),
-);
+jest.mock("@/components/ui/Navbar", () => {
+  const NavbarMock = () => <div>Navbar content</div>;
+  NavbarMock.displayName = "Navbar";
+  return NavbarMock;
+});
+
+jest.mock("@/components/BypassBlock", () => {
+  const BypassBlockMock = () => <div>Bypass block content</div>;
+  BypassBlockMock.displayName = "BypassBlock";
+  return BypassBlockMock;
+});
+
+jest.mock("@/components/Sidebar", () => {
+  const SideBar = ({ sidebarOpen }: SidebarProps) => (
+    <div>Sidebar content {sidebarOpen ? "open" : "closed"}</div>
+  );
+  SideBar.displayName = "SideBar";
+  return SideBar;
+});
+
+jest.mock("@/components/ui/Button", () => {
+  const Button = ({ onClick, children }: ButtonProps) => (
+    <button onClick={onClick}>{children}</button>
+  );
+  Button.displayName = "Button";
+  return Button;
+});
 
 jest.mock("react-i18next", () => ({
   useTranslation: () => ({
@@ -48,11 +65,4 @@ describe("Layout", () => {
     expect(screen.getByText("Child content")).toBeInTheDocument();
     expect(screen.getByText("Footer content")).toBeInTheDocument();
   });
-
-  // it("toggles the sidebar when button is clicked", () => {
-  //   fireEvent.click(screen.getByText("common.menu"));
-  //   () => {
-  //     expect(screen.getByText("Sidebar content open")).toBeInTheDocument();
-  //   };
-  // });
 });
