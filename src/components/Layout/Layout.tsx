@@ -12,7 +12,7 @@ const Layout = (props: ILayoutProps) => {
   const [sidebarOpen, toggleSidebarOpen] = useToggle(false);
 
   return (
-    <div className="bg-primary-25">
+    <div className="flex min-h-screen flex-col bg-primary-25">
       <BypassBlock
         bypassLink="main-content"
         bypassStyle="bg-primary text-white"
@@ -24,7 +24,7 @@ const Layout = (props: ILayoutProps) => {
       />
       <main
         id="main-content"
-        className="layout flex h-full flex-col bg-primary-25"
+        className="layout flex flex-grow flex-col bg-primary-25"
       >
         <div className="sticky top-0 z-40">
           <Navbar sidebarOpen={sidebarOpen} toggleSidebar={toggleSidebarOpen} />
@@ -33,7 +33,7 @@ const Layout = (props: ILayoutProps) => {
             toggleSidebar={toggleSidebarOpen}
           />
         </div>
-        <div className="w-full">{children}</div>
+        <div className="w-full flex-grow">{children}</div>
       </main>
       <Footer
         content={{

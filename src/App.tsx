@@ -1,6 +1,8 @@
+import { useTranslation } from "react-i18next";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import Quote from "@/pages/Quote";
+import Signup from "@/pages/Signup";
 import ROUTES from "@/constants/Routes";
 import Layout from "@/components/Layout/Layout";
 import AddEventForm from "@/components/Stepper/AddEventForm/AddEventForm";
@@ -15,7 +17,6 @@ import { StepperStepInformation } from "@/models/StepperStepInformation";
 
 // Custom styling
 import "./styles/global.css";
-import { useTranslation } from "react-i18next";
 
 function App() {
   const { t } = useTranslation();
@@ -58,6 +59,7 @@ function App() {
         <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
           <Layout>
             <Routes>
+              <Route path={ROUTES.SIGNUP} element={<Signup />} />
               <Route path={ROUTES.QUOTE} element={<Quote />} />
               <Route
                 path={ROUTES.STEPPER_FORM.BASE}

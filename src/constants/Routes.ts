@@ -9,7 +9,7 @@ const ROUTES = {
     ADD_EVENTS: "add-events",
     REVIEW_AND_SUBMIT: "review-and-submit",
   },
-  // LOGIN: "/login",
+  SIGNUP: "/signup",
   // HOME: "/home",
   // REGISTER: "/register",
   // CREATE_GROUP: "/create-group",
