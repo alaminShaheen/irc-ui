@@ -18,11 +18,11 @@ import Button from "@/components/ui/Button";
 import Checkbox from "@/components/ui/Checkbox";
 import Datepicker from "@/components/ui/DatePicker";
 import TimePicker from "@/components/ui/TimePicker";
-import EventClock from "../../../AppIcons/EventClock";
 import RadioGroup from "@/components/ui/Radio/components/RadioGroup/RadioGroup";
-import AddEventIcon from "../../../AppIcons/AddEvent";
-import EventCalendar from "../../../AppIcons/EventCalendar";
-import GraphiteAlertInfo from "../../../AppIcons/GraphiteAlertInfo";
+import EventClock from "@/components/AppIcons/EventClock";
+import AddEventIcon from "@/components/AppIcons/AddEvent";
+import EventCalendar from "@/components/AppIcons/EventCalendar";
+import GraphiteAlertInfo from "@/components/AppIcons/GraphiteAlertInfo";
 import { ButtonType, ButtonVariant } from "@/models/enums/ButtonVariant";
 import { IBasicInformationSectionProps } from "@/components/AddEvent/components/BasicInformationSection/BasicInformationSection.d";
 
@@ -64,23 +64,19 @@ const BasicInformationSection = (props: IBasicInformationSectionProps) => {
       <h2 className="font-segoe text-2xl font-bold text-primary">
         {basicInfo}
       </h2>
-      <div className="mt-6 flex flex-col gap-y-1">
+      <div className={cn("form-group mt-6", { "has-error": errors.eventName })}>
         <label htmlFor="eventName" className="form-label">
           {nameYourEventLabel}
         </label>
         <input
           {...register("eventName")}
           id="eventName"
-          className={cn("input p-4", {
-            "has-error": !!errors.eventName?.message,
-          })}
+          className="input p-4"
           placeholder={nameYourEventPlaceholder}
           type="text"
         />
         {errors.eventName?.message && (
-          <span className="my-2 text-sm text-red-500">
-            {errors.eventName.message}
-          </span>
+          <span className="error-warning">{errors.eventName.message}</span>
         )}
       </div>
 
@@ -96,50 +92,50 @@ const BasicInformationSection = (props: IBasicInformationSectionProps) => {
       </div>
 
       <div className="mt-6 rounded-md border-2 border-dashed border-primary-200 bg-primary-25 p-4">
-        <div className="flex flex-col gap-y-1">
+        <div
+          className={cn("form-group", {
+            "has-error": errors.rentalFacilityAgreementNumber,
+          })}
+        >
           <label htmlFor="rentalFacilityAgreementNumber" className="form-label">
             {rentalFacilityLabel}
           </label>
           <input
             {...register("rentalFacilityAgreementNumber")}
             id="rentalFacilityAgreementNumber"
-            className={cn("input p-4", {
-              "has-error": !!errors.eventName?.message,
-            })}
+            className="input p-4"
             placeholder={rentalFacilityPlaceholder}
             type="text"
           />
           {errors.rentalFacilityAgreementNumber?.message && (
-            <span className="my-2 text-sm text-red-500">
+            <span className="error-warning">
               {errors.rentalFacilityAgreementNumber.message}
             </span>
           )}
         </div>
 
-        <div className="mt-4 flex flex-col gap-y-1">
+        <div
+          className={cn("form-group mt-4", { "has-error": errors.facility })}
+        >
           <label htmlFor="facility" className="form-label">
             {facilityLabel}
           </label>
           <input
             {...register("facility")}
             id="facility"
-            className={cn("input p-4", {
-              "has-error": !!errors.facility?.message,
-            })}
+            className="input p-4"
             placeholder={facilityPlaceholder}
             type="text"
           />
           {errors.facility?.message && (
-            <span className="my-2 text-sm text-red-500">
-              {errors.facility.message}
-            </span>
+            <span className="error-warning">{errors.facility.message}</span>
           )}
         </div>
 
         <div className="my-4 h-1 w-full border-t border-graphite-200" />
 
         <div className="grid grid-cols-1 grid-rows-4 gap-4 lg:grid-cols-2 lg:grid-rows-2">
-          <div className="flex flex-col gap-y-1">
+          <div className={cn("form-group", { "has-error": errors.startDate })}>
             <label htmlFor="startDate" className="form-label">
               {startDate}
             </label>
@@ -163,13 +159,11 @@ const BasicInformationSection = (props: IBasicInformationSectionProps) => {
               control={control}
             />
             {errors.startDate?.message && (
-              <span className="my-2 text-sm text-red-500">
-                {errors.startDate.message}
-              </span>
+              <span className="error-warning">{errors.startDate.message}</span>
             )}
           </div>
 
-          <div className="flex flex-col gap-y-1">
+          <div className={cn("form-group", { "has-error": errors.startTime })}>
             <label htmlFor="startTime" className="form-label">
               {startTime}
             </label>
@@ -203,13 +197,11 @@ const BasicInformationSection = (props: IBasicInformationSectionProps) => {
               control={control}
             />
             {errors.startTime?.message && (
-              <span className="my-2 text-sm text-red-500">
-                {errors.startTime.message}
-              </span>
+              <span className="error-warning">{errors.startTime.message}</span>
             )}
           </div>
 
-          <div className="flex flex-col gap-y-1">
+          <div className={cn("form-group", { "has-error": errors.endDate })}>
             <label htmlFor="endDate" className="form-label">
               {endDate}
             </label>
@@ -233,13 +225,11 @@ const BasicInformationSection = (props: IBasicInformationSectionProps) => {
               control={control}
             />
             {errors.endDate?.message && (
-              <span className="my-2 text-sm text-red-500">
-                {errors.endDate.message}
-              </span>
+              <span className="error-warning">{errors.endDate.message}</span>
             )}
           </div>
 
-          <div className="flex flex-col gap-y-1">
+          <div className={cn("form-group", { "has-error": errors.endTime })}>
             <label htmlFor="endTime" className="form-label">
               {endTime}
             </label>
@@ -260,21 +250,27 @@ const BasicInformationSection = (props: IBasicInformationSectionProps) => {
               control={control}
             />
             {errors.endTime?.message && (
-              <span className="my-2 text-sm text-red-500">
-                {errors.endTime.message}
-              </span>
+              <span className="error-warning">{errors.endTime.message}</span>
             )}
           </div>
         </div>
 
-        <div className="mt-4 flex items-center gap-x-3">
+        <div
+          className={cn("form-checkbox-group mt-4", {
+            "has-error": errors.repeatEvent,
+          })}
+        >
           <Checkbox {...register("repeatEvent")} id="repeatEvent" />
           <label htmlFor="repeatEvent" className="form-label">
             {repeatEvent}
           </label>
         </div>
 
-        <div className="mt-4 flex flex-col gap-y-2">
+        <div
+          className={cn("form-group mt-4", {
+            "has-error": errors.repeatFrequency,
+          })}
+        >
           <p className="form-label flex gap-x-3">{repeatLabel}</p>
           <RadioGroup
             className="lg-gap-y-0 flex flex-col items-start gap-y-4 lg:flex-row lg:items-baseline lg:gap-x-4"
