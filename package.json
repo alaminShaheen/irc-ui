@@ -7,7 +7,7 @@
     "build": "tsc && vite build",
     "svg-to-react": "npx @svgr/cli --typescript --svg-props role=img --jsx-runtime=automatic --out-dir  src/components/AppIcons --no-prettier src/assets/svgs/*.svg",
     "convert-svg": "npm run svg-to-react && npm run lint:fix",
-    "dev": "vite",
+    "dev": "vite --host 0.0.0.0",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives",
     "lint:fix": "eslint --ext .js,.ts,.tsx --fix .",
     "prepare": "husky",
