@@ -35,7 +35,7 @@
 }
 
 .btn-disabled {
-	@apply text-primary-600 border-2 border-dashed border-primary bg-transparent
+	@apply text-primary-600 border-2 border-dashed border-primary bg-transparent !important;
 }
 
 .form-group {

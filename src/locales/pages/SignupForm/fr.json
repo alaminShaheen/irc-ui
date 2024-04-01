@@ -1,0 +1,30 @@
+{
+  "signupTitle": "FR-Sign up",
+  "alreadyHaveAnAccount": "FR-Already have an account",
+  "signIn": "FR-Sign in",
+  "signUpViaEmail": "FR-Or sign up via e-mail",
+  "form": {
+    "firstName": "FR-First Name:",
+    "lastName": "FR-Last Name:",
+    "email": "FR-Email:",
+    "phoneNumber": "FR-Phone Number:",
+    "createPassword": "FR-Create Password:",
+    "show": "FR-Show",
+    "hide": "FR-Hide",
+    "required": "FR-Required",
+    "lowercase": "FR-Lowercase",
+    "numbers": "FR-Numbers",
+    "uppercase": "FR-Uppercase",
+    "minimumCharacters": "FR-Minimum 8 characters",
+    "checkbox1Label": "FR-I understand the above and acknowledge that I will answer all questions to the best of my ability at the time of completing this application.",
+    "checkbox2Label": "FR-I understand and agree that the personal information collected through this purchasing process will be shared with the Insurance Broker, Insurance Underwriters, in the event of a claim Third Party Claims Adjusters, and other companies or individuals required to service your insurance requirements and needs. Additionally, I have read and agree to the Privacy Policy contained in your portal.",
+    "signUp": "FR-Sign up",
+    "errors": {
+      "fieldRequired": "FR-This field is required",
+      "passwordMinCharacters": "FR-Password must be a minimum of 8 characters",
+      "passwordUppercaseCharacters": "FR-Password must contain at least 1 uppercase alphabet",
+      "passwordLowerCharacters": "FR-Password must contain at least 1 lowercase alphabet",
+      "passwordNumericCharacters": "FR-Password must contain at least 1 numeric character"
+    }
+  }
+}

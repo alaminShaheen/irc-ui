@@ -24,7 +24,7 @@ const Button = forwardRef<HTMLButtonElement, IButtonProps>((props, ref) => {
       className={cn(DEFAULT_BUTTON_STYLE, className, {
         "btn-primary text-xl": variant === ButtonVariant.PRIMARY,
         "btn-secondary text-md": variant === ButtonVariant.SECONDARY,
-        "btn-disabled": variant === ButtonVariant.DISABLED,
+        "btn-disabled": variant === ButtonVariant.DISABLED || props.disabled,
         "btn-transparent": variant === ButtonVariant.TRANSPARENT,
         btn: variant === ButtonVariant.VANILLA,
       })}

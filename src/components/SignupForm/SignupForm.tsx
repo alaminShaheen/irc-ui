@@ -1,10 +1,11 @@
 import * as yup from "yup";
-import { ObjectSchema } from "yup";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { InputMask } from "@react-input/mask";
 import { useCallback } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { ObjectSchema } from "yup";
+import { useTranslation } from "react-i18next";
 
 import {
   ButtonType,
@@ -27,35 +28,61 @@ import SmallAlertExclamation from "@/components/AppIcons/SmallAlertExclamation";
 
 const SignupForm = () => {
   const [showPassword, toggleShowPassword] = useToggle(false);
+  const { t } = useTranslation();
+  const pageContent = {
+    signupTitle: t("pages.signupForm.signupTitle"),
+    alreadyHaveAnAccount: t("pages.signupForm.alreadyHaveAnAccount"),
+    signIn: t("pages.signupForm.signIn"),
+    signUpViaEmail: t("pages.signupForm.signUpViaEmail"),
+    firstName: t("pages.signupForm.form.firstName"),
+    lastName: t("pages.signupForm.form.lastName"),
+    email: t("pages.signupForm.form.email"),
+    phoneNumber: t("pages.signupForm.form.phoneNumber"),
+    createPassword: t("pages.signupForm.form.createPassword"),
+    show: t("pages.signupForm.form.show"),
+    hide: t("pages.signupForm.form.hide"),
+    required: t("pages.signupForm.form.required"),
+    lowercase: t("pages.signupForm.form.lowercase"),
+    numbers: t("pages.signupForm.form.numbers"),
+    uppercase: t("pages.signupForm.form.uppercase"),
+    minimumCharacters: t("pages.signupForm.form.minimumCharacters"),
+    checkbox1Label: t("pages.signupForm.form.checkbox1Label"),
+    checkbox2Label: t("pages.signupForm.form.checkbox2Label"),
+    signUp: t("pages.signupForm.form.signUp"),
+    fieldRequired: t("pages.signupForm.form.errors.fieldRequired"),
+    passwordMinCharacters: t(
+      "pages.signupForm.form.errors.passwordMinCharacters",
+    ),
+    passwordUppercaseCharacters: t(
+      "pages.signupForm.form.errors.passwordUppercaseCharacters",
+    ),
+    passwordLowerCharacters: t(
+      "pages.signupForm.form.errors.passwordLowerCharacters",
+    ),
+    passwordNumericCharacters: t(
+      "pages.signupForm.form.errors.passwordNumericCharacters",
+    ),
+  };
   const formValidationSchema: ObjectSchema<SignupFormModel> = yup
     .object()
     .shape({
-      email: yup.string().required("This field is required."),
+      email: yup.string().required(pageContent.fieldRequired),
       bestAbilityAcknowledgement: yup
         .boolean()
-        .required("This field is required."),
-      firstName: yup.string().required("This field is required."),
-      lastName: yup.string().required("This field is required."),
+        .required(pageContent.fieldRequired),
+      firstName: yup.string().required(pageContent.fieldRequired),
+      lastName: yup.string().required(pageContent.fieldRequired),
       password: yup
         .string()
-        .required("This field is required.")
-        .min(8, "Password must be a minimum of 8 characters")
-        .matches(
-          /[A-Z]+/,
-          "Password must contain at least 1 uppercase alphabet",
-        )
-        .matches(
-          /[a-z]+/,
-          "Password must contain at least 1 uppercase alphabet",
-        )
-        .matches(
-          /[0-9]+/,
-          "Password must contain at least 1 numeric character",
-        ),
+        .required(pageContent.fieldRequired)
+        .min(8, pageContent.passwordMinCharacters)
+        .matches(/[A-Z]+/, pageContent.passwordUppercaseCharacters)
+        .matches(/[a-z]+/, pageContent.passwordLowerCharacters)
+        .matches(/[0-9]+/, pageContent.passwordNumericCharacters),
       personalInformationCollectionAgreement: yup
         .boolean()
-        .required("This field is required."),
-      phoneNumber: yup.string().required("This field is required."),
+        .required(pageContent.fieldRequired),
+      phoneNumber: yup.string().required(pageContent.fieldRequired),
     });
 
   const {
@@ -76,6 +103,10 @@ const SignupForm = () => {
     mode: "onBlur",
     resolver: yupResolver(formValidationSchema),
   });
+  const formDisabled =
+    !watch("personalInformationCollectionAgreement") ||
+    !watch("bestAbilityAcknowledgement") ||
+    Object.entries(errors).length > 0;
 
   const onFormSubmit = useCallback(() => {}, []);
 
@@ -83,15 +114,15 @@ const SignupForm = () => {
     <div className="px-8 py-9">
       <div className="flex flex-col gap-y-4 lg:flex-row lg:items-center lg:justify-between lg:gap-y-0">
         <h2 className="font-segoe text-3xl font-semibold text-primary">
-          Sign up
+          {pageContent.signupTitle}
         </h2>
         <p>
-          Already have an account?{" "}
+          {pageContent.alreadyHaveAnAccount}{" "}
           <Link
             to={ROUTES.SIGNUP}
             className="text-base text-secondary underline"
           >
-            Sign in
+            {pageContent.signIn}
           </Link>
         </p>
       </div>
@@ -124,7 +155,7 @@ const SignupForm = () => {
           "after:ml-4 after:flex-1 after:bg-primary-300 after:p-px after:content-['']",
         )}
       >
-        Or sign up via e-mail
+        {pageContent.signUpViaEmail}
       </div>
 
       <form
@@ -134,13 +165,13 @@ const SignupForm = () => {
       >
         <div className={cn("form-group", { "has-error": errors.firstName })}>
           <label htmlFor="firstName" className="form-label">
-            First Name:
+            {pageContent.firstName}
           </label>
           <input
             {...register("firstName")}
             id="firstName"
             className="input w-full py-5"
-            placeholder="Required"
+            placeholder={pageContent.required}
             type="text"
           />
           {errors.firstName?.message && (
@@ -150,13 +181,13 @@ const SignupForm = () => {
 
         <div className={cn("form-group", { "has-error": errors.lastName })}>
           <label htmlFor="lastName" className="form-label">
-            Last Name:
+            {pageContent.lastName}
           </label>
           <input
             {...register("lastName")}
             id="lastName"
             className="input w-full py-5"
-            placeholder="Required"
+            placeholder={pageContent.required}
             type="text"
           />
           {errors.lastName?.message && (
@@ -166,13 +197,13 @@ const SignupForm = () => {
 
         <div className={cn("form-group", { "has-error": errors.email })}>
           <label htmlFor="email" className="form-label">
-            Email:
+            {pageContent.email}
           </label>
           <input
             {...register("email")}
             id="email"
             className="input w-full py-5"
-            placeholder="Required"
+            placeholder={pageContent.required}
             type="email"
           />
           {errors.email?.message && (
@@ -182,14 +213,14 @@ const SignupForm = () => {
 
         <div className={cn("form-group", { "has-error": errors.phoneNumber })}>
           <label htmlFor="phoneNumber" className="form-label">
-            Phone Number:
+            {pageContent.phoneNumber}
           </label>
           <InputMask
             mask="(999) 999-9999"
             replacement={{ 9: /\d/ }}
             {...register("phoneNumber")}
             id="phoneNumber"
-            placeholder="Required"
+            placeholder={pageContent.required}
             className="input w-full py-5"
             type="tel"
           />
@@ -200,22 +231,22 @@ const SignupForm = () => {
 
         <div className={cn("form-group", { "has-error": errors.password })}>
           <label htmlFor="password" className="form-label">
-            Create password:
+            {pageContent.createPassword}
           </label>
           <InputWithIcon
             icon={
               <span
-                className="cursor-pointer select-none text-primary"
+                className="cursor-pointer select-none font-bold text-primary-700"
                 onClick={toggleShowPassword}
               >
-                {showPassword ? "Hide" : "Show"}
+                {showPassword ? pageContent.hide : pageContent.show}
               </span>
             }
             iconPosition={IconPosition.RIGHT}
             {...register("password")}
             id="password"
             className="input w-full py-5"
-            placeholder="Required"
+            placeholder={pageContent.required}
             type={showPassword ? "text" : "password"}
           />
           {errors.password?.message && (
@@ -233,7 +264,7 @@ const SignupForm = () => {
               ) : (
                 <NeutralCircle />
               )}
-              <p>Lowercase</p>
+              <p>{pageContent.lowercase}</p>
             </div>
 
             <div className="flex items-center gap-x-2">
@@ -244,7 +275,7 @@ const SignupForm = () => {
               ) : (
                 <NeutralCircle />
               )}
-              <p>Uppercase</p>
+              <p>{pageContent.uppercase}</p>
             </div>
           </div>
           <div className="flex flex-col gap-y-2">
@@ -256,7 +287,7 @@ const SignupForm = () => {
               ) : (
                 <NeutralCircle />
               )}
-              <p>Numbers</p>
+              <p>{pageContent.numbers}</p>
             </div>
             <div className="flex items-center gap-x-2">
               {errors.password && watch("password").length < 8 ? (
@@ -266,7 +297,7 @@ const SignupForm = () => {
               ) : (
                 <NeutralCircle />
               )}
-              <p>Minimum 8 characters</p>
+              <p>{pageContent.minimumCharacters}</p>
             </div>
           </div>
         </div>
@@ -283,9 +314,7 @@ const SignupForm = () => {
             htmlFor="bestAbilityAcknowledgement"
             className="border-primary-300 text-black"
           >
-            I understand the above and acknowledge that I will answer all
-            questions to the best of my ability at the time of completing this
-            application.
+            {pageContent.checkbox1Label}
           </label>
         </div>
 
@@ -303,21 +332,19 @@ const SignupForm = () => {
             htmlFor="personalInformationCollectionAgreement"
             className="border-primary-300 text-black"
           >
-            I understand and agree that the personal information collected
-            through this purchasing process will be shared with the Insurance
-            Broker, Insurance Underwriters, in the event of a claim Third Party
-            Claims Adjusters, and other companies or individuals required to
-            service your insurance requirements and needs. Additionally, I have
-            read and agree to the Privacy Policy contained in your portal.
+            {pageContent.checkbox2Label}
           </label>
         </div>
 
         <Button
-          className="!mt-8 w-full rounded-md"
-          variant={ButtonVariant.PRIMARY}
+          disabled={formDisabled}
+          className="!mt-8 w-full rounded-md text-xl"
+          variant={
+            formDisabled ? ButtonVariant.DISABLED : ButtonVariant.PRIMARY
+          }
           type={ButtonType.SUBMIT}
         >
-          Sign up
+          {pageContent.signUp}
         </Button>
       </form>
     </div>
