@@ -10,7 +10,7 @@ const ROUTES = {
     REVIEW_AND_SUBMIT: "review-and-submit",
   },
   SIGNUP: "/signup",
-  // HOME: "/home",
+  HOME: "/",
   // REGISTER: "/register",
   // CREATE_GROUP: "/create-group",
   // GROUP: {

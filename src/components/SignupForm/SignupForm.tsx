@@ -17,12 +17,12 @@ import Button from "@/components/ui/Button";
 import Checkbox from "@/components/ui/Checkbox";
 import useToggle from "@/hooks/useToggle";
 import AppleLogo from "@/components/AppIcons/AppleLogo";
+import SmallTick from "@/components/AppIcons/SmallTick";
 import GoogleLogo from "@/components/AppIcons/GoogleLogo";
 import InputWithIcon from "@/components/ui/InputWithIcon";
 import MicrosoftLogo from "@/components/AppIcons/MicrosoftLogo";
-import { SignupFormModel } from "@/models/form/SignupFormModel";
 import NeutralCircle from "@/components/AppIcons/NeutralCircle";
-import SmallTick from "@/components/AppIcons/SmallTick";
+import { SignupFormModel } from "@/models/form/SignupFormModel";
 import SmallAlertExclamation from "@/components/AppIcons/SmallAlertExclamation";
 
 const SignupForm = () => {

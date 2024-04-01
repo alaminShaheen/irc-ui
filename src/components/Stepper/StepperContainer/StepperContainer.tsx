@@ -14,8 +14,9 @@ const StepperContainer = (props: IStepperContainerProps) => {
   const { steps } = props;
   const { pathname } = useLocation();
   const navigate = useNavigate();
-  const activeStepIndex = steps.findIndex(
-    (step) => pathname.search(step.route) >= 0,
+  const activeStepIndex = Math.max(
+    steps.findIndex((step) => pathname.search(step.route) >= 0),
+    0,
   );
   const { t } = useTranslation();
   const [isBackButtonHovered, toggleButtonHovered] = useToggle(false);
