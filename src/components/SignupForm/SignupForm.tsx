@@ -32,25 +32,25 @@ const SignupForm = () => {
   const navigate = useNavigate();
 
   const pageContent = {
-    signupTitle: t("pages.signupForm.signupTitle"),
-    alreadyHaveAnAccount: t("pages.signupForm.alreadyHaveAnAccount"),
-    signIn: t("pages.signupForm.signIn"),
-    signUpViaEmail: t("pages.signupForm.signUpViaEmail"),
-    firstName: t("pages.signupForm.form.firstName"),
-    lastName: t("pages.signupForm.form.lastName"),
-    email: t("pages.signupForm.form.email"),
-    phoneNumber: t("pages.signupForm.form.phoneNumber"),
-    createPassword: t("pages.signupForm.form.createPassword"),
-    show: t("pages.signupForm.form.show"),
-    hide: t("pages.signupForm.form.hide"),
-    required: t("pages.signupForm.form.required"),
-    lowercase: t("pages.signupForm.form.lowercase"),
-    numbers: t("pages.signupForm.form.numbers"),
-    uppercase: t("pages.signupForm.form.uppercase"),
-    minimumCharacters: t("pages.signupForm.form.minimumCharacters"),
-    checkbox1Label: t("pages.signupForm.form.checkbox1Label"),
-    checkbox2Label: t("pages.signupForm.form.checkbox2Label"),
-    signUp: t("pages.signupForm.form.signUp"),
+    signupTitle: t("pages.signup.signupForm.signupTitle"),
+    alreadyHaveAnAccount: t("pages.signup.signupForm.alreadyHaveAnAccount"),
+    signIn: t("pages.signup.signupForm.signIn"),
+    signUpViaEmail: t("pages.signup.signupForm.signUpViaEmail"),
+    firstName: t("pages.signup.signupForm.form.firstName"),
+    lastName: t("pages.signup.signupForm.form.lastName"),
+    email: t("pages.signup.signupForm.form.email"),
+    phoneNumber: t("pages.signup.signupForm.form.phoneNumber"),
+    createPassword: t("pages.signup.signupForm.form.createPassword"),
+    show: t("pages.signup.signupForm.form.show"),
+    hide: t("pages.signup.signupForm.form.hide"),
+    required: t("pages.signup.signupForm.form.required"),
+    lowercase: t("pages.signup.signupForm.form.lowercase"),
+    numbers: t("pages.signup.signupForm.form.numbers"),
+    uppercase: t("pages.signup.signupForm.form.uppercase"),
+    minimumCharacters: t("pages.signup.signupForm.form.minimumCharacters"),
+    checkbox1Label: t("pages.signup.signupForm.form.checkbox1Label"),
+    checkbox2Label: t("pages.signup.signupForm.form.checkbox2Label"),
+    signUp: t("pages.signup.signupForm.form.signUp"),
   };
 
   const formValidationSchema: ObjectSchema<SignupFormModel> = yup
@@ -58,38 +58,38 @@ const SignupForm = () => {
     .shape({
       email: yup
         .string()
-        .required("pages.signupForm.form.errors.fieldRequired"),
+        .required("pages.signup.signupForm.form.errors.fieldRequired"),
       bestAbilityAcknowledgement: yup
         .boolean()
-        .required("pages.signupForm.form.errors.fieldRequired"),
+        .required("pages.signup.signupForm.form.errors.fieldRequired"),
       firstName: yup
         .string()
-        .required("pages.signupForm.form.errors.fieldRequired"),
+        .required("pages.signup.signupForm.form.errors.fieldRequired"),
       lastName: yup
         .string()
-        .required("pages.signupForm.form.errors.fieldRequired"),
+        .required("pages.signup.signupForm.form.errors.fieldRequired"),
       password: yup
         .string()
-        .required("pages.signupForm.form.errors.fieldRequired")
-        .min(8, "pages.signupForm.form.errors.passwordMinCharacters")
+        .required("pages.signup.signupForm.form.errors.fieldRequired")
+        .min(8, "pages.signup.signupForm.form.errors.passwordMinCharacters")
         .matches(
           /[A-Z]+/,
-          "pages.signupForm.form.errors.passwordUppercaseCharacters",
+          "pages.signup.signupForm.form.errors.passwordUppercaseCharacters",
         )
         .matches(
           /[a-z]+/,
-          "pages.signupForm.form.errors.passwordLowerCharacters",
+          "pages.signup.signupForm.form.errors.passwordLowerCharacters",
         )
         .matches(
           /[0-9]+/,
-          "pages.signupForm.form.errors.passwordNumericCharacters",
+          "pages.signup.signupForm.form.errors.passwordNumericCharacters",
         ),
       personalInformationCollectionAgreement: yup
         .boolean()
-        .required("pages.signupForm.form.errors.fieldRequired"),
+        .required("pages.signup.signupForm.form.errors.fieldRequired"),
       phoneNumber: yup
         .string()
-        .required("pages.signupForm.form.errors.fieldRequired"),
+        .required("pages.signup.signupForm.form.errors.fieldRequired"),
     });
 
   const {
@@ -146,6 +146,7 @@ const SignupForm = () => {
           className="flex-grow rounded-md border border-graphite-400 bg-white py-2.5"
           variant={ButtonVariant.VANILLA}
         >
+          <span className="sr-only">Apple Logo</span>
           <AppleLogo className="mx-auto" />
         </Button>
         <Button
@@ -153,6 +154,7 @@ const SignupForm = () => {
           className="flex-grow rounded-md border border-graphite-400 bg-white py-2.5"
           variant={ButtonVariant.VANILLA}
         >
+          <span className="sr-only">Google Logo</span>
           <GoogleLogo className="mx-auto" />
         </Button>
         <Button
@@ -160,6 +162,7 @@ const SignupForm = () => {
           className="flex-grow rounded-md border border-graphite-400 bg-white py-2.5"
           variant={ButtonVariant.VANILLA}
         >
+          <span className="sr-only">Microsoft Logo</span>
           <MicrosoftLogo className="mx-auto" />
         </Button>
       </div>
