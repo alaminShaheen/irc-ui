@@ -1,0 +1,42 @@
+{
+  "en": [
+    {
+      "id": 1,
+      "title": "Fast and Easy",
+      "content": "Thanks to the account, you can price your insurance faster or change the insurance date",
+      "iconPath": "speedometer"
+    },
+    {
+      "id": 2,
+      "title": "Recurring Activities",
+      "content": "Thanks to the account, you can price your insurance faster or change the insurance date",
+      "iconPath": "recurringTasks"
+    },
+    {
+      "id": 3,
+      "title": "Everything in one place",
+      "content": "Thanks to the account, you can price your insurance faster or change the insurance date",
+      "iconPath": "allInOne"
+    }
+  ],
+  "fr": [
+    {
+      "id": 1,
+      "title": "FR-Fast and Easy",
+      "content": "FR-Thanks to the account, you can price your insurance faster or change the insurance date",
+      "iconPath": "speedometer"
+    },
+    {
+      "id": 2,
+      "title": "FR-Recurring Activities",
+      "content": "FR-Thanks to the account, you can price your insurance faster or change the insurance date",
+      "iconPath": "recurringTasks"
+    },
+    {
+      "id": 3,
+      "title": "FR-Everything in one place",
+      "content": "FR-Thanks to the account, you can price your insurance faster or change the insurance date",
+      "iconPath": "allInOne"
+    }
+  ]
+}
