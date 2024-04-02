@@ -228,8 +228,8 @@ const SignupForm = () => {
             {pageContent.phoneNumber}
           </label>
           <InputMask
-            mask="(999) 999-9999"
-            replacement={{ 9: /\d/ }}
+            mask="(___) ___-____"
+            replacement={{ _: /\d/ }}
             {...register("phoneNumber")}
             id="phoneNumber"
             placeholder={pageContent.required}
