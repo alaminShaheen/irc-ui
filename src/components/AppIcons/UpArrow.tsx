@@ -4,7 +4,7 @@ const SvgUpArrow = (props: SVGProps<SVGSVGElement>) => (
     xmlns="http://www.w3.org/2000/svg"
     width={25}
     height={24}
-    // fill="none"
+    fill="none"
     role="img"
     {...props}
   >
