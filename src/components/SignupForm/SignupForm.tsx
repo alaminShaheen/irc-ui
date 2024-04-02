@@ -272,8 +272,8 @@ const SignupForm = () => {
           )}
         </div>
 
-        <div className="!mb-6 flex flex-col gap-y-2">
-          <div className="flex items-center gap-x-20 ">
+        <div className="!mb-6 !mt-2 flex flex-col gap-y-2">
+          <div className="flex items-center gap-x-16 lg:gap-x-20">
             <div className="flex items-center gap-x-2">
               <div>
                 {errors.password?.message &&
@@ -316,7 +316,7 @@ const SignupForm = () => {
             </div>
           </div>
 
-          <div className="flex items-center gap-x-20">
+          <div className="flex items-center gap-x-16 lg:gap-x-20">
             <div className="flex items-center gap-x-2">
               <div>
                 {errors.password && !/[A-Z]+/.test(watch("password")) ? (
