@@ -58,73 +58,89 @@ const AddEventModal = (props: IAddEventModalProps) => {
     weekly,
     monthly,
     addEventIconAltText,
-    fieldRequired,
-    endDateInvalid,
+    // endDateInvalid,
     // endTimeInvalid,
-    startDateInvalid,
+    // startDateInvalid,
+    errorKeys,
     // startTimeInvalid,
   } = translationContent;
 
   const formValidationSchema: ObjectSchema<AddEventModel> = yup.object().shape(
     {
-      eventName: yup.string().required(fieldRequired),
-      rentalFacilityAgreementNumber: yup.string().required(fieldRequired),
-      facility: yup.string().required(fieldRequired),
+      eventName: yup
+        .string()
+        .required((errorKeys as { [key: string]: string }).fieldRequired),
+      rentalFacilityAgreementNumber: yup
+        .string()
+        .required((errorKeys as { [key: string]: string }).fieldRequired),
+      facility: yup
+        .string()
+        .required((errorKeys as { [key: string]: string }).fieldRequired),
       startDate: yup
         .date()
         .default(null)
-        .required(fieldRequired)
+        .required((errorKeys as { [key: string]: string }).fieldRequired)
         .when("endDate", ([endDate], schema) => {
           if (endDate) {
-            return schema.max(endDate, startDateInvalid);
+            return schema.max(
+              endDate,
+              (errorKeys as { [key: string]: string }).startDateInvalid,
+            );
           }
           return schema;
         }),
-      startTime: yup.date().required(fieldRequired),
+      startTime: yup
+        .date()
+        .required((errorKeys as { [key: string]: string }).fieldRequired),
       endDate: yup
         .date()
         .default(null)
-        .required(fieldRequired)
+        .required((errorKeys as { [key: string]: string }).fieldRequired)
         .when("startDate", ([startDate], schema) => {
           if (startDate) {
-            return schema.min(startDate, endDateInvalid);
+            return schema.min(
+              startDate,
+              (errorKeys as { [key: string]: string }).endDateInvalid,
+            );
           }
           return schema;
         }),
-      endTime: yup.date().required(fieldRequired),
+      endTime: yup
+        .date()
+        .required((errorKeys as { [key: string]: string }).fieldRequired),
       repeatEvent: yup.boolean().defined(),
       repeatFrequency: yup
         .mixed<EventRepeatFrequency>()
         .oneOf(Object.values(EventRepeatFrequency))
-        .required(fieldRequired),
+        .required((errorKeys as { [key: string]: string }).fieldRequired),
       insuranceCoverageAmount: yup
         .mixed<InsuranceCoverageAmount>()
         .oneOf(Object.values(InsuranceCoverageAmount))
-        .required(fieldRequired),
+        .required((errorKeys as { [key: string]: string }).fieldRequired),
       foodBeverageSale: yup
         .mixed<BinaryResponse>()
         .oneOf(Object.values(BinaryResponse))
-        .required(fieldRequired),
+        .required((errorKeys as { [key: string]: string }).fieldRequired),
       thirdPartyFoodPackaging: yup
         .mixed<BinaryResponse>()
         .oneOf(Object.values(BinaryResponse))
-        .required(fieldRequired),
+        .required((errorKeys as { [key: string]: string }).fieldRequired),
       requireAlcoholCoverage: yup
         .mixed<BinaryResponse>()
         .oneOf(Object.values(BinaryResponse))
-        .required(fieldRequired),
+        .required((errorKeys as { [key: string]: string }).fieldRequired),
       validDriverLicensesPresent: yup
         .mixed<BinaryResponse>()
         .oneOf(Object.values(BinaryResponse))
-        .required(fieldRequired),
+        .required((errorKeys as { [key: string]: string }).fieldRequired),
       selfTransportation: yup
         .mixed<BinaryResponse>()
         .oneOf(Object.values(BinaryResponse))
-        .required(fieldRequired),
+        .required((errorKeys as { [key: string]: string }).fieldRequired),
       rentalVehicleOwnage: yup
         .mixed<BinaryResponse>()
         .oneOf(Object.values(BinaryResponse))
-        .required(fieldRequired),
+        .required((errorKeys as { [key: string]: string }).fieldRequired),
     },
     [["endDate", "startDate"]],
   );
@@ -156,7 +172,7 @@ const AddEventModal = (props: IAddEventModalProps) => {
 
   return (
     <Modal
-      title={title}
+      title={title as string}
       isOpen={isOpen}
       size={isMobile || isTab ? ModalSize.SMALL : ModalSize.LARGE}
       toggle={onClose}
@@ -169,52 +185,56 @@ const AddEventModal = (props: IAddEventModalProps) => {
             onSubmit={handleSubmit(onSubmit)}
           >
             <BasicInformationSection
-              translationContents={{
-                basicInfo,
-                nameYourEventLabel,
-                nameYourEventPlaceholder,
-                infoText,
-                rentalFacilityLabel,
-                rentalFacilityPlaceholder,
-                facilityLabel,
-                facilityPlaceholder,
-                startDate,
-                startTime,
-                endDate,
-                endTime,
-                chooseDate,
-                chooseTime,
-                repeatEvent,
-                repeatLabel,
-                addTime,
-                daily,
-                weekly,
-                monthly,
-                addEventIconAltText,
-              }}
+              translationContents={
+                {
+                  basicInfo,
+                  nameYourEventLabel,
+                  nameYourEventPlaceholder,
+                  infoText,
+                  rentalFacilityLabel,
+                  rentalFacilityPlaceholder,
+                  facilityLabel,
+                  facilityPlaceholder,
+                  startDate,
+                  startTime,
+                  endDate,
+                  endTime,
+                  chooseDate,
+                  chooseTime,
+                  repeatEvent,
+                  repeatLabel,
+                  addTime,
+                  daily,
+                  weekly,
+                  monthly,
+                  addEventIconAltText,
+                } as { [key: string]: string }
+              }
             />
             <AdditionalQuestionsSection
-              translationContents={{
-                additionalQuestions,
-                insuranceCoverageLabel,
-                foodAndBeverages,
-                foodBeingSoldLabel,
-                foodByThirdPartyLabel,
-                alcoholCoverageLabel,
-                transport,
-                driverLicenceLabel,
-                selfTransportation,
-                rentalVehicleOwnage,
-                yes,
-                no,
-              }}
+              translationContents={
+                {
+                  additionalQuestions,
+                  insuranceCoverageLabel,
+                  foodAndBeverages,
+                  foodBeingSoldLabel,
+                  foodByThirdPartyLabel,
+                  alcoholCoverageLabel,
+                  transport,
+                  driverLicenceLabel,
+                  selfTransportation,
+                  rentalVehicleOwnage,
+                  yes,
+                  no,
+                } as { [key: string]: string }
+              }
             />
             <Button
               variant={ButtonVariant.PRIMARY}
               className="mt-8 rounded-md px-16"
               type={ButtonType.SUBMIT}
             >
-              {confirm}
+              {confirm as string}
             </Button>
           </form>
         </FormProvider>

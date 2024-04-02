@@ -25,6 +25,7 @@ import EventCalendar from "@/components/AppIcons/EventCalendar";
 import GraphiteAlertInfo from "@/components/AppIcons/GraphiteAlertInfo";
 import { ButtonType, ButtonVariant } from "@/models/enums/ButtonVariant";
 import { IBasicInformationSectionProps } from "@/components/AddEvent/components/BasicInformationSection/BasicInformationSection.d";
+import { useTranslation } from "react-i18next";
 
 const BasicInformationSection = (props: IBasicInformationSectionProps) => {
   const {
@@ -58,6 +59,7 @@ const BasicInformationSection = (props: IBasicInformationSectionProps) => {
     control,
     watch,
   } = useFormContext<AddEventModel>();
+  const { t } = useTranslation();
 
   return (
     <>
@@ -76,7 +78,7 @@ const BasicInformationSection = (props: IBasicInformationSectionProps) => {
           type="text"
         />
         {errors.eventName?.message && (
-          <span className="error-warning">{errors.eventName.message}</span>
+          <span className="error-warning">{t(errors.eventName.message)}</span>
         )}
       </div>
 
@@ -109,7 +111,7 @@ const BasicInformationSection = (props: IBasicInformationSectionProps) => {
           />
           {errors.rentalFacilityAgreementNumber?.message && (
             <span className="error-warning">
-              {errors.rentalFacilityAgreementNumber.message}
+              {t(errors.rentalFacilityAgreementNumber.message)}
             </span>
           )}
         </div>
@@ -128,7 +130,7 @@ const BasicInformationSection = (props: IBasicInformationSectionProps) => {
             type="text"
           />
           {errors.facility?.message && (
-            <span className="error-warning">{errors.facility.message}</span>
+            <span className="error-warning">{t(errors.facility.message)}</span>
           )}
         </div>
 
@@ -159,7 +161,9 @@ const BasicInformationSection = (props: IBasicInformationSectionProps) => {
               control={control}
             />
             {errors.startDate?.message && (
-              <span className="error-warning">{errors.startDate.message}</span>
+              <span className="error-warning">
+                {t(errors.startDate.message)}
+              </span>
             )}
           </div>
 
@@ -197,7 +201,9 @@ const BasicInformationSection = (props: IBasicInformationSectionProps) => {
               control={control}
             />
             {errors.startTime?.message && (
-              <span className="error-warning">{errors.startTime.message}</span>
+              <span className="error-warning">
+                {t(errors.startTime.message)}
+              </span>
             )}
           </div>
 
@@ -225,7 +231,7 @@ const BasicInformationSection = (props: IBasicInformationSectionProps) => {
               control={control}
             />
             {errors.endDate?.message && (
-              <span className="error-warning">{errors.endDate.message}</span>
+              <span className="error-warning">{t(errors.endDate.message)}</span>
             )}
           </div>
 
@@ -250,7 +256,7 @@ const BasicInformationSection = (props: IBasicInformationSectionProps) => {
               control={control}
             />
             {errors.endTime?.message && (
-              <span className="error-warning">{errors.endTime.message}</span>
+              <span className="error-warning">{t(errors.endTime.message)}</span>
             )}
           </div>
         </div>

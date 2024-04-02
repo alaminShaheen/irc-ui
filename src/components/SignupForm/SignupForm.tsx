@@ -51,41 +51,45 @@ const SignupForm = () => {
     checkbox1Label: t("pages.signupForm.form.checkbox1Label"),
     checkbox2Label: t("pages.signupForm.form.checkbox2Label"),
     signUp: t("pages.signupForm.form.signUp"),
-    fieldRequired: t("pages.signupForm.form.errors.fieldRequired"),
-    passwordMinCharacters: t(
-      "pages.signupForm.form.errors.passwordMinCharacters",
-    ),
-    passwordUppercaseCharacters: t(
-      "pages.signupForm.form.errors.passwordUppercaseCharacters",
-    ),
-    passwordLowerCharacters: t(
-      "pages.signupForm.form.errors.passwordLowerCharacters",
-    ),
-    passwordNumericCharacters: t(
-      "pages.signupForm.form.errors.passwordNumericCharacters",
-    ),
   };
 
   const formValidationSchema: ObjectSchema<SignupFormModel> = yup
     .object()
     .shape({
-      email: yup.string().required(pageContent.fieldRequired),
+      email: yup
+        .string()
+        .required("pages.signupForm.form.errors.fieldRequired"),
       bestAbilityAcknowledgement: yup
         .boolean()
-        .required(pageContent.fieldRequired),
-      firstName: yup.string().required(pageContent.fieldRequired),
-      lastName: yup.string().required(pageContent.fieldRequired),
+        .required("pages.signupForm.form.errors.fieldRequired"),
+      firstName: yup
+        .string()
+        .required("pages.signupForm.form.errors.fieldRequired"),
+      lastName: yup
+        .string()
+        .required("pages.signupForm.form.errors.fieldRequired"),
       password: yup
         .string()
-        .required(pageContent.fieldRequired)
-        .min(8, pageContent.passwordMinCharacters)
-        .matches(/[A-Z]+/, pageContent.passwordUppercaseCharacters)
-        .matches(/[a-z]+/, pageContent.passwordLowerCharacters)
-        .matches(/[0-9]+/, pageContent.passwordNumericCharacters),
+        .required("pages.signupForm.form.errors.fieldRequired")
+        .min(8, "pages.signupForm.form.errors.passwordMinCharacters")
+        .matches(
+          /[A-Z]+/,
+          "pages.signupForm.form.errors.passwordUppercaseCharacters",
+        )
+        .matches(
+          /[a-z]+/,
+          "pages.signupForm.form.errors.passwordLowerCharacters",
+        )
+        .matches(
+          /[0-9]+/,
+          "pages.signupForm.form.errors.passwordNumericCharacters",
+        ),
       personalInformationCollectionAgreement: yup
         .boolean()
-        .required(pageContent.fieldRequired),
-      phoneNumber: yup.string().required(pageContent.fieldRequired),
+        .required("pages.signupForm.form.errors.fieldRequired"),
+      phoneNumber: yup
+        .string()
+        .required("pages.signupForm.form.errors.fieldRequired"),
     });
 
   const {
@@ -162,7 +166,7 @@ const SignupForm = () => {
 
       <div
         className={cn(
-          "flex items-center py-4",
+          "flex items-center py-4 font-bold opacity-55",
           "before:mr-4 before:flex-1 before:bg-primary-300 before:p-px before:content-['']",
           "after:ml-4 after:flex-1 after:bg-primary-300 after:p-px after:content-['']",
         )}
@@ -187,7 +191,7 @@ const SignupForm = () => {
             type="text"
           />
           {errors.firstName?.message && (
-            <span className="error-warning">{errors.firstName.message}</span>
+            <span className="error-warning">{t(errors.firstName.message)}</span>
           )}
         </div>
 
@@ -203,7 +207,7 @@ const SignupForm = () => {
             type="text"
           />
           {errors.lastName?.message && (
-            <span className="error-warning">{errors.lastName.message}</span>
+            <span className="error-warning">{t(errors.lastName.message)}</span>
           )}
         </div>
 
@@ -219,7 +223,7 @@ const SignupForm = () => {
             type="email"
           />
           {errors.email?.message && (
-            <span className="error-warning">{errors.email.message}</span>
+            <span className="error-warning">{t(errors.email.message)}</span>
           )}
         </div>
 
@@ -237,7 +241,9 @@ const SignupForm = () => {
             type="tel"
           />
           {errors.phoneNumber?.message && (
-            <span className="error-warning">{errors.phoneNumber.message}</span>
+            <span className="error-warning">
+              {t(errors.phoneNumber.message)}
+            </span>
           )}
         </div>
 
@@ -262,54 +268,92 @@ const SignupForm = () => {
             type={showPassword ? "text" : "password"}
           />
           {errors.password?.message && (
-            <span className="error-warning">{errors.password.message}</span>
+            <span className="error-warning">{t(errors.password.message)}</span>
           )}
         </div>
 
-        <div className="!mb-6 flex gap-x-10">
-          <div className="flex flex-col gap-y-2">
+        <div className="!mb-6 flex flex-col gap-y-2">
+          <div className="flex items-center gap-x-20 ">
             <div className="flex items-center gap-x-2">
-              {errors.password?.message && !/[a-z]+/.test(watch("password")) ? (
-                <SmallAlertExclamation />
-              ) : /[a-z]+/.test(watch("password")) ? (
-                <SmallTick />
-              ) : (
-                <NeutralCircle />
-              )}
-              <p>{pageContent.lowercase}</p>
+              <div>
+                {errors.password?.message &&
+                !/[a-z]+/.test(watch("password")) ? (
+                  <SmallAlertExclamation />
+                ) : /[a-z]+/.test(watch("password")) ? (
+                  <SmallTick />
+                ) : (
+                  <NeutralCircle />
+                )}
+              </div>
+              <p
+                className={cn("", {
+                  "text-red-500":
+                    errors.password && !/[a-z]+/.test(watch("password")),
+                })}
+              >
+                {pageContent.lowercase}
+              </p>
             </div>
 
             <div className="flex items-center gap-x-2">
-              {errors.password && !/[A-Z]+/.test(watch("password")) ? (
-                <SmallAlertExclamation />
-              ) : /[A-Z]+/.test(watch("password")) ? (
-                <SmallTick />
-              ) : (
-                <NeutralCircle />
-              )}
-              <p>{pageContent.uppercase}</p>
+              <div>
+                {errors.password && !/[0-9]+/.test(watch("password")) ? (
+                  <SmallAlertExclamation />
+                ) : /[0-9]+/.test(watch("password")) ? (
+                  <SmallTick />
+                ) : (
+                  <NeutralCircle />
+                )}
+              </div>
+              <p
+                className={cn("", {
+                  "text-red-500":
+                    errors.password && !/[0-9]+/.test(watch("password")),
+                })}
+              >
+                {pageContent.numbers}
+              </p>
             </div>
           </div>
-          <div className="flex flex-col gap-y-2">
+
+          <div className="flex items-center gap-x-20">
             <div className="flex items-center gap-x-2">
-              {errors.password && !/[0-9]+/.test(watch("password")) ? (
-                <SmallAlertExclamation />
-              ) : /[0-9]+/.test(watch("password")) ? (
-                <SmallTick />
-              ) : (
-                <NeutralCircle />
-              )}
-              <p>{pageContent.numbers}</p>
+              <div>
+                {errors.password && !/[A-Z]+/.test(watch("password")) ? (
+                  <SmallAlertExclamation />
+                ) : /[A-Z]+/.test(watch("password")) ? (
+                  <SmallTick />
+                ) : (
+                  <NeutralCircle />
+                )}
+              </div>
+              <p
+                className={cn("", {
+                  "text-red-500":
+                    errors.password && !/[A-Z]+/.test(watch("password")),
+                })}
+              >
+                {pageContent.uppercase}
+              </p>
             </div>
             <div className="flex items-center gap-x-2">
-              {errors.password && watch("password").length < 8 ? (
-                <SmallAlertExclamation />
-              ) : watch("password").length >= 8 ? (
-                <SmallTick />
-              ) : (
-                <NeutralCircle />
-              )}
-              <p>{pageContent.minimumCharacters}</p>
+              <div>
+                {errors.password && watch("password").length < 8 ? (
+                  <SmallAlertExclamation />
+                ) : watch("password").length >= 8 ? (
+                  <SmallTick />
+                ) : (
+                  <NeutralCircle />
+                )}
+              </div>
+              <p
+                className={cn("", {
+                  "text-red-500":
+                    errors.password && watch("password").length < 8,
+                })}
+              >
+                {pageContent.minimumCharacters}
+              </p>
             </div>
           </div>
         </div>

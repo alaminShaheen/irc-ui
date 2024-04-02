@@ -1,8 +1,8 @@
 import * as yup from "yup";
+import { ObjectSchema } from "yup";
 import { useForm } from "react-hook-form";
 import { InputMask } from "@react-input/mask";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { ObjectSchema } from "yup";
 import { useCallback, useEffect, useState } from "react";
 
 import Button from "@/components/ui/Button/Button";
@@ -10,6 +10,7 @@ import { InsuredFormModel } from "@/models/form/InsuredFormModel";
 import { IInsuredFormProps } from "@/components/InsuredForm/InsuredForm.d";
 import { cn, formatPhoneNumber } from "@/utils/helper";
 import { ButtonType, ButtonVariant } from "@/models/enums/ButtonVariant";
+import { useTranslation } from "react-i18next";
 
 const InsuredForm = (props: IInsuredFormProps) => {
   const {
@@ -21,17 +22,17 @@ const InsuredForm = (props: IInsuredFormProps) => {
       addressOfInsuredLabel,
       telephoneNumLabel,
       emailAddressLabel,
-      fieldRequired,
+      fieldRequiredKey,
     },
   } = props;
-
+  const { t } = useTranslation();
   const formValidationSchema: ObjectSchema<InsuredFormModel> = yup
     .object()
     .shape({
-      name: yup.string().required(fieldRequired),
-      address: yup.string().required(fieldRequired),
-      telephone: yup.string().required(fieldRequired),
-      email: yup.string().required(fieldRequired),
+      name: yup.string().required(fieldRequiredKey),
+      address: yup.string().required(fieldRequiredKey),
+      telephone: yup.string().required(fieldRequiredKey),
+      email: yup.string().required(fieldRequiredKey),
     });
 
   const {
@@ -54,7 +55,7 @@ const InsuredForm = (props: IInsuredFormProps) => {
     name: "John Doe",
     email: "myemail@gmail.com",
     address: "[Address]",
-    telephone: "4372545078",
+    telephone: "4372345678",
   });
 
   const onFormSubmit = useCallback(
@@ -90,7 +91,7 @@ const InsuredForm = (props: IInsuredFormProps) => {
               type="text"
             />
             {errors.name?.message && (
-              <span className="error-warning">{errors.name.message}</span>
+              <span className="error-warning">{t(errors.name.message)}</span>
             )}
           </div>
 
@@ -105,7 +106,7 @@ const InsuredForm = (props: IInsuredFormProps) => {
               type="text"
             />
             {errors.address?.message && (
-              <span className="error-warning">{errors.address.message}</span>
+              <span className="error-warning">{t(errors.address.message)}</span>
             )}
           </div>
 
@@ -123,7 +124,9 @@ const InsuredForm = (props: IInsuredFormProps) => {
             />
 
             {errors.telephone?.message && (
-              <span className="error-warning">{errors.telephone.message}</span>
+              <span className="error-warning">
+                {t(errors.telephone.message)}
+              </span>
             )}
           </div>
 
@@ -138,7 +141,7 @@ const InsuredForm = (props: IInsuredFormProps) => {
               type="email"
             />
             {errors.email?.message && (
-              <span className="error-warning">{errors.email.message}</span>
+              <span className="error-warning">{t(errors.email.message)}</span>
             )}
           </div>
 
