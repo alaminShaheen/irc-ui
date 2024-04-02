@@ -1,5 +1,5 @@
 import * as yup from "yup";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { InputMask } from "@react-input/mask";
 import { useCallback } from "react";
@@ -29,6 +29,8 @@ import SmallAlertExclamation from "@/components/AppIcons/SmallAlertExclamation";
 const SignupForm = () => {
   const [showPassword, toggleShowPassword] = useToggle(false);
   const { t } = useTranslation();
+  const navigate = useNavigate();
+
   const pageContent = {
     signupTitle: t("pages.signupForm.signupTitle"),
     alreadyHaveAnAccount: t("pages.signupForm.alreadyHaveAnAccount"),
@@ -63,6 +65,7 @@ const SignupForm = () => {
       "pages.signupForm.form.errors.passwordNumericCharacters",
     ),
   };
+
   const formValidationSchema: ObjectSchema<SignupFormModel> = yup
     .object()
     .shape({
@@ -108,7 +111,13 @@ const SignupForm = () => {
     !watch("bestAbilityAcknowledgement") ||
     Object.entries(errors).length > 0;
 
-  const onFormSubmit = useCallback(() => {}, []);
+  const onFormSubmit = useCallback(() => {
+    navigate(ROUTES.STEPPER_FORM.BASE);
+  }, [navigate]);
+
+  const onAuthClick = useCallback(() => {
+    navigate(ROUTES.IDENTITY_CONFIRM);
+  }, [navigate]);
 
   return (
     <div className="px-8 py-9">
@@ -129,18 +138,21 @@ const SignupForm = () => {
 
       <div className="flex w-full gap-x-4 pt-4 lg:mt-7">
         <Button
+          onClick={onAuthClick}
           className="flex-grow rounded-md border border-graphite-400 bg-white py-2.5"
           variant={ButtonVariant.VANILLA}
         >
           <AppleLogo className="mx-auto" />
         </Button>
         <Button
+          onClick={onAuthClick}
           className="flex-grow rounded-md border border-graphite-400 bg-white py-2.5"
           variant={ButtonVariant.VANILLA}
         >
           <GoogleLogo className="mx-auto" />
         </Button>
         <Button
+          onClick={onAuthClick}
           className="flex-grow rounded-md border border-graphite-400 bg-white py-2.5"
           variant={ButtonVariant.VANILLA}
         >

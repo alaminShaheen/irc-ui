@@ -17,6 +17,7 @@ import { StepperStepInformation } from "@/models/StepperStepInformation";
 
 // Custom styling
 import "./styles/global.css";
+import IsThisYou from "@/pages/IsThisYou";
 
 function App() {
   const { t } = useTranslation();
@@ -65,6 +66,7 @@ function App() {
               />
               <Route path={ROUTES.SIGNUP} element={<Signup />} />
               <Route path={ROUTES.QUOTE} element={<Quote />} />
+              <Route path={ROUTES.IDENTITY_CONFIRM} element={<IsThisYou />} />
               <Route
                 path={ROUTES.STEPPER_FORM.BASE}
                 element={<StepperContainer steps={stepperSteps} />}

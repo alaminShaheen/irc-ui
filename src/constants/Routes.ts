@@ -11,6 +11,7 @@ const ROUTES = {
   },
   SIGNUP: "/signup",
   HOME: "/",
+  IDENTITY_CONFIRM: "/confirm_identity",
   // REGISTER: "/register",
   // CREATE_GROUP: "/create-group",
   // GROUP: {
