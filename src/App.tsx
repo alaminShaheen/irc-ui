@@ -65,7 +65,6 @@ function App() {
                 element={<Navigate to={ROUTES.SIGNUP} replace />}
               />
               <Route path={ROUTES.SIGNUP} element={<Signup />} />
-              <Route path={ROUTES.SIGNUP} element={<Signup />} />
               <Route path={ROUTES.QUOTE} element={<Quote />} />
               <Route path={ROUTES.IDENTITY_CONFIRM} element={<IsThisYou />} />
               <Route
