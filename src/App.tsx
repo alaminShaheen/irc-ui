@@ -5,6 +5,7 @@ import Quote from "@/pages/Quote";
 import Signup from "@/pages/Signup";
 import ROUTES from "@/constants/Routes";
 import Layout from "@/components/Layout/Layout";
+import IsThisYou from "@/pages/IsThisYou";
 import AddEventForm from "@/components/Stepper/AddEventForm/AddEventForm";
 import StepperContainer from "@/components/Stepper/StepperContainer/StepperContainer";
 import { ThemeProvider } from "@/context/ThemeContext";
@@ -17,7 +18,6 @@ import { StepperStepInformation } from "@/models/StepperStepInformation";
 
 // Custom styling
 import "./styles/global.css";
-import IsThisYou from "@/pages/IsThisYou";
 
 function App() {
   const { t } = useTranslation();
@@ -64,6 +64,7 @@ function App() {
                 path={ROUTES.HOME}
                 element={<Navigate to={ROUTES.SIGNUP} replace />}
               />
+              <Route path={ROUTES.SIGNUP} element={<Signup />} />
               <Route path={ROUTES.SIGNUP} element={<Signup />} />
               <Route path={ROUTES.QUOTE} element={<Quote />} />
               <Route path={ROUTES.IDENTITY_CONFIRM} element={<IsThisYou />} />
