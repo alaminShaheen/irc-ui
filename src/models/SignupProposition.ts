@@ -1,8 +1,6 @@
-export type SignupProposition = {
+export type TProposition = {
   id: number;
   title: string;
-  title_fr: string;
   content: string;
-  content_fr: string;
   iconPath: string;
 };
