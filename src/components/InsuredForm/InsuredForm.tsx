@@ -1,8 +1,8 @@
 import * as yup from "yup";
+import { ObjectSchema } from "yup";
 import { useForm } from "react-hook-form";
 import { InputMask } from "@react-input/mask";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { ObjectSchema } from "yup";
 import { useCallback, useEffect, useState } from "react";
 
 import Button from "@/components/ui/Button/Button";
@@ -10,6 +10,7 @@ import { InsuredFormModel } from "@/models/form/InsuredFormModel";
 import { IInsuredFormProps } from "@/components/InsuredForm/InsuredForm.d";
 import { cn, formatPhoneNumber } from "@/utils/helper";
 import { ButtonType, ButtonVariant } from "@/models/enums/ButtonVariant";
+import { useTranslation } from "react-i18next";
 
 const InsuredForm = (props: IInsuredFormProps) => {
   const {
@@ -21,17 +22,17 @@ const InsuredForm = (props: IInsuredFormProps) => {
       addressOfInsuredLabel,
       telephoneNumLabel,
       emailAddressLabel,
-      fieldRequired,
+      fieldRequiredKey,
     },
   } = props;
-
+  const { t } = useTranslation();
   const formValidationSchema: ObjectSchema<InsuredFormModel> = yup
     .object()
     .shape({
-      name: yup.string().required(fieldRequired),
-      address: yup.string().required(fieldRequired),
-      telephone: yup.string().required(fieldRequired),
-      email: yup.string().required(fieldRequired),
+      name: yup.string().required(fieldRequiredKey),
+      address: yup.string().required(fieldRequiredKey),
+      telephone: yup.string().required(fieldRequiredKey),
+      email: yup.string().required(fieldRequiredKey),
     });
 
   const {
@@ -54,7 +55,7 @@ const InsuredForm = (props: IInsuredFormProps) => {
     name: "John Doe",
     email: "myemail@gmail.com",
     address: "[Address]",
-    telephone: "4372545078",
+    telephone: "4372345678",
   });
 
   const onFormSubmit = useCallback(
@@ -79,46 +80,38 @@ const InsuredForm = (props: IInsuredFormProps) => {
           onSubmit={handleSubmit(onFormSubmit)}
           data-testid="insured-form"
         >
-          <div className="flex flex-col gap-y-1">
-            <label htmlFor="name" className="text-white-5">
+          <div className={cn("form-group", { "has-error": errors.name })}>
+            <label htmlFor="name" className="form-label">
               {nameOfInsuredLabel}
             </label>
             <input
               {...register("name")}
               id="name"
-              className={cn("input w-full py-5 lg:w-1/2", {
-                "has-error": !!errors.name?.message,
-              })}
+              className="input w-full py-5 lg:w-1/2"
               type="text"
             />
             {errors.name?.message && (
-              <span className="my-2 text-sm text-red-500">
-                {errors.name.message}
-              </span>
+              <span className="error-warning">{t(errors.name.message)}</span>
             )}
           </div>
 
-          <div className="flex flex-col gap-y-1">
-            <label htmlFor="address" className="text-white-5">
+          <div className={cn("form-group", { "has-error": errors.address })}>
+            <label htmlFor="address" className="form-label">
               {addressOfInsuredLabel}
             </label>
             <input
               {...register("address")}
               id="address"
-              className={cn("input w-full py-5 lg:w-1/2", {
-                "has-error": !!errors.address?.message,
-              })}
+              className="input w-full py-5 lg:w-1/2"
               type="text"
             />
             {errors.address?.message && (
-              <span className="my-2 text-sm text-red-500">
-                {errors.address.message}
-              </span>
+              <span className="error-warning">{t(errors.address.message)}</span>
             )}
           </div>
 
-          <div className="flex flex-col gap-y-1">
-            <label htmlFor="telephone" className="text-white-5">
+          <div className={cn("form-group", { "has-error": errors.telephone })}>
+            <label htmlFor="telephone" className="form-label">
               {telephoneNumLabel}
             </label>
             <InputMask
@@ -126,35 +119,29 @@ const InsuredForm = (props: IInsuredFormProps) => {
               replacement={{ 9: /\d/ }}
               {...register("telephone")}
               id="telephone"
-              className={cn("input w-full py-5 lg:w-1/2", {
-                "has-error": !!errors.telephone?.message,
-              })}
+              className="input w-full py-5 lg:w-1/2"
               type="tel"
             />
 
             {errors.telephone?.message && (
-              <span className="my-2 text-sm text-red-500">
-                {errors.telephone.message}
+              <span className="error-warning">
+                {t(errors.telephone.message)}
               </span>
             )}
           </div>
 
-          <div className="flex flex-col gap-y-1">
-            <label htmlFor="email" className="text-white-5">
+          <div className={cn("form-group", { "has-error": errors.email })}>
+            <label htmlFor="email" className="form-label">
               {nameOfInsuredLabel}
             </label>
             <input
               {...register("email")}
               id="email"
-              className={cn("input w-full py-5 lg:w-1/2", {
-                "has-error": !!errors.email?.message,
-              })}
+              className="input w-full py-5 lg:w-1/2"
               type="email"
             />
             {errors.email?.message && (
-              <span className="my-2 text-sm text-red-500">
-                {errors.email.message}
-              </span>
+              <span className="error-warning">{t(errors.email.message)}</span>
             )}
           </div>
 
@@ -172,7 +159,7 @@ const InsuredForm = (props: IInsuredFormProps) => {
         </form>
       ) : (
         <div className="flex flex-col gap-y-4">
-          <div className="flex flex-col gap-y-1">
+          <div className="form-group">
             <span className="font-segoe text-graphite-700">
               {nameOfInsuredLabel}
             </span>
@@ -181,7 +168,7 @@ const InsuredForm = (props: IInsuredFormProps) => {
             </div>
           </div>
 
-          <div className="flex flex-col gap-y-1">
+          <div className="form-group">
             <span className="font-segoe text-graphite-700">
               {addressOfInsuredLabel}
             </span>
@@ -190,7 +177,7 @@ const InsuredForm = (props: IInsuredFormProps) => {
             </div>
           </div>
 
-          <div className="flex flex-col gap-y-1">
+          <div className="form-group">
             <span className="font-segoe text-graphite-700">
               {telephoneNumLabel}
             </span>
@@ -199,7 +186,7 @@ const InsuredForm = (props: IInsuredFormProps) => {
             </div>
           </div>
 
-          <div className="flex flex-col gap-y-1">
+          <div className="form-group">
             <span className="font-segoe text-graphite-700">
               {emailAddressLabel}
             </span>

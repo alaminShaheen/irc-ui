@@ -125,7 +125,7 @@ const EventConfirmationCard = ({ content }: IEventConfirmationCardProps) => {
           )}
         />
 
-        <div className="flex items-center gap-x-3">
+        <div className="form-radio-checkbox-group">
           <div className="flex items-center justify-center">
             <Checkbox
               id="professional-liability"

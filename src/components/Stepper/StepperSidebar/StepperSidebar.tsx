@@ -15,7 +15,10 @@ const StepperSidebar = (props: IStepperSidebar) => {
   return (
     <div className={cn("h-full bg-primary", className)}>
       {/* LG version */}
-      <ul className="sticky top-[100px] hidden p-16 text-white lg:block">
+      <ul
+        className="sticky top-[100px] hidden p-16 text-white lg:block"
+        aria-label="progress"
+      >
         {steps.map((step, index) => {
           return (
             <Fragment key={step.title}>
@@ -26,6 +29,7 @@ const StepperSidebar = (props: IStepperSidebar) => {
                     "opacity-70": index < activeStepIndex,
                   },
                 )}
+                aria-current={activeStepIndex === index}
                 onMouseEnter={() => setHoveredIndex(index)}
                 onMouseLeave={() => setHoveredIndex(-1)}
               >
@@ -91,7 +95,7 @@ const StepperSidebar = (props: IStepperSidebar) => {
       </ul>
 
       {/* SM, MD version */}
-      <div className="block text-white lg:hidden">
+      <div className="block text-white lg:hidden" aria-label="progress">
         <div className="progress-bar relative h-1 w-full">
           <div className="absolute h-full w-full bg-white" />
           <div

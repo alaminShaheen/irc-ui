@@ -45,7 +45,7 @@ const Quote = () => {
       addressOfInsuredLabel: t("pages.quote.insured.addressOfInsuredLabel"),
       telephoneNumLabel: t("pages.quote.insured.telephoneNumLabel"),
       emailAddressLabel: t("pages.quote.insured.emailAddressLabel"),
-      fieldRequired: t("pages.quote.insured.fieldRequired"),
+      fieldRequiredKey: "pages.quote.insured.fieldRequired",
     },
     yourPolicies: {
       addAnotherEvent: t("pages.quote.yourPolicies.addAnotherEvent"),
@@ -117,11 +117,13 @@ const Quote = () => {
       weekly: t("pages.addEventForm.weekly"),
       monthly: t("pages.addEventForm.monthly"),
       addEventIconAltText: t("common.iconAltText.addEvent"),
-      fieldRequired: t("pages.addEventForm.errors.fieldRequired"),
-      endDateInvalid: t("pages.addEventForm.errors.endDateInvalid"),
-      endTimeInvalid: t("pages.addEventForm.errors.endTimeInvalid"),
-      startDateInvalid: t("pages.addEventForm.errors.startDateInvalid"),
-      startTimeInvalid: t("pages.addEventForm.errors.startTimeInvalid"),
+      errorKeys: {
+        fieldRequired: "pages.addEventForm.errors.fieldRequired",
+        endDateInvalid: "pages.addEventForm.errors.endDateInvalid",
+        endTimeInvalid: "pages.addEventForm.errors.endTimeInvalid",
+        startDateInvalid: "pages.addEventForm.errors.startDateInvalid",
+        startTimeInvalid: "pages.addEventForm.errors.startTimeInvalid",
+      } as { [key: string]: string },
     },
   };
 

@@ -1,10 +1,11 @@
 import { useTranslation } from "react-i18next";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
 import Quote from "@/pages/Quote";
 import Signup from "@/pages/Signup";
 import ROUTES from "@/constants/Routes";
 import Layout from "@/components/Layout/Layout";
+import IsThisYou from "@/pages/IsThisYou";
 import AddEventForm from "@/components/Stepper/AddEventForm/AddEventForm";
 import StepperContainer from "@/components/Stepper/StepperContainer/StepperContainer";
 import { ThemeProvider } from "@/context/ThemeContext";
@@ -59,12 +60,26 @@ function App() {
         <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
           <Layout>
             <Routes>
+              <Route
+                path={ROUTES.HOME}
+                element={<Navigate to={ROUTES.SIGNUP} replace />}
+              />
               <Route path={ROUTES.SIGNUP} element={<Signup />} />
               <Route path={ROUTES.QUOTE} element={<Quote />} />
+              <Route path={ROUTES.IDENTITY_CONFIRM} element={<IsThisYou />} />
               <Route
                 path={ROUTES.STEPPER_FORM.BASE}
                 element={<StepperContainer steps={stepperSteps} />}
               >
+                <Route
+                  index
+                  Component={() => (
+                    <Navigate
+                      to={ROUTES.STEPPER_FORM.APPLICATION_AGREEMENT}
+                      replace
+                    />
+                  )}
+                />
                 {stepperSteps.map((stepInformation) => (
                   <Route
                     key={stepInformation.title}

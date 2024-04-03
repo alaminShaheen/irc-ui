@@ -35,11 +35,35 @@
 }
 
 .btn-disabled {
-	@apply text-primary-600 border-2 border-dashed border-primary bg-transparent
+	@apply text-primary-600 border-2 border-dashed border-primary bg-transparent !important;
+}
+
+.form-group {
+	@apply flex flex-col gap-y-1;
+}
+
+.form-radio-checkbox-group {
+	@apply flex items-center gap-x-3;
 }
 
 .form-label {
 	@apply text-white-5 text-base;
+}
+
+.form-group.has-error input,
+.form-radio-checkbox-group.has-error input {
+	@apply border-red-500;
+}
+
+.form-group.has-error label,
+.form-group.has-error .form-label,
+.form-radio-checkbox-group.has-error label {
+	@apply text-red-500;
+}
+
+.form-group.has-error .error-warning,
+.form-radio-checkbox-group.has-error .error-warning {
+	@apply my-2 text-sm text-red-500;
 }
 
 .input {
