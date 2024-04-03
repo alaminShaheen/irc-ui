@@ -111,9 +111,8 @@ const SignupForm = () => {
     resolver: yupResolver(formValidationSchema),
   });
   const formDisabled =
-    !watch("personalInformationCollectionAgreement") ||
-    !watch("bestAbilityAcknowledgement") ||
-    Object.entries(errors).length > 0;
+    Object.entries(errors).length > 0 ||
+    Object.values(watch()).some((value) => !value);
 
   const onFormSubmit = useCallback(() => {
     navigate(ROUTES.STEPPER_FORM.BASE);
@@ -277,7 +276,7 @@ const SignupForm = () => {
 
         <div className="!mb-6 !mt-2 flex flex-col gap-y-2">
           <div className="flex items-center gap-x-16 lg:gap-x-20">
-            <div className="flex items-center gap-x-2">
+            <div className="flex w-28 items-center gap-x-2 ">
               <div>
                 {errors.password?.message &&
                 !/[a-z]+/.test(watch("password")) ? (
@@ -298,7 +297,7 @@ const SignupForm = () => {
               </p>
             </div>
 
-            <div className="flex items-center gap-x-2">
+            <div className="flex w-28 items-center gap-x-2">
               <div>
                 {errors.password && !/[0-9]+/.test(watch("password")) ? (
                   <SmallAlertExclamation />
@@ -320,7 +319,7 @@ const SignupForm = () => {
           </div>
 
           <div className="flex items-center gap-x-16 lg:gap-x-20">
-            <div className="flex items-center gap-x-2">
+            <div className="flex w-28 items-center gap-x-2">
               <div>
                 {errors.password && !/[A-Z]+/.test(watch("password")) ? (
                   <SmallAlertExclamation />
@@ -339,7 +338,7 @@ const SignupForm = () => {
                 {pageContent.uppercase}
               </p>
             </div>
-            <div className="flex items-center gap-x-2">
+            <div className="flex w-28 items-center gap-x-2">
               <div>
                 {errors.password && watch("password").length < 8 ? (
                   <SmallAlertExclamation />
