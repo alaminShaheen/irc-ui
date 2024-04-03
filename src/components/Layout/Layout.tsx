@@ -40,6 +40,7 @@ const Layout = (props: ILayoutProps) => {
           poweredBy: t("footer.poweredBy"),
           body: t("footer.body"),
           privacyPolicy: t("footer.privacyPolicy"),
+          brokerWebPage: t("footer.brokerWebPage"),
           copyright: t("footer.copyright"),
           logoAltText: t("common.iconAltText.appLogo"),
         }}

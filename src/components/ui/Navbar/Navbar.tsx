@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next";
 
 import Icon from "@/components/ui/Icon";
 import Button from "@/components/ui/Button";
-import appLogo from "@/assets/images/app-logo-alternate.png";
+import BrokerLinkLogo from "@/components/AppIcons/BrokerLinkLogo";
 import Hamburger from "@/components/AppIcons/Hamburger";
 import LanguageToggle from "@/components/LanguageToggle";
 import { INavbarProps } from "@/components/ui/Navbar/Navbar.d";
@@ -12,10 +12,14 @@ const Navbar = (props: INavbarProps) => {
   const { t } = useTranslation();
 
   return (
-    <nav className="flex h-navbar items-center justify-between bg-primary px-9">
+    <nav className="flex h-navbar items-center justify-between bg-primary px-6 md:px-9">
       <div>
         <a href="#">
-          <Icon src={appLogo} alt={t("common.iconAltText.appLogo")} size={40} />
+          <Icon
+            src={<BrokerLinkLogo />}
+            alt={t("common.iconAltText.appLogo")}
+            size={136}
+          />
         </a>
       </div>
 
