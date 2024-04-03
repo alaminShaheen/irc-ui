@@ -276,7 +276,7 @@ const SignupForm = () => {
 
         <div className="!mb-6 !mt-2 flex flex-col gap-y-2">
           <div className="flex items-center gap-x-16 lg:gap-x-20">
-            <div className="flex w-28 items-center gap-x-2 ">
+            <div className="flex w-28 items-center gap-x-2 lg:w-auto ">
               <div>
                 {errors.password?.message &&
                 !/[a-z]+/.test(watch("password")) ? (
@@ -297,7 +297,7 @@ const SignupForm = () => {
               </p>
             </div>
 
-            <div className="flex w-28 items-center gap-x-2">
+            <div className="flex w-28 items-center gap-x-2 lg:w-auto">
               <div>
                 {errors.password && !/[0-9]+/.test(watch("password")) ? (
                   <SmallAlertExclamation />
@@ -319,7 +319,7 @@ const SignupForm = () => {
           </div>
 
           <div className="flex items-center gap-x-16 lg:gap-x-20">
-            <div className="flex w-28 items-center gap-x-2">
+            <div className="flex w-28 items-center gap-x-2 lg:w-auto">
               <div>
                 {errors.password && !/[A-Z]+/.test(watch("password")) ? (
                   <SmallAlertExclamation />
@@ -338,7 +338,7 @@ const SignupForm = () => {
                 {pageContent.uppercase}
               </p>
             </div>
-            <div className="flex w-28 items-center gap-x-2">
+            <div className="flex w-28 items-center gap-x-2 lg:w-auto">
               <div>
                 {errors.password && watch("password").length < 8 ? (
                   <SmallAlertExclamation />
