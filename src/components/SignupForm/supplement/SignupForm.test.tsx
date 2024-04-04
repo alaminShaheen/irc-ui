@@ -1,4 +1,10 @@
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import {
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+  act,
+} from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { BrowserRouter as Router } from "react-router-dom";
 import SignupForm from "../SignupForm";
@@ -76,11 +82,13 @@ describe("SignupForm", () => {
     expect(phoneNumberField.value).toBe("(123) 456-7890");
   });
 
-  it("shows errors for password field when criteria are not met", () => {
-    fireEvent.change(createPasswordField, {
-      target: { value: "badpass" },
+  it("shows errors for password field when criteria are not met", async () => {
+    await act(async () => {
+      fireEvent.change(createPasswordField, {
+        target: { value: "badpass" },
+      });
+      fireEvent.blur(createPasswordField);
     });
-    fireEvent.blur(createPasswordField);
 
     () => {
       expect(
@@ -92,28 +100,25 @@ describe("SignupForm", () => {
   });
 
   it("enables the signup button when all fields are valid", async () => {
-    fireEvent.change(firstNameField),
-      {
+    await act(async () => {
+      fireEvent.change(firstNameField, {
         target: { value: "John" },
-      };
-    fireEvent.change(lastNameField),
-      {
+      });
+      fireEvent.change(lastNameField, {
         target: { value: "Doe" },
-      };
-    fireEvent.change(emailField),
-      {
+      });
+      fireEvent.change(emailField, {
         target: { value: "john.doe@example.com" },
-      };
-    fireEvent.change(phoneNumberField),
-      {
-        target: { value: "(123)456-7890" },
-      };
-    fireEvent.change(createPasswordField),
-      {
+      });
+      fireEvent.change(phoneNumberField, {
+        target: { value: "(123) 456-7890" },
+      });
+      fireEvent.change(createPasswordField, {
         target: { value: "Password123" },
-      };
-    fireEvent.click(checkBox1!);
-    fireEvent.click(checkBox2!);
+      });
+      fireEvent.click(checkBox1);
+      fireEvent.click(checkBox2);
+    });
 
     await waitFor(() => {
       expect(signupButton).toBeEnabled();
