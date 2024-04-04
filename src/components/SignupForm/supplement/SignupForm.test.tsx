@@ -9,6 +9,7 @@ import userEvent from "@testing-library/user-event";
 import { BrowserRouter as Router } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import SignupForm from "../SignupForm";
+import ROUTES from "@/constants/Routes";
 
 type FormElement = HTMLInputElement | HTMLButtonElement | HTMLLabelElement;
 
@@ -85,7 +86,7 @@ describe("SignupForm", () => {
 
     await userEvent.click(appleButton);
 
-    expect(mockedNavigate).toHaveBeenCalledWith("/confirm_identity");
+    expect(mockedNavigate).toHaveBeenCalledWith(ROUTES.IDENTITY_CONFIRM);
   });
 
   it("disables signup button until all fields and checkboxes are completed", async () => {
@@ -171,6 +172,6 @@ describe("SignupForm", () => {
     });
 
     await userEvent.click(signupButton);
-    expect(mockedNavigate).toHaveBeenCalledWith("/form");
+    expect(mockedNavigate).toHaveBeenCalledWith(ROUTES.STEPPER_FORM.BASE);
   });
 });
