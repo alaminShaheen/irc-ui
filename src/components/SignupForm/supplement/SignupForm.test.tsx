@@ -7,6 +7,7 @@ import {
 } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { BrowserRouter as Router } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import SignupForm from "../SignupForm";
 
 type FormElement = HTMLInputElement | HTMLButtonElement | HTMLLabelElement;
@@ -18,7 +19,14 @@ jest.mock("react-i18next", () => ({
   }),
 }));
 
+jest.mock("react-router-dom", () => ({
+  ...jest.requireActual("react-router-dom"),
+  useNavigate: jest.fn(),
+}));
+
 describe("SignupForm", () => {
+  const mockedNavigate = jest.fn();
+
   let firstNameField: FormElement;
   let lastNameField: FormElement;
   let emailField: FormElement;
@@ -29,6 +37,8 @@ describe("SignupForm", () => {
   let checkBox2: FormElement;
 
   beforeEach(() => {
+    jest.mocked(useNavigate).mockReturnValue(mockedNavigate);
+    mockedNavigate.mockClear();
     render(
       <Router>
         <SignupForm />,
@@ -66,6 +76,16 @@ describe("SignupForm", () => {
     expect(phoneNumberField).toBeInTheDocument();
     expect(createPasswordField).toBeInTheDocument();
     expect(signupButton).toBeInTheDocument();
+  });
+
+  it("navigates to the identity confirmation on authentication button click", async () => {
+    const appleButton = screen
+      .getByText("Apple Logo")
+      .closest("button") as HTMLButtonElement;
+
+    await userEvent.click(appleButton);
+
+    expect(mockedNavigate).toHaveBeenCalledWith("/confirm_identity");
   });
 
   it("disables signup button until all fields and checkboxes are completed", async () => {
@@ -123,5 +143,34 @@ describe("SignupForm", () => {
     await waitFor(() => {
       expect(signupButton).toBeEnabled();
     });
+  });
+
+  it("navigates to the base step form on form submit", async () => {
+    await act(async () => {
+      fireEvent.change(firstNameField, {
+        target: { value: "John" },
+      });
+      fireEvent.change(lastNameField, {
+        target: { value: "Doe" },
+      });
+      fireEvent.change(emailField, {
+        target: { value: "john.doe@example.com" },
+      });
+      fireEvent.change(phoneNumberField, {
+        target: { value: "(123) 456-7890" },
+      });
+      fireEvent.change(createPasswordField, {
+        target: { value: "Password123" },
+      });
+      fireEvent.click(checkBox1);
+      fireEvent.click(checkBox2);
+    });
+
+    await waitFor(() => {
+      expect(signupButton).toBeEnabled();
+    });
+
+    await userEvent.click(signupButton);
+    expect(mockedNavigate).toHaveBeenCalledWith("/form");
   });
 });
