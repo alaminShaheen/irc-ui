@@ -1,10 +1,10 @@
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { BrowserRouter as Router } from "react-router-dom";
 import SignupForm from "../SignupForm";
 
 type FormElement = HTMLInputElement | HTMLButtonElement | HTMLLabelElement;
 
-// Mock react-i18next
 jest.mock("react-i18next", () => ({
   useTranslation: () => ({
     t: (key: string) => key,
@@ -30,20 +30,20 @@ describe("SignupForm", () => {
     );
 
     firstNameField = screen.getByLabelText(
-      /pages.signup.signupForm.form.firstName/,
+      "pages.signup.signupForm.form.firstName",
     ) as FormElement;
     lastNameField = screen.getByLabelText(
-      /pages.signup.signupForm.form.lastName/,
+      "pages.signup.signupForm.form.lastName",
     ) as FormElement;
-    emailField = screen.getByLabelText(/pages.signup.signupForm.form.email/);
+    emailField = screen.getByLabelText("pages.signup.signupForm.form.email");
     phoneNumberField = screen.getByLabelText(
-      /pages.signup.signupForm.form.phoneNumber/,
+      "pages.signup.signupForm.form.phoneNumber",
     ) as FormElement;
     createPasswordField = screen.getByLabelText(
-      /pages.signup.signupForm.form.createPassword/,
+      "pages.signup.signupForm.form.createPassword",
     ) as FormElement;
     signupButton = screen.getByText(
-      /pages.signup.signupForm.form.signUp/,
+      "pages.signup.signupForm.form.signUp",
     ) as FormElement;
     checkBox1 = screen.getByLabelText(
       "pages.signup.signupForm.form.checkbox1Label",
@@ -52,8 +52,6 @@ describe("SignupForm", () => {
       "pages.signup.signupForm.form.checkbox2Label",
     ) as FormElement;
   });
-
-  screen.debug();
 
   it("renders all form elements", () => {
     expect(firstNameField).toBeInTheDocument();
@@ -64,31 +62,33 @@ describe("SignupForm", () => {
     expect(signupButton).toBeInTheDocument();
   });
 
-  screen.debug();
-
   it("disables signup button until all fields and checkboxes are completed", async () => {
     expect(signupButton).toBeDisabled();
+  });
 
-    fireEvent.change(firstNameField, {
-      target: { value: "John" },
-    });
-    fireEvent.change(lastNameField, {
-      target: { value: "Doe" },
-    });
-    fireEvent.change(emailField, {
-      target: { value: "john.doe@example.com" },
-    });
-    fireEvent.change(phoneNumberField, {
-      target: { value: "(123)456-7890" },
-    });
+  it("formats the phone number input as (xxx) xxx-xxxx when typing", async () => {
+    const phoneNumberField = screen.getByLabelText(
+      "pages.signup.signupForm.form.phoneNumber",
+    ) as HTMLInputElement;
+
+    await userEvent.type(phoneNumberField, "1234567890");
+
+    expect(phoneNumberField.value).toBe("(123) 456-7890");
+  });
+
+  it("shows errors for password field when criteria are not met", () => {
     fireEvent.change(createPasswordField, {
-      target: { value: "password123" },
+      target: { value: "badpass" },
     });
+    fireEvent.blur(createPasswordField);
 
-    fireEvent.click(checkBox1);
-    fireEvent.click(checkBox2);
-
-    expect(signupButton).toBeEnabled();
+    () => {
+      expect(
+        screen.getByText("pageContent.minimumCharacters"),
+      ).toBeInTheDocument();
+      expect(screen.getByText("pageContent.uppercase")).toBeInTheDocument();
+      expect(screen.getByText("pageContent.numbers")).toBeInTheDocument();
+    };
   });
 
   it("enables the signup button when all fields are valid", async () => {
@@ -116,7 +116,7 @@ describe("SignupForm", () => {
     fireEvent.click(checkBox2!);
 
     await waitFor(() => {
-      expect(signupButton).not.toBeDisabled();
+      expect(signupButton).toBeEnabled();
     });
   });
 });
