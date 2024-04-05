@@ -13,8 +13,8 @@ describe("SignupContentList component", () => {
   test("renders icon, title, and content correctly", () => {
     const signupProposition = {
       id: 1,
-      iconPath: "speedometer",
-      title: "Speedometer",
+      iconPath: "rocketship",
+      title: "RocketShip",
       content: "Lorem ipsum dolor sit amet.",
     };
 

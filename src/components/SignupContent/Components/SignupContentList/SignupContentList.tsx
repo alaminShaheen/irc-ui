@@ -1,14 +1,14 @@
 import { ISignupContentList } from "./SignupContentList.d";
 import Icon from "@/components/ui/Icon";
 
-import Speedometer from "../../../AppIcons/SpeedometerIcon";
+import RocketShip from "../../../AppIcons/RocketShipIcon";
 import RecurringTasks from "../../../AppIcons/RecurringTaskIcon";
 import AllInOne from "../../../AppIcons/AllInOneIcon";
 
 const iconMapper: {
   [key: string]: JSX.Element;
 } = {
-  speedometer: <Speedometer />,
+  rocketship: <RocketShip />,
   recurringTasks: <RecurringTasks />,
   allInOne: <AllInOne />,
 };

@@ -13,6 +13,7 @@ export const en_content = {
     poweredBy: "Powered by:",
     body: "Instant Risk Coverage is a trademark of Instant Risk Coverage Inc. Refer to your policy for the most detailed and accurate information about your coverage and terms of insurance. Your policy, which serves as your insurance contract, will always prevail if there's ever a conflict with the information found on this site.",
     privacyPolicy: "Privacy policy",
+    brokerWebPage: "Broker Webpage",
     copyright: "© {{year}} instantriskcoverage",
   },
   pages: {
