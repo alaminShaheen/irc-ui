@@ -1,5 +1,6 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { Helmet } from "react-helmet-async";
 
 import Alert from "@/components/ui/Alert/Alert";
 import Button from "@/components/ui/Button";
@@ -34,10 +35,6 @@ const Quote = () => {
     },
     [toggleAddEventModal],
   );
-
-  useEffect(() => {
-    document.title = t("pages.quote.pageTitle");
-  }, [t]);
 
   const pageContent = {
     insuredFormContent: {
@@ -129,6 +126,8 @@ const Quote = () => {
 
   return (
     <div className="flex flex-col gap-x-6 px-4 py-6 lg:grid lg:grid-cols-5 lg:px-9 lg:py-8">
+      <Helmet title={t("pages.quote.seo.title")} />
+
       <div className="lg:col-span-3">
         <Alert alertMessage={t("pages.quote.policyNotification")} />
 
