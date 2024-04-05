@@ -8,9 +8,7 @@ const Signup = () => {
 
   return (
     <div className="grid grid-rows-1 md:grid-cols-2">
-      <Helmet>
-        <title>{t("pages.signup.seo.title")}</title>
-      </Helmet>
+      <Helmet title={t("pages.signup.seo.title")} />
 
       <section className="hidden md:block">
         {/* Left section */}

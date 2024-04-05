@@ -6,9 +6,7 @@ const IsThisYou = () => {
 
   return (
     <div>
-      <Helmet>
-        <title>{t("pages.isThisYou.seo.title")}</title>
-      </Helmet>
+      <Helmet title={t("pages.isThisYou.seo.title")} />
 
       <h1>Is This You?</h1>
     </div>

@@ -361,7 +361,7 @@ const SignupForm = () => {
           </div>
         </div>
 
-        <div className="form-radio-checkbox-group">
+        <div className="form-radio-checkbox-group !items-start">
           <div className="flex items-center justify-center">
             <Checkbox
               {...register("bestAbilityAcknowledgement")}
@@ -379,7 +379,7 @@ const SignupForm = () => {
 
         <div className={cn(`ml-auto h-1 border-t border-primary-300`)} />
 
-        <div className="form-radio-checkbox-group">
+        <div className="form-radio-checkbox-group !items-start">
           <div className="flex items-center justify-center">
             <Checkbox
               {...register("personalInformationCollectionAgreement")}
