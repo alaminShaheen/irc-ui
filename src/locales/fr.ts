@@ -1,12 +1,12 @@
 // Common language file
-import Common from "./common/fr.json";
+import Common from "@/locales/common/fr.json";
 
 // Page level language files
-import Quote from "./pages/Quote/fr.json";
-import AddEventForm from "@/locales/pages/AddEvent/fr.json";
-import StepperForm from "@/locales/pages/StepperForm/fr.json";
+import Quote from "@/locales/pages/Quote/fr.json";
 import Signup from "@/locales/pages/Signup/fr.json";
-import IsThisYou from "@/locales/pages/IsThisYou/fr.json";
+import StepperForm from "@/locales/pages/StepperForm/fr.json";
+import AddEventForm from "@/locales/pages/AddEvent/fr.json";
+import ConfirmIdentity from "@/locales/pages/ConfirmIdentity/fr.json";
 
 export const fr_content = {
   common: Common,
@@ -22,6 +22,6 @@ export const fr_content = {
     addEventForm: AddEventForm,
     stepperForm: StepperForm,
     signup: Signup,
-    isThisYou: IsThisYou,
+    confirmIdentity: ConfirmIdentity,
   },
 };

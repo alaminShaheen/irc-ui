@@ -1,0 +1,23 @@
+{
+  "seo": {
+    "title": "FR-IRC - Is This you"
+  },
+  "pageTitle": "FR-Is this you",
+  "backToSignUp": "FR-Back to sign up",
+  "form": {
+    "allFieldsRequired": "FR-All fields are required",
+    "firstName": "FR-First Name:",
+    "lastName": "FR-Last Name:",
+    "email": "FR-Email:",
+    "phoneNumber": "FR-Phone Number:",
+    "identityInfo": "FR-By law, we must verify your identity before we quote your insurance.",
+    "emailInfo": "FR-This is the email we will send all insurance policy documentation to.",
+    "phoneNumberInfo": "FR-A phone number is needed as an alternative contact method to email.",
+    "checkbox1Label": "FR-I understand the above and acknowledge that I will answer all questions to the best of my ability at the time of completing this application.",
+    "checkbox2Label": "FR-I understand and agree that the personal information collected through this purchasing process will be shared with the Insurance Broker, Insurance Underwriters, in the event of a claim Third Party Claims Adjusters, and other companies or individuals required to service your insurance requirements and needs. Additionally, I have read and agree to the Privacy Policy contained in your portal.",
+    "confirm": "FR-Confirm",
+    "errors": {
+      "fieldRequired": "FR-This field is required"
+    }
+  }
+}
