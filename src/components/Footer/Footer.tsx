@@ -77,7 +77,7 @@ const Footer = ({ content }: IFooterProps) => {
               {brokerWebPage}
             </a>
           </div>
-          <p className="mt-[27px] self-center text-base font-medium md:mt-[30px]">
+          <p className="mt-[27px] self-center text-base font-medium md:mt-[23.5px]">
             {copyright.replace("{{year}}", currentYear)}
           </p>
         </div>

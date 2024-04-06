@@ -6,6 +6,7 @@ import Quote from "@/locales/pages/Quote/en.json";
 import AddEventForm from "@/locales/pages/AddEvent/en.json";
 import StepperForm from "@/locales/pages/StepperForm/en.json";
 import Signup from "@/locales/pages/Signup/en.json";
+import IsThisYou from "@/locales/pages/IsThisYou/en.json";
 
 export const en_content = {
   common: Common,
@@ -21,5 +22,6 @@ export const en_content = {
     addEventForm: AddEventForm,
     stepperForm: StepperForm,
     signup: Signup,
+    isThisYou: IsThisYou,
   },
 };
