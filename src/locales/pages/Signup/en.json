@@ -3,7 +3,7 @@
     "title": "IRC Signup"
   },
   "signupContent": {
-    "title": "Get an instant quote and buy Insurance"
+    "title": "Get an Instant Quote and Purchase Coverage"
   },
   "signupForm": {
     "signupTitle": "Sign up",
@@ -23,8 +23,8 @@
       "numbers": "Numbers",
       "uppercase": "Uppercase",
       "minimumCharacters": "Minimum 8 characters",
-      "checkbox1Label": "I understand the above and acknowledge that I will answer all questions to the best of my ability at the time of completing this application.",
-      "checkbox2Label": "I understand and agree that the personal information collected through this purchasing process will be shared with the Insurance Broker, Insurance Underwriters, in the event of a claim Third Party Claims Adjusters, and other companies or individuals required to service your insurance requirements and needs. Additionally, I have read and agree to the Privacy Policy contained in your portal.",
+      "checkbox1Label": "I understand and agree to the use of application agreement.",
+      "checkbox2Label": "I understand and agree the information submitted will be used in line with our privacy policy.",
       "signUp": "Sign up",
       "errors": {
         "fieldRequired": "This field is required",
