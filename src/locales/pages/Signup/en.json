@@ -28,6 +28,7 @@
       "signUp": "Sign up",
       "errors": {
         "fieldRequired": "This field is required",
+        "invalidEmail": "Invalid email format",
         "passwordMinCharacters": "Password must be a minimum of 8 characters",
         "passwordUppercaseCharacters": "Password must contain at least 1 uppercase alphabet",
         "passwordLowerCharacters": "Password must contain at least 1 lowercase alphabet",

@@ -28,6 +28,7 @@
       "signUp": "FR-Sign up",
       "errors": {
         "fieldRequired": "FR-This field is required",
+        "invalidEmail": "FR-Invalid email format",
         "passwordMinCharacters": "FR-Password must be a minimum of 8 characters",
         "passwordUppercaseCharacters": "FR-Password must contain at least 1 uppercase alphabet",
         "passwordLowerCharacters": "FR-Password must contain at least 1 lowercase alphabet",
