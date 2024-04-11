@@ -5,7 +5,7 @@ import { InputMask } from "@react-input/mask";
 import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 
 import { cn } from "@/utils/helper";
 import ROUTES from "@/constants/Routes";
@@ -15,6 +15,7 @@ import EmailFormat from "@/constants/EmailFormat";
 import AlertInfoOutline from "@/components/AppIcons/AlertInfoOutline";
 import { ConfirmIdentityFormModel } from "@/models/form/ConfirmIdentityFormModel";
 import { ButtonType, ButtonVariant } from "@/models/enums/ButtonVariant";
+import ExternalLink from "@/components/AppIcons/ExternalLink";
 
 const ConfirmIdentityForm = () => {
   const { t } = useTranslation();
@@ -29,8 +30,31 @@ const ConfirmIdentityForm = () => {
     identityInfo: t("pages.confirmIdentity.form.identityInfo"),
     emailInfo: t("pages.confirmIdentity.form.emailInfo"),
     phoneNumberInfo: t("pages.confirmIdentity.form.phoneNumberInfo"),
-    checkbox1Label: t("pages.confirmIdentity.form.checkbox1Label"),
-    checkbox2Label: t("pages.confirmIdentity.form.checkbox2Label"),
+    checkbox1Label: (
+      <Trans i18nKey="pages.confirmIdentity.form.checkbox1Label">
+        I understand and agree to the use of
+        <a
+          href="#"
+          className="inline-flex items-center gap-x-1 font-bold text-primary underline"
+        >
+          application agreement
+          <ExternalLink className=""></ExternalLink>
+        </a>
+      </Trans>
+    ),
+    checkbox2Label: (
+      <Trans i18nKey="pages.confirmIdentity.form.checkbox2Label">
+        I understand and agree the information submitted will be used in line
+        with our
+        <a
+          href="#"
+          className="inline-flex items-center gap-x-1 font-bold text-primary underline"
+        >
+          privacy policy
+          <ExternalLink className=""></ExternalLink>
+        </a>
+      </Trans>
+    ),
     confirm: t("pages.confirmIdentity.form.confirm"),
   };
 
@@ -222,7 +246,7 @@ const ConfirmIdentityForm = () => {
         </div>
         <label
           htmlFor="bestAbilityAcknowledgement"
-          className="border-primary-300 text-black"
+          className="mt-1 border-primary-300 text-black"
         >
           {pageContent.checkbox1Label}
         </label>
