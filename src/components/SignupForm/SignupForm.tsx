@@ -6,6 +6,7 @@ import { useCallback } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { ObjectSchema } from "yup";
 import { useTranslation } from "react-i18next";
+import EmailFormat from "@/constants/EmailFormat";
 
 import {
   ButtonType,
@@ -58,7 +59,11 @@ const SignupForm = () => {
     .shape({
       email: yup
         .string()
-        .required("pages.signup.signupForm.form.errors.fieldRequired"),
+        .required("pages.signup.signupForm.form.errors.fieldRequired")
+        .matches(
+          EmailFormat,
+          "pages.signup.signupForm.form.errors.invalidEmail",
+        ),
       bestAbilityAcknowledgement: yup
         .boolean()
         .required("pages.signup.signupForm.form.errors.fieldRequired"),

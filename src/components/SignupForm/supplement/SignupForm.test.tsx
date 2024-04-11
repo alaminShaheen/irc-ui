@@ -93,6 +93,36 @@ describe("SignupForm", () => {
     expect(signupButton).toBeDisabled();
   });
 
+  it("shows error for email field when the email pattern is not correct", async () => {
+    await act(async () => {
+      fireEvent.change(emailField, {
+        target: { value: "agh2345$@adhfj.asdda" },
+      });
+      fireEvent.blur(emailField);
+    });
+
+    () => {
+      expect(
+        screen.getByText("pages.signup.signupForm.form.errors.invalidEmail"),
+      ).toBeInTheDocument();
+    };
+  });
+
+  it("shows no errors for email field when the email pattern is correct", async () => {
+    await act(async () => {
+      fireEvent.change(emailField, {
+        target: { value: "agh23_45@adhfj.asd" },
+      });
+      fireEvent.blur(emailField);
+    });
+
+    () => {
+      expect(
+        screen.getByText("pages.signup.signupForm.form.errors.invalidEmail"),
+      ).not.toBeInTheDocument();
+    };
+  });
+
   it("formats the phone number input as (xxx) xxx-xxxx when typing", async () => {
     const phoneNumberField = screen.getByLabelText(
       "pages.signup.signupForm.form.phoneNumber",
