@@ -239,7 +239,7 @@ const SignupForm = () => {
             {pageContent.phoneNumber}
           </label>
           <InputMask
-            mask="(___) ___-____"
+            mask="___________"
             replacement={{ _: /\d/ }}
             {...register("phoneNumber")}
             id="phoneNumber"

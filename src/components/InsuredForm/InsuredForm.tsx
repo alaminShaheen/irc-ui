@@ -3,6 +3,7 @@ import { ObjectSchema } from "yup";
 import { useForm } from "react-hook-form";
 import { InputMask } from "@react-input/mask";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useTranslation } from "react-i18next";
 import { useCallback, useEffect, useState } from "react";
 
 import Button from "@/components/ui/Button/Button";
@@ -10,7 +11,6 @@ import { InsuredFormModel } from "@/models/form/InsuredFormModel";
 import { IInsuredFormProps } from "@/components/InsuredForm/InsuredForm.d";
 import { cn, formatPhoneNumber } from "@/utils/helper";
 import { ButtonType, ButtonVariant } from "@/models/enums/ButtonVariant";
-import { useTranslation } from "react-i18next";
 
 const InsuredForm = (props: IInsuredFormProps) => {
   const {
@@ -115,8 +115,8 @@ const InsuredForm = (props: IInsuredFormProps) => {
               {telephoneNumLabel}
             </label>
             <InputMask
-              mask="(999) 999-9999"
-              replacement={{ 9: /\d/ }}
+              mask="___________"
+              replacement={{ _: /\d/ }}
               {...register("telephone")}
               id="telephone"
               className="input w-full py-5 lg:w-1/2"

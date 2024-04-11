@@ -1,6 +1,17 @@
-import { render, fireEvent, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import Sidebar from "../Sidebar";
+
+jest.mock("react-i18next", () => ({
+  useTranslation: () => ({
+    t: (key: string) => key,
+    i18n: { language: "en", changeLanguage: () => new Promise(() => {}) },
+  }),
+  initReactI18next: {
+    type: "3rdParty",
+    init: () => {},
+  },
+}));
 
 describe("Sidebar", () => {
   const toggleSidebarMock = jest.fn();
@@ -16,12 +27,5 @@ describe("Sidebar", () => {
   it("closes on overlay click", () => {
     fireEvent.click(screen.getByTestId("overlay"));
     expect(toggleSidebarMock).toHaveBeenCalled();
-  });
-
-  it("loads and displays translation content", () => {
-    () => {
-      const closeButton = screen.findByText(/close/i);
-      expect(closeButton).toBeInTheDocument();
-    };
   });
 });

@@ -18,6 +18,10 @@ jest.mock("react-i18next", () => ({
     t: (key: string) => key,
     i18n: { language: "en" },
   }),
+  initReactI18next: {
+    type: "3rdParty",
+    init: () => {},
+  },
 }));
 
 jest.mock("react-router-dom", () => ({
@@ -89,7 +93,7 @@ describe("SignupForm", () => {
     expect(mockedNavigate).toHaveBeenCalledWith(ROUTES.IDENTITY_CONFIRM);
   });
 
-  it("disables signup button until all fields and checkboxes are completed", async () => {
+  it("disables signup button until all fields and checkboxes are completed", () => {
     expect(signupButton).toBeDisabled();
   });
 
@@ -123,14 +127,14 @@ describe("SignupForm", () => {
     };
   });
 
-  it("formats the phone number input as (xxx) xxx-xxxx when typing", async () => {
+  it("formats the phone number input as xxxxxxxxxxx when typing", async () => {
     const phoneNumberField = screen.getByLabelText(
       "pages.signup.signupForm.form.phoneNumber",
     ) as HTMLInputElement;
 
-    await userEvent.type(phoneNumberField, "1234567890");
+    await userEvent.type(phoneNumberField, "12345678901");
 
-    expect(phoneNumberField.value).toBe("(123) 456-7890");
+    expect(phoneNumberField.value).toBe("12345678901");
   });
 
   it("shows errors for password field when criteria are not met", async () => {
@@ -141,17 +145,19 @@ describe("SignupForm", () => {
       fireEvent.blur(createPasswordField);
     });
 
-    () => {
-      expect(
-        screen.getByText("pageContent.minimumCharacters"),
-      ).toBeInTheDocument();
-      expect(screen.getByText("pageContent.uppercase")).toBeInTheDocument();
-      expect(screen.getByText("pageContent.numbers")).toBeInTheDocument();
-    };
+    expect(
+      screen.getByText("pages.signup.signupForm.form.minimumCharacters"),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText("pages.signup.signupForm.form.uppercase"),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText("pages.signup.signupForm.form.numbers"),
+    ).toBeInTheDocument();
   });
 
-  it("enables the signup button when all fields are valid", async () => {
-    await act(async () => {
+  it("enables the signup button when all fields are valid", () => {
+    act(() => {
       fireEvent.change(firstNameField, {
         target: { value: "John" },
       });
@@ -162,7 +168,7 @@ describe("SignupForm", () => {
         target: { value: "john.doe@example.com" },
       });
       fireEvent.change(phoneNumberField, {
-        target: { value: "(123) 456-7890" },
+        target: { value: "12345678901" },
       });
       fireEvent.change(createPasswordField, {
         target: { value: "Password123" },
@@ -171,9 +177,7 @@ describe("SignupForm", () => {
       fireEvent.click(checkBox2);
     });
 
-    await waitFor(() => {
-      expect(signupButton).toBeEnabled();
-    });
+    expect(signupButton).toBeEnabled();
   });
 
   it("navigates to the base step form on form submit", async () => {
@@ -188,7 +192,7 @@ describe("SignupForm", () => {
         target: { value: "john.doe@example.com" },
       });
       fireEvent.change(phoneNumberField, {
-        target: { value: "(123) 456-7890" },
+        target: { value: "12345678901" },
       });
       fireEvent.change(createPasswordField, {
         target: { value: "Password123" },

@@ -9,6 +9,17 @@ const mockContent = {
   emailAddressLabel: "Email Address",
 };
 
+jest.mock("react-i18next", () => ({
+  useTranslation: () => ({
+    t: (key: string) => key,
+    i18n: { language: "en", changeLanguage: () => new Promise(() => {}) },
+  }),
+  initReactI18next: {
+    type: "3rdParty",
+    init: () => {},
+  },
+}));
+
 describe("InsuredForm", () => {
   const onSaveMock = jest.fn();
   const onCancelMock = jest.fn();
@@ -27,10 +38,10 @@ describe("InsuredForm", () => {
   it("fills and submits the form", async () => {
     const nameInput = screen.getAllByLabelText("Name of Insured")[0];
 
-    userEvent.type(nameInput, "John");
+    await userEvent.type(nameInput, "John");
 
     const saveButton = screen.getByRole("button", { name: "Save" });
-    userEvent.click(saveButton);
+    await userEvent.click(saveButton);
 
     await waitFor(() => {
       expect(onSaveMock).toHaveBeenCalled();
@@ -39,7 +50,7 @@ describe("InsuredForm", () => {
 
   it("calls onCancel when cancel button is clicked", async () => {
     const cancelButton = screen.getByRole("button", { name: "Cancel" });
-    userEvent.click(cancelButton);
+    await userEvent.click(cancelButton);
 
     await waitFor(() => {
       expect(onCancelMock).toHaveBeenCalled();

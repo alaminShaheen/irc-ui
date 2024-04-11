@@ -2,6 +2,17 @@ import { render, fireEvent, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import PolicyCard from "../PolicyCard";
 
+jest.mock("react-i18next", () => ({
+  useTranslation: () => ({
+    t: (key: string) => key,
+    i18n: { language: "en", changeLanguage: () => new Promise(() => {}) },
+  }),
+  initReactI18next: {
+    type: "3rdParty",
+    init: () => {},
+  },
+}));
+
 const mockProps = {
   policy: {
     id: 123,
@@ -30,8 +41,12 @@ describe("PolicyCard Component", () => {
     render(<PolicyCard {...mockProps} />);
   });
 
-  it("renders correctly", () => {
-    expect(screen.getByText("Nom de la politique")).toBeInTheDocument();
+  it("renders title correctly", () => {
+    expect(screen.getByRole("heading", { level: 2 })).toBeInTheDocument();
+  });
+
+  it("renders subtitle correctly", () => {
+    expect(screen.getByRole("contentinfo")).toBeInTheDocument();
   });
 
   it("toggles the subtitle display on click", () => {
