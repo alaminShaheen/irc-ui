@@ -197,9 +197,13 @@ const SignupForm = () => {
             className="input w-full py-5"
             placeholder={pageContent.required}
             type="text"
+            aria-invalid={!!errors.firstName}
+            aria-describedby={errors.firstName ? "firstName-error" : undefined}
           />
           {errors.firstName?.message && (
-            <span className="error-warning">{t(errors.firstName.message)}</span>
+            <span className="error-warning" id="firstName-error">
+              {t(errors.firstName.message)}
+            </span>
           )}
         </div>
 
@@ -213,9 +217,13 @@ const SignupForm = () => {
             className="input w-full py-5"
             placeholder={pageContent.required}
             type="text"
+            aria-invalid={!!errors.lastName}
+            aria-describedby={errors.lastName ? "lastName-error" : undefined}
           />
           {errors.lastName?.message && (
-            <span className="error-warning">{t(errors.lastName.message)}</span>
+            <span className="error-warning" id="lastName-error">
+              {t(errors.lastName.message)}
+            </span>
           )}
         </div>
 
@@ -229,9 +237,13 @@ const SignupForm = () => {
             className="input w-full py-5"
             placeholder={pageContent.required}
             type="email"
+            aria-invalid={!!errors.email}
+            aria-describedby={errors.email ? "email-error" : undefined}
           />
           {errors.email?.message && (
-            <span className="error-warning">{t(errors.email.message)}</span>
+            <span className="error-warning" id="email-error">
+              {t(errors.email.message)}
+            </span>
           )}
         </div>
 
@@ -247,9 +259,13 @@ const SignupForm = () => {
             placeholder={pageContent.required}
             className="input w-full py-5"
             type="tel"
+            aria-invalid={!!errors.phoneNumber}
+            aria-describedby={
+              errors.phoneNumber ? "phoneNumber-error" : undefined
+            }
           />
           {errors.phoneNumber?.message && (
-            <span className="error-warning">
+            <span className="error-warning" id="phoneNumber-error">
               {t(errors.phoneNumber.message)}
             </span>
           )}
@@ -274,9 +290,13 @@ const SignupForm = () => {
             className="input w-full py-5"
             placeholder={pageContent.required}
             type={showPassword ? "text" : "password"}
+            aria-invalid={!!errors.password}
+            aria-describedby={errors.password ? "password-error" : undefined}
           />
           {errors.password?.message && (
-            <span className="error-warning">{t(errors.password.message)}</span>
+            <span className="error-warning" id="password-error">
+              {t(errors.password.message)}
+            </span>
           )}
         </div>
 
@@ -371,7 +391,7 @@ const SignupForm = () => {
             <Checkbox
               {...register("bestAbilityAcknowledgement")}
               id="bestAbilityAcknowledgement"
-              type="checkbox"
+              aria-invalid={!!errors.bestAbilityAcknowledgement}
             />
           </div>
           <label
@@ -389,7 +409,7 @@ const SignupForm = () => {
             <Checkbox
               {...register("personalInformationCollectionAgreement")}
               id="personalInformationCollectionAgreement"
-              type="checkbox"
+              aria-invalid={!!errors.personalInformationCollectionAgreement}
             />
           </div>
           <label

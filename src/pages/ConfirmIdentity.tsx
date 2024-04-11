@@ -19,14 +19,14 @@ const ConfirmIdentity = () => {
   return (
     <div className="flex items-center justify-center px-4 py-11">
       <Helmet title={t("pages.confirmIdentity.seo.title")} />
-      <section className="w-[1018px]">
+      <section className="w-[1034px]">
         <Button
           variant={ButtonVariant.TRANSPARENT}
           className="flex gap-x-2 p-0"
           icon={<Back />}
           iconPosition={IconPosition.LEFT}
         >
-          <Link to={ROUTES.SIGNUP} className="text-secondary">
+          <Link to={ROUTES.SIGNUP} className="text-secondary underline">
             {pageContent.backToSignUp}
           </Link>
         </Button>
