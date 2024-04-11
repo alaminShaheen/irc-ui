@@ -1,16 +1,17 @@
 import * as yup from "yup";
-import { ObjectSchema } from "yup";
 import { useForm } from "react-hook-form";
 import { InputMask } from "@react-input/mask";
 import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { ObjectSchema } from "yup";
 import { useTranslation } from "react-i18next";
 
 import { cn } from "@/utils/helper";
 import ROUTES from "@/constants/Routes";
 import Button from "@/components/ui/Button";
 import Checkbox from "@/components/ui/Checkbox";
+import EmailFormat from "@/constants/EmailFormat";
 import AlertInfoOutline from "@/components/AppIcons/AlertInfoOutline";
 import { ConfirmIdentityFormModel } from "@/models/form/ConfirmIdentityFormModel";
 import { ButtonType, ButtonVariant } from "@/models/enums/ButtonVariant";
@@ -38,7 +39,8 @@ const ConfirmIdentityForm = () => {
     .shape({
       email: yup
         .string()
-        .required("pages.confirmIdentity.form.errors.fieldRequired"),
+        .required("pages.confirmIdentity.form.errors.fieldRequired")
+        .matches(EmailFormat, "pages.confirmIdentity.form.errors.invalidEmail"),
       bestAbilityAcknowledgement: yup
         .boolean()
         .required("pages.confirmIdentity.form.errors.fieldRequired"),
@@ -53,7 +55,8 @@ const ConfirmIdentityForm = () => {
         .required("pages.confirmIdentity.form.errors.fieldRequired"),
       phoneNumber: yup
         .string()
-        .required("pages.confirmIdentity.form.errors.fieldRequired"),
+        .required("pages.confirmIdentity.form.errors.fieldRequired")
+        .min(11, "pages.confirmIdentity.form.errors.phoneNumberMinLength"),
     });
 
   const {
@@ -95,7 +98,7 @@ const ConfirmIdentityForm = () => {
           <span className="opacity-60">{pageContent.allFieldsRequired}</span>
         </p>
 
-        <div className="grid lg:grid-cols-[554px_1fr] lg:gap-x-6">
+        <div className="grid gap-y-[6px] lg:grid-cols-[554px_1fr] lg:gap-x-6">
           <div
             className={cn("form-group", {
               "has-error": errors.firstName,
@@ -117,7 +120,7 @@ const ConfirmIdentityForm = () => {
               </span>
             )}
           </div>
-          <p className="hidden gap-x-[6px] font-normal lg:flex">
+          <p className="inline-flex gap-x-[6px] font-normal">
             <span>{<AlertInfoOutline />}</span>
             <span className="opacity-60">{pageContent.identityInfo}</span>
           </p>
@@ -142,7 +145,7 @@ const ConfirmIdentityForm = () => {
           )}
         </div>
 
-        <div className="grid lg:grid-cols-[554px_1fr] lg:gap-x-6">
+        <div className="grid gap-y-[6px] lg:grid-cols-[554px_1fr] lg:gap-x-6">
           <div
             className={cn("form-group", {
               "has-error": errors.email,
@@ -161,13 +164,13 @@ const ConfirmIdentityForm = () => {
               <span className="error-warning">{t(errors.email.message)}</span>
             )}
           </div>
-          <p className="hidden gap-x-[6px] font-normal lg:flex">
+          <p className="inline-flex gap-x-[6px] font-normal">
             <span>{<AlertInfoOutline />}</span>
             <span className="opacity-60">{pageContent.emailInfo}</span>
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-[554px_1fr] lg:gap-x-6">
+        <div className="grid gap-y-[6px] lg:grid-cols-[554px_1fr] lg:gap-x-6">
           <div
             className={cn("form-group", {
               "has-error": errors.phoneNumber,
@@ -190,13 +193,13 @@ const ConfirmIdentityForm = () => {
               </span>
             )}
           </div>
-          <p className="hidden gap-x-[6px] font-normal lg:flex">
+          <p className="inline-flex gap-x-[6px] font-normal">
             <span>{<AlertInfoOutline />}</span>
             <span className="opacity-60">{pageContent.phoneNumberInfo}</span>
           </p>
         </div>
 
-        <div className="form-radio-checkbox-group !items-start">
+        <div className="form-radio-checkbox-group mt-[6px] !items-start lg:mt-4">
           <div className="flex items-center justify-center">
             <Checkbox
               {...register("bestAbilityAcknowledgement")}
@@ -231,7 +234,7 @@ const ConfirmIdentityForm = () => {
         <Button
           disabled={formDisabled}
           name="confirm-identity-submit-button"
-          className="!mt-8 w-full rounded-md px-28 py-3 text-xl lg:w-auto"
+          className="!mt-8 w-full rounded-md px-28 py-3 text-xl lg:w-[554px]"
           variant={
             formDisabled ? ButtonVariant.DISABLED : ButtonVariant.PRIMARY
           }

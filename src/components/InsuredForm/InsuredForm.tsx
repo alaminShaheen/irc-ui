@@ -11,6 +11,7 @@ import { InsuredFormModel } from "@/models/form/InsuredFormModel";
 import { IInsuredFormProps } from "@/components/InsuredForm/InsuredForm.d";
 import { cn, formatPhoneNumber } from "@/utils/helper";
 import { ButtonType, ButtonVariant } from "@/models/enums/ButtonVariant";
+import EmailFormat from "@/constants/EmailFormat";
 
 const InsuredForm = (props: IInsuredFormProps) => {
   const {
@@ -23,6 +24,8 @@ const InsuredForm = (props: IInsuredFormProps) => {
       telephoneNumLabel,
       emailAddressLabel,
       fieldRequiredKey,
+      invalidEmailKey,
+      phoneNumberMinLengthKey,
     },
   } = props;
   const { t } = useTranslation();
@@ -31,8 +34,14 @@ const InsuredForm = (props: IInsuredFormProps) => {
     .shape({
       name: yup.string().required(fieldRequiredKey),
       address: yup.string().required(fieldRequiredKey),
-      telephone: yup.string().required(fieldRequiredKey),
-      email: yup.string().required(fieldRequiredKey),
+      telephone: yup
+        .string()
+        .required(fieldRequiredKey)
+        .min(11, phoneNumberMinLengthKey),
+      email: yup
+        .string()
+        .required(fieldRequiredKey)
+        .matches(EmailFormat, invalidEmailKey),
     });
 
   const {
@@ -55,7 +64,7 @@ const InsuredForm = (props: IInsuredFormProps) => {
     name: "John Doe",
     email: "myemail@gmail.com",
     address: "[Address]",
-    telephone: "4372345678",
+    telephone: "43723456781",
   });
 
   const onFormSubmit = useCallback(

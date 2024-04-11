@@ -94,7 +94,8 @@ const SignupForm = () => {
         .required("pages.signup.signupForm.form.errors.fieldRequired"),
       phoneNumber: yup
         .string()
-        .required("pages.signup.signupForm.form.errors.fieldRequired"),
+        .required("pages.signup.signupForm.form.errors.fieldRequired")
+        .min(11, "pages.signup.signupForm.form.errors.phoneNumberMinLength"),
     });
 
   const {

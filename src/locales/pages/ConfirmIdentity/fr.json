@@ -17,7 +17,9 @@
     "checkbox2Label": "FR-I understand and agree that the personal information collected through this purchasing process will be shared with the Insurance Broker, Insurance Underwriters, in the event of a claim Third Party Claims Adjusters, and other companies or individuals required to service your insurance requirements and needs. Additionally, I have read and agree to the Privacy Policy contained in your portal.",
     "confirm": "FR-Confirm",
     "errors": {
-      "fieldRequired": "FR-This field is required"
+      "fieldRequired": "FR-This field is required",
+      "invalidEmail": "Invalid email format",
+      "phoneNumberMinLength": "FR-Phone number must be 11 digits long."
     }
   }
 }

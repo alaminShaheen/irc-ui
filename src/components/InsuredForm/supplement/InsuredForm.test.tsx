@@ -51,9 +51,6 @@ describe("InsuredForm", () => {
   it("calls onCancel when cancel button is clicked", async () => {
     const cancelButton = screen.getByRole("button", { name: "Cancel" });
     await userEvent.click(cancelButton);
-
-    await waitFor(() => {
-      expect(onCancelMock).toHaveBeenCalled();
-    });
+    expect(onCancelMock).toHaveBeenCalled();
   });
 });

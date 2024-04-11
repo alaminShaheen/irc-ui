@@ -82,13 +82,82 @@ describe("ConfirmIdentityForm", () => {
     expect(submitButton).toBeInTheDocument();
   });
 
-  test("Phone number is formatted properly as xxxxxxxxxxx when typing", async () => {
-    await userEvent.type(phoneNumberField, "12345678901");
-    expect((phoneNumberField as HTMLInputElement).value).toBe("12345678901");
+  describe("Email validations", () => {
+    it("show error for invalid email", async () => {
+      await act(async () => {
+        fireEvent.change(emailField, {
+          target: { value: "agh2345$@adhfj.asdda" },
+        });
+        fireEvent.blur(emailField);
+      });
+
+      expect(
+        screen.getByText("pages.confirmIdentity.form.errors.invalidEmail"),
+      ).toBeInTheDocument();
+    });
+
+    it("don't show errors for valid email", async () => {
+      await act(async () => {
+        fireEvent.change(emailField, {
+          target: { value: "agh23_45@adhfj.asd" },
+        });
+        fireEvent.blur(emailField);
+      });
+
+      expect(
+        screen.queryByText("pages.confirmIdentity.form.errors.invalidEmail"),
+      ).not.toBeInTheDocument();
+    });
+
+    it("show error for empty email", async () => {
+      await act(async () => {
+        fireEvent.blur(emailField);
+      });
+
+      expect(
+        screen.getByText("pages.confirmIdentity.form.errors.fieldRequired"),
+      ).toBeInTheDocument();
+    });
+  });
+
+  describe("Phone number validations", () => {
+    it("show error for empty phone number", async () => {
+      await act(async () => {
+        fireEvent.blur(phoneNumberField);
+      });
+
+      expect(
+        screen.getByText("pages.confirmIdentity.form.errors.fieldRequired"),
+      ).toBeInTheDocument();
+    });
+
+    it("show error for invalid phone number", async () => {
+      await userEvent.type(phoneNumberField, "12344");
+      await act(async () => {
+        fireEvent.blur(phoneNumberField);
+      });
+
+      expect(
+        screen.getByText(
+          "pages.confirmIdentity.form.errors.phoneNumberMinLength",
+        ),
+      ).toBeInTheDocument();
+    });
+
+    it("accepts only 11 digits as input", async () => {
+      const wrongInput = "@!#,s u h12bu1h 2b121111928392839238jh21jh12";
+      const correctInput = Array.from(wrongInput)
+        .filter((char) => char.match(/\d+/))
+        .slice(0, 11)
+        .join("");
+      await userEvent.type(phoneNumberField, wrongInput);
+      expect((phoneNumberField as HTMLInputElement).value).toBe(correctInput);
+      expect((phoneNumberField as HTMLInputElement).value).toHaveLength(11);
+    });
   });
 
   test("Submit button remains disabled until all fields are populated", async () => {
-    await userEvent.type(phoneNumberField, "1234567890");
+    await userEvent.type(phoneNumberField, "12345678901");
     expect(submitButton).toBeDisabled();
     await userEvent.type(firstNameField, "hello");
     expect(submitButton).toBeDisabled();
