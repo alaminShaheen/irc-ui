@@ -38,7 +38,7 @@ const ConfirmIdentityForm = () => {
           className="inline-flex items-center gap-x-1 font-bold text-primary underline"
         >
           application agreement
-          <ExternalLink className=""></ExternalLink>
+          <ExternalLink />
         </a>
       </Trans>
     ),
@@ -51,7 +51,7 @@ const ConfirmIdentityForm = () => {
           className="inline-flex items-center gap-x-1 font-bold text-primary underline"
         >
           privacy policy
-          <ExternalLink className=""></ExternalLink>
+          <ExternalLink />
         </a>
       </Trans>
     ),

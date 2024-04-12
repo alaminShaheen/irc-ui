@@ -58,7 +58,7 @@ const SignupForm = () => {
           className="inline-flex items-center gap-x-1 font-bold text-primary underline"
         >
           application agreement
-          <ExternalLink className=""></ExternalLink>
+          <ExternalLink />
         </a>
       </Trans>
     ),
@@ -71,7 +71,7 @@ const SignupForm = () => {
           className="inline-flex items-center gap-x-1 font-bold text-primary underline"
         >
           privacy policy
-          <ExternalLink className=""></ExternalLink>
+          <ExternalLink />
         </a>
       </Trans>
     ),
