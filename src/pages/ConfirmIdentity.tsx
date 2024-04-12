@@ -19,7 +19,7 @@ const ConfirmIdentity = () => {
   return (
     <div className="flex items-center justify-center px-4 py-11">
       <Helmet title={t("pages.confirmIdentity.seo.title")} />
-      <section className="w-[1034px]">
+      <section className="w-full lg:w-[1110px]">
         <Button
           variant={ButtonVariant.TRANSPARENT}
           className="flex gap-x-2 p-0"

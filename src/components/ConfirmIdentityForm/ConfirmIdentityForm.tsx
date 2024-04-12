@@ -12,10 +12,10 @@ import ROUTES from "@/constants/Routes";
 import Button from "@/components/ui/Button";
 import Checkbox from "@/components/ui/Checkbox";
 import EmailFormat from "@/constants/EmailFormat";
+import ExternalLink from "@/components/AppIcons/ExternalLink";
 import AlertInfoOutline from "@/components/AppIcons/AlertInfoOutline";
 import { ConfirmIdentityFormModel } from "@/models/form/ConfirmIdentityFormModel";
 import { ButtonType, ButtonVariant } from "@/models/enums/ButtonVariant";
-import ExternalLink from "@/components/AppIcons/ExternalLink";
 
 const ConfirmIdentityForm = () => {
   const { t } = useTranslation();
@@ -133,7 +133,7 @@ const ConfirmIdentityForm = () => {
           <input
             {...register("firstName")}
             id="firstName"
-            className="input w-full py-5 lg:max-w-[486px]"
+            className="input w-full py-5 lg:max-w-[554px]"
             type="text"
             aria-invalid={!!errors.firstName}
             aria-describedby={errors.firstName ? "firstName-error" : undefined}
@@ -162,7 +162,7 @@ const ConfirmIdentityForm = () => {
         <input
           {...register("lastName")}
           id="lastName"
-          className="input w-full py-5 lg:max-w-[486px]"
+          className="input w-full py-5 lg:max-w-[554px]"
           type="text"
           aria-invalid={!!errors.lastName}
           aria-describedby={errors.lastName ? "lastName-error" : undefined}
@@ -186,7 +186,7 @@ const ConfirmIdentityForm = () => {
           <input
             {...register("email")}
             id="email"
-            className="input w-full py-5 lg:max-w-[486px]"
+            className="input w-full py-5 lg:max-w-[554px]"
             type="email"
             aria-invalid={!!errors.email}
             aria-describedby={errors.email ? "email-error" : undefined}
@@ -217,7 +217,7 @@ const ConfirmIdentityForm = () => {
             replacement={{ _: /\d/ }}
             {...register("phoneNumber")}
             id="phoneNumber"
-            className="input w-full py-5 lg:max-w-[486px]"
+            className="input w-full py-5 lg:max-w-[554px]"
             type="tel"
             aria-invalid={!!errors.phoneNumber}
             aria-describedby={
@@ -236,7 +236,7 @@ const ConfirmIdentityForm = () => {
         )}
       </div>
 
-      <div className="form-radio-checkbox-group mt-[6px] !items-start lg:mt-4">
+      <div className="form-radio-checkbox-group mt-[6px] w-full !items-start lg:mt-4 lg:max-w-[554px]">
         <div className="flex items-center justify-center">
           <Checkbox
             {...register("bestAbilityAcknowledgement")}
@@ -254,7 +254,7 @@ const ConfirmIdentityForm = () => {
 
       <div className={cn(`ml-auto h-1 border-t border-primary-300`)} />
 
-      <div className="form-radio-checkbox-group !items-start">
+      <div className="form-radio-checkbox-group w-full items-center lg:max-w-[554px]">
         <div className="flex items-center justify-center">
           <Checkbox
             {...register("personalInformationCollectionAgreement")}
