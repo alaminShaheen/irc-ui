@@ -61,11 +61,11 @@ describe("ConfirmIdentityForm", () => {
     });
 
     checkBox1 = screen.getByRole("checkbox", {
-      name: "pages.confirmIdentity.form.checkbox1Label",
+      name: "common.disclaimer.checkbox1Label",
     });
 
     checkBox2 = screen.getByRole("checkbox", {
-      name: "pages.confirmIdentity.form.checkbox2Label",
+      name: "common.disclaimer.checkbox2Label",
     });
 
     submitButton = screen.getByRole("button", {

@@ -39,5 +39,9 @@
     "waiverOfAdultParticipants": "Waiver of Adult Participants",
     "paradeApplicationForm": "Parade Application Form",
     "largeEventApplicationForm": "Large Event Application Form"
+  },
+  "disclaimer": {
+    "checkbox1Label": "I understand and agree to the use of <1>application agreement <1></1></1>",
+    "checkbox2Label": "I understand and agree the information submitted will be used in line with our <1>privacy policy <1></1></1>"
   }
 }

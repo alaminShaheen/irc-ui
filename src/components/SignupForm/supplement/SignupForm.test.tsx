@@ -8,7 +8,7 @@ import {
 import userEvent from "@testing-library/user-event";
 import { BrowserRouter as Router } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import SignupForm from "../SignupForm";
+import SignupForm from "@/components/SignupForm";
 import ROUTES from "@/constants/Routes";
 
 type FormElement = HTMLInputElement | HTMLButtonElement | HTMLLabelElement;
@@ -18,6 +18,7 @@ jest.mock("react-i18next", () => ({
     t: (key: string) => key,
     i18n: { language: "en" },
   }),
+  Trans: ({ i18nKey }: { i18nKey: string }) => i18nKey,
   initReactI18next: {
     type: "3rdParty",
     init: () => {},
@@ -67,10 +68,10 @@ describe("SignupForm", () => {
       "pages.signup.signupForm.form.signUp",
     ) as FormElement;
     checkBox1 = screen.getByLabelText(
-      "pages.signup.signupForm.form.checkbox1Label",
+      "common.disclaimer.checkbox1Label",
     ) as FormElement;
     checkBox2 = screen.getByLabelText(
-      "pages.signup.signupForm.form.checkbox2Label",
+      "common.disclaimer.checkbox2Label",
     ) as FormElement;
   });
 
@@ -80,6 +81,8 @@ describe("SignupForm", () => {
     expect(emailField).toBeInTheDocument();
     expect(phoneNumberField).toBeInTheDocument();
     expect(createPasswordField).toBeInTheDocument();
+    expect(checkBox1).toBeInTheDocument();
+    expect(checkBox2).toBeInTheDocument();
     expect(signupButton).toBeInTheDocument();
   });
 

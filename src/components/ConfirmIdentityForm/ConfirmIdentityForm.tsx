@@ -10,12 +10,12 @@ import { Trans, useTranslation } from "react-i18next";
 import { cn } from "@/utils/helper";
 import ROUTES from "@/constants/Routes";
 import Button from "@/components/ui/Button";
-import Checkbox from "@/components/ui/Checkbox";
 import EmailFormat from "@/constants/EmailFormat";
 import ExternalLink from "@/components/AppIcons/ExternalLink";
 import AlertInfoOutline from "@/components/AppIcons/AlertInfoOutline";
 import { ConfirmIdentityFormModel } from "@/models/form/ConfirmIdentityFormModel";
 import { ButtonType, ButtonVariant } from "@/models/enums/ButtonVariant";
+import Checkbox from "@/components/ui/Checkbox";
 
 const ConfirmIdentityForm = () => {
   const { t } = useTranslation();
@@ -31,7 +31,7 @@ const ConfirmIdentityForm = () => {
     emailInfo: t("pages.confirmIdentity.form.emailInfo"),
     phoneNumberInfo: t("pages.confirmIdentity.form.phoneNumberInfo"),
     checkbox1Label: (
-      <Trans i18nKey="pages.confirmIdentity.form.checkbox1Label">
+      <Trans i18nKey="common.disclaimer.checkbox1Label">
         I understand and agree to the use of
         <a
           href="#"
@@ -43,7 +43,7 @@ const ConfirmIdentityForm = () => {
       </Trans>
     ),
     checkbox2Label: (
-      <Trans i18nKey="pages.confirmIdentity.form.checkbox2Label">
+      <Trans i18nKey="common.disclaimer.checkbox2Label">
         I understand and agree the information submitted will be used in line
         with our
         <a
@@ -252,7 +252,9 @@ const ConfirmIdentityForm = () => {
         </label>
       </div>
 
-      <div className={cn(`ml-auto h-1 border-t border-primary-300`)} />
+      <div
+        className={cn(`ml-auto h-1 border-t border-primary-300 md:hidden`)}
+      />
 
       <div className="form-radio-checkbox-group w-full items-center lg:max-w-[554px]">
         <div className="flex items-center justify-center">

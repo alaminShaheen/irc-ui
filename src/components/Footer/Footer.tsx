@@ -1,10 +1,10 @@
 import { IFooterProps } from "./Footer.d";
-import { FaFacebookF } from "react-icons/fa6";
-import { FaInstagram } from "react-icons/fa6";
-import { FaXTwitter } from "react-icons/fa6";
+import FacabookIcon from "@/components/AppIcons/FacebookIcon";
+import LinkedinIcon from "@/components/AppIcons/LinkedinIcon";
 
 import Icon from "@/components/ui/Icon";
 import footerLogo from "../../assets/images/footer-logo.png";
+import instaIcon from "../../assets/images/insta-icon.png";
 
 const Footer = ({ content }: IFooterProps) => {
   const {
@@ -32,21 +32,15 @@ const Footer = ({ content }: IFooterProps) => {
           {body}
         </p>
         <div className="mt-[47.5px] flex justify-start md:mr-[130px] md:justify-end">
-          <div className="flex w-24 justify-between">
-            <a href="#" target="_blank">
-              <div className="flex h-6 w-6 items-end justify-center rounded-full bg-white text-primary">
-                <FaFacebookF size={22} />
-              </div>
+          <div className="flex w-32 justify-between">
+            <a data-testid="social-icon" href="#" target="_blank">
+              <Icon src={<FacabookIcon />} />
             </a>
-            <a href="#" target="_blank">
-              <div className="flex h-6 w-6 items-center justify-center rounded-full bg-white text-graphite-600">
-                <FaInstagram />
-              </div>
+            <a data-testid="social-icon" href="#" target="_blank">
+              <Icon className="h-[35px] w-[35px]" src={instaIcon} />
             </a>
-            <a href="#" target="_blank">
-              <div className="flex h-6 w-6 items-center justify-center rounded-full bg-white text-graphite-600">
-                <FaXTwitter />
-              </div>
+            <a data-testid="social-icon" href="#" target="_blank">
+              <Icon src={<LinkedinIcon />} />
             </a>
           </div>
         </div>
