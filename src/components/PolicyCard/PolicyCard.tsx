@@ -6,10 +6,10 @@ import { cn } from "@/utils/helper";
 import Button from "@/components/ui/Button";
 import useToggle from "@/hooks/useToggle";
 import EventCard from "@/components/EventCard/EventCard";
-import AddEventIcon from "../AppIcons/AddEvent";
+import AddEventIcon from "@/components/AppIcons/AddEvent";
 import { IPolicyCard } from "@/components/PolicyCard/PolicyCard.d";
 import { LanguageCode } from "@/models/enums/LanguageCode";
-import AddEventFilledIcon from "../AppIcons/AddEventFilled";
+import AddEventFilledIcon from "@/components/AppIcons/AddEventFilled";
 import { ButtonVariant, IconPosition } from "@/models/enums/ButtonVariant";
 
 const PolicyCard = (props: IPolicyCard) => {
@@ -62,6 +62,7 @@ const PolicyCard = (props: IPolicyCard) => {
               className={cn("text-graphite-700", {
                 "w-2/3 truncate": !showMoreSubtitle,
               })}
+              role="contentinfo"
             >
               {currentLanguage === LanguageCode.ENGLISH
                 ? subtitle

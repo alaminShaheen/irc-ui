@@ -1,12 +1,12 @@
+import { Helmet } from "react-helmet-async";
 import { useTranslation } from "react-i18next";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import { Helmet } from "react-helmet-async";
 
 import Quote from "@/pages/Quote";
 import Signup from "@/pages/Signup";
 import ROUTES from "@/constants/Routes";
 import Layout from "@/components/Layout/Layout";
-import IsThisYou from "@/pages/IsThisYou";
+import ConfirmIdentity from "@/pages/ConfirmIdentity";
 import AddEventForm from "@/components/Stepper/AddEventForm/AddEventForm";
 import StepperContainer from "@/components/Stepper/StepperContainer/StepperContainer";
 import { ThemeProvider } from "@/context/ThemeContext";
@@ -84,7 +84,10 @@ function App() {
                 />
                 <Route path={ROUTES.SIGNUP} element={<Signup />} />
                 <Route path={ROUTES.QUOTE} element={<Quote />} />
-                <Route path={ROUTES.IDENTITY_CONFIRM} element={<IsThisYou />} />
+                <Route
+                  path={ROUTES.IDENTITY_CONFIRM}
+                  element={<ConfirmIdentity />}
+                />
                 <Route
                   path={ROUTES.STEPPER_FORM.BASE}
                   element={<StepperContainer steps={stepperSteps} />}

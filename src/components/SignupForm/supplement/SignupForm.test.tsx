@@ -18,6 +18,10 @@ jest.mock("react-i18next", () => ({
     t: (key: string) => key,
     i18n: { language: "en" },
   }),
+  initReactI18next: {
+    type: "3rdParty",
+    init: () => {},
+  },
 }));
 
 jest.mock("react-router-dom", () => ({
@@ -89,69 +93,104 @@ describe("SignupForm", () => {
     expect(mockedNavigate).toHaveBeenCalledWith(ROUTES.IDENTITY_CONFIRM);
   });
 
-  it("disables signup button until all fields and checkboxes are completed", async () => {
+  it("disables signup button until all fields and checkboxes are completed", () => {
     expect(signupButton).toBeDisabled();
   });
 
-  it("shows error for email field when the email pattern is not correct", async () => {
-    await act(async () => {
-      fireEvent.change(emailField, {
-        target: { value: "agh2345$@adhfj.asdda" },
+  describe("Email validations", () => {
+    it("show error for invalid email", async () => {
+      await act(async () => {
+        fireEvent.change(emailField, {
+          target: { value: "agh2345$@adhfj.asdda" },
+        });
+        fireEvent.blur(emailField);
       });
-      fireEvent.blur(emailField);
-    });
 
-    () => {
       expect(
         screen.getByText("pages.signup.signupForm.form.errors.invalidEmail"),
       ).toBeInTheDocument();
-    };
-  });
-
-  it("shows no errors for email field when the email pattern is correct", async () => {
-    await act(async () => {
-      fireEvent.change(emailField, {
-        target: { value: "agh23_45@adhfj.asd" },
-      });
-      fireEvent.blur(emailField);
     });
 
-    () => {
+    it("don't show errors for valid email", async () => {
+      await act(async () => {
+        fireEvent.change(emailField, {
+          target: { value: "agh23_45@adhfj.asd" },
+        });
+        fireEvent.blur(emailField);
+      });
+
       expect(
-        screen.getByText("pages.signup.signupForm.form.errors.invalidEmail"),
+        screen.queryByText("pages.signup.signupForm.form.errors.invalidEmail"),
       ).not.toBeInTheDocument();
-    };
+    });
+
+    it("show error for empty email", async () => {
+      await act(async () => {
+        fireEvent.blur(emailField);
+      });
+
+      expect(
+        screen.getByText("pages.signup.signupForm.form.errors.fieldRequired"),
+      ).toBeInTheDocument();
+    });
   });
 
-  it("formats the phone number input as (xxx) xxx-xxxx when typing", async () => {
-    const phoneNumberField = screen.getByLabelText(
-      "pages.signup.signupForm.form.phoneNumber",
-    ) as HTMLInputElement;
+  describe("Phone number validations", () => {
+    it("show error for empty phone number", async () => {
+      await act(async () => {
+        fireEvent.blur(phoneNumberField);
+      });
 
-    await userEvent.type(phoneNumberField, "1234567890");
+      expect(
+        screen.getByText("pages.signup.signupForm.form.errors.fieldRequired"),
+      ).toBeInTheDocument();
+    });
 
-    expect(phoneNumberField.value).toBe("(123) 456-7890");
+    it("show error for invalid phone number", async () => {
+      await userEvent.type(phoneNumberField, "12344");
+      await act(async () => {
+        fireEvent.blur(phoneNumberField);
+      });
+
+      expect(
+        screen.getByText(
+          "pages.signup.signupForm.form.errors.phoneNumberMinLength",
+        ),
+      ).toBeInTheDocument();
+    });
+
+    it("accepts only 11 digits as input", async () => {
+      const wrongInput = "@!#,s u h12bu1h 2b121111928392839238jh21jh12";
+      const correctInput = Array.from(wrongInput)
+        .filter((char) => char.match(/\d+/))
+        .slice(0, 11)
+        .join("");
+      await userEvent.type(phoneNumberField, wrongInput);
+      expect((phoneNumberField as HTMLInputElement).value).toBe(correctInput);
+      expect((phoneNumberField as HTMLInputElement).value).toHaveLength(11);
+    });
   });
 
   it("shows errors for password field when criteria are not met", async () => {
+    await userEvent.type(phoneNumberField, "badpass");
+
     await act(async () => {
-      fireEvent.change(createPasswordField, {
-        target: { value: "badpass" },
-      });
       fireEvent.blur(createPasswordField);
     });
 
-    () => {
-      expect(
-        screen.getByText("pageContent.minimumCharacters"),
-      ).toBeInTheDocument();
-      expect(screen.getByText("pageContent.uppercase")).toBeInTheDocument();
-      expect(screen.getByText("pageContent.numbers")).toBeInTheDocument();
-    };
+    expect(
+      screen.getByText("pages.signup.signupForm.form.minimumCharacters"),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText("pages.signup.signupForm.form.uppercase"),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText("pages.signup.signupForm.form.numbers"),
+    ).toBeInTheDocument();
   });
 
-  it("enables the signup button when all fields are valid", async () => {
-    await act(async () => {
+  it("enables the signup button when all fields are valid", () => {
+    act(() => {
       fireEvent.change(firstNameField, {
         target: { value: "John" },
       });
@@ -162,7 +201,7 @@ describe("SignupForm", () => {
         target: { value: "john.doe@example.com" },
       });
       fireEvent.change(phoneNumberField, {
-        target: { value: "(123) 456-7890" },
+        target: { value: "12345678901" },
       });
       fireEvent.change(createPasswordField, {
         target: { value: "Password123" },
@@ -171,9 +210,7 @@ describe("SignupForm", () => {
       fireEvent.click(checkBox2);
     });
 
-    await waitFor(() => {
-      expect(signupButton).toBeEnabled();
-    });
+    expect(signupButton).toBeEnabled();
   });
 
   it("navigates to the base step form on form submit", async () => {
@@ -188,7 +225,7 @@ describe("SignupForm", () => {
         target: { value: "john.doe@example.com" },
       });
       fireEvent.change(phoneNumberField, {
-        target: { value: "(123) 456-7890" },
+        target: { value: "12345678901" },
       });
       fireEvent.change(createPasswordField, {
         target: { value: "Password123" },

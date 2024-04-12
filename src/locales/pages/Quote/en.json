@@ -10,7 +10,9 @@
     "addressOfInsuredLabel": "Address of Insured:",
     "telephoneNumLabel": "Telephone number:",
     "emailAddressLabel": "Email address:",
-    "fieldRequired": "This field is required."
+    "fieldRequired": "This field is required.",
+    "invalidEmail": "Invalid email format.",
+    "phoneNumberMinLength": "Phone number must be 11 digits long."
   },
   "yourPolicies": {
     "title": "Your Policies",

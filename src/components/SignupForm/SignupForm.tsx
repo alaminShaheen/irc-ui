@@ -94,7 +94,8 @@ const SignupForm = () => {
         .required("pages.signup.signupForm.form.errors.fieldRequired"),
       phoneNumber: yup
         .string()
-        .required("pages.signup.signupForm.form.errors.fieldRequired"),
+        .required("pages.signup.signupForm.form.errors.fieldRequired")
+        .min(11, "pages.signup.signupForm.form.errors.phoneNumberMinLength"),
     });
 
   const {
@@ -116,9 +117,8 @@ const SignupForm = () => {
     resolver: yupResolver(formValidationSchema),
   });
   const formDisabled =
-    !watch("personalInformationCollectionAgreement") ||
-    !watch("bestAbilityAcknowledgement") ||
-    Object.entries(errors).length > 0;
+    Object.entries(errors).length > 0 ||
+    Object.values(watch()).some((value) => !value);
 
   const onFormSubmit = useCallback(() => {
     navigate(ROUTES.STEPPER_FORM.BASE);
@@ -197,9 +197,13 @@ const SignupForm = () => {
             className="input w-full py-5"
             placeholder={pageContent.required}
             type="text"
+            aria-invalid={!!errors.firstName}
+            aria-describedby={errors.firstName ? "firstName-error" : undefined}
           />
           {errors.firstName?.message && (
-            <span className="error-warning">{t(errors.firstName.message)}</span>
+            <span className="error-warning" id="firstName-error">
+              {t(errors.firstName.message)}
+            </span>
           )}
         </div>
 
@@ -213,9 +217,13 @@ const SignupForm = () => {
             className="input w-full py-5"
             placeholder={pageContent.required}
             type="text"
+            aria-invalid={!!errors.lastName}
+            aria-describedby={errors.lastName ? "lastName-error" : undefined}
           />
           {errors.lastName?.message && (
-            <span className="error-warning">{t(errors.lastName.message)}</span>
+            <span className="error-warning" id="lastName-error">
+              {t(errors.lastName.message)}
+            </span>
           )}
         </div>
 
@@ -229,9 +237,13 @@ const SignupForm = () => {
             className="input w-full py-5"
             placeholder={pageContent.required}
             type="email"
+            aria-invalid={!!errors.email}
+            aria-describedby={errors.email ? "email-error" : undefined}
           />
           {errors.email?.message && (
-            <span className="error-warning">{t(errors.email.message)}</span>
+            <span className="error-warning" id="email-error">
+              {t(errors.email.message)}
+            </span>
           )}
         </div>
 
@@ -240,16 +252,20 @@ const SignupForm = () => {
             {pageContent.phoneNumber}
           </label>
           <InputMask
-            mask="(___) ___-____"
+            mask="___________"
             replacement={{ _: /\d/ }}
             {...register("phoneNumber")}
             id="phoneNumber"
             placeholder={pageContent.required}
             className="input w-full py-5"
             type="tel"
+            aria-invalid={!!errors.phoneNumber}
+            aria-describedby={
+              errors.phoneNumber ? "phoneNumber-error" : undefined
+            }
           />
           {errors.phoneNumber?.message && (
-            <span className="error-warning">
+            <span className="error-warning" id="phoneNumber-error">
               {t(errors.phoneNumber.message)}
             </span>
           )}
@@ -274,15 +290,19 @@ const SignupForm = () => {
             className="input w-full py-5"
             placeholder={pageContent.required}
             type={showPassword ? "text" : "password"}
+            aria-invalid={!!errors.password}
+            aria-describedby={errors.password ? "password-error" : undefined}
           />
           {errors.password?.message && (
-            <span className="error-warning">{t(errors.password.message)}</span>
+            <span className="error-warning" id="password-error">
+              {t(errors.password.message)}
+            </span>
           )}
         </div>
 
         <div className="!mb-6 !mt-2 flex flex-col gap-y-2">
           <div className="flex items-center gap-x-16 lg:gap-x-20">
-            <div className="flex items-center gap-x-2">
+            <div className="flex w-28 items-center gap-x-2 lg:w-auto ">
               <div>
                 {errors.password?.message &&
                 !/[a-z]+/.test(watch("password")) ? (
@@ -303,7 +323,7 @@ const SignupForm = () => {
               </p>
             </div>
 
-            <div className="flex items-center gap-x-2">
+            <div className="flex w-28 items-center gap-x-2 lg:w-auto">
               <div>
                 {errors.password && !/[0-9]+/.test(watch("password")) ? (
                   <SmallAlertExclamation />
@@ -325,7 +345,7 @@ const SignupForm = () => {
           </div>
 
           <div className="flex items-center gap-x-16 lg:gap-x-20">
-            <div className="flex items-center gap-x-2">
+            <div className="flex w-28 items-center gap-x-2 lg:w-auto">
               <div>
                 {errors.password && !/[A-Z]+/.test(watch("password")) ? (
                   <SmallAlertExclamation />
@@ -344,7 +364,7 @@ const SignupForm = () => {
                 {pageContent.uppercase}
               </p>
             </div>
-            <div className="flex items-center gap-x-2">
+            <div className="flex w-28 items-center gap-x-2 lg:w-auto">
               <div>
                 {errors.password && watch("password").length < 8 ? (
                   <SmallAlertExclamation />
@@ -371,7 +391,7 @@ const SignupForm = () => {
             <Checkbox
               {...register("bestAbilityAcknowledgement")}
               id="bestAbilityAcknowledgement"
-              type="checkbox"
+              aria-invalid={!!errors.bestAbilityAcknowledgement}
             />
           </div>
           <label
@@ -389,7 +409,7 @@ const SignupForm = () => {
             <Checkbox
               {...register("personalInformationCollectionAgreement")}
               id="personalInformationCollectionAgreement"
-              type="checkbox"
+              aria-invalid={!!errors.personalInformationCollectionAgreement}
             />
           </div>
           <label
