@@ -5,7 +5,7 @@ import { InputMask } from "@react-input/mask";
 import { useCallback } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { ObjectSchema } from "yup";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import EmailFormat from "@/constants/EmailFormat";
 
 import {
@@ -16,7 +16,6 @@ import {
 import { cn } from "@/utils/helper";
 import ROUTES from "@/constants/Routes";
 import Button from "@/components/ui/Button";
-import Checkbox from "@/components/ui/Checkbox";
 import useToggle from "@/hooks/useToggle";
 import AppleLogo from "@/components/AppIcons/AppleLogo";
 import SmallTick from "@/components/AppIcons/SmallTick";
@@ -26,6 +25,8 @@ import MicrosoftLogo from "@/components/AppIcons/MicrosoftLogo";
 import NeutralCircle from "@/components/AppIcons/NeutralCircle";
 import { SignupFormModel } from "@/models/form/SignupFormModel";
 import SmallAlertExclamation from "@/components/AppIcons/SmallAlertExclamation";
+import ExternalLink from "@/components/AppIcons/ExternalLink";
+import Checkbox from "@/components/ui/Checkbox";
 
 const SignupForm = () => {
   const [showPassword, toggleShowPassword] = useToggle(false);
@@ -49,8 +50,31 @@ const SignupForm = () => {
     numbers: t("pages.signup.signupForm.form.numbers"),
     uppercase: t("pages.signup.signupForm.form.uppercase"),
     minimumCharacters: t("pages.signup.signupForm.form.minimumCharacters"),
-    checkbox1Label: t("pages.signup.signupForm.form.checkbox1Label"),
-    checkbox2Label: t("pages.signup.signupForm.form.checkbox2Label"),
+    checkbox1Label: (
+      <Trans i18nKey="common.disclaimer.checkbox1Label">
+        I understand and agree to the use of
+        <a
+          href="#"
+          className="inline-flex items-center gap-x-1 font-bold text-primary underline"
+        >
+          application agreement
+          <ExternalLink />
+        </a>
+      </Trans>
+    ),
+    checkbox2Label: (
+      <Trans i18nKey="common.disclaimer.checkbox2Label">
+        I understand and agree the information submitted will be used in line
+        with our
+        <a
+          href="#"
+          className="inline-flex items-center gap-x-1 font-bold text-primary underline"
+        >
+          privacy policy
+          <ExternalLink />
+        </a>
+      </Trans>
+    ),
     signUp: t("pages.signup.signupForm.form.signUp"),
   };
 
@@ -402,7 +426,9 @@ const SignupForm = () => {
           </label>
         </div>
 
-        <div className={cn(`ml-auto h-1 border-t border-primary-300`)} />
+        <div
+          className={cn(`ml-auto h-1 border-t border-primary-300 md:hidden`)}
+        />
 
         <div className="form-radio-checkbox-group !items-start">
           <div className="flex items-center justify-center">

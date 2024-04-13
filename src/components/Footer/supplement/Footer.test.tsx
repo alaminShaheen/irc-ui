@@ -34,7 +34,7 @@ describe("Footer", () => {
   });
 
   it("renders social media icons", () => {
-    expect(screen.getAllByRole("img")).toHaveLength(1);
+    expect(screen.getAllByTestId("social-icon")).toHaveLength(3);
   });
 
   it("renders the correct copyright year", () => {
