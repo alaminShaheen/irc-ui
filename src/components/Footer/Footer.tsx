@@ -31,7 +31,10 @@ const Footer = ({ content }: IFooterProps) => {
         <p className="mt-5 text-start text-sm font-normal md:ml-[130px] md:mr-[152px] md:text-lg lg:mt-4">
           {body}
         </p>
-        <div className="mt-[47.5px] flex justify-start md:mr-[130px] md:justify-end">
+        <p className="mt-4 self-center text-base font-medium md:ml-[130px]">
+          {copyright.replace("{{year}}", currentYear)}
+        </p>
+        <div className="mt-[46px] flex justify-start md:mr-[130px] md:mt-[14.5px] md:justify-end">
           <div className="flex w-32 justify-between">
             <a data-testid="social-icon" href="#" target="_blank">
               <Icon src={<FacabookIcon />} />
@@ -54,26 +57,21 @@ const Footer = ({ content }: IFooterProps) => {
             <path d="M0 0.5H1176" stroke="white" />
           </svg>
         </div>
-        <div className="flex flex-col justify-between md:ml-[130px] md:mr-[130px] md:flex-row">
-          <div className="flex justify-between md:basis-[55%]">
-            <a
-              className="mt-[27px] text-base font-normal text-white underline decoration-white underline-offset-4 md:mt-[23.5px] md:text-lg"
-              href=""
-              target="_blank"
-            >
-              {privacyPolicy}
-            </a>
-            <a
-              className="mt-[27px] text-base font-normal text-white underline decoration-white underline-offset-4 md:mt-[23.5px] md:text-lg"
-              href=""
-              target="_blank"
-            >
-              {brokerWebPage}
-            </a>
-          </div>
-          <p className="mt-[27px] self-center text-base font-medium md:mt-[23.5px]">
-            {copyright.replace("{{year}}", currentYear)}
-          </p>
+        <div className="flex flex-row justify-between md:ml-[130px] md:max-w-[270px] md:gap-x-6">
+          <a
+            className="mt-[27px] text-base font-normal text-white underline decoration-white underline-offset-4 md:mt-[23.5px] md:text-lg"
+            href=""
+            target="_blank"
+          >
+            {privacyPolicy}
+          </a>
+          <a
+            className="mt-[27px] text-base font-normal text-white underline decoration-white underline-offset-4 md:mt-[23.5px] md:text-lg"
+            href=""
+            target="_blank"
+          >
+            {brokerWebPage}
+          </a>
         </div>
       </div>
     </footer>
