@@ -12,7 +12,7 @@
     "emailAddressLabel": "Email address:",
     "fieldRequired": "This field is required.",
     "invalidEmail": "Invalid email format.",
-    "phoneNumberMinLength": "Phone number must be 11 digits long."
+    "phoneNumberMinLength": "Phone number must be 10 digits long."
   },
   "yourPolicies": {
     "title": "Your Policies",

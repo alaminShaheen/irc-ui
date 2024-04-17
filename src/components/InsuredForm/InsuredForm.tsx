@@ -37,7 +37,7 @@ const InsuredForm = (props: IInsuredFormProps) => {
       telephone: yup
         .string()
         .required(fieldRequiredKey)
-        .min(11, phoneNumberMinLengthKey),
+        .min(10, phoneNumberMinLengthKey),
       email: yup
         .string()
         .required(fieldRequiredKey)
@@ -64,7 +64,7 @@ const InsuredForm = (props: IInsuredFormProps) => {
     name: "John Doe",
     email: "myemail@gmail.com",
     address: "[Address]",
-    telephone: "43723456781",
+    telephone: "4372345678",
   });
 
   const onFormSubmit = useCallback(

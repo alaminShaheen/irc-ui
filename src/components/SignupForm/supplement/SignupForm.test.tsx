@@ -166,16 +166,16 @@ describe("SignupForm", () => {
       const wrongInput = "@!#,s u h12bu1h 2b121111928392839238jh21jh12";
       const correctInput = Array.from(wrongInput)
         .filter((char) => char.match(/\d+/))
-        .slice(0, 11)
+        .slice(0, 10)
         .join("");
       await userEvent.type(phoneNumberField, wrongInput);
       expect((phoneNumberField as HTMLInputElement).value).toBe(correctInput);
-      expect((phoneNumberField as HTMLInputElement).value).toHaveLength(11);
+      expect((phoneNumberField as HTMLInputElement).value).toHaveLength(10);
     });
   });
 
   it("shows errors for password field when criteria are not met", async () => {
-    await userEvent.type(phoneNumberField, "badpass");
+    await userEvent.type(createPasswordField, "badpass");
 
     await act(async () => {
       fireEvent.blur(createPasswordField);
@@ -204,7 +204,7 @@ describe("SignupForm", () => {
         target: { value: "john.doe@example.com" },
       });
       fireEvent.change(phoneNumberField, {
-        target: { value: "12345678901" },
+        target: { value: "1234567890" },
       });
       fireEvent.change(createPasswordField, {
         target: { value: "Password123" },
@@ -228,7 +228,7 @@ describe("SignupForm", () => {
         target: { value: "john.doe@example.com" },
       });
       fireEvent.change(phoneNumberField, {
-        target: { value: "12345678901" },
+        target: { value: "1234567890" },
       });
       fireEvent.change(createPasswordField, {
         target: { value: "Password123" },

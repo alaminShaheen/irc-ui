@@ -80,7 +80,7 @@ const ConfirmIdentityForm = () => {
       phoneNumber: yup
         .string()
         .required("pages.confirmIdentity.form.errors.fieldRequired")
-        .min(11, "pages.confirmIdentity.form.errors.phoneNumberMinLength"),
+        .min(10, "pages.confirmIdentity.form.errors.phoneNumberMinLength"),
     });
 
   const {
@@ -213,7 +213,7 @@ const ConfirmIdentityForm = () => {
         </label>
         <div className="flex flex-col gap-y-[6px] lg:flex-row lg:items-center lg:gap-x-6">
           <InputMask
-            mask="___________"
+            mask="__________"
             replacement={{ _: /\d/ }}
             {...register("phoneNumber")}
             id="phoneNumber"

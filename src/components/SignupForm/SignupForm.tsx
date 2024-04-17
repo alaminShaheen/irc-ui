@@ -119,7 +119,7 @@ const SignupForm = () => {
       phoneNumber: yup
         .string()
         .required("pages.signup.signupForm.form.errors.fieldRequired")
-        .min(11, "pages.signup.signupForm.form.errors.phoneNumberMinLength"),
+        .min(10, "pages.signup.signupForm.form.errors.phoneNumberMinLength"),
     });
 
   const {
@@ -276,7 +276,7 @@ const SignupForm = () => {
             {pageContent.phoneNumber}
           </label>
           <InputMask
-            mask="___________"
+            mask="__________"
             replacement={{ _: /\d/ }}
             {...register("phoneNumber")}
             id="phoneNumber"

@@ -11,7 +11,7 @@
     "telephoneNumLabel": "FR-Telephone number:",
     "fieldRequired": "FR-This field is required.",
     "invalidEmail": "FR-Invalid email format.",
-    "phoneNumberMinLength": "Phone number must be 11 digits long."
+    "phoneNumberMinLength": "Phone number must be 10 digits long."
   },
   "yourPolicies": {
     "title": "Vos Politiques",

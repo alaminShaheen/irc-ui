@@ -149,16 +149,16 @@ describe("ConfirmIdentityForm", () => {
       const wrongInput = "@!#,s u h12bu1h 2b121111928392839238jh21jh12";
       const correctInput = Array.from(wrongInput)
         .filter((char) => char.match(/\d+/))
-        .slice(0, 11)
+        .slice(0, 10)
         .join("");
       await userEvent.type(phoneNumberField, wrongInput);
       expect((phoneNumberField as HTMLInputElement).value).toBe(correctInput);
-      expect((phoneNumberField as HTMLInputElement).value).toHaveLength(11);
+      expect((phoneNumberField as HTMLInputElement).value).toHaveLength(10);
     });
   });
 
   test("Submit button remains disabled until all fields are populated", async () => {
-    await userEvent.type(phoneNumberField, "12345678901");
+    await userEvent.type(phoneNumberField, "1234567890");
     expect(submitButton).toBeDisabled();
     await userEvent.type(firstNameField, "hello");
     expect(submitButton).toBeDisabled();

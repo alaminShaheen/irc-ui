@@ -1,25 +1,25 @@
 {
   "seo": {
-	"title": "IRC - Is This you"
+    "title": "IRC - Is This you"
   },
   "pageTitle": "Is this you?",
   "backToSignUp": "Back to sign up",
   "form": {
-	"allFieldsRequired": "All fields are required",
-	"firstName": "First Name:",
-	"lastName": "Last Name:",
-	"email": "Email:",
-	"phoneNumber": "Phone Number:",
-	"identityInfo": "By law, we must verify your identity before we quote your insurance.",
-	"emailInfo": "This is the email we will send all insurance policy documentation to.",
-	"phoneNumberInfo": "A phone number is needed as an alternative contact method to email.",
-	"checkbox1Label": "I understand and agree to the use of <1>application agreement <1></1></1>",
-	"checkbox2Label": "I understand and agree the information submitted will be used in line with our <1>privacy policy <1></1></1>",
-	"confirm": "Confirm",
-	"errors": {
-	  "fieldRequired": "This field is required",
-	  "invalidEmail": "Invalid email format",
-	  "phoneNumberMinLength": "Phone number must be 11 digits long."
-	}
+    "allFieldsRequired": "All fields are required",
+    "firstName": "First Name:",
+    "lastName": "Last Name:",
+    "email": "Email:",
+    "phoneNumber": "Phone Number:",
+    "identityInfo": "By law, we must verify your identity before we quote your insurance.",
+    "emailInfo": "This is the email we will send all insurance policy documentation to.",
+    "phoneNumberInfo": "A phone number is needed as an alternative contact method to email.",
+    "checkbox1Label": "I understand and agree to the use of <1>application agreement <1></1></1>",
+    "checkbox2Label": "I understand and agree the information submitted will be used in line with our <1>privacy policy <1></1></1>",
+    "confirm": "Confirm",
+    "errors": {
+      "fieldRequired": "This field is required",
+      "invalidEmail": "Invalid email format",
+      "phoneNumberMinLength": "Phone number must be 10 digits long."
+    }
   }
 }
