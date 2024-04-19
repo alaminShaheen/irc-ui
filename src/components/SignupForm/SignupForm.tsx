@@ -1,35 +1,34 @@
 import * as yup from "yup";
+import { ObjectSchema } from "yup";
 import { Link, useNavigate } from "react-router-dom";
-import { useForm } from "react-hook-form";
-import { InputMask } from "@react-input/mask";
+import { useForm, FormProvider } from "react-hook-form";
 import { useCallback } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { ObjectSchema } from "yup";
 import { Trans, useTranslation } from "react-i18next";
-import EmailFormat from "@/constants/EmailFormat";
 
-import {
-  ButtonType,
-  ButtonVariant,
-  IconPosition,
-} from "@/models/enums/ButtonVariant";
+import { ButtonType, ButtonVariant } from "@/models/enums/ButtonVariant";
 import { cn } from "@/utils/helper";
 import ROUTES from "@/constants/Routes";
 import Button from "@/components/ui/Button";
-import useToggle from "@/hooks/useToggle";
 import AppleLogo from "@/components/AppIcons/AppleLogo";
 import SmallTick from "@/components/AppIcons/SmallTick";
 import GoogleLogo from "@/components/AppIcons/GoogleLogo";
-import InputWithIcon from "@/components/ui/InputWithIcon";
 import MicrosoftLogo from "@/components/AppIcons/MicrosoftLogo";
 import NeutralCircle from "@/components/AppIcons/NeutralCircle";
-import { SignupFormModel } from "@/models/form/SignupFormModel";
 import SmallAlertExclamation from "@/components/AppIcons/SmallAlertExclamation";
 import ExternalLink from "@/components/AppIcons/ExternalLink";
 import Checkbox from "@/components/ui/Checkbox";
+import { SignupFormModel } from "@/models/form/SignupFormModel";
+import Email from "@/components/FormElements/Email";
+import Password from "@/components/FormElements/Password";
+import PhoneNumber from "@/components/FormElements/PhoneNumber";
+import {
+  emailValidationSchema,
+  passwordValidationSchema,
+  phoneNumberValidation,
+} from "../FormElements/ValidationSchemas";
 
 const SignupForm = () => {
-  const [showPassword, toggleShowPassword] = useToggle(false);
   const { t } = useTranslation();
   const navigate = useNavigate();
 
@@ -81,13 +80,7 @@ const SignupForm = () => {
   const formValidationSchema: ObjectSchema<SignupFormModel> = yup
     .object()
     .shape({
-      email: yup
-        .string()
-        .required("pages.signup.signupForm.form.errors.fieldRequired")
-        .matches(
-          EmailFormat,
-          "pages.signup.signupForm.form.errors.invalidEmail",
-        ),
+      email: emailValidationSchema,
       bestAbilityAcknowledgement: yup
         .boolean()
         .required("pages.signup.signupForm.form.errors.fieldRequired"),
@@ -97,37 +90,14 @@ const SignupForm = () => {
       lastName: yup
         .string()
         .required("pages.signup.signupForm.form.errors.fieldRequired"),
-      password: yup
-        .string()
-        .required("pages.signup.signupForm.form.errors.fieldRequired")
-        .min(8, "pages.signup.signupForm.form.errors.passwordMinCharacters")
-        .matches(
-          /[A-Z]+/,
-          "pages.signup.signupForm.form.errors.passwordUppercaseCharacters",
-        )
-        .matches(
-          /[a-z]+/,
-          "pages.signup.signupForm.form.errors.passwordLowerCharacters",
-        )
-        .matches(
-          /[0-9]+/,
-          "pages.signup.signupForm.form.errors.passwordNumericCharacters",
-        ),
+      password: passwordValidationSchema,
       personalInformationCollectionAgreement: yup
         .boolean()
         .required("pages.signup.signupForm.form.errors.fieldRequired"),
-      phoneNumber: yup
-        .string()
-        .required("pages.signup.signupForm.form.errors.fieldRequired")
-        .min(10, "pages.signup.signupForm.form.errors.phoneNumberMinLength"),
+      phoneNumber: phoneNumberValidation,
     });
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    watch,
-  } = useForm<SignupFormModel>({
+  const methods = useForm({
     defaultValues: {
       email: "",
       bestAbilityAcknowledgement: false,
@@ -140,6 +110,14 @@ const SignupForm = () => {
     mode: "onBlur",
     resolver: yupResolver(formValidationSchema),
   });
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    watch,
+  } = methods;
+
   const formDisabled =
     Object.entries(errors).length > 0 ||
     Object.values(watch()).some((value) => !value);
@@ -206,257 +184,205 @@ const SignupForm = () => {
         {pageContent.signUpViaEmail}
       </div>
 
-      <form
-        onSubmit={handleSubmit(onFormSubmit)}
-        data-testid="signup-form"
-        className="space-y-4"
-      >
-        <div className={cn("form-group", { "has-error": errors.firstName })}>
-          <label htmlFor="firstName" className="form-label">
-            {pageContent.firstName}
-          </label>
-          <input
-            {...register("firstName")}
-            id="firstName"
-            className="input w-full py-5"
-            placeholder={pageContent.required}
-            type="text"
-            aria-invalid={!!errors.firstName}
-            aria-describedby={errors.firstName ? "firstName-error" : undefined}
-          />
-          {errors.firstName?.message && (
-            <span className="error-warning" id="firstName-error">
-              {t(errors.firstName.message)}
-            </span>
-          )}
-        </div>
-
-        <div className={cn("form-group", { "has-error": errors.lastName })}>
-          <label htmlFor="lastName" className="form-label">
-            {pageContent.lastName}
-          </label>
-          <input
-            {...register("lastName")}
-            id="lastName"
-            className="input w-full py-5"
-            placeholder={pageContent.required}
-            type="text"
-            aria-invalid={!!errors.lastName}
-            aria-describedby={errors.lastName ? "lastName-error" : undefined}
-          />
-          {errors.lastName?.message && (
-            <span className="error-warning" id="lastName-error">
-              {t(errors.lastName.message)}
-            </span>
-          )}
-        </div>
-
-        <div className={cn("form-group", { "has-error": errors.email })}>
-          <label htmlFor="email" className="form-label">
-            {pageContent.email}
-          </label>
-          <input
-            {...register("email")}
-            id="email"
-            className="input w-full py-5"
-            placeholder={pageContent.required}
-            type="email"
-            aria-invalid={!!errors.email}
-            aria-describedby={errors.email ? "email-error" : undefined}
-          />
-          {errors.email?.message && (
-            <span className="error-warning" id="email-error">
-              {t(errors.email.message)}
-            </span>
-          )}
-        </div>
-
-        <div className={cn("form-group", { "has-error": errors.phoneNumber })}>
-          <label htmlFor="phoneNumber" className="form-label">
-            {pageContent.phoneNumber}
-          </label>
-          <InputMask
-            mask="__________"
-            replacement={{ _: /\d/ }}
-            {...register("phoneNumber")}
-            id="phoneNumber"
-            placeholder={pageContent.required}
-            className="input w-full py-5"
-            type="tel"
-            aria-invalid={!!errors.phoneNumber}
-            aria-describedby={
-              errors.phoneNumber ? "phoneNumber-error" : undefined
-            }
-          />
-          {errors.phoneNumber?.message && (
-            <span className="error-warning" id="phoneNumber-error">
-              {t(errors.phoneNumber.message)}
-            </span>
-          )}
-        </div>
-
-        <div className={cn("form-group", { "has-error": errors.password })}>
-          <label htmlFor="password" className="form-label">
-            {pageContent.createPassword}
-          </label>
-          <InputWithIcon
-            icon={
-              <span
-                className="cursor-pointer select-none font-bold text-primary-700"
-                onClick={toggleShowPassword}
-              >
-                {showPassword ? pageContent.hide : pageContent.show}
-              </span>
-            }
-            iconPosition={IconPosition.RIGHT}
-            {...register("password")}
-            id="password"
-            className="input w-full py-5"
-            placeholder={pageContent.required}
-            type={showPassword ? "text" : "password"}
-            aria-invalid={!!errors.password}
-            aria-describedby={errors.password ? "password-error" : undefined}
-          />
-          {errors.password?.message && (
-            <span className="error-warning" id="password-error">
-              {t(errors.password.message)}
-            </span>
-          )}
-        </div>
-
-        <div className="!mb-6 !mt-2 flex flex-col gap-y-2">
-          <div className="flex items-center gap-x-16 lg:gap-x-20">
-            <div className="flex w-28 items-center gap-x-2 lg:w-auto ">
-              <div>
-                {errors.password?.message &&
-                !/[a-z]+/.test(watch("password")) ? (
-                  <SmallAlertExclamation />
-                ) : /[a-z]+/.test(watch("password")) ? (
-                  <SmallTick />
-                ) : (
-                  <NeutralCircle />
-                )}
-              </div>
-              <p
-                className={cn("", {
-                  "text-red-500":
-                    errors.password && !/[a-z]+/.test(watch("password")),
-                })}
-              >
-                {pageContent.lowercase}
-              </p>
-            </div>
-
-            <div className="flex w-28 items-center gap-x-2 lg:w-auto">
-              <div>
-                {errors.password && !/[0-9]+/.test(watch("password")) ? (
-                  <SmallAlertExclamation />
-                ) : /[0-9]+/.test(watch("password")) ? (
-                  <SmallTick />
-                ) : (
-                  <NeutralCircle />
-                )}
-              </div>
-              <p
-                className={cn("", {
-                  "text-red-500":
-                    errors.password && !/[0-9]+/.test(watch("password")),
-                })}
-              >
-                {pageContent.numbers}
-              </p>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-x-16 lg:gap-x-20">
-            <div className="flex w-28 items-center gap-x-2 lg:w-auto">
-              <div>
-                {errors.password && !/[A-Z]+/.test(watch("password")) ? (
-                  <SmallAlertExclamation />
-                ) : /[A-Z]+/.test(watch("password")) ? (
-                  <SmallTick />
-                ) : (
-                  <NeutralCircle />
-                )}
-              </div>
-              <p
-                className={cn("", {
-                  "text-red-500":
-                    errors.password && !/[A-Z]+/.test(watch("password")),
-                })}
-              >
-                {pageContent.uppercase}
-              </p>
-            </div>
-            <div className="flex w-28 items-center gap-x-2 lg:w-auto">
-              <div>
-                {errors.password && watch("password").length < 8 ? (
-                  <SmallAlertExclamation />
-                ) : watch("password").length >= 8 ? (
-                  <SmallTick />
-                ) : (
-                  <NeutralCircle />
-                )}
-              </div>
-              <p
-                className={cn("", {
-                  "text-red-500":
-                    errors.password && watch("password").length < 8,
-                })}
-              >
-                {pageContent.minimumCharacters}
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div className="form-radio-checkbox-group !items-start">
-          <div className="flex items-center justify-center">
-            <Checkbox
-              {...register("bestAbilityAcknowledgement")}
-              id="bestAbilityAcknowledgement"
-              aria-invalid={!!errors.bestAbilityAcknowledgement}
-            />
-          </div>
-          <label
-            htmlFor="bestAbilityAcknowledgement"
-            className="border-primary-300 text-black"
-          >
-            {pageContent.checkbox1Label}
-          </label>
-        </div>
-
-        <div
-          className={cn(`ml-auto h-1 border-t border-primary-300 md:hidden`)}
-        />
-
-        <div className="form-radio-checkbox-group !items-start">
-          <div className="flex items-center justify-center">
-            <Checkbox
-              {...register("personalInformationCollectionAgreement")}
-              id="personalInformationCollectionAgreement"
-              aria-invalid={!!errors.personalInformationCollectionAgreement}
-            />
-          </div>
-          <label
-            htmlFor="personalInformationCollectionAgreement"
-            className="border-primary-300 text-black"
-          >
-            {pageContent.checkbox2Label}
-          </label>
-        </div>
-
-        <Button
-          disabled={formDisabled}
-          className="!mt-8 w-full rounded-md text-xl"
-          variant={
-            formDisabled ? ButtonVariant.DISABLED : ButtonVariant.PRIMARY
-          }
-          type={ButtonType.SUBMIT}
+      <FormProvider {...methods}>
+        <form
+          onSubmit={handleSubmit(onFormSubmit)}
+          data-testid="signup-form"
+          className="space-y-4"
         >
-          {pageContent.signUp}
-        </Button>
-      </form>
+          <div className={cn("form-group", { "has-error": errors.firstName })}>
+            <label htmlFor="firstName" className="form-label">
+              {pageContent.firstName}
+            </label>
+            <input
+              {...register("firstName")}
+              id="firstName"
+              className="input w-full py-5"
+              placeholder={pageContent.required}
+              type="text"
+              aria-invalid={!!errors.firstName}
+              aria-describedby={
+                errors.firstName ? "firstName-error" : undefined
+              }
+            />
+            {errors.firstName?.message && (
+              <span className="error-warning" id="firstName-error">
+                {t(errors.firstName.message)}
+              </span>
+            )}
+          </div>
+
+          <div className={cn("form-group", { "has-error": errors.lastName })}>
+            <label htmlFor="lastName" className="form-label">
+              {pageContent.lastName}
+            </label>
+            <input
+              {...register("lastName")}
+              id="lastName"
+              className="input w-full py-5"
+              placeholder={pageContent.required}
+              type="text"
+              aria-invalid={!!errors.lastName}
+              aria-describedby={errors.lastName ? "lastName-error" : undefined}
+            />
+            {errors.lastName?.message && (
+              <span className="error-warning" id="lastName-error">
+                {t(errors.lastName.message)}
+              </span>
+            )}
+          </div>
+
+          <Email
+            label={pageContent.email}
+            placeholderContent={pageContent.required}
+          />
+
+          <PhoneNumber
+            label={pageContent.phoneNumber}
+            placeholderContent={pageContent.required}
+          />
+
+          <Password
+            label={pageContent.createPassword}
+            placeholderContent={pageContent.required}
+            showPasswordContent={pageContent.show}
+            hidePasswordContent={pageContent.hide}
+          />
+
+          <div className="!mb-6 !mt-2 flex flex-col gap-y-2">
+            <div className="flex items-center gap-x-16 lg:gap-x-20">
+              <div className="flex w-28 items-center gap-x-2 lg:w-auto ">
+                <div>
+                  {errors.password?.message &&
+                  !/[a-z]+/.test(watch("password")) ? (
+                    <SmallAlertExclamation />
+                  ) : /[a-z]+/.test(watch("password")) ? (
+                    <SmallTick />
+                  ) : (
+                    <NeutralCircle />
+                  )}
+                </div>
+                <p
+                  className={cn("", {
+                    "text-red-500":
+                      errors.password && !/[a-z]+/.test(watch("password")),
+                  })}
+                >
+                  {pageContent.lowercase}
+                </p>
+              </div>
+
+              <div className="flex w-28 items-center gap-x-2 lg:w-auto">
+                <div>
+                  {errors.password && !/[0-9]+/.test(watch("password")) ? (
+                    <SmallAlertExclamation />
+                  ) : /[0-9]+/.test(watch("password")) ? (
+                    <SmallTick />
+                  ) : (
+                    <NeutralCircle />
+                  )}
+                </div>
+                <p
+                  className={cn("", {
+                    "text-red-500":
+                      errors.password && !/[0-9]+/.test(watch("password")),
+                  })}
+                >
+                  {pageContent.numbers}
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-x-16 lg:gap-x-20">
+              <div className="flex w-28 items-center gap-x-2 lg:w-auto">
+                <div>
+                  {errors.password && !/[A-Z]+/.test(watch("password")) ? (
+                    <SmallAlertExclamation />
+                  ) : /[A-Z]+/.test(watch("password")) ? (
+                    <SmallTick />
+                  ) : (
+                    <NeutralCircle />
+                  )}
+                </div>
+                <p
+                  className={cn("", {
+                    "text-red-500":
+                      errors.password && !/[A-Z]+/.test(watch("password")),
+                  })}
+                >
+                  {pageContent.uppercase}
+                </p>
+              </div>
+              <div className="flex w-28 items-center gap-x-2 lg:w-auto">
+                <div>
+                  {errors.password && watch("password").length < 8 ? (
+                    <SmallAlertExclamation />
+                  ) : watch("password").length >= 8 ? (
+                    <SmallTick />
+                  ) : (
+                    <NeutralCircle />
+                  )}
+                </div>
+                <p
+                  className={cn("", {
+                    "text-red-500":
+                      errors.password && watch("password").length < 8,
+                  })}
+                >
+                  {pageContent.minimumCharacters}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="form-radio-checkbox-group !items-start">
+            <div className="flex items-center justify-center">
+              <Checkbox
+                {...register("bestAbilityAcknowledgement")}
+                id="bestAbilityAcknowledgement"
+                aria-invalid={!!errors.bestAbilityAcknowledgement}
+              />
+            </div>
+            <label
+              htmlFor="bestAbilityAcknowledgement"
+              className="border-primary-300 text-black"
+            >
+              {pageContent.checkbox1Label}
+            </label>
+          </div>
+
+          <div
+            className={cn(`ml-auto h-1 border-t border-primary-300 md:hidden`)}
+          />
+
+          <div className="form-radio-checkbox-group !items-start">
+            <div className="flex items-center justify-center">
+              <Checkbox
+                {...register("personalInformationCollectionAgreement")}
+                id="personalInformationCollectionAgreement"
+                aria-invalid={!!errors.personalInformationCollectionAgreement}
+              />
+            </div>
+            <label
+              htmlFor="personalInformationCollectionAgreement"
+              className="border-primary-300 text-black"
+            >
+              {pageContent.checkbox2Label}
+            </label>
+          </div>
+
+          <Button
+            disabled={formDisabled}
+            className="!mt-8 w-full rounded-md text-xl"
+            variant={
+              formDisabled ? ButtonVariant.DISABLED : ButtonVariant.PRIMARY
+            }
+            type={ButtonType.SUBMIT}
+          >
+            {pageContent.signUp}
+          </Button>
+        </form>
+      </FormProvider>
     </div>
   );
 };

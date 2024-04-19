@@ -43,8 +43,6 @@ const Quote = () => {
       telephoneNumLabel: t("pages.quote.insured.telephoneNumLabel"),
       emailAddressLabel: t("pages.quote.insured.emailAddressLabel"),
       fieldRequiredKey: "pages.quote.insured.fieldRequired",
-      invalidEmailKey: "pages.quote.insured.invalidEmail",
-      phoneNumberMinLengthKey: "pages.quote.insured.phoneNumberMinLength",
     },
     yourPolicies: {
       addAnotherEvent: t("pages.quote.yourPolicies.addAnotherEvent"),

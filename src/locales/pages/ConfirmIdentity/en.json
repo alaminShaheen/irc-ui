@@ -18,8 +18,7 @@
     "confirm": "Confirm",
     "errors": {
       "fieldRequired": "This field is required",
-      "invalidEmail": "Invalid email format",
-      "phoneNumberMinLength": "Phone number must be 10 digits long."
+      "invalidEmail": "Invalid email format"
     }
   }
 }

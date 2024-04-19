@@ -1,6 +1,6 @@
 export type InsuredFormModel = {
   name: string;
   address: string;
-  telephone: string;
+  phoneNumber: string;
   email: string;
 };

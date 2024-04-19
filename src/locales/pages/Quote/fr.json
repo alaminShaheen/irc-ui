@@ -9,9 +9,7 @@
     "nameOfInsuredLabel": "FR-Name of Insured:",
     "addressOfInsuredLabel": "FR-Address of Insured:",
     "telephoneNumLabel": "FR-Telephone number:",
-    "fieldRequired": "FR-This field is required.",
-    "invalidEmail": "FR-Invalid email format.",
-    "phoneNumberMinLength": "Phone number must be 10 digits long."
+    "fieldRequired": "FR-This field is required."
   },
   "yourPolicies": {
     "title": "Vos Politiques",
