@@ -7,6 +7,7 @@ import AddEventForm from "@/locales/pages/AddEvent/en.json";
 import StepperForm from "@/locales/pages/StepperForm/en.json";
 import Signup from "@/locales/pages/Signup/en.json";
 import ConfirmIdentity from "@/locales/pages/ConfirmIdentity/en.json";
+import Signin from "@/locales/pages/Signin/en.json";
 
 export const en_content = {
   common: Common,
@@ -22,6 +23,7 @@ export const en_content = {
     addEventForm: AddEventForm,
     stepperForm: StepperForm,
     signup: Signup,
+    signin: Signin,
     confirmIdentity: ConfirmIdentity,
   },
 };

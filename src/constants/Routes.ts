@@ -10,6 +10,7 @@ const ROUTES = {
     REVIEW_AND_SUBMIT: "review-and-submit",
   },
   SIGNUP: "/signup",
+  SIGNIN: "/signin",
   HOME: "/",
   IDENTITY_CONFIRM: "/confirm-identity",
   // REGISTER: "/register",

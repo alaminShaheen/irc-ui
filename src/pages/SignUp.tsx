@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import SignupForm from "@/components/SignupForm/SignupForm";
 import SignupContent from "@/components/SignupContent/SignupContent";
 
-const Signup = () => {
+const SignUp = () => {
   const { t } = useTranslation();
 
   return (
@@ -22,4 +22,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default SignUp;

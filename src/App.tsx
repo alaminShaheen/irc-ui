@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
 import Quote from "@/pages/Quote";
-import Signup from "@/pages/Signup";
+import SignUp from "@/pages/SignUp";
 import ROUTES from "@/constants/Routes";
 import Layout from "@/components/Layout/Layout";
 import ConfirmIdentity from "@/pages/ConfirmIdentity";
@@ -19,6 +19,7 @@ import { StepperStepInformation } from "@/models/StepperStepInformation";
 
 // Custom styling
 import "./styles/global.css";
+import SignIn from "@/pages/SignIn";
 
 function App() {
   const { t } = useTranslation();
@@ -82,12 +83,13 @@ function App() {
                   path={ROUTES.HOME}
                   element={<Navigate to={ROUTES.SIGNUP} replace />}
                 />
-                <Route path={ROUTES.SIGNUP} element={<Signup />} />
+                <Route path={ROUTES.SIGNUP} element={<SignUp />} />
                 <Route path={ROUTES.QUOTE} element={<Quote />} />
                 <Route
                   path={ROUTES.IDENTITY_CONFIRM}
                   element={<ConfirmIdentity />}
                 />
+                <Route path={ROUTES.SIGNIN} element={<SignIn />} />
                 <Route
                   path={ROUTES.STEPPER_FORM.BASE}
                   element={<StepperContainer steps={stepperSteps} />}
