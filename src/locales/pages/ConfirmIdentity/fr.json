@@ -18,8 +18,7 @@
     "confirm": "FR-Confirm",
     "errors": {
       "fieldRequired": "FR-This field is required",
-      "invalidEmail": "Invalid email format",
-      "phoneNumberMinLength": "FR-Phone number must be 10 digits long."
+      "invalidEmail": "Invalid email format"
     }
   }
 }

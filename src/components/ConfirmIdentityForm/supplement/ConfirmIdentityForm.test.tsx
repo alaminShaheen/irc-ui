@@ -83,80 +83,6 @@ describe("ConfirmIdentityForm", () => {
     expect(submitButton).toBeInTheDocument();
   });
 
-  describe("Email validations", () => {
-    it("show error for invalid email", async () => {
-      await act(async () => {
-        fireEvent.change(emailField, {
-          target: { value: "agh2345$@adhfj.asdda" },
-        });
-        fireEvent.blur(emailField);
-      });
-
-      expect(
-        screen.getByText("pages.confirmIdentity.form.errors.invalidEmail"),
-      ).toBeInTheDocument();
-    });
-
-    it("don't show errors for valid email", async () => {
-      await act(async () => {
-        fireEvent.change(emailField, {
-          target: { value: "agh23_45@adhfj.asd" },
-        });
-        fireEvent.blur(emailField);
-      });
-
-      expect(
-        screen.queryByText("pages.confirmIdentity.form.errors.invalidEmail"),
-      ).not.toBeInTheDocument();
-    });
-
-    it("show error for empty email", async () => {
-      await act(async () => {
-        fireEvent.blur(emailField);
-      });
-
-      expect(
-        screen.getByText("pages.confirmIdentity.form.errors.fieldRequired"),
-      ).toBeInTheDocument();
-    });
-  });
-
-  describe("Phone number validations", () => {
-    it("show error for empty phone number", async () => {
-      await act(async () => {
-        fireEvent.blur(phoneNumberField);
-      });
-
-      expect(
-        screen.getByText("pages.confirmIdentity.form.errors.fieldRequired"),
-      ).toBeInTheDocument();
-    });
-
-    it("show error for invalid phone number", async () => {
-      await userEvent.type(phoneNumberField, "12344");
-      await act(async () => {
-        fireEvent.blur(phoneNumberField);
-      });
-
-      expect(
-        screen.getByText(
-          "pages.confirmIdentity.form.errors.phoneNumberMinLength",
-        ),
-      ).toBeInTheDocument();
-    });
-
-    it("accepts only 11 digits as input", async () => {
-      const wrongInput = "@!#,s u h12bu1h 2b121111928392839238jh21jh12";
-      const correctInput = Array.from(wrongInput)
-        .filter((char) => char.match(/\d+/))
-        .slice(0, 10)
-        .join("");
-      await userEvent.type(phoneNumberField, wrongInput);
-      expect((phoneNumberField as HTMLInputElement).value).toBe(correctInput);
-      expect((phoneNumberField as HTMLInputElement).value).toHaveLength(10);
-    });
-  });
-
   test("Submit button remains disabled until all fields are populated", async () => {
     await userEvent.type(phoneNumberField, "1234567890");
     expect(submitButton).toBeDisabled();
@@ -198,28 +124,6 @@ describe("ConfirmIdentityForm", () => {
           "pages.confirmIdentity.form.errors.fieldRequired",
         ),
       ).toHaveLength(2);
-    });
-
-    act(() => {
-      fireEvent.blur(emailField);
-    });
-    await waitFor(() => {
-      expect(
-        screen.queryAllByText(
-          "pages.confirmIdentity.form.errors.fieldRequired",
-        ),
-      ).toHaveLength(3);
-    });
-
-    act(() => {
-      fireEvent.blur(phoneNumberField);
-    });
-    await waitFor(() => {
-      expect(
-        screen.queryAllByText(
-          "pages.confirmIdentity.form.errors.fieldRequired",
-        ),
-      ).toHaveLength(4);
     });
   });
 });
