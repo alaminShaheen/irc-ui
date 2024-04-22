@@ -25,10 +25,6 @@ export const passwordValidationSchema = yup
     "pages.signup.signupForm.form.errors.passwordNumericCharacters",
   )
   .matches(
-    /[0-9]+/,
-    "pages.signup.signupForm.form.errors.passwordNumericCharacters",
-  )
-  .matches(
     /^[\w^$*.[\]{}()?"!@#%&/\\,><':;|_~`=+-]*$/,
     "pages.signup.signupForm.form.errors.passwordInvalidCharacters",
   );
