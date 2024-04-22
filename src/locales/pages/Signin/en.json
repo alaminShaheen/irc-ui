@@ -1,0 +1,26 @@
+{
+  "seo": {
+    "title": "IRC Signin"
+  },
+  "signinForm": {
+    "signinTitle": "Sign in",
+    "signIn": "Sign in",
+    "signInViaEmail": "Or sign in via e-mail",
+    "dontHaveAnAccount": "Don't Have An Account?",
+    "form": {
+      "email": "Email:",
+      "password": "Password",
+      "show": "Show",
+      "hide": "Hide",
+      "enterEmail": "Enter email",
+      "required": "Required",
+      "forgetYourPassword": "Forget your password?",
+      "signUp": "Sign up",
+      "logIn": "Log in",
+      "errors": {
+        "fieldRequired": "This field is required",
+        "invalidEmail": "Invalid email format"
+      }
+    }
+  }
+}

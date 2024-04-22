@@ -139,7 +139,7 @@ const SignupForm = () => {
         <p>
           {pageContent.alreadyHaveAnAccount}{" "}
           <Link
-            to={ROUTES.SIGNUP}
+            to={ROUTES.SIGNIN}
             className="text-base text-secondary underline"
           >
             {pageContent.signIn}

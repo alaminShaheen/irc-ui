@@ -4,6 +4,7 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
 import Quote from "@/pages/Quote";
 import Signup from "@/pages/Signup";
+import Signin from "@/pages/Signin";
 import ROUTES from "@/constants/Routes";
 import Layout from "@/components/Layout/Layout";
 import ConfirmIdentity from "@/pages/ConfirmIdentity";
@@ -82,6 +83,7 @@ function App() {
                   path={ROUTES.HOME}
                   element={<Navigate to={ROUTES.SIGNUP} replace />}
                 />
+                <Route path={ROUTES.SIGNIN} element={<Signin />} />
                 <Route path={ROUTES.SIGNUP} element={<Signup />} />
                 <Route path={ROUTES.QUOTE} element={<Quote />} />
                 <Route
