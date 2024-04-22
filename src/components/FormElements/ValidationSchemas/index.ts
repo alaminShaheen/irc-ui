@@ -23,6 +23,14 @@ export const passwordValidationSchema = yup
   .matches(
     /[0-9]+/,
     "pages.signup.signupForm.form.errors.passwordNumericCharacters",
+  )
+  .matches(
+    /[0-9]+/,
+    "pages.signup.signupForm.form.errors.passwordNumericCharacters",
+  )
+  .matches(
+    /^[\^$*.[\]{}()?"!@#%&/\\,><':;|_~`=+-\w]*$/,
+    "pages.signup.signupForm.form.errors.passwordInvalidCharacters",
   );
 
 export const phoneNumberValidation = yup
