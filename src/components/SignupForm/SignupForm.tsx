@@ -1,10 +1,10 @@
 import * as yup from "yup";
-import { ObjectSchema } from "yup";
-import { Link, useNavigate } from "react-router-dom";
-import { useForm, FormProvider } from "react-hook-form";
 import { useCallback } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { ObjectSchema } from "yup";
+import { Link, useNavigate } from "react-router-dom";
 import { Trans, useTranslation } from "react-i18next";
+import { useForm, FormProvider } from "react-hook-form";
 
 import Email from "@/components/FormElements/Email";
 import { cn } from "@/utils/helper";
