@@ -16,10 +16,7 @@ import MicrosoftLogo from "@/components/AppIcons/MicrosoftLogo";
 import { SigninFormModel } from "@/models/form/SigninFormModel";
 import Email from "@/components/FormElements/Email";
 import Password from "@/components/FormElements/Password";
-import {
-  emailValidationSchema,
-  passwordValidationSchema,
-} from "../FormElements/ValidationSchemas";
+import { emailValidationSchema } from "../FormElements/ValidationSchemas";
 
 const SigninForm = () => {
   const { t } = useTranslation();
@@ -45,7 +42,9 @@ const SigninForm = () => {
     .object()
     .shape({
       email: emailValidationSchema,
-      password: passwordValidationSchema,
+      password: yup
+        .string()
+        .required("pages.signup.signupForm.form.errors.fieldRequired"),
     });
 
   const methods = useForm({
