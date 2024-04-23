@@ -18,7 +18,7 @@ import Email from "@/components/FormElements/Email";
 import PhoneNumber from "@/components/FormElements/PhoneNumber";
 import {
   emailValidationSchema,
-  phoneNumberValidation,
+  phoneNumberValidationSchema,
 } from "@/components/FormElements/ValidationSchemas";
 
 const ConfirmIdentityForm = () => {
@@ -78,7 +78,7 @@ const ConfirmIdentityForm = () => {
       personalInformationCollectionAgreement: yup
         .boolean()
         .required("pages.confirmIdentity.form.errors.fieldRequired"),
-      phoneNumber: phoneNumberValidation,
+      phoneNumber: phoneNumberValidationSchema,
     });
 
   const methods = useForm({

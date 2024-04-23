@@ -1,7 +1,12 @@
-import { fireEvent, render, screen, act } from "@testing-library/react";
+import * as yup from "yup";
 import userEvent from "@testing-library/user-event";
-import { useFormContext } from "react-hook-form";
-import PhoneNumber from "../PhoneNumber";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { FormProvider, useForm } from "react-hook-form";
+import { act, fireEvent, render, screen } from "@testing-library/react";
+
+import PhoneNumber from "@/components/FormElements/PhoneNumber";
+import { TPhoneNumberModel } from "@/components/FormElements/PhoneNumber/PhoneNumber.d";
+import { phoneNumberValidationSchema } from "@/components/FormElements/ValidationSchemas";
 
 jest.mock("react-i18next", () => ({
   useTranslation: () => ({
@@ -15,48 +20,40 @@ jest.mock("react-i18next", () => ({
   },
 }));
 
-jest.mock("react-router-dom", () => ({
-  ...jest.requireActual("react-router-dom"),
-  useNavigate: jest.fn(),
-}));
-
-// Mocking useFormContext
-jest.mock("react-hook-form", () => ({
-  useFormContext: jest.fn(),
-}));
-
-const mockUseFormContext = useFormContext as jest.Mock;
-
 describe("PhoneNumber component", () => {
-  beforeEach(() => {
-    // Reset mock implementation before each test
-    mockUseFormContext.mockReset();
+  const labelText = "Hello world";
 
-    // Mock useFormContext to return empty errors by default
-    mockUseFormContext.mockReturnValueOnce({
-      register: jest.fn(),
-      formState: { errors: {} },
+  const TestPhoneNumberInput = () => {
+    const methods = useForm<TPhoneNumberModel>({
+      mode: "onBlur",
+      resolver: yupResolver(
+        yup.object().shape({ phoneNumber: phoneNumberValidationSchema }),
+      ),
     });
 
-    render(<PhoneNumber label="PhoneNumber" />);
+    return (
+      <FormProvider {...methods}>
+        <PhoneNumber label={labelText} />
+      </FormProvider>
+    );
+  };
+
+  beforeEach(() => {
+    render(<TestPhoneNumberInput />);
   });
 
   it("renders without errors", () => {
-    const phoneNumberInput = screen.getByLabelText("PhoneNumber");
+    const phoneNumberInput = screen.getByRole("textbox");
     expect(phoneNumberInput).toBeInTheDocument();
   });
 
-  it("show error for empty phone number", async () => {
-    // Mock useFormContext to return validation schema
-    mockUseFormContext.mockReturnValueOnce({
-      register: jest.fn(),
-      formState: {
-        errors: { phoneNumber: { message: "Phone number required" } },
-      },
-    });
+  it("renders with proper label", () => {
+    const labelElement = screen.getByLabelText(labelText);
+    expect(labelElement).toBeInTheDocument();
+  });
 
-    render(<PhoneNumber label="PhoneNumber" />);
-    const phoneNumberInput = screen.getByLabelText("PhoneNumber");
+  it("shows error for empty phone number", async () => {
+    const phoneNumberInput = screen.getByRole("textbox");
 
     await act(async () => {
       fireEvent.blur(phoneNumberInput);
@@ -66,17 +63,8 @@ describe("PhoneNumber component", () => {
     expect(errorMessage).toBeInTheDocument();
   });
 
-  it("show error for invalid phone number", async () => {
-    // Mock useFormContext to return validation schema
-    mockUseFormContext.mockReturnValueOnce({
-      register: jest.fn(),
-      formState: {
-        errors: { phoneNumber: { message: "Invalid phone number" } },
-      },
-    });
-
-    render(<PhoneNumber label="PhoneNumber" />);
-    const phoneNumberInput = screen.getByLabelText("PhoneNumber");
+  it("shows error for invalid phone number", async () => {
+    const phoneNumberInput = screen.getByRole("textbox");
 
     await userEvent.type(phoneNumberInput, "12344");
     await act(async () => {
@@ -94,10 +82,10 @@ describe("PhoneNumber component", () => {
       .slice(0, 10)
       .join("");
 
-    const phoneNumberInput = screen.getByLabelText("PhoneNumber");
+    const phoneNumberInput = screen.getByRole<HTMLInputElement>("textbox");
     await userEvent.type(phoneNumberInput, wrongInput);
 
-    expect((phoneNumberInput as HTMLInputElement).value).toBe(correctInput);
-    expect((phoneNumberInput as HTMLInputElement).value).toHaveLength(10);
+    expect(phoneNumberInput).toHaveValue(correctInput);
+    expect(phoneNumberInput.value).toHaveLength(10);
   });
 });

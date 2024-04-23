@@ -14,7 +14,7 @@ import Email from "@/components/FormElements/Email";
 import PhoneNumber from "@/components/FormElements/PhoneNumber";
 import {
   emailValidationSchema,
-  phoneNumberValidation,
+  phoneNumberValidationSchema,
 } from "@/components/FormElements/ValidationSchemas";
 
 const InsuredForm = (props: IInsuredFormProps) => {
@@ -36,7 +36,7 @@ const InsuredForm = (props: IInsuredFormProps) => {
     .shape({
       name: yup.string().required(fieldRequiredKey),
       address: yup.string().required(fieldRequiredKey),
-      phoneNumber: phoneNumberValidation,
+      phoneNumber: phoneNumberValidationSchema,
       email: emailValidationSchema,
     });
 

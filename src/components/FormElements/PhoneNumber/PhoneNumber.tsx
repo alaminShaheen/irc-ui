@@ -51,6 +51,7 @@ const PhoneNumber = ({
         <span
           className="error-warning"
           id="phoneNumber-error"
+          role="alert"
           data-testid="phoneNumber-error"
         >
           {t(errors.phoneNumber.message)}
