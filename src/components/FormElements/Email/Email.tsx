@@ -48,6 +48,7 @@ const Email = ({
         <span
           className="error-warning"
           id="email-error"
+          aria-live="assertive"
           data-testid="email-error"
         >
           {t(errors.email.message)}
