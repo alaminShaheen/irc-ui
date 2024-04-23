@@ -148,7 +148,11 @@ const ConfirmIdentityForm = () => {
           </div>
 
           {errors.firstName?.message && (
-            <span className="error-warning" id="firstName-error">
+            <span
+              className="error-warning"
+              id="firstName-error"
+              aria-live="assertive"
+            >
               {t(errors.firstName.message)}
             </span>
           )}
@@ -171,7 +175,11 @@ const ConfirmIdentityForm = () => {
             aria-describedby={errors.lastName ? "lastName-error" : undefined}
           />
           {errors.lastName?.message && (
-            <span className="error-warning" id="lastName-error">
+            <span
+              className="error-warning"
+              id="lastName-error"
+              aria-live="assertive"
+            >
               {t(errors.lastName.message)}
             </span>
           )}

@@ -99,7 +99,9 @@ const InsuredForm = (props: IInsuredFormProps) => {
                 type="text"
               />
               {errors.name?.message && (
-                <span className="error-warning">{t(errors.name.message)}</span>
+                <span className="error-warning" aria-live="assertive">
+                  {t(errors.name.message)}
+                </span>
               )}
             </div>
 
@@ -114,7 +116,7 @@ const InsuredForm = (props: IInsuredFormProps) => {
                 type="text"
               />
               {errors.address?.message && (
-                <span className="error-warning">
+                <span className="error-warning" aria-live="assertive">
                   {t(errors.address.message)}
                 </span>
               )}
