@@ -71,7 +71,7 @@ describe("SigninForm", () => {
     expect(mockedNavigate).toHaveBeenCalledWith(ROUTES.IDENTITY_CONFIRM);
   });
 
-  it("disables signup button until all fields and checkboxes are completed", () => {
+  it("disables signin button until all fields and checkboxes are completed", () => {
     expect(loginButton).toBeDisabled();
   });
 
@@ -83,7 +83,7 @@ describe("SigninForm", () => {
     };
   });
 
-  it("enables the signup button when all fields are valid and navigates to the base step form on form submit", async () => {
+  it("enables the signin button when all fields are valid and navigates to the base step form on form submit", async () => {
     await act(async () => {
       fireEvent.change(emailField, {
         target: { value: "john.doe@example.com" },

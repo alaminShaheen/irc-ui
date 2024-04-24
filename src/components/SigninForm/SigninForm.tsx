@@ -108,7 +108,7 @@ const SigninForm = () => {
       </div>
       <div
         className={cn(
-          "flex items-center py-4 font-bold opacity-55",
+          "flex items-center pb-8 font-bold opacity-55",
           "before:mr-4 before:flex-1 before:bg-primary-300 before:p-px before:content-['']",
           "after:ml-4 after:flex-1 after:bg-primary-300 after:p-px after:content-['']",
         )}
@@ -120,7 +120,7 @@ const SigninForm = () => {
         <form
           onSubmit={handleSubmit(onFormSubmit)}
           data-testid="signin-form"
-          className="space-y-4"
+          className="space-y-6"
         >
           <Email
             label={pageContent.email}
@@ -153,15 +153,17 @@ const SigninForm = () => {
           </Button>
         </form>
       </FormProvider>
-      <p className="text-center text-lg">
-        {pageContent.dontHaveAnAccount}{" "}
+      <div className="flex items-center justify-center gap-x-2">
+        <p className="text-center text-lg opacity-[.56]">
+          {pageContent.dontHaveAnAccount}{" "}
+        </p>
         <Link
           to={ROUTES.SIGNUP}
-          className="text-base font-bold text-primary-700 underline decoration-1 underline-offset-1 !opacity-100"
+          className="text-base font-bold text-primary-700 underline decoration-1 underline-offset-1"
         >
           {pageContent.signUp}
         </Link>
-      </p>
+      </div>
     </div>
   );
 };
