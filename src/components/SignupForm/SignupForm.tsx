@@ -139,8 +139,8 @@ const SignupForm = () => {
         <p>
           {pageContent.alreadyHaveAnAccount}{" "}
           <Link
-            to={ROUTES.SIGNUP}
-            className="text-base text-secondary underline"
+            to={ROUTES.SIGNIN}
+            className="text-base font-bold text-secondary underline decoration-1 underline-offset-1"
           >
             {pageContent.signIn}
           </Link>

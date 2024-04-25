@@ -1,0 +1,26 @@
+{
+  "seo": {
+    "title": "FR-IRC Signin"
+  },
+  "signinForm": {
+    "signinTitle": "FR-Sign in",
+    "signIn": "FR-Sign in",
+    "signInViaEmail": "FR-Or sign in via e-mail",
+    "dontHaveAnAccount": "FR-Don't Have An Account?",
+    "form": {
+      "email": "FR-Email:",
+      "password": "FR-Password:",
+      "show": "FR-Show",
+      "hide": "FR-Hide",
+      "required": "FR-Required",
+      "forgetYourPassword": "FR-Forget your password?",
+      "enterEmail": "FR-Enter email",
+      "signUp": "FR-Sign up",
+      "logIn": "FR-Log in",
+      "errors": {
+        "fieldRequired": "FR-This field is required",
+        "invalidEmail": "FR-Invalid email format"
+      }
+    }
+  }
+}
