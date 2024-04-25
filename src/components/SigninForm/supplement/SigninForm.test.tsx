@@ -75,22 +75,6 @@ describe("SigninForm", () => {
     expect(loginButton).toBeDisabled();
   });
 
-  it("displays validation errors when fields are empty", async () => {
-    act(() => {
-      fireEvent.change(emailField, { target: { value: "" } });
-      fireEvent.blur(emailField);
-      fireEvent.change(passwordField, { target: { value: "" } });
-      fireEvent.blur(passwordField);
-    });
-
-    () => {
-      const errorMessages = screen.getAllByText(
-        "pages.signin.signinForm.form.errors.fieldRequired",
-      );
-      expect(errorMessages).toHaveLength(2);
-    };
-  });
-
   it("enables the signin button when all fields are valid and navigates to the base step form on form submit", async () => {
     await act(async () => {
       fireEvent.change(emailField, {
