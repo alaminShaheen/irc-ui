@@ -140,7 +140,7 @@ const SignupForm = () => {
           {pageContent.alreadyHaveAnAccount}{" "}
           <Link
             to={ROUTES.SIGNIN}
-            className="text-base text-secondary underline"
+            className="text-base font-bold text-secondary underline decoration-1 underline-offset-1"
           >
             {pageContent.signIn}
           </Link>

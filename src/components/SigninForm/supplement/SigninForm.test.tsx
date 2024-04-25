@@ -76,10 +76,18 @@ describe("SigninForm", () => {
   });
 
   it("displays validation errors when fields are empty", async () => {
-    await userEvent.click(loginButton);
+    act(() => {
+      fireEvent.change(emailField, { target: { value: "" } });
+      fireEvent.blur(emailField);
+      fireEvent.change(passwordField, { target: { value: "" } });
+      fireEvent.blur(passwordField);
+    });
 
     () => {
-      expect(screen.getAllByText("This field is required")).toHaveLength(2);
+      const errorMessages = screen.getAllByText(
+        "pages.signin.signinForm.form.errors.fieldRequired",
+      );
+      expect(errorMessages).toHaveLength(2);
     };
   });
 

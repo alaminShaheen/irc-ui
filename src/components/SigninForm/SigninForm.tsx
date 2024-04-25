@@ -80,7 +80,7 @@ const SigninForm = () => {
         {pageContent.signIn}
       </h1>
 
-      <div className="flex w-full gap-x-4 pt-4 lg:mt-7">
+      <div className="flex w-full gap-x-4 md:mt-3">
         <Button
           onClick={onAuthClick}
           className="flex-grow rounded-md border border-graphite-400 bg-white py-2.5"
@@ -108,7 +108,7 @@ const SigninForm = () => {
       </div>
       <div
         className={cn(
-          "flex items-center pb-8 font-bold opacity-55",
+          "flex items-center font-bold opacity-55 md:pb-8",
           "before:mr-4 before:flex-1 before:bg-primary-300 before:p-px before:content-['']",
           "after:ml-4 after:flex-1 after:bg-primary-300 after:p-px after:content-['']",
         )}
@@ -120,7 +120,7 @@ const SigninForm = () => {
         <form
           onSubmit={handleSubmit(onFormSubmit)}
           data-testid="signin-form"
-          className="space-y-6"
+          className="space-y-4 md:space-y-6"
         >
           <Email
             label={pageContent.email}
@@ -136,7 +136,7 @@ const SigninForm = () => {
 
           <Link
             to={ROUTES.FORGET_PASSWORD}
-            className="!mt-2 flex justify-end text-base font-bold text-primary-700 underline decoration-1 underline-offset-1"
+            className="!mt-2 flex justify-end text-base font-bold text-secondary underline decoration-1 underline-offset-1"
           >
             {pageContent.forgetYourPassword}
           </Link>
@@ -159,7 +159,7 @@ const SigninForm = () => {
         </p>
         <Link
           to={ROUTES.SIGNUP}
-          className="text-base font-bold text-primary-700 underline decoration-1 underline-offset-1"
+          className="text-base font-bold text-secondary underline decoration-1 underline-offset-1"
         >
           {pageContent.signUp}
         </Link>

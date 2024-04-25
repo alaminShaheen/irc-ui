@@ -9,7 +9,7 @@
     "dontHaveAnAccount": "Don't Have An Account?",
     "form": {
       "email": "Email:",
-      "password": "Password",
+      "password": "Password:",
       "show": "Show",
       "hide": "Hide",
       "enterEmail": "Enter email",
