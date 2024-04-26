@@ -52,6 +52,7 @@ const PhoneNumber = ({
           className="error-warning"
           id="phoneNumber-error"
           data-testid="phoneNumber-error"
+          aria-live="assertive"
         >
           {t(errors.phoneNumber.message)}
         </span>

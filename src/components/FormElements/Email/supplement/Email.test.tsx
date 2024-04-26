@@ -1,6 +1,12 @@
-import { fireEvent, render, screen, act } from "@testing-library/react";
-import { useFormContext } from "react-hook-form";
-import Email from "../Email";
+import * as yup from "yup";
+import userEvent from "@testing-library/user-event";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { FormProvider, useForm } from "react-hook-form";
+import { act, fireEvent, render, screen } from "@testing-library/react";
+
+import Email from "@/components/FormElements/Email";
+import { TEmailModel } from "@/components/FormElements/Email/Email.d";
+import { emailValidationSchema } from "@/components/FormElements/ValidationSchemas";
 
 jest.mock("react-i18next", () => ({
   useTranslation: () => ({
@@ -14,60 +20,41 @@ jest.mock("react-i18next", () => ({
   },
 }));
 
-jest.mock("react-router-dom", () => ({
-  ...jest.requireActual("react-router-dom"),
-  useNavigate: jest.fn(),
-}));
-
-// Mocking useFormContext
-jest.mock("react-hook-form", () => ({
-  useFormContext: jest.fn(),
-}));
-
-const mockUseFormContext = useFormContext as jest.Mock;
-
 describe("Email component", () => {
+  const labelText = "Hello world";
+
+  const TestEmailInput = () => {
+    const methods = useForm<TEmailModel>({
+      mode: "onBlur",
+      resolver: yupResolver(
+        yup.object().shape({ email: emailValidationSchema }),
+      ),
+    });
+
+    return (
+      <FormProvider {...methods}>
+        <Email label={labelText} />
+      </FormProvider>
+    );
+  };
+
   beforeEach(() => {
-    // Reset mock implementation before each test
-    mockUseFormContext.mockReset();
+    render(<TestEmailInput />);
   });
 
   it("renders without errors", () => {
-    // Mock useFormContext to return empty errors
-    mockUseFormContext.mockReturnValueOnce({
-      register: jest.fn(),
-      formState: { errors: {} },
-    });
-
-    render(<Email label="Email" />);
-
-    const emailInput = screen.getByLabelText("Email");
+    const emailInput = screen.getByRole("textbox");
     expect(emailInput).toBeInTheDocument();
   });
 
-  it("renders with validation error", () => {
-    // Mock useFormContext to return validation error
-    mockUseFormContext.mockReturnValueOnce({
-      register: jest.fn(),
-      formState: { errors: { email: { message: "Invalid email" } } },
-    });
-
-    render(<Email label="Email" />);
-
-    const errorMessage = screen.getByText("Invalid email");
-    expect(errorMessage).toBeInTheDocument();
+  it("renders with proper label", () => {
+    const labelElement = screen.getByLabelText(labelText);
+    expect(labelElement).toBeInTheDocument();
   });
 
   it("show error for empty email", async () => {
-    // Mock useFormContext to return validation schema
-    mockUseFormContext.mockReturnValueOnce({
-      register: jest.fn(),
-      formState: { errors: { email: { message: "Invalid email" } } },
-    });
+    const emailInput = screen.getByRole("textbox");
 
-    render(<Email label="Email" />);
-
-    const emailInput = screen.getByLabelText("Email");
     await act(async () => {
       fireEvent.blur(emailInput);
     });
@@ -76,21 +63,24 @@ describe("Email component", () => {
     expect(errorMessage).toBeInTheDocument();
   });
 
-  it("validates email input", () => {
-    // Mock useFormContext to return validation schema
-    mockUseFormContext.mockReturnValueOnce({
-      register: jest.fn(),
-      formState: { errors: {} },
-    });
+  it("does not throw error for valid email input", async () => {
+    const emailInput = screen.getByRole("textbox");
 
-    render(<Email label="Email" />);
-
-    const emailInput = screen.getByLabelText("Email");
-    fireEvent.change(emailInput, {
-      target: { value: "abc@gmail.com" },
-    });
+    await userEvent.type(emailInput, "abc@gmail.com");
 
     const errorMessage = screen.queryByTestId("email-error");
     expect(errorMessage).not.toBeInTheDocument();
+  });
+
+  it("shows error for invalid email input", async () => {
+    const emailInput = screen.getByRole("textbox");
+
+    await userEvent.type(emailInput, "abc");
+    await act(async () => {
+      fireEvent.blur(emailInput);
+    });
+
+    const errorMessage = screen.queryByTestId("email-error");
+    expect(errorMessage).toBeInTheDocument();
   });
 });

@@ -2,34 +2,25 @@ import * as yup from "yup";
 
 export const emailValidationSchema = yup
   .string()
-  .required("pages.signup.signupForm.form.errors.fieldRequired")
+  .required("common.form.errors.fieldRequired")
   .matches(
     /^[\w.-]+@[a-zA-Z\d.-]+\.[a-zA-Z]{2,4}$/,
-    "pages.signup.signupForm.form.errors.invalidEmail",
+    "common.form.errors.invalidEmail",
   );
 
 export const passwordValidationSchema = yup
   .string()
-  .required("pages.signup.signupForm.form.errors.fieldRequired")
-  .min(8, "pages.signup.signupForm.form.errors.passwordMinCharacters")
-  .matches(
-    /[A-Z]+/,
-    "pages.signup.signupForm.form.errors.passwordUppercaseCharacters",
-  )
-  .matches(
-    /[a-z]+/,
-    "pages.signup.signupForm.form.errors.passwordLowerCharacters",
-  )
-  .matches(
-    /[0-9]+/,
-    "pages.signup.signupForm.form.errors.passwordNumericCharacters",
-  )
+  .required("common.form.errors.fieldRequired")
+  .min(8, "common.form.errors.passwordMinCharacters")
+  .matches(/[A-Z]+/, "common.form.errors.passwordUppercaseCharacters")
+  .matches(/[a-z]+/, "common.form.errors.passwordLowerCharacters")
+  .matches(/[0-9]+/, "common.form.errors.passwordNumericCharacters")
   .matches(
     /^[\w^$*.[\]{}()?"!@#%&/\\,><':;|_~`=+-]*$/,
-    "pages.signup.signupForm.form.errors.passwordInvalidCharacters",
+    "common.form.errors.passwordInvalidCharacters",
   );
 
-export const phoneNumberValidation = yup
+export const phoneNumberValidationSchema = yup
   .string()
-  .required("pages.signup.signupForm.form.errors.fieldRequired")
-  .min(10, "pages.signup.signupForm.form.errors.phoneNumberMinLength");
+  .required("common.form.errors.fieldRequired")
+  .min(10, "common.form.errors.phoneNumberMinLength");

@@ -43,5 +43,17 @@
   "disclaimer": {
     "checkbox1Label": "I understand and agree to the use of <1>application agreement <1></1></1>",
     "checkbox2Label": "I understand and agree the information submitted will be used in line with our <1>privacy policy <1></1></1>"
+  },
+  "form": {
+    "errors": {
+      "fieldRequired": "This field is required",
+      "invalidEmail": "Invalid email format",
+      "passwordMinCharacters": "Password must be a minimum of 8 characters",
+      "passwordInvalidCharacters": "Password can only contain ^$*.[]{}()?-+_|'<>,\"!@#%&\\\/ characters",
+      "passwordUppercaseCharacters": "Password must contain at least 1 uppercase alphabet",
+      "passwordLowerCharacters": "Password must contain at least 1 lowercase alphabet",
+      "passwordNumericCharacters": "Password must contain at least 1 numeric character",
+      "phoneNumberMinLength": "Phone number must be 10 digits long."
+    }
   }
 }

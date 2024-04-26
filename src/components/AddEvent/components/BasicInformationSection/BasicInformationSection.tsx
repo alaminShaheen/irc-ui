@@ -78,7 +78,9 @@ const BasicInformationSection = (props: IBasicInformationSectionProps) => {
           type="text"
         />
         {errors.eventName?.message && (
-          <span className="error-warning">{t(errors.eventName.message)}</span>
+          <span className="error-warning" aria-live="assertive">
+            {t(errors.eventName.message)}
+          </span>
         )}
       </div>
 
@@ -110,7 +112,7 @@ const BasicInformationSection = (props: IBasicInformationSectionProps) => {
             type="text"
           />
           {errors.rentalFacilityAgreementNumber?.message && (
-            <span className="error-warning">
+            <span className="error-warning" aria-live="assertive">
               {t(errors.rentalFacilityAgreementNumber.message)}
             </span>
           )}
@@ -130,7 +132,9 @@ const BasicInformationSection = (props: IBasicInformationSectionProps) => {
             type="text"
           />
           {errors.facility?.message && (
-            <span className="error-warning">{t(errors.facility.message)}</span>
+            <span className="error-warning" aria-live="assertive">
+              {t(errors.facility.message)}
+            </span>
           )}
         </div>
 
@@ -161,7 +165,7 @@ const BasicInformationSection = (props: IBasicInformationSectionProps) => {
               control={control}
             />
             {errors.startDate?.message && (
-              <span className="error-warning">
+              <span className="error-warning" aria-live="assertive">
                 {t(errors.startDate.message)}
               </span>
             )}
@@ -201,7 +205,7 @@ const BasicInformationSection = (props: IBasicInformationSectionProps) => {
               control={control}
             />
             {errors.startTime?.message && (
-              <span className="error-warning">
+              <span className="error-warning" aria-live="assertive">
                 {t(errors.startTime.message)}
               </span>
             )}
@@ -231,7 +235,9 @@ const BasicInformationSection = (props: IBasicInformationSectionProps) => {
               control={control}
             />
             {errors.endDate?.message && (
-              <span className="error-warning">{t(errors.endDate.message)}</span>
+              <span className="error-warning" aria-live="assertive">
+                {t(errors.endDate.message)}
+              </span>
             )}
           </div>
 
@@ -256,7 +262,9 @@ const BasicInformationSection = (props: IBasicInformationSectionProps) => {
               control={control}
             />
             {errors.endTime?.message && (
-              <span className="error-warning">{t(errors.endTime.message)}</span>
+              <span className="error-warning" aria-live="assertive">
+                {t(errors.endTime.message)}
+              </span>
             )}
           </div>
         </div>

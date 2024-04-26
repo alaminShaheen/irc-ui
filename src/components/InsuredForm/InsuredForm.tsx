@@ -14,7 +14,7 @@ import Email from "@/components/FormElements/Email";
 import PhoneNumber from "@/components/FormElements/PhoneNumber";
 import {
   emailValidationSchema,
-  phoneNumberValidation,
+  phoneNumberValidationSchema,
 } from "@/components/FormElements/ValidationSchemas";
 
 const InsuredForm = (props: IInsuredFormProps) => {
@@ -36,7 +36,7 @@ const InsuredForm = (props: IInsuredFormProps) => {
     .shape({
       name: yup.string().required(fieldRequiredKey),
       address: yup.string().required(fieldRequiredKey),
-      phoneNumber: phoneNumberValidation,
+      phoneNumber: phoneNumberValidationSchema,
       email: emailValidationSchema,
     });
 
@@ -99,7 +99,9 @@ const InsuredForm = (props: IInsuredFormProps) => {
                 type="text"
               />
               {errors.name?.message && (
-                <span className="error-warning">{t(errors.name.message)}</span>
+                <span className="error-warning" aria-live="assertive">
+                  {t(errors.name.message)}
+                </span>
               )}
             </div>
 
@@ -114,7 +116,7 @@ const InsuredForm = (props: IInsuredFormProps) => {
                 type="text"
               />
               {errors.address?.message && (
-                <span className="error-warning">
+                <span className="error-warning" aria-live="assertive">
                   {t(errors.address.message)}
                 </span>
               )}
