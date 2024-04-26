@@ -1,8 +1,7 @@
 import { ComponentType } from "react";
 
 export type StepperStepInformation = {
-  title: string;
-  subtitle: string;
+  id: number;
   route: string;
   Component: ComponentType;
 };

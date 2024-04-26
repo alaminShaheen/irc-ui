@@ -3,8 +3,8 @@ const ROUTES = {
   QUOTE: "/quote",
   STEPPER_FORM: {
     BASE: "/form",
-    APPLICATION_AGREEMENT: "application-agreement",
     APPLICANT_INFORMATION: "applicant-information",
+    APPLICATION_AGREEMENT: "application-agreement",
     TRANSPORT_AND_INSURANCE: "transport-and-insurance",
     ADD_EVENTS: "add-events",
     REVIEW_AND_SUBMIT: "review-and-submit",
