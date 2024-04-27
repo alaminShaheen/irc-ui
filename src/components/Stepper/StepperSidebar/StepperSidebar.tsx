@@ -13,18 +13,18 @@ const StepperSidebar = (props: IStepperSidebar) => {
   const completedPercentage = ((activeStepIndex + 1) / steps.length) * 100;
 
   return (
-    <div className={cn("h-full bg-primary", className)}>
+    <div className={cn("h-full", className)}>
       {/* LG version */}
       <ul
-        className="sticky top-[100px] hidden p-16 text-white lg:block"
+        className="sticky top-[100px] hidden px-14 py-16 text-white lg:block"
         aria-label="progress"
       >
         {steps.map((step, index) => {
           return (
-            <Fragment key={step.title}>
+            <Fragment key={step.id}>
               <li
                 className={cn(
-                  "transition-all duration-200 hover:rounded-md hover:bg-secondary hover:opacity-100",
+                  "group transition-all duration-200 hover:rounded-md hover:bg-secondary hover:opacity-100",
                   {
                     "opacity-70": index < activeStepIndex,
                   },
@@ -37,7 +37,16 @@ const StepperSidebar = (props: IStepperSidebar) => {
                   to={step.route}
                   className="flex cursor-pointer items-center gap-x-3 p-2"
                 >
-                  <div className="relative h-10 w-10 items-center justify-center rounded-full bg-secondary text-xl">
+                  <div
+                    className={cn(
+                      "relative size-10 basis-10 items-center justify-center rounded-full text-lg",
+                      {
+                        "bg-secondary text-white": index <= activeStepIndex,
+                        "border-2 border-dashed border-secondary text-primary":
+                          index > activeStepIndex,
+                      },
+                    )}
+                  >
                     <Transition
                       show={hoveredIndex === index}
                       className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform"
@@ -48,10 +57,10 @@ const StepperSidebar = (props: IStepperSidebar) => {
                       leaveFrom="opacity-100"
                       leaveTo="opacity-0"
                     >
-                      <Return />
+                      <Return height={30} width={30} />
                     </Transition>
                     <Transition
-                      className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform"
+                      className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform font-segoe font-semibold"
                       show={hoveredIndex !== index}
                       enter="transition-opacity ease-linear duration-200"
                       enterFrom="opacity-0"
@@ -60,12 +69,22 @@ const StepperSidebar = (props: IStepperSidebar) => {
                       leaveFrom="opacity-100"
                       leaveTo="opacity-0"
                     >
-                      {index < activeStepIndex ? <Tick /> : index + 1}
+                      {index < activeStepIndex ? (
+                        <Tick height={24} width={24} className="stroke-white" />
+                      ) : (
+                        index + 1
+                      )}
                     </Transition>
                   </div>
-                  <div>
-                    <div className="text-xl">{step.title}</div>
-                    <div className="text-sm">{step.subtitle}</div>
+                  <div className="basis-auto text-primary group-hover:text-white">
+                    <div
+                      className={cn(
+                        "font-segoe text-lg font-semibold opacity-95",
+                      )}
+                    >
+                      {step.title}
+                    </div>
+                    <div className="text-sm opacity-90">{step.subtitle}</div>
                   </div>
                 </Link>
               </li>
@@ -76,13 +95,13 @@ const StepperSidebar = (props: IStepperSidebar) => {
                       (index === activeStepIndex ? (
                         <div className="relative h-11 w-1">
                           <div className="absolute z-10 h-1/2 w-1 rounded-md bg-secondary transition-all duration-500" />
-                          <div className="absolute h-full w-1 rounded-md bg-white" />
+                          <div className="absolute h-full w-1 rounded-md bg-primary-100" />
                         </div>
                       ) : (
                         <div
                           className={cn("h-11 w-1 rounded-md", {
                             "bg-secondary": index < activeStepIndex,
-                            "bg-white": index > activeStepIndex,
+                            "bg-primary-100": index > activeStepIndex,
                           })}
                         />
                       ))}

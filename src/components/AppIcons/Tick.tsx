@@ -10,7 +10,7 @@ const SvgTick = (props: SVGProps<SVGSVGElement>) => (
   >
     <g clipPath="url(#tick_svg__a)">
       <path
-        stroke="#FAFBFC"
+        // stroke={props.color ?? "#FAFBFC"}
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeWidth={3}

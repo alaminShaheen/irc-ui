@@ -5,7 +5,7 @@ const ApplicantInformation = () => {
   return (
     <>
       <Helmet title={"Applicant Information"} />
-      <section className="mx-4 md:mx-auto md:w-[50%] lg:w-[33%]">
+      <section className="mx-4">
         <ApplicantInformationForm />
       </section>
     </>

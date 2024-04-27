@@ -18,7 +18,10 @@ const Footer = ({ content }: IFooterProps) => {
   const currentYear = new Date().getFullYear().toString();
 
   return (
-    <footer id="footer-content" className="font-Roboto bg-primary text-white">
+    <footer
+      id="footer-content"
+      className="font-Roboto z-10 bg-primary text-white"
+    >
       <div className="pt-[51px] max-sm:px-[30px] max-sm:pb-[62px] sm:max-md:px-8 sm:max-md:pb-[67px] md:pb-[54px] md:pt-[92px]">
         <p className="text-left text-sm font-light text-primary-25 md:ml-[130px]">
           {poweredBy}

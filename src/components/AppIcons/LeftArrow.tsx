@@ -9,7 +9,7 @@ const SvgLeftArrow = (props: SVGProps<SVGSVGElement>) => (
     {...props}
   >
     <path
-      stroke="#093C55"
+      stroke={props.color ?? "#093C55"}
       strokeLinecap="round"
       strokeLinejoin="round"
       strokeWidth={2}
