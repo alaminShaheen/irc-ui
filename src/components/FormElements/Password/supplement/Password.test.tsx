@@ -1,7 +1,12 @@
-import { fireEvent, render, screen, act } from "@testing-library/react";
+import * as yup from "yup";
 import userEvent from "@testing-library/user-event";
-import { useFormContext } from "react-hook-form";
-import Password from "../Password";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { FormProvider, useForm } from "react-hook-form";
+import { act, fireEvent, render, screen } from "@testing-library/react";
+
+import Password from "@/components/FormElements/Password";
+import { TPasswordModel } from "@/components/FormElements/Password/Password.d";
+import { passwordValidationSchema } from "@/components/FormElements/ValidationSchemas";
 
 jest.mock("react-i18next", () => ({
   useTranslation: () => ({
@@ -15,76 +20,104 @@ jest.mock("react-i18next", () => ({
   },
 }));
 
-jest.mock("react-router-dom", () => ({
-  ...jest.requireActual("react-router-dom"),
-  useNavigate: jest.fn(),
-}));
-
-// Mocking useFormContext
-jest.mock("react-hook-form", () => ({
-  ...jest.requireActual("react-hook-form"), // Preserve other functionalities
-  useFormContext: jest.fn(),
-}));
-
-const mockUseFormContext = useFormContext as jest.Mock;
-
 describe("Password component", () => {
-  beforeEach(() => {
-    // Reset mock implementation before each test
-    mockUseFormContext.mockReset();
+  const labelText = "Hello world";
 
-    // Mock useFormContext to return empty errors by default
-    mockUseFormContext.mockReturnValueOnce({
-      register: jest.fn(),
-      formState: { errors: {} },
+  const TestPasswordInput = () => {
+    const methods = useForm<TPasswordModel>({
+      mode: "onBlur",
+      resolver: yupResolver(
+        yup.object().shape({ password: passwordValidationSchema }),
+      ),
     });
 
-    render(<Password label="Password" />);
+    return (
+      <FormProvider {...methods}>
+        <Password label={labelText} />
+      </FormProvider>
+    );
+  };
+
+  beforeEach(() => {
+    render(<TestPasswordInput />);
   });
 
   it("renders without errors", () => {
-    const passwordInput = screen.getByLabelText("Password");
+    const passwordInput = screen.getByLabelText(labelText);
     expect(passwordInput).toBeInTheDocument();
   });
 
-  it("show error for empty password", async () => {
-    // Mock useFormContext to return validation schema
-    mockUseFormContext.mockReturnValueOnce({
-      register: jest.fn(),
-      formState: {
-        errors: { password: { message: "Password required" } },
-      },
-    });
+  it("renders with proper label", () => {
+    const labelElement = screen.getByLabelText(labelText);
+    expect(labelElement).toBeInTheDocument();
+  });
 
-    render(<Password label="Password" />);
-    const passwordInput = screen.getByLabelText("Password");
+  it("shows error for empty password", async () => {
+    const passwordInput = screen.getByLabelText(labelText);
 
     await act(async () => {
       fireEvent.blur(passwordInput);
     });
 
-    const errorMessage = screen.queryByTestId("password-error");
+    const errorMessage = screen.queryByText("common.form.errors.fieldRequired");
     expect(errorMessage).toBeInTheDocument();
   });
 
-  it("show error for invalid password", async () => {
-    // Mock useFormContext to return validation schema
-    mockUseFormContext.mockReturnValueOnce({
-      register: jest.fn(),
-      formState: {
-        errors: { password: { message: "Invalid password" } },
-      },
-    });
-
-    render(<Password label="Password" />);
-    const passwordInput = screen.getByLabelText("Password");
+  it("shows error for invalid password", async () => {
+    const passwordInput = screen.getByLabelText(labelText);
 
     await userEvent.type(passwordInput, "badpass");
     await act(async () => {
       fireEvent.blur(passwordInput);
     });
 
-    const errorMessage = screen.queryByTestId("password-error");
-    expect(errorMessage).toBeInTheDocument();
+    const minCharactersErrorMessage = screen.getByText(
+      "common.form.errors.passwordMinCharacters",
+    );
+    expect(minCharactersErrorMessage).toBeInTheDocument();
+
+    await userEvent.clear(passwordInput);
+    await userEvent.type(passwordInput, "n0uppercase");
+    await act(async () => {
+      fireEvent.blur(passwordInput);
+    });
+
+    const noUppercaseErrorMessage = screen.getByText(
+      "common.form.errors.passwordUppercaseCharacters",
+    );
+    expect(noUppercaseErrorMessage).toBeInTheDocument();
+
+    await userEvent.clear(passwordInput);
+    await userEvent.type(passwordInput, "N0LOWERCASE");
+    await act(async () => {
+      fireEvent.blur(passwordInput);
+    });
+
+    const noLowercaseErrorMessage = screen.getByText(
+      "common.form.errors.passwordLowerCharacters",
+    );
+    expect(noLowercaseErrorMessage).toBeInTheDocument();
+
+    await userEvent.clear(passwordInput);
+    await userEvent.type(passwordInput, "noDigits");
+    await act(async () => {
+      fireEvent.blur(passwordInput);
+    });
+
+    const noDigitsErrorMessage = screen.getByText(
+      "common.form.errors.passwordNumericCharacters",
+    );
+    expect(noDigitsErrorMessage).toBeInTheDocument();
+
+    await userEvent.clear(passwordInput);
+    await userEvent.type(passwordInput, "Inval1d😃");
+    await act(async () => {
+      fireEvent.blur(passwordInput);
+    });
+
+    const invalidCharacterPassword = screen.getByText(
+      "common.form.errors.passwordInvalidCharacters",
+    );
+    expect(invalidCharacterPassword).toBeInTheDocument();
   });
 });

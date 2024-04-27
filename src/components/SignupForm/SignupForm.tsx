@@ -1,32 +1,32 @@
 import * as yup from "yup";
-import { ObjectSchema } from "yup";
-import { Link, useNavigate } from "react-router-dom";
-import { useForm, FormProvider } from "react-hook-form";
 import { useCallback } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { ObjectSchema } from "yup";
+import { Link, useNavigate } from "react-router-dom";
 import { Trans, useTranslation } from "react-i18next";
+import { useForm, FormProvider } from "react-hook-form";
 
-import { ButtonType, ButtonVariant } from "@/models/enums/ButtonVariant";
+import Email from "@/components/FormElements/Email";
 import { cn } from "@/utils/helper";
 import ROUTES from "@/constants/Routes";
 import Button from "@/components/ui/Button";
+import Checkbox from "@/components/ui/Checkbox";
+import Password from "@/components/FormElements/Password";
 import AppleLogo from "@/components/AppIcons/AppleLogo";
 import SmallTick from "@/components/AppIcons/SmallTick";
 import GoogleLogo from "@/components/AppIcons/GoogleLogo";
+import PhoneNumber from "@/components/FormElements/PhoneNumber";
+import ExternalLink from "@/components/AppIcons/ExternalLink";
 import MicrosoftLogo from "@/components/AppIcons/MicrosoftLogo";
 import NeutralCircle from "@/components/AppIcons/NeutralCircle";
-import SmallAlertExclamation from "@/components/AppIcons/SmallAlertExclamation";
-import ExternalLink from "@/components/AppIcons/ExternalLink";
-import Checkbox from "@/components/ui/Checkbox";
 import { SignupFormModel } from "@/models/form/SignupFormModel";
-import Email from "@/components/FormElements/Email";
-import Password from "@/components/FormElements/Password";
-import PhoneNumber from "@/components/FormElements/PhoneNumber";
+import SmallAlertExclamation from "@/components/AppIcons/SmallAlertExclamation";
+import { ButtonType, ButtonVariant } from "@/models/enums/ButtonVariant";
 import {
   emailValidationSchema,
   passwordValidationSchema,
-  phoneNumberValidation,
-} from "../FormElements/ValidationSchemas";
+  phoneNumberValidationSchema,
+} from "@/components/FormElements/ValidationSchemas";
 
 const SignupForm = () => {
   const { t } = useTranslation();
@@ -94,7 +94,7 @@ const SignupForm = () => {
       personalInformationCollectionAgreement: yup
         .boolean()
         .required("pages.signup.signupForm.form.errors.fieldRequired"),
-      phoneNumber: phoneNumberValidation,
+      phoneNumber: phoneNumberValidationSchema,
     });
 
   const methods = useForm({
@@ -206,7 +206,11 @@ const SignupForm = () => {
               }
             />
             {errors.firstName?.message && (
-              <span className="error-warning" id="firstName-error">
+              <span
+                className="error-warning"
+                id="firstName-error"
+                aria-live="assertive"
+              >
                 {t(errors.firstName.message)}
               </span>
             )}
@@ -226,7 +230,11 @@ const SignupForm = () => {
               aria-describedby={errors.lastName ? "lastName-error" : undefined}
             />
             {errors.lastName?.message && (
-              <span className="error-warning" id="lastName-error">
+              <span
+                className="error-warning"
+                id="lastName-error"
+                aria-live="assertive"
+              >
                 {t(errors.lastName.message)}
               </span>
             )}

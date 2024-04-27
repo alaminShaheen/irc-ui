@@ -50,6 +50,7 @@ const Password = ({
         <span
           className="error-warning"
           id="password-error"
+          aria-live="assertive"
           data-testid="password-error"
         >
           {t(errors.password.message)}
