@@ -1,4 +1,5 @@
 import { Helmet } from "react-helmet-async";
+import { useTranslation } from "react-i18next";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
 import Quote from "@/pages/Quote";
@@ -21,29 +22,41 @@ import { StepperStepInformation } from "@/models/StepperStepInformation";
 import "./styles/global.css";
 
 function App() {
+  const { t } = useTranslation();
+
   const stepperSteps: StepperStepInformation[] = [
     {
       id: 1,
+      title: t("pages.stepperForm.applicationAgreement.title"),
+      subtitle: t("pages.stepperForm.applicationAgreement.subtitle"),
       route: ROUTES.STEPPER_FORM.APPLICANT_INFORMATION,
       Component: ApplicantInformation,
     },
     {
       id: 2,
+      title: t("pages.stepperForm.applicantInformation.title"),
+      subtitle: t("pages.stepperForm.applicantInformation.subtitle"),
       route: ROUTES.STEPPER_FORM.APPLICATION_AGREEMENT,
       Component: ApplicantInformationForm,
     },
     {
       id: 3,
+      title: t("pages.stepperForm.transportAndInsurance.title"),
+      subtitle: t("pages.stepperForm.transportAndInsurance.subtitle"),
       route: ROUTES.STEPPER_FORM.TRANSPORT_AND_INSURANCE,
       Component: TransportAndInsuranceForm,
     },
     {
       id: 4,
+      title: t("pages.stepperForm.addEvents.title"),
+      subtitle: t("pages.stepperForm.addEvents.subtitle"),
       route: ROUTES.STEPPER_FORM.ADD_EVENTS,
       Component: AddEventForm,
     },
     {
       id: 5,
+      title: t("pages.stepperForm.reviewAndSubmit.title"),
+      subtitle: t("pages.stepperForm.reviewAndSubmit.subtitle"),
       route: ROUTES.STEPPER_FORM.REVIEW_AND_SUBMIT,
       Component: ReviewAndSubmitSection,
     },
