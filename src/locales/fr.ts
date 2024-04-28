@@ -8,6 +8,7 @@ import Signin from "@/locales/pages/Signin/fr.json";
 import StepperForm from "@/locales/pages/StepperForm/fr.json";
 import AddEventForm from "@/locales/pages/AddEvent/fr.json";
 import ConfirmIdentity from "@/locales/pages/ConfirmIdentity/fr.json";
+import ApplicantInformation from "@/locales/pages/ApplicantInformation/fr.json";
 
 export const fr_content = {
   common: Common,
@@ -25,5 +26,6 @@ export const fr_content = {
     signup: Signup,
     signin: Signin,
     confirmIdentity: ConfirmIdentity,
+    applicantInformation: ApplicantInformation,
   },
 };
