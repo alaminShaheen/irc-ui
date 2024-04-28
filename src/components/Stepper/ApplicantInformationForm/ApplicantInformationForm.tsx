@@ -32,50 +32,7 @@ import { LanguageCode } from "@/models/enums/LanguageCode";
 import { useStepperContext } from "@/context/StepperContext";
 import { COUNTRY_PROVINCE_LIST } from "@/constants/CountryProvinceList";
 import ExternalLink from "@/components/AppIcons/ExternalLink";
-
-const formValidationSchema = yup.object().shape({
-  name: yup
-    .string()
-    .matches(
-      /^\w+\s[\w\s?]+$/,
-      "pages.applicantInformation.form.errors.invalidName",
-    )
-    .required("pages.applicantInformation.form.errors.required"),
-  address: yup.string().when("$enterManualAddress", (condition, schema) => {
-    return condition[0]
-      ? schema.optional()
-      : schema.required("pages.applicantInformation.form.errors.required");
-  }),
-  postalCode: yup.string().when("$enterManualAddress", (condition, schema) => {
-    return condition[0]
-      ? schema.required("pages.applicantInformation.form.errors.required")
-      : schema.optional();
-  }),
-  streetAddress: yup
-    .string()
-    .when("$enterManualAddress", (condition, schema) => {
-      return condition[0]
-        ? schema.required("pages.applicantInformation.form.errors.required")
-        : schema.optional();
-    }),
-  country: yup.string().when("$enterManualAddress", (condition, schema) => {
-    return condition[0]
-      ? schema.required("pages.applicantInformation.form.errors.required")
-      : schema.optional();
-  }),
-  province: yup.string().when("$enterManualAddress", (condition, schema) => {
-    return condition[0]
-      ? schema.required("pages.applicantInformation.form.errors.required")
-      : schema.optional();
-  }),
-  city: yup.string().when("$enterManualAddress", (condition, schema) => {
-    return condition[0]
-      ? schema.required("pages.applicantInformation.form.errors.required")
-      : schema.optional();
-  }),
-  bestAbilityAcknowledgement: yup.boolean().required(),
-  personalInformationCollectionAgreement: yup.boolean().required(),
-});
+import { useDebounceCallback } from "usehooks-ts";
 
 const ApplicantInformationForm = () => {
   const {
@@ -87,6 +44,74 @@ const ApplicantInformationForm = () => {
     "city" in formValues.applicantInformationForm,
   );
   const { goToPreviousStep, goToNextStep } = useStepperContext();
+
+  const validateOrganizationName = useCallback((name: string) => {
+    return new Promise<boolean>((resolve) => {
+      setTimeout(() => {
+        resolve(!!name);
+      }, 1000);
+    });
+  }, []);
+
+  const debouncedNameValidation = useDebounceCallback(
+    validateOrganizationName,
+    500,
+  );
+
+  const formValidationSchema = yup.object().shape({
+    name: yup
+      .string()
+      .matches(
+        /^\w+\s[\w\s?]+$/,
+        "pages.applicantInformation.form.errors.invalidName",
+      )
+      .required("pages.applicantInformation.form.errors.required")
+      .test("verified", "Code not verified", async (value, options) => {
+        const verified = await debouncedNameValidation(value as string);
+        return verified
+          ? true
+          : options.createError({
+              message: "This isn't a valid organization name.",
+              path: "name",
+            });
+      }),
+    address: yup.string().when("$enterManualAddress", (condition, schema) => {
+      return condition[0]
+        ? schema.optional()
+        : schema.required("pages.applicantInformation.form.errors.required");
+    }),
+    postalCode: yup
+      .string()
+      .when("$enterManualAddress", (condition, schema) => {
+        return condition[0]
+          ? schema.required("pages.applicantInformation.form.errors.required")
+          : schema.optional();
+      }),
+    streetAddress: yup
+      .string()
+      .when("$enterManualAddress", (condition, schema) => {
+        return condition[0]
+          ? schema.required("pages.applicantInformation.form.errors.required")
+          : schema.optional();
+      }),
+    country: yup.string().when("$enterManualAddress", (condition, schema) => {
+      return condition[0]
+        ? schema.required("pages.applicantInformation.form.errors.required")
+        : schema.optional();
+    }),
+    province: yup.string().when("$enterManualAddress", (condition, schema) => {
+      return condition[0]
+        ? schema.required("pages.applicantInformation.form.errors.required")
+        : schema.optional();
+    }),
+    city: yup.string().when("$enterManualAddress", (condition, schema) => {
+      return condition[0]
+        ? schema.required("pages.applicantInformation.form.errors.required")
+        : schema.optional();
+    }),
+    bestAbilityAcknowledgement: yup.boolean().required(),
+    personalInformationCollectionAgreement: yup.boolean().required(),
+  });
 
   const pageContent = {
     pageTitle: t("pages.applicantInformation.pageTitle"),
