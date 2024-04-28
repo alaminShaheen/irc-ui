@@ -5,15 +5,16 @@ import { Fragment, useState } from "react";
 import Tick from "@/components/AppIcons/Tick";
 import { cn } from "@/utils/helper";
 import Return from "@/components/AppIcons/Return";
-import { IStepperSidebar } from "@/components/Stepper/StepperSidebar/StepperSidebar.d";
+import { useStepperContext } from "@/context/StepperContext";
 
-const StepperSidebar = (props: IStepperSidebar) => {
-  const { steps, className, activeStepIndex } = props;
+const StepperSidebar = () => {
+  const { stepperStepInformation: steps, activeStepIndex } =
+    useStepperContext();
   const [hoveredIndex, setHoveredIndex] = useState(-1);
   const completedPercentage = ((activeStepIndex + 1) / steps.length) * 100;
 
   return (
-    <div className={cn("h-full", className)}>
+    <div className="order-1 h-full lg:order-2">
       {/* LG version */}
       <ul
         className="sticky top-[100px] hidden px-14 py-16 text-white lg:block"

@@ -1,30 +1,46 @@
+import {
+  Control,
+  Controller,
+  FieldErrors,
+  Resolver,
+  useForm,
+} from "react-hook-form";
 import * as yup from "yup";
-import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useTranslation } from "react-i18next";
 import { useCallback, useEffect, useState } from "react";
 
-import { ApplicantInformationFormModel } from "@/models/form/ApplicantInformationFormModel";
-import { cn } from "@/utils/helper";
-import InputWithIcon from "@/components/ui/InputWithIcon";
 import {
   ButtonType,
   ButtonVariant,
   IconPosition,
 } from "@/models/enums/ButtonVariant";
-import Search from "@/components/AppIcons/Search";
+import {
+  ApplicantInformationFormModel,
+  CommonApplicantInformation,
+  WithAddress,
+  WithManualAddress,
+} from "@/models/form/ApplicantInformationFormModel";
+import { cn } from "@/utils/helper";
 import Button from "@/components/ui/Button";
-import SelectDropdown from "@/components/ui/SelectDropdown/SelectDropdown";
-import { COUNTRY_PROVINCE_LIST } from "@/constants/CountryProvinceList";
-import { LanguageCode } from "@/models/enums/LanguageCode";
-import Checkbox from "@/components/ui/Checkbox";
+import Search from "@/components/AppIcons/Search";
 import UpArrow from "@/components/AppIcons/UpArrow";
+import Checkbox from "@/components/ui/Checkbox";
+import InputWithIcon from "@/components/ui/InputWithIcon";
+import SelectDropdown from "@/components/ui/SelectDropdown/SelectDropdown";
+import { LanguageCode } from "@/models/enums/LanguageCode";
+import { useStepperContext } from "@/context/StepperContext";
+import { COUNTRY_PROVINCE_LIST } from "@/constants/CountryProvinceList";
 
 const ApplicantInformationForm = () => {
   const {
     i18n: { language },
   } = useTranslation();
-  const [enterManualAddress, setEnterManualAddress] = useState(false);
+  const { setFormValues, formValues } = useStepperContext();
+  const [enterManualAddress, setEnterManualAddress] = useState(
+    "city" in formValues.applicantInformationForm,
+  );
+  const { goToPreviousStep, goToNextStep } = useStepperContext();
 
   const formValidationSchema = yup.object().shape({
     name: yup
@@ -34,48 +50,40 @@ const ApplicantInformationForm = () => {
         "Person / Organization can't be a single word",
       )
       .required("This field is required"),
-    address: yup
-      .string()
-      .when("$enterManualAddress", (enterManualAddress, schema) => {
-        return enterManualAddress[0]
-          ? schema.optional()
-          : schema.required("This is a required field");
-      }),
+    address: yup.string().when("$enterManualAddress", (condition, schema) => {
+      return condition[0]
+        ? schema.optional()
+        : schema.required("This is a required field");
+    }),
     postalCode: yup
       .string()
-      .when("$enterManualAddress", (enterManualAddress, schema) => {
-        return enterManualAddress[0]
+      .when("$enterManualAddress", (condition, schema) => {
+        return condition[0]
           ? schema.required("This is a required field")
           : schema.optional();
       }),
     streetAddress: yup
       .string()
-      .when("$enterManualAddress", (enterManualAddress, schema) => {
-        return enterManualAddress[0]
+      .when("$enterManualAddress", (condition, schema) => {
+        return condition[0]
           ? schema.required("This is a required field")
           : schema.optional();
       }),
-    country: yup
-      .string()
-      .when("$enterManualAddress", (enterManualAddress, schema) => {
-        return enterManualAddress[0]
-          ? schema.required("This is a required field")
-          : schema.optional();
-      }),
-    province: yup
-      .string()
-      .when("$enterManualAddress", (enterManualAddress, schema) => {
-        return enterManualAddress[0]
-          ? schema.required("This is a required field")
-          : schema.optional();
-      }),
-    city: yup
-      .string()
-      .when("$enterManualAddress", (enterManualAddress, schema) => {
-        return enterManualAddress[0]
-          ? schema.required("This is a required field")
-          : schema.optional();
-      }),
+    country: yup.string().when("$enterManualAddress", (condition, schema) => {
+      return condition[0]
+        ? schema.required("This is a required field")
+        : schema.optional();
+    }),
+    province: yup.string().when("$enterManualAddress", (condition, schema) => {
+      return condition[0]
+        ? schema.required("This is a required field")
+        : schema.optional();
+    }),
+    city: yup.string().when("$enterManualAddress", (condition, schema) => {
+      return condition[0]
+        ? schema.required("This is a required field")
+        : schema.optional();
+    }),
     bestAbilityAcknowledgement: yup.boolean().required(),
     personalInformationCollectionAgreement: yup.boolean().required(),
   });
@@ -87,15 +95,21 @@ const ApplicantInformationForm = () => {
     watch,
     control,
     resetField,
+    handleSubmit,
   } = useForm({
-    defaultValues: {
-      name: "",
-      address: "",
-    },
+    defaultValues: formValues.applicantInformationForm,
     mode: "onBlur",
-    resolver: yupResolver(formValidationSchema),
+    resolver: yupResolver(
+      formValidationSchema,
+    ) as Resolver<ApplicantInformationFormModel>,
     context: { enterManualAddress },
   });
+  const errorWithAddress = errors as FieldErrors<
+    CommonApplicantInformation & WithAddress
+  >;
+  const errorWithManualAddress = errors as FieldErrors<
+    CommonApplicantInformation & WithManualAddress
+  >;
 
   const selectedCountry = watch("country");
 
@@ -123,18 +137,45 @@ const ApplicantInformationForm = () => {
         ).some((value) => !value));
 
   const onEnterManualAddress = useCallback(() => {
-    resetField("address");
+    resetField("address", { defaultValue: "" });
     setEnterManualAddress(true);
   }, [resetField]);
 
+  const handleFormSubmit = useCallback(
+    (data: ApplicantInformationFormModel) => {
+      data.name = data.name.trim();
+      if (enterManualAddress) {
+        const dataWithManualAddress = data as CommonApplicantInformation &
+          WithManualAddress;
+        dataWithManualAddress.city = dataWithManualAddress.city.trim();
+        dataWithManualAddress.streetAddress =
+          dataWithManualAddress.streetAddress.trim();
+        dataWithManualAddress.country = dataWithManualAddress.country.trim();
+        dataWithManualAddress.province = dataWithManualAddress.province.trim();
+        dataWithManualAddress.postalCode =
+          dataWithManualAddress.postalCode.trim();
+        data = { ...data, ...dataWithManualAddress };
+      } else {
+        const dataWithAddress = data as CommonApplicantInformation &
+          WithAddress;
+        dataWithAddress.address = dataWithAddress.address.trim();
+        data = { ...data, ...dataWithAddress };
+      }
+      setFormValues((prev) => ({ ...prev, applicantInformationForm: data }));
+      goToNextStep();
+    },
+    [enterManualAddress, setFormValues, goToNextStep],
+  );
+
   useEffect(() => {
     const conditionalKeys = [
-      "address",
+      "postalCode",
       "city",
       "country",
       "province",
       "streetAddress",
-    ] as (keyof ApplicantInformationFormModel)[];
+    ] as (keyof WithManualAddress)[];
+
     if (enterManualAddress) {
       conditionalKeys.forEach((key) => register(key));
     } else {
@@ -156,7 +197,10 @@ const ApplicantInformationForm = () => {
   }, [selectedCountry, watch, resetField]);
 
   return (
-    <form className="mr-auto flex w-4/5 flex-col gap-y-6">
+    <form
+      className="mr-auto flex w-4/5 flex-col gap-y-6"
+      onSubmit={handleSubmit(handleFormSubmit)}
+    >
       <div className="">
         <h2 className="font-segoe text-3xl font-bold text-primary">
           Applicant Information
@@ -186,7 +230,9 @@ const ApplicantInformationForm = () => {
         )}
       </div>
 
-      <div className={cn("form-group", { "has-error": errors.address })}>
+      <div
+        className={cn("form-group", { "has-error": errorWithAddress.address })}
+      >
         <label htmlFor="address" className="form-label">
           Address of the person / organization named above
         </label>
@@ -199,12 +245,14 @@ const ApplicantInformationForm = () => {
           className="input w-full p-4"
           placeholder="Start typing..."
           type="text"
-          aria-invalid={!!errors.address}
-          aria-describedby={errors.address ? "address-error" : undefined}
+          aria-invalid={!!errorWithAddress.address}
+          aria-describedby={
+            errorWithAddress.address ? "address-error" : undefined
+          }
         />
-        {errors.address?.message && (
+        {errorWithAddress.address?.message && (
           <span className="error-warning" id="address-error">
-            {errors.address.message}
+            {errorWithAddress.address.message}
           </span>
         )}
         {!enterManualAddress && (
@@ -227,7 +275,7 @@ const ApplicantInformationForm = () => {
 
           <div
             className={cn("form-group w-1/2", {
-              "has-error": errors.postalCode,
+              "has-error": errorWithManualAddress.postalCode,
             })}
           >
             <label htmlFor="postalCode" className="form-label">
@@ -239,20 +287,24 @@ const ApplicantInformationForm = () => {
               className="input p-4"
               placeholder="Enter Postal / Zip code"
               type="text"
-              aria-invalid={!!errors.postalCode}
+              aria-invalid={!!errorWithManualAddress.postalCode}
               aria-describedby={
-                errors.postalCode ? "postalCode-error" : undefined
+                errorWithManualAddress.postalCode
+                  ? "postalCode-error"
+                  : undefined
               }
             />
-            {errors.postalCode?.message && (
+            {errorWithManualAddress.postalCode?.message && (
               <span className="error-warning" id="postalCode-error">
-                {errors.postalCode.message}
+                {errorWithManualAddress.postalCode.message}
               </span>
             )}
           </div>
 
           <div
-            className={cn("form-group", { "has-error": errors.streetAddress })}
+            className={cn("form-group", {
+              "has-error": errorWithManualAddress.streetAddress,
+            })}
           >
             <label htmlFor="streetAddress" className="form-label">
               Street Address / Range Road / Box Information
@@ -263,19 +315,25 @@ const ApplicantInformationForm = () => {
               className="input p-4"
               placeholder="Enter Street Name..."
               type="text"
-              aria-invalid={!!errors.streetAddress}
+              aria-invalid={!!errorWithManualAddress.streetAddress}
               aria-describedby={
-                errors.streetAddress ? "streetAddress-error" : undefined
+                errorWithManualAddress.streetAddress
+                  ? "streetAddress-error"
+                  : undefined
               }
             />
-            {errors.streetAddress?.message && (
+            {errorWithManualAddress.streetAddress?.message && (
               <span className="error-warning" id="streetAddress-error">
-                {errors.streetAddress.message}
+                {errorWithManualAddress.streetAddress.message}
               </span>
             )}
           </div>
 
-          <div className={cn("form-group", { "has-error": errors.city })}>
+          <div
+            className={cn("form-group", {
+              "has-error": errorWithManualAddress.city,
+            })}
+          >
             <label htmlFor="city" className="form-label">
               City:
             </label>
@@ -285,22 +343,32 @@ const ApplicantInformationForm = () => {
               className="input p-4"
               placeholder="Enter City Name..."
               type="text"
-              aria-invalid={!!errors.city}
-              aria-describedby={errors.city ? "city-error" : undefined}
+              aria-invalid={!!errorWithManualAddress.city}
+              aria-describedby={
+                errorWithManualAddress.city ? "city-error" : undefined
+              }
             />
-            {errors.city?.message && (
+            {errorWithManualAddress.city?.message && (
               <span className="error-warning" id="city-error">
-                {errors.city.message}
+                {errorWithManualAddress.city.message}
               </span>
             )}
           </div>
 
-          <div className={cn("form-group", { "has-error": errors.country })}>
+          <div
+            className={cn("form-group", {
+              "has-error": errorWithManualAddress.country,
+            })}
+          >
             <label htmlFor="country" className="form-label">
               Country:
             </label>
             <Controller
-              control={control}
+              control={
+                control as Control<
+                  CommonApplicantInformation & WithManualAddress
+                >
+              }
               name="country"
               defaultValue=""
               render={({ field: { value, name, onChange } }) => (
@@ -313,26 +381,34 @@ const ApplicantInformationForm = () => {
                     }),
                   )}
                   placeholderText="Enter Country Name..."
-                  value={value!}
+                  value={value}
                   name={name}
                   onChange={onChange}
                 />
               )}
             />
 
-            {errors.country?.message && (
+            {errorWithManualAddress.country?.message && (
               <span className="error-warning" id="country-error">
-                {errors.country.message}
+                {errorWithManualAddress.country.message}
               </span>
             )}
           </div>
 
-          <div className={cn("form-group", { "has-error": errors.province })}>
+          <div
+            className={cn("form-group", {
+              "has-error": errorWithManualAddress.province,
+            })}
+          >
             <label htmlFor="province" className="form-label">
               Province:
             </label>
             <Controller
-              control={control}
+              control={
+                control as Control<
+                  CommonApplicantInformation & WithManualAddress
+                >
+              }
               disabled={!selectedCountry}
               name="province"
               defaultValue=""
@@ -355,9 +431,9 @@ const ApplicantInformationForm = () => {
                 />
               )}
             />
-            {errors.province?.message && (
+            {errorWithManualAddress.province?.message && (
               <span className="error-warning" id="province-error">
-                {errors.province.message}
+                {errorWithManualAddress.province.message}
               </span>
             )}
           </div>
@@ -405,6 +481,8 @@ const ApplicantInformationForm = () => {
         <Button
           className="flex gap-x-1 rounded-md text-xl"
           variant={ButtonVariant.SECONDARY}
+          onClick={goToPreviousStep}
+          type={ButtonType.BUTTON}
         >
           <UpArrow className="stroke-primary" />
           Back
