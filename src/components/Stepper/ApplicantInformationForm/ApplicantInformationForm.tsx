@@ -7,6 +7,7 @@ import {
 } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useDebounceCallback } from "usehooks-ts";
 import { Trans, useTranslation } from "react-i18next";
 import { useCallback, useEffect, useState } from "react";
 
@@ -26,13 +27,12 @@ import Button from "@/components/ui/Button";
 import Search from "@/components/AppIcons/Search";
 import UpArrow from "@/components/AppIcons/UpArrow";
 import Checkbox from "@/components/ui/Checkbox";
+import ExternalLink from "@/components/AppIcons/ExternalLink";
 import InputWithIcon from "@/components/ui/InputWithIcon";
 import SelectDropdown from "@/components/ui/SelectDropdown/SelectDropdown";
 import { LanguageCode } from "@/models/enums/LanguageCode";
 import { useStepperContext } from "@/context/StepperContext";
 import { COUNTRY_PROVINCE_LIST } from "@/constants/CountryProvinceList";
-import ExternalLink from "@/components/AppIcons/ExternalLink";
-import { useDebounceCallback } from "usehooks-ts";
 
 const ApplicantInformationForm = () => {
   const {
@@ -46,9 +46,9 @@ const ApplicantInformationForm = () => {
   const { goToPreviousStep, goToNextStep } = useStepperContext();
 
   const validateOrganizationName = useCallback((name: string) => {
-    return new Promise<boolean>((resolve) => {
+    return new Promise<{ valid: boolean }>((resolve) => {
       setTimeout(() => {
-        resolve(!!name);
+        resolve({ valid: name.split(" ").length > 1 });
       }, 1000);
     });
   }, []);
@@ -65,16 +65,7 @@ const ApplicantInformationForm = () => {
         /^\w+\s[\w\s?]+$/,
         "pages.applicantInformation.form.errors.invalidName",
       )
-      .required("pages.applicantInformation.form.errors.required")
-      .test("verified", "Code not verified", async (value, options) => {
-        const verified = await debouncedNameValidation(value as string);
-        return verified
-          ? true
-          : options.createError({
-              message: "This isn't a valid organization name.",
-              path: "name",
-            });
-      }),
+      .required("pages.applicantInformation.form.errors.required"),
     address: yup.string().when("$enterManualAddress", (condition, schema) => {
       return condition[0]
         ? schema.optional()
@@ -177,6 +168,7 @@ const ApplicantInformationForm = () => {
     formState: { errors },
     watch,
     control,
+    setError,
     resetField,
     handleSubmit,
   } = useForm({
@@ -298,7 +290,18 @@ const ApplicantInformationForm = () => {
           {pageContent.name}
         </label>
         <input
-          {...register("name")}
+          {...register("name", {
+            onChange: async (event) => {
+              const response = await debouncedNameValidation(
+                event.target.value,
+              );
+              if (response?.valid) {
+                setError("name", {
+                  message: "pages.applicantInformation.form.errors.invalidName",
+                });
+              }
+            },
+          })}
           id="name"
           className="input p-4"
           placeholder={pageContent.nameOrCompanyName}
