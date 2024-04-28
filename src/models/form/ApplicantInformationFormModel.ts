@@ -1,16 +1,4 @@
-// export type ApplicantInformationFormModel = {
-//   name: string;
-//   address: string;
-//   postalCode: string;
-//   streetAddress: string;
-//   city: string;
-//   province: string;
-//   country: string;
-//   bestAbilityAcknowledgement: boolean;
-//   personalInformationCollectionAgreement: boolean;
-// };
-
-export type Common = {
+export type CommonApplicantInformation = {
   name: string;
   bestAbilityAcknowledgement: boolean;
   personalInformationCollectionAgreement: boolean;
@@ -18,12 +6,6 @@ export type Common = {
 
 export type WithAddress = {
   address: string;
-
-  postalCode?: never;
-  streetAddress?: never;
-  city?: never;
-  province?: never;
-  country?: never;
 };
 
 export type WithManualAddress = {
@@ -32,8 +14,7 @@ export type WithManualAddress = {
   city: string;
   province: string;
   country: string;
-  address?: never;
 };
 
-export type ApplicantInformationFormModel = Common &
+export type ApplicantInformationFormModel = CommonApplicantInformation &
   (WithAddress | WithManualAddress);
