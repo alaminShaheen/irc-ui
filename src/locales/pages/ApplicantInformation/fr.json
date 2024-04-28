@@ -1,35 +1,35 @@
 {
   "seo": {
-    "title": "FR-IRC Applicant Information Page"
+	"title": "FR-IRC Applicant Information Page"
   },
   "pageTitle": "FR-Applicant Information",
   "pagePolicy": "FR-We need this information to comply with local law.",
-  "applicantInformationForm": {
-    "form": {
-      "name": "FR-Person / Organization applying for Insurance Coverage:",
-      "address": "FR-Address of the person / organization named above:",
-      "nameOrCompanyName": "FR-e.g. John Doe or Your Company Name Inc.",
-      "startTyping": "FR-Start typing...",
-      "addAddressManually": "FR-Add Address Manually",
-      "addingAddressManually": "FR-Adding Address Manually",
-      "postalCode": "FR-Postal / Zip code:",
-      "enterPostalCode": "FR-Enter Postal / Zip code",
-      "streetAddress": "FR-Street Address / Range Road / Box Information",
-      "enterStreetName": "FR-Enter Street Name...",
-      "city": "FR-City:",
-      "enterCityName": "FR-Enter City Name...",
-      "province": "FR-Province:",
-      "enterProvinceName": "FR-Enter Province Name...",
-      "state": "FR-State:",
-      "enterStateName": "FR-Enter State Name...",
-      "country": "FR-Country:",
-      "enterCountryName": "FR-Enter Country Name...",
-      "back": "FR-Back",
-      "confirm": "FR-Confirm",
-      "errors": {
-        "somethingWentWrong": "FR-Oops! Something went wrong. Please check your internet connection and try again.",
-        "streetAddressWrong": "FR-It seems that street address is wrong. Please ensure a proper street address / box information is entered"
-      }
-    }
+  "form": {
+	"name": "FR-Person / Organization applying for Insurance Coverage:",
+	"address": "FR-Address of the person / organization named above:",
+	"nameOrCompanyName": "FR-e.g. John Doe or Your Company Name Inc.",
+	"startTyping": "FR-Start typing...",
+	"addAddressManually": "FR-Add Address Manually",
+	"addingAddressManually": "FR-Adding Address Manually",
+	"postalCode": "FR-Postal / Zip code:",
+	"enterPostalCode": "FR-Enter Postal / Zip code",
+	"streetAddress": "FR-Street Address / Range Road / Box Information",
+	"enterStreetName": "FR-Enter Street Name...",
+	"city": "FR-City:",
+	"enterCityName": "FR-Enter City Name...",
+	"province": "FR-Province:",
+	"enterProvinceName": "FR-Enter Province Name...",
+	"state": "FR-State:",
+	"enterStateName": "FR-Enter State Name...",
+	"country": "FR-Country:",
+	"enterCountryName": "FR-Enter Country Name...",
+	"back": "FR-Back",
+	"confirm": "FR-Confirm",
+	"errors": {
+	  "somethingWentWrong": "FR-Oops! Something went wrong. Please check your internet connection and try again.",
+	  "streetAddressWrong": "FR-It seems that street address is wrong. Please ensure a proper street address / box information is entered",
+	  "required": "FR-This field is required.",
+	  "invalidName": "FR-Person / Organization can't be a single word."
+	}
   }
 }

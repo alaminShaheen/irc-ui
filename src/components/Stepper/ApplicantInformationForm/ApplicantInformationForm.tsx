@@ -7,7 +7,7 @@ import {
 } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import { useCallback, useEffect, useState } from "react";
 
 import {
@@ -31,9 +31,55 @@ import SelectDropdown from "@/components/ui/SelectDropdown/SelectDropdown";
 import { LanguageCode } from "@/models/enums/LanguageCode";
 import { useStepperContext } from "@/context/StepperContext";
 import { COUNTRY_PROVINCE_LIST } from "@/constants/CountryProvinceList";
+import ExternalLink from "@/components/AppIcons/ExternalLink";
+
+const formValidationSchema = yup.object().shape({
+  name: yup
+    .string()
+    .matches(
+      /^\w+\s[\w\s?]+$/,
+      "pages.applicantInformation.form.errors.invalidName",
+    )
+    .required("pages.applicantInformation.form.errors.required"),
+  address: yup.string().when("$enterManualAddress", (condition, schema) => {
+    return condition[0]
+      ? schema.optional()
+      : schema.required("pages.applicantInformation.form.errors.required");
+  }),
+  postalCode: yup.string().when("$enterManualAddress", (condition, schema) => {
+    return condition[0]
+      ? schema.required("pages.applicantInformation.form.errors.required")
+      : schema.optional();
+  }),
+  streetAddress: yup
+    .string()
+    .when("$enterManualAddress", (condition, schema) => {
+      return condition[0]
+        ? schema.required("pages.applicantInformation.form.errors.required")
+        : schema.optional();
+    }),
+  country: yup.string().when("$enterManualAddress", (condition, schema) => {
+    return condition[0]
+      ? schema.required("pages.applicantInformation.form.errors.required")
+      : schema.optional();
+  }),
+  province: yup.string().when("$enterManualAddress", (condition, schema) => {
+    return condition[0]
+      ? schema.required("pages.applicantInformation.form.errors.required")
+      : schema.optional();
+  }),
+  city: yup.string().when("$enterManualAddress", (condition, schema) => {
+    return condition[0]
+      ? schema.required("pages.applicantInformation.form.errors.required")
+      : schema.optional();
+  }),
+  bestAbilityAcknowledgement: yup.boolean().required(),
+  personalInformationCollectionAgreement: yup.boolean().required(),
+});
 
 const ApplicantInformationForm = () => {
   const {
+    t,
     i18n: { language },
   } = useTranslation();
   const { setFormValues, formValues } = useStepperContext();
@@ -42,51 +88,63 @@ const ApplicantInformationForm = () => {
   );
   const { goToPreviousStep, goToNextStep } = useStepperContext();
 
-  const formValidationSchema = yup.object().shape({
-    name: yup
-      .string()
-      .matches(
-        /^\w+\s[\w\s?]+$/,
-        "Person / Organization can't be a single word",
-      )
-      .required("This field is required"),
-    address: yup.string().when("$enterManualAddress", (condition, schema) => {
-      return condition[0]
-        ? schema.optional()
-        : schema.required("This is a required field");
-    }),
-    postalCode: yup
-      .string()
-      .when("$enterManualAddress", (condition, schema) => {
-        return condition[0]
-          ? schema.required("This is a required field")
-          : schema.optional();
-      }),
-    streetAddress: yup
-      .string()
-      .when("$enterManualAddress", (condition, schema) => {
-        return condition[0]
-          ? schema.required("This is a required field")
-          : schema.optional();
-      }),
-    country: yup.string().when("$enterManualAddress", (condition, schema) => {
-      return condition[0]
-        ? schema.required("This is a required field")
-        : schema.optional();
-    }),
-    province: yup.string().when("$enterManualAddress", (condition, schema) => {
-      return condition[0]
-        ? schema.required("This is a required field")
-        : schema.optional();
-    }),
-    city: yup.string().when("$enterManualAddress", (condition, schema) => {
-      return condition[0]
-        ? schema.required("This is a required field")
-        : schema.optional();
-    }),
-    bestAbilityAcknowledgement: yup.boolean().required(),
-    personalInformationCollectionAgreement: yup.boolean().required(),
-  });
+  const pageContent = {
+    pageTitle: t("pages.applicantInformation.pageTitle"),
+    pagePolicy: t("pages.applicantInformation.pagePolicy"),
+    name: t("pages.applicantInformation.form.name"),
+    address: t("pages.applicantInformation.form.address"),
+    nameOrCompanyName: t("pages.applicantInformation.form.nameOrCompanyName"),
+    startTyping: t("pages.applicantInformation.form.startTyping"),
+    addAddressManually: t("pages.applicantInformation.form.addAddressManually"),
+    addingAddressManually: t(
+      "pages.applicantInformation.form.addingAddressManually",
+    ),
+    postalCode: t("pages.applicantInformation.form.postalCode"),
+    enterPostalCode: t("pages.applicantInformation.form.enterPostalCode"),
+    streetAddress: t("pages.applicantInformation.form.streetAddress"),
+    enterStreetName: t("pages.applicantInformation.form.enterStreetName"),
+    city: t("pages.applicantInformation.form.city"),
+    enterCityName: t("pages.applicantInformation.form.enterCityName"),
+    province: t("pages.applicantInformation.form.province"),
+    enterProvinceName: t("pages.applicantInformation.form.enterProvinceName"),
+    state: t("pages.applicantInformation.form.state"),
+    enterStateName: t("pages.applicantInformation.form.enterStateName"),
+    country: t("pages.applicantInformation.form.country"),
+    enterCountryName: t("pages.applicantInformation.form.enterCountryName"),
+    back: t("pages.applicantInformation.form.back"),
+    confirm: t("pages.applicantInformation.form.confirm"),
+    somethingWentWrong: t(
+      "pages.applicantInformation.form.errors.somethingWentWrong",
+    ),
+    streetAddressWrong: t(
+      "pages.applicantInformation.form.errors.streetAddressWrong",
+    ),
+    checkbox1Label: (
+      <Trans i18nKey="common.disclaimer.checkbox1Label">
+        I understand and agree to the use of
+        <a
+          href="#"
+          className="inline-flex items-center gap-x-1 font-bold text-primary underline"
+        >
+          application agreement
+          <ExternalLink />
+        </a>
+      </Trans>
+    ),
+    checkbox2Label: (
+      <Trans i18nKey="common.disclaimer.checkbox2Label">
+        I understand and agree the information submitted will be used in line
+        with our
+        <a
+          href="#"
+          className="inline-flex items-center gap-x-1 font-bold text-primary underline"
+        >
+          privacy policy
+          <ExternalLink />
+        </a>
+      </Trans>
+    ),
+  };
 
   const {
     register,
@@ -203,29 +261,29 @@ const ApplicantInformationForm = () => {
     >
       <div className="">
         <h2 className="font-segoe text-3xl font-bold text-primary">
-          Applicant Information
+          {pageContent.pageTitle}
         </h2>
         <p className="text-lg font-normal text-graphite-700">
-          We need this information to comply with local law.
+          {pageContent.pagePolicy}
         </p>
       </div>
 
       <div className={cn("form-group", { "has-error": errors.name })}>
         <label htmlFor="name" className="form-label">
-          Person / Organization applying for Insurance Coverage:
+          {pageContent.name}
         </label>
         <input
           {...register("name")}
           id="name"
           className="input p-4"
-          placeholder="e.g. John Doe or Your Company Name Inc."
+          placeholder={pageContent.nameOrCompanyName}
           type="text"
           aria-invalid={!!errors.name}
           aria-describedby={errors.name ? "name-error" : undefined}
         />
         {errors.name?.message && (
           <span className="error-warning" id="name-error">
-            {errors.name.message}
+            {t(errors.name.message)}
           </span>
         )}
       </div>
@@ -234,7 +292,7 @@ const ApplicantInformationForm = () => {
         className={cn("form-group", { "has-error": errorWithAddress.address })}
       >
         <label htmlFor="address" className="form-label">
-          Address of the person / organization named above
+          {pageContent.address}
         </label>
         <InputWithIcon
           icon={<Search />}
@@ -243,7 +301,7 @@ const ApplicantInformationForm = () => {
           id="address"
           disabled={enterManualAddress}
           className="input w-full p-4"
-          placeholder="Start typing..."
+          placeholder={pageContent.startTyping}
           type="text"
           aria-invalid={!!errorWithAddress.address}
           aria-describedby={
@@ -252,7 +310,7 @@ const ApplicantInformationForm = () => {
         />
         {errorWithAddress.address?.message && (
           <span className="error-warning" id="address-error">
-            {errorWithAddress.address.message}
+            {t(errorWithAddress.address.message)}
           </span>
         )}
         {!enterManualAddress && (
@@ -262,7 +320,7 @@ const ApplicantInformationForm = () => {
             className="w-fit p-0 pt-2 text-left font-bold text-primary hover:underline"
             type={ButtonType.BUTTON}
           >
-            Add Address Manually
+            {pageContent.addAddressManually}
           </Button>
         )}
       </div>
@@ -270,7 +328,7 @@ const ApplicantInformationForm = () => {
       {enterManualAddress && (
         <>
           <h4 className="font-segoe text-xl font-semibold text-primary">
-            Adding Address Manually
+            {pageContent.addAddressManually}
           </h4>
 
           <div
@@ -279,13 +337,13 @@ const ApplicantInformationForm = () => {
             })}
           >
             <label htmlFor="postalCode" className="form-label">
-              Postal / Zip code:
+              {pageContent.postalCode}
             </label>
             <input
               {...register("postalCode")}
               id="postalCode"
               className="input p-4"
-              placeholder="Enter Postal / Zip code"
+              placeholder={pageContent.enterPostalCode}
               type="text"
               aria-invalid={!!errorWithManualAddress.postalCode}
               aria-describedby={
@@ -296,7 +354,7 @@ const ApplicantInformationForm = () => {
             />
             {errorWithManualAddress.postalCode?.message && (
               <span className="error-warning" id="postalCode-error">
-                {errorWithManualAddress.postalCode.message}
+                {t(errorWithManualAddress.postalCode.message)}
               </span>
             )}
           </div>
@@ -307,13 +365,13 @@ const ApplicantInformationForm = () => {
             })}
           >
             <label htmlFor="streetAddress" className="form-label">
-              Street Address / Range Road / Box Information
+              {pageContent.streetAddress}
             </label>
             <input
               {...register("streetAddress")}
               id="streetAddress"
               className="input p-4"
-              placeholder="Enter Street Name..."
+              placeholder={pageContent.enterStreetName}
               type="text"
               aria-invalid={!!errorWithManualAddress.streetAddress}
               aria-describedby={
@@ -324,7 +382,7 @@ const ApplicantInformationForm = () => {
             />
             {errorWithManualAddress.streetAddress?.message && (
               <span className="error-warning" id="streetAddress-error">
-                {errorWithManualAddress.streetAddress.message}
+                {t(errorWithManualAddress.streetAddress.message)}
               </span>
             )}
           </div>
@@ -335,13 +393,13 @@ const ApplicantInformationForm = () => {
             })}
           >
             <label htmlFor="city" className="form-label">
-              City:
+              {pageContent.city}
             </label>
             <input
               {...register("city")}
               id="city"
               className="input p-4"
-              placeholder="Enter City Name..."
+              placeholder={pageContent.enterCityName}
               type="text"
               aria-invalid={!!errorWithManualAddress.city}
               aria-describedby={
@@ -350,7 +408,7 @@ const ApplicantInformationForm = () => {
             />
             {errorWithManualAddress.city?.message && (
               <span className="error-warning" id="city-error">
-                {errorWithManualAddress.city.message}
+                {t(errorWithManualAddress.city.message)}
               </span>
             )}
           </div>
@@ -361,7 +419,7 @@ const ApplicantInformationForm = () => {
             })}
           >
             <label htmlFor="country" className="form-label">
-              Country:
+              {pageContent.country}
             </label>
             <Controller
               control={
@@ -380,7 +438,7 @@ const ApplicantInformationForm = () => {
                       value: key,
                     }),
                   )}
-                  placeholderText="Enter Country Name..."
+                  placeholderText={pageContent.enterCountryName}
                   value={value}
                   name={name}
                   onChange={onChange}
@@ -390,7 +448,7 @@ const ApplicantInformationForm = () => {
 
             {errorWithManualAddress.country?.message && (
               <span className="error-warning" id="country-error">
-                {errorWithManualAddress.country.message}
+                {t(errorWithManualAddress.country.message)}
               </span>
             )}
           </div>
@@ -401,7 +459,7 @@ const ApplicantInformationForm = () => {
             })}
           >
             <label htmlFor="province" className="form-label">
-              Province:
+              {pageContent.province}
             </label>
             <Controller
               control={
@@ -424,7 +482,7 @@ const ApplicantInformationForm = () => {
                     label: province[language as LanguageCode],
                     value: province["en"],
                   }))}
-                  placeholderText="Enter Province Name..."
+                  placeholderText={pageContent.enterProvinceName}
                   value={value!}
                   name={name}
                   onChange={onChange}
@@ -433,7 +491,7 @@ const ApplicantInformationForm = () => {
             />
             {errorWithManualAddress.province?.message && (
               <span className="error-warning" id="province-error">
-                {errorWithManualAddress.province.message}
+                {t(errorWithManualAddress.province.message)}
               </span>
             )}
           </div>
@@ -452,7 +510,7 @@ const ApplicantInformationForm = () => {
           htmlFor="bestAbilityAcknowledgement"
           className="border-primary-300 text-black"
         >
-          I understand and agree to the use of application agreement
+          {pageContent.checkbox1Label}
         </label>
       </div>
 
@@ -472,8 +530,7 @@ const ApplicantInformationForm = () => {
           htmlFor="personalInformationCollectionAgreement"
           className="border-primary-300 text-black"
         >
-          I understand and agree the information submitted will be used in line
-          with our privacy policy
+          {pageContent.checkbox2Label}
         </label>
       </div>
 
@@ -485,7 +542,7 @@ const ApplicantInformationForm = () => {
           type={ButtonType.BUTTON}
         >
           <UpArrow className="stroke-primary" />
-          Back
+          {pageContent.back}
         </Button>
         <Button
           disabled={formDisabled}
@@ -495,7 +552,7 @@ const ApplicantInformationForm = () => {
           }
           type={ButtonType.SUBMIT}
         >
-          Confirm
+          {pageContent.confirm}
         </Button>
       </div>
     </form>
