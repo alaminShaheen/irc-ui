@@ -115,7 +115,10 @@ const StepperSidebar = () => {
       </ul>
 
       {/* SM, MD version */}
-      <div className="block text-white lg:hidden" aria-label="progress">
+      <div
+        className="block bg-primary text-white lg:hidden"
+        aria-label="progress"
+      >
         <div className="progress-bar relative h-1 w-full">
           <div className="absolute h-full w-full bg-white" />
           <div
@@ -123,14 +126,11 @@ const StepperSidebar = () => {
             style={{ width: `${completedPercentage}%` }}
           />
         </div>
-        <div className="progress-info flex items-center gap-x-3 px-4 py-6">
+        <div className="progress-info flex items-center gap-x-3 px-4 pb-5 pt-4">
           <div className="flex h-10 w-10 items-center justify-center rounded-full bg-secondary text-base">
             {`${activeStepIndex + 1}/${steps.length}`}
           </div>
-          <div>
-            <div className="text-xl">{steps[activeStepIndex].title}</div>
-            <div className="text-sm">{steps[activeStepIndex].subtitle}</div>
-          </div>
+          <div className="text-xl">{steps[activeStepIndex].title}</div>
         </div>
       </div>
     </div>

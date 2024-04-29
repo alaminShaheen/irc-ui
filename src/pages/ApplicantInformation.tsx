@@ -8,7 +8,7 @@ const ApplicantInformation = () => {
   return (
     <>
       <Helmet title={t("pages.applicantInformation.seo.title")} />
-      <section className="mx-4">
+      <section className="mx-4 mb-10 mt-6 lg:my-0">
         <ApplicantInformationForm />
       </section>
     </>

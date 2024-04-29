@@ -272,7 +272,7 @@ const ApplicantInformationForm = () => {
 
   return (
     <form
-      className="mr-auto flex w-4/5 flex-col gap-y-6"
+      className="flex flex-col gap-y-6 lg:mr-auto lg:w-4/5"
       onSubmit={handleSubmit(handleFormSubmit)}
     >
       <div className="">
@@ -362,7 +362,7 @@ const ApplicantInformationForm = () => {
           </h4>
 
           <div
-            className={cn("form-group w-1/2", {
+            className={cn("form-group lg:w-1/2", {
               "has-error": errorWithManualAddress.postalCode,
             })}
           >
@@ -572,11 +572,11 @@ const ApplicantInformationForm = () => {
           type={ButtonType.BUTTON}
         >
           <UpArrow className="stroke-primary" />
-          {pageContent.back}
+          <span className="hidden lg:inline">{pageContent.back}</span>
         </Button>
         <Button
           disabled={formDisabled}
-          className="rounded-md px-20 text-xl"
+          className="w-full rounded-md text-xl lg:w-auto lg:px-20"
           variant={
             formDisabled ? ButtonVariant.DISABLED : ButtonVariant.PRIMARY
           }
