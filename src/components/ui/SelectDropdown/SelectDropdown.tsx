@@ -22,6 +22,7 @@ const SelectDropdown = (props: ISelectDropdownProps) => {
       value={value}
       onChange={onChangeSelectedOption}
       name={name}
+      data-testid={`${name}-select-dropdown`}
       disabled={disabled}
       defaultValue={value}
     >
@@ -37,6 +38,7 @@ const SelectDropdown = (props: ISelectDropdownProps) => {
             )}
           >
             <span
+              data-testid="select-dropdown-display"
               className={cn("block truncate", {
                 "text-gray-400": !selectedOption?.label,
               })}
@@ -59,7 +61,10 @@ const SelectDropdown = (props: ISelectDropdownProps) => {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <Listbox.Options className="absolute z-50 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white p-1 text-sm shadow-lg ring-1 ring-black/5 focus:outline-none lg:text-base">
+            <Listbox.Options
+              className="absolute z-50 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white p-1 text-sm shadow-lg ring-1 ring-black/5 focus:outline-none lg:text-base"
+              data-testid="select-dropdown-options-wrapper"
+            >
               {options.map((option, index) => (
                 <Listbox.Option
                   key={option.id}
@@ -81,7 +86,7 @@ const SelectDropdown = (props: ISelectDropdownProps) => {
                       >
                         {option.label}
                       </span>
-                      {selected ? (
+                      {selected && (
                         <span className="absolute inset-y-0 left-0 top-0 flex items-center pl-3">
                           <Tick
                             className={cn(
@@ -91,7 +96,7 @@ const SelectDropdown = (props: ISelectDropdownProps) => {
                             aria-hidden="true"
                           />
                         </span>
-                      ) : null}
+                      )}
                     </>
                   )}
                 </Listbox.Option>
