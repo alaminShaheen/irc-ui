@@ -61,11 +61,11 @@ const ApplicantInformationForm = () => {
   const formValidationSchema = yup.object().shape({
     name: yup
       .string()
+      .required("pages.applicantInformation.form.errors.required")
       .matches(
         /^\w+\s[\w\s?]+$/,
         "pages.applicantInformation.form.errors.invalidName",
-      )
-      .required("pages.applicantInformation.form.errors.required"),
+      ),
     address: yup.string().when("$enterManualAddress", (condition, schema) => {
       return condition[0]
         ? schema.optional()
@@ -123,8 +123,6 @@ const ApplicantInformationForm = () => {
     enterCityName: t("pages.applicantInformation.form.enterCityName"),
     province: t("pages.applicantInformation.form.province"),
     enterProvinceName: t("pages.applicantInformation.form.enterProvinceName"),
-    state: t("pages.applicantInformation.form.state"),
-    enterStateName: t("pages.applicantInformation.form.enterStateName"),
     country: t("pages.applicantInformation.form.country"),
     enterCountryName: t("pages.applicantInformation.form.enterCountryName"),
     back: t("pages.applicantInformation.form.back"),
@@ -197,6 +195,7 @@ const ApplicantInformationForm = () => {
             "personalInformationCollectionAgreement",
             "name",
             "country",
+            "streetAddress",
             "city",
             "province",
             "postalCode",
@@ -292,13 +291,16 @@ const ApplicantInformationForm = () => {
         <input
           {...register("name", {
             onChange: async (event) => {
-              const response = await debouncedNameValidation(
-                event.target.value,
-              );
-              if (response?.valid) {
-                setError("name", {
-                  message: "pages.applicantInformation.form.errors.invalidName",
-                });
+              if (event.target.value) {
+                const response = await debouncedNameValidation(
+                  event.target.value,
+                );
+                if (response?.valid) {
+                  setError("name", {
+                    message:
+                      "pages.applicantInformation.form.errors.invalidName",
+                  });
+                }
               }
             },
           })}
