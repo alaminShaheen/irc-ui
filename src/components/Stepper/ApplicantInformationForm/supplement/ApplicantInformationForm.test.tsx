@@ -71,8 +71,8 @@ describe("ApplicantInformationForm", () => {
     expect(confirmButton).toBeDisabled();
   });
 
-  describe("shows errors after toggling manual address for", () => {
-    test("name field", async () => {
+  describe("before toggling manual address", () => {
+    test("name field renders and functions properly", async () => {
       act(() => {
         fireEvent.blur(nameField);
       });
@@ -101,7 +101,7 @@ describe("ApplicantInformationForm", () => {
       ).toBeInTheDocument();
     });
 
-    test("address field", async () => {
+    test("address field renders and functions properly", async () => {
       act(() => {
         fireEvent.blur(addressField);
       });
@@ -115,12 +115,22 @@ describe("ApplicantInformationForm", () => {
       await userEvent.type(nameField, "hello");
       expect(nameField).toHaveValue("hello");
     });
+
+    test("keeps confirm button disabled until all fields have been filled with values", async () => {
+      await userEvent.type(nameField, "hello world");
+      expect(confirmButton).toBeDisabled();
+      await userEvent.type(addressField, "hello universe");
+      expect(confirmButton).toBeDisabled();
+      await userEvent.click(checkBox1);
+      expect(confirmButton).toBeDisabled();
+      await userEvent.click(checkBox2);
+      expect(confirmButton).toBeEnabled();
+    });
   });
 
   describe("After toggling manual address", () => {
     let postalCodeField: FormElement;
     let cityField: FormElement;
-    // let provinceField: FormElement;
     let streetAddressField: FormElement;
 
     beforeEach(async () => {
@@ -134,9 +144,6 @@ describe("ApplicantInformationForm", () => {
       cityField = (await screen.findByRole("textbox", {
         name: "pages.applicantInformation.form.city",
       })) as FormElement;
-      // provinceField = screen.queryByRole("textbox", {
-      //   name: "pages.applicantInformation.form.province",
-      // }) as FormElement;
       streetAddressField = (await screen.findByRole("textbox", {
         name: "pages.applicantInformation.form.streetAddress",
       })) as FormElement;
