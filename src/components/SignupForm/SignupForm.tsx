@@ -24,6 +24,7 @@ import SmallAlertExclamation from "@/components/AppIcons/SmallAlertExclamation";
 import { ButtonType, ButtonVariant } from "@/models/enums/ButtonVariant";
 import {
   emailValidationSchema,
+  passwordValidationRegEx,
   passwordValidationSchema,
   phoneNumberValidationSchema,
 } from "@/components/FormElements/ValidationSchemas";
@@ -49,6 +50,9 @@ const SignupForm = () => {
     numbers: t("pages.signup.signupForm.form.numbers"),
     uppercase: t("pages.signup.signupForm.form.uppercase"),
     minimumCharacters: t("pages.signup.signupForm.form.minimumCharacters"),
+    minimumSpecialCharacter: t(
+      "pages.signup.signupForm.form.minimumSpecialCharacter",
+    ),
     checkbox1Label: (
       <Trans i18nKey="common.disclaimer.checkbox1Label">
         I understand and agree to the use of
@@ -129,6 +133,46 @@ const SignupForm = () => {
   const onAuthClick = useCallback(() => {
     navigate(ROUTES.IDENTITY_CONFIRM);
   }, [navigate]);
+
+  interface PasswordValidationIndicatorProps {
+    contentKey: keyof typeof passwordValidationRegEx | "minimumCharacters";
+    passwordValidationRegEx: {
+      [key: string]: RegExp;
+    };
+  }
+
+  const PassWordValidationIndicator = ({
+    contentKey,
+    passwordValidationRegEx,
+  }: PasswordValidationIndicatorProps) => {
+    const password = watch("password");
+    const isRegexValid =
+      contentKey !== "minimumCharacters" &&
+      passwordValidationRegEx[contentKey]?.test(password);
+    const isLengthValid =
+      contentKey === "minimumCharacters" && password.length >= 8;
+
+    return (
+      <div className="flex w-28 items-center gap-x-2 lg:w-auto ">
+        <div>
+          {errors.password?.message && !(isRegexValid || isLengthValid) ? (
+            <SmallAlertExclamation />
+          ) : isRegexValid || isLengthValid ? (
+            <SmallTick />
+          ) : (
+            <NeutralCircle />
+          )}
+        </div>
+        <p
+          className={cn("", {
+            "text-red-500": errors.password && !(isRegexValid || isLengthValid),
+          })}
+        >
+          {pageContent[contentKey]}
+        </p>
+      </div>
+    );
+  };
 
   return (
     <div className="px-8 py-9">
@@ -259,87 +303,31 @@ const SignupForm = () => {
 
           <div className="!mb-6 !mt-2 flex flex-col gap-y-2">
             <div className="flex items-center gap-x-16 lg:gap-x-20">
-              <div className="flex w-28 items-center gap-x-2 lg:w-auto ">
-                <div>
-                  {errors.password?.message &&
-                  !/[a-z]+/.test(watch("password")) ? (
-                    <SmallAlertExclamation />
-                  ) : /[a-z]+/.test(watch("password")) ? (
-                    <SmallTick />
-                  ) : (
-                    <NeutralCircle />
-                  )}
-                </div>
-                <p
-                  className={cn("", {
-                    "text-red-500":
-                      errors.password && !/[a-z]+/.test(watch("password")),
-                  })}
-                >
-                  {pageContent.lowercase}
-                </p>
-              </div>
-
-              <div className="flex w-28 items-center gap-x-2 lg:w-auto">
-                <div>
-                  {errors.password && !/[0-9]+/.test(watch("password")) ? (
-                    <SmallAlertExclamation />
-                  ) : /[0-9]+/.test(watch("password")) ? (
-                    <SmallTick />
-                  ) : (
-                    <NeutralCircle />
-                  )}
-                </div>
-                <p
-                  className={cn("", {
-                    "text-red-500":
-                      errors.password && !/[0-9]+/.test(watch("password")),
-                  })}
-                >
-                  {pageContent.numbers}
-                </p>
-              </div>
+              <PassWordValidationIndicator
+                contentKey="lowercase"
+                passwordValidationRegEx={passwordValidationRegEx}
+              />
+              <PassWordValidationIndicator
+                contentKey="numbers"
+                passwordValidationRegEx={passwordValidationRegEx}
+              />
             </div>
 
             <div className="flex items-center gap-x-16 lg:gap-x-20">
-              <div className="flex w-28 items-center gap-x-2 lg:w-auto">
-                <div>
-                  {errors.password && !/[A-Z]+/.test(watch("password")) ? (
-                    <SmallAlertExclamation />
-                  ) : /[A-Z]+/.test(watch("password")) ? (
-                    <SmallTick />
-                  ) : (
-                    <NeutralCircle />
-                  )}
-                </div>
-                <p
-                  className={cn("", {
-                    "text-red-500":
-                      errors.password && !/[A-Z]+/.test(watch("password")),
-                  })}
-                >
-                  {pageContent.uppercase}
-                </p>
-              </div>
-              <div className="flex w-28 items-center gap-x-2 lg:w-auto">
-                <div>
-                  {errors.password && watch("password").length < 8 ? (
-                    <SmallAlertExclamation />
-                  ) : watch("password").length >= 8 ? (
-                    <SmallTick />
-                  ) : (
-                    <NeutralCircle />
-                  )}
-                </div>
-                <p
-                  className={cn("", {
-                    "text-red-500":
-                      errors.password && watch("password").length < 8,
-                  })}
-                >
-                  {pageContent.minimumCharacters}
-                </p>
-              </div>
+              <PassWordValidationIndicator
+                contentKey="uppercase"
+                passwordValidationRegEx={passwordValidationRegEx}
+              />
+              <PassWordValidationIndicator
+                contentKey="minimumCharacters"
+                passwordValidationRegEx={passwordValidationRegEx}
+              />
+            </div>
+            <div className="flex items-center gap-x-16 lg:gap-x-20">
+              <PassWordValidationIndicator
+                contentKey="minimumSpecialCharacter"
+                passwordValidationRegEx={passwordValidationRegEx}
+              />
             </div>
           </div>
 
