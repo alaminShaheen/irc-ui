@@ -67,7 +67,7 @@ describe("ApplicantInformationForm", () => {
   });
 
   describe("before toggling manual address", () => {
-    test("name field renders and functions properly", async () => {
+    test("name field renders, shows errors and functions properly", async () => {
       act(() => {
         fireEvent.blur(nameField);
       });
@@ -96,7 +96,7 @@ describe("ApplicantInformationForm", () => {
       ).toBeInTheDocument();
     });
 
-    test("address field renders and functions properly", async () => {
+    test("address field renders, shows errors and functions properly", async () => {
       act(() => {
         fireEvent.blur(addressField);
       });
@@ -144,7 +144,7 @@ describe("ApplicantInformationForm", () => {
       })) as FormElement;
     });
 
-    test("postal code field renders properly", async () => {
+    test("postal code field renders, shows errors and functions properly", async () => {
       expect(postalCodeField).toBeInTheDocument();
       act(() => {
         fireEvent.blur(postalCodeField);
@@ -165,7 +165,7 @@ describe("ApplicantInformationForm", () => {
       expect(postalCodeField).toHaveValue("hello");
     });
 
-    test("street address field renders properly", async () => {
+    test("street address field renders, shows errors and functions properly", async () => {
       await act(async () => {
         fireEvent.blur(streetAddressField);
       });
@@ -178,7 +178,7 @@ describe("ApplicantInformationForm", () => {
       expect(streetAddressField).toHaveValue("hello");
     });
 
-    test("city field renders properly", async () => {
+    test("city field renders, shows errors and functions properly", async () => {
       await act(async () => {
         fireEvent.blur(cityField);
       });
@@ -189,6 +189,33 @@ describe("ApplicantInformationForm", () => {
 
       await userEvent.type(cityField, "hello");
       expect(cityField).toHaveValue("hello");
+    });
+
+    test("province dropdown remains disabled until a country has been selected", async () => {
+      const provinceSelectDropdown = screen.getByTestId(
+        "province-select-dropdown",
+      );
+
+      const provinceTriggerBtn = within(provinceSelectDropdown).getByRole(
+        "button",
+      );
+
+      expect(provinceTriggerBtn).toBeDisabled();
+
+      // Select a country
+      const countrySelectDropdown = screen.getByTestId(
+        "country-select-dropdown",
+      );
+      const countryTriggerBtn = within(countrySelectDropdown).getByRole(
+        "button",
+      );
+      await userEvent.click(countryTriggerBtn);
+      const countryOptionsWrapper = await within(
+        countrySelectDropdown,
+      ).findByTestId("select-dropdown-options-wrapper");
+      await userEvent.click(countryOptionsWrapper.children[0]);
+
+      expect(provinceTriggerBtn).toBeEnabled();
     });
 
     test("country dropdown renders and functions properly", async () => {
