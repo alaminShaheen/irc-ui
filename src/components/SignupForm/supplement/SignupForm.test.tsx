@@ -157,7 +157,7 @@ describe("SignupForm", () => {
         target: { value: "1234567890" },
       });
       fireEvent.change(createPasswordField, {
-        target: { value: "Password123" },
+        target: { value: "Password123!" },
       });
       fireEvent.click(checkBox1);
       fireEvent.click(checkBox2);
