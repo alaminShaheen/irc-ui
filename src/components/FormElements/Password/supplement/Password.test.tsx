@@ -68,6 +68,22 @@ describe("Password component", () => {
     };
   });
 
+  it("shows an error when an emoji is entered in the password field", async () => {
+    const passwordInput = screen.getByLabelText(labelText);
+
+    await userEvent.type(passwordInput, "😊");
+
+    await act(async () => {
+      fireEvent.blur(passwordInput);
+    });
+
+    () => {
+      expect(
+        screen.getByText("common.form.errors.passwordNoEmojis"),
+      ).toBeInTheDocument();
+    };
+  });
+
   it("shows error for invalid password", async () => {
     const passwordInput = screen.getByLabelText(labelText);
 

@@ -53,6 +53,7 @@ const SignupForm = () => {
     minimumSpecialCharacter: t(
       "pages.signup.signupForm.form.minimumSpecialCharacter",
     ),
+    noEmoji: t("pages.signup.signupForm.form.noEmoji"),
     checkbox1Label: (
       <Trans i18nKey="common.disclaimer.checkbox1Label">
         I understand and agree to the use of
@@ -136,14 +137,9 @@ const SignupForm = () => {
 
   interface PasswordValidationIndicatorProps {
     contentKey: keyof typeof passwordValidationRegEx | "minimumCharacters";
-    passwordValidationRegEx: {
-      [key: string]: RegExp;
-    };
   }
-
   const PassWordValidationIndicator = ({
     contentKey,
-    passwordValidationRegEx,
   }: PasswordValidationIndicatorProps) => {
     const password = watch("password");
     const isRegexValid =
@@ -303,31 +299,16 @@ const SignupForm = () => {
 
           <div className="!mb-6 !mt-2 flex flex-col gap-y-2">
             <div className="flex items-center gap-x-16 lg:gap-x-20">
-              <PassWordValidationIndicator
-                contentKey="lowercase"
-                passwordValidationRegEx={passwordValidationRegEx}
-              />
-              <PassWordValidationIndicator
-                contentKey="numbers"
-                passwordValidationRegEx={passwordValidationRegEx}
-              />
+              <PassWordValidationIndicator contentKey="lowercase" />
+              <PassWordValidationIndicator contentKey="numbers" />
             </div>
 
             <div className="flex items-center gap-x-16 lg:gap-x-20">
-              <PassWordValidationIndicator
-                contentKey="uppercase"
-                passwordValidationRegEx={passwordValidationRegEx}
-              />
-              <PassWordValidationIndicator
-                contentKey="minimumCharacters"
-                passwordValidationRegEx={passwordValidationRegEx}
-              />
+              <PassWordValidationIndicator contentKey="uppercase" />
+              <PassWordValidationIndicator contentKey="minimumCharacters" />
             </div>
             <div className="flex items-center gap-x-16 lg:gap-x-20">
-              <PassWordValidationIndicator
-                contentKey="minimumSpecialCharacter"
-                passwordValidationRegEx={passwordValidationRegEx}
-              />
+              <PassWordValidationIndicator contentKey="minimumSpecialCharacter" />
             </div>
           </div>
 

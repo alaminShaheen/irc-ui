@@ -13,6 +13,7 @@ export const passwordValidationRegEx = {
   lowercase: /[a-z]+/,
   numbers: /[0-9]+/,
   minimumSpecialCharacter: /[\^$*.()[\]{}?"!@#%&/\\,><':;|_~`=+-]/,
+  noEmoji: /^(?!.*[\uD83C-\uDBFF\uDC00-\uDFFF]).*$/u,
 };
 
 export const passwordValidationSchema = yup
@@ -34,6 +35,10 @@ export const passwordValidationSchema = yup
   .matches(
     passwordValidationRegEx.minimumSpecialCharacter,
     "pages.signup.signupForm.form.errors.passwordMinSpecialCharacter",
+  )
+  .matches(
+    passwordValidationRegEx.noEmoji,
+    "pages.signup.signupForm.form.errors.passwordNoEmoji",
   );
 
 export const phoneNumberValidationSchema = yup
