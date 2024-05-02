@@ -1,8 +1,9 @@
-import { FormProvider, useForm } from "react-hook-form";
-import { CommonCheckboxes } from "@/models/CommonCheckboxes";
-import AgreementCheckboxes from "@/components/AgreementCheckboxes";
-import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { render, screen } from "@testing-library/react";
+import { FormProvider, useForm } from "react-hook-form";
+
+import AgreementCheckboxes from "@/components/AgreementCheckboxes";
+import { CommonCheckboxes } from "@/models/CommonCheckboxes";
 
 jest.mock("react-i18next", () => ({
   useTranslation: () => ({
