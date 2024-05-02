@@ -20,6 +20,7 @@ import {
   emailValidationSchema,
   phoneNumberValidationSchema,
 } from "@/components/FormElements/ValidationSchemas";
+import AlertDanger from "@/components/AppIcons/AlertDanger";
 
 const ConfirmIdentityForm = () => {
   const { t } = useTranslation();
@@ -153,6 +154,7 @@ const ConfirmIdentityForm = () => {
               id="firstName-error"
               aria-live="assertive"
             >
+              <AlertDanger className="fill-alert" />
               {t(errors.firstName.message)}
             </span>
           )}
@@ -180,6 +182,7 @@ const ConfirmIdentityForm = () => {
               id="lastName-error"
               aria-live="assertive"
             >
+              <AlertDanger className="fill-alert" />
               {t(errors.lastName.message)}
             </span>
           )}

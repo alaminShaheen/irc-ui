@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import AlertInfoOutline from "@/components/AppIcons/AlertInfoOutline";
 import { cn } from "@/utils/helper";
 import { IEmailProps, TEmailModel } from "./Email.d";
+import AlertDanger from "@/components/AppIcons/AlertDanger";
 
 const Email = ({
   label,
@@ -51,6 +52,7 @@ const Email = ({
           aria-live="assertive"
           data-testid="email-error"
         >
+          <AlertDanger className="fill-alert" />
           {t(errors.email.message)}
         </span>
       )}

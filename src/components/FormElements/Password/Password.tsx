@@ -6,6 +6,7 @@ import InputWithIcon from "@/components/ui/InputWithIcon";
 import { cn } from "@/utils/helper";
 import { IPasswordProps, TPasswordModel } from "./Password.d";
 import { IconPosition } from "@/models/enums/ButtonVariant";
+import AlertDanger from "@/components/AppIcons/AlertDanger";
 
 const Password = ({
   label,
@@ -53,6 +54,7 @@ const Password = ({
           aria-live="assertive"
           data-testid="password-error"
         >
+          <AlertDanger className="fill-alert" />
           {t(errors.password.message)}
         </span>
       )}

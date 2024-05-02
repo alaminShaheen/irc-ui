@@ -16,6 +16,7 @@ import {
   emailValidationSchema,
   phoneNumberValidationSchema,
 } from "@/components/FormElements/ValidationSchemas";
+import AlertDanger from "@/components/AppIcons/AlertDanger";
 
 const InsuredForm = (props: IInsuredFormProps) => {
   const {
@@ -100,6 +101,7 @@ const InsuredForm = (props: IInsuredFormProps) => {
               />
               {errors.name?.message && (
                 <span className="error-warning" aria-live="assertive">
+                  <AlertDanger className="fill-alert" />
                   {t(errors.name.message)}
                 </span>
               )}
@@ -117,6 +119,7 @@ const InsuredForm = (props: IInsuredFormProps) => {
               />
               {errors.address?.message && (
                 <span className="error-warning" aria-live="assertive">
+                  <AlertDanger className="fill-alert" />
                   {t(errors.address.message)}
                 </span>
               )}

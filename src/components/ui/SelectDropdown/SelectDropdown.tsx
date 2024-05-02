@@ -62,7 +62,7 @@ const SelectDropdown = (props: ISelectDropdownProps) => {
             leaveTo="opacity-0"
           >
             <Listbox.Options
-              className="absolute z-50 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white p-1 text-sm shadow-lg ring-1 ring-black/5 focus:outline-none lg:text-base"
+              className="absolute z-40 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white p-1 text-sm shadow-lg ring-1 ring-black/5 focus:outline-none lg:text-base"
               data-testid="select-dropdown-options-wrapper"
             >
               {options.map((option, index) => (

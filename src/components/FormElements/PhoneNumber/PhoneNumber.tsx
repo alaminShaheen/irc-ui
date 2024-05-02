@@ -5,6 +5,7 @@ import { InputMask } from "@react-input/mask";
 import AlertInfoOutline from "@/components/AppIcons/AlertInfoOutline";
 import { cn } from "@/utils/helper";
 import { IPhoneNumberProps, TPhoneNumberModel } from "./PhoneNumber.d";
+import AlertDanger from "@/components/AppIcons/AlertDanger";
 
 const PhoneNumber = ({
   label,
@@ -54,6 +55,7 @@ const PhoneNumber = ({
           data-testid="phoneNumber-error"
           aria-live="assertive"
         >
+          <AlertDanger className="fill-alert" />
           {t(errors.phoneNumber.message)}
         </span>
       )}

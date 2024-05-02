@@ -28,7 +28,6 @@ describe("ApplicantInformationForm", () => {
   let checkBox1: FormElement;
   let checkBox2: FormElement;
   let confirmButton: FormElement;
-  let backButton: FormElement;
   let manualAddressToggler: FormElement;
 
   beforeEach(() => {
@@ -49,9 +48,6 @@ describe("ApplicantInformationForm", () => {
     confirmButton = screen.getByRole("button", {
       name: "pages.applicantInformation.form.confirm",
     }) as FormElement;
-    backButton = screen.getByRole("button", {
-      name: "pages.applicantInformation.form.back",
-    }) as FormElement;
     manualAddressToggler = screen.getByRole("button", {
       name: "pages.applicantInformation.form.addAddressManually",
     }) as FormElement;
@@ -63,7 +59,6 @@ describe("ApplicantInformationForm", () => {
     expect(checkBox1).toBeInTheDocument();
     expect(checkBox2).toBeInTheDocument();
     expect(confirmButton).toBeInTheDocument();
-    expect(backButton).toBeInTheDocument();
     expect(manualAddressToggler).toBeInTheDocument();
   });
 

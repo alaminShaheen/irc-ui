@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
 
@@ -6,10 +5,15 @@ import Tick from "@/components/AppIcons/Tick";
 import { cn } from "@/utils/helper";
 import Return from "@/components/AppIcons/Return";
 import { useStepperContext } from "@/context/StepperContext";
+import Button from "@/components/ui/Button";
+import { ButtonVariant } from "@/models/enums/ButtonVariant";
 
 const StepperSidebar = () => {
-  const { stepperStepInformation: steps, activeStepIndex } =
-    useStepperContext();
+  const {
+    stepperStepInformation: steps,
+    activeStepIndex,
+    changeRouteTo,
+  } = useStepperContext();
   const [hoveredIndex, setHoveredIndex] = useState(-1);
   const completedPercentage = ((activeStepIndex + 1) / steps.length) * 100;
 
@@ -22,7 +26,7 @@ const StepperSidebar = () => {
       >
         {steps.map((step, index) => {
           return (
-            <Fragment key={step.id}>
+            <Fragment key={`${step.title}-${step.id}`}>
               <li
                 className={cn(
                   "group transition-all duration-200 hover:rounded-md hover:bg-secondary hover:opacity-100",
@@ -34,9 +38,10 @@ const StepperSidebar = () => {
                 onMouseEnter={() => setHoveredIndex(index)}
                 onMouseLeave={() => setHoveredIndex(-1)}
               >
-                <Link
-                  to={step.route}
-                  className="flex cursor-pointer items-center gap-x-3 p-2"
+                <Button
+                  variant={ButtonVariant.TRANSPARENT}
+                  onClick={() => changeRouteTo(index)}
+                  className="flex cursor-pointer items-center justify-start gap-x-3 p-2"
                 >
                   <div
                     className={cn(
@@ -77,7 +82,7 @@ const StepperSidebar = () => {
                       )}
                     </Transition>
                   </div>
-                  <div className="basis-auto text-primary group-hover:text-white">
+                  <div className="basis-auto text-left text-primary group-hover:text-white">
                     <div
                       className={cn(
                         "font-segoe text-lg font-semibold opacity-95",
@@ -87,7 +92,7 @@ const StepperSidebar = () => {
                     </div>
                     <div className="text-sm opacity-90">{step.subtitle}</div>
                   </div>
-                </Link>
+                </Button>
               </li>
               {index < steps.length - 1 && (
                 <li className="my-2 px-2">

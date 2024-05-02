@@ -12,11 +12,6 @@ import { Trans, useTranslation } from "react-i18next";
 import { useCallback, useEffect, useState } from "react";
 
 import {
-  ButtonType,
-  ButtonVariant,
-  IconPosition,
-} from "@/models/enums/ButtonVariant";
-import {
   ApplicantInformationFormModel,
   CommonApplicantInformation,
   WithAddress,
@@ -25,25 +20,33 @@ import {
 import { cn } from "@/utils/helper";
 import Button from "@/components/ui/Button";
 import Search from "@/components/AppIcons/Search";
-import UpArrow from "@/components/AppIcons/UpArrow";
 import Checkbox from "@/components/ui/Checkbox";
+import AlertDanger from "@/components/AppIcons/AlertDanger";
 import ExternalLink from "@/components/AppIcons/ExternalLink";
 import InputWithIcon from "@/components/ui/InputWithIcon";
 import SelectDropdown from "@/components/ui/SelectDropdown/SelectDropdown";
 import { LanguageCode } from "@/models/enums/LanguageCode";
 import { useStepperContext } from "@/context/StepperContext";
 import { COUNTRY_PROVINCE_LIST } from "@/constants/CountryProvinceList";
+import {
+  ButtonType,
+  ButtonVariant,
+  IconPosition,
+} from "@/models/enums/ButtonVariant";
 
 const ApplicantInformationForm = () => {
   const {
     t,
     i18n: { language },
   } = useTranslation();
-  const { setFormValues, formValues } = useStepperContext();
+  const { setFormValues, formValues, changingRouteTo, switchRoute } =
+    useStepperContext();
   const [enterManualAddress, setEnterManualAddress] = useState(
-    "city" in formValues.applicantInformationForm,
+    ["postalCode", "city", "country", "province", "streetAddress"].some(
+      (key) => key in formValues.applicantInformationForm,
+    ),
   );
-  const { goToPreviousStep, goToNextStep } = useStepperContext();
+  const { goToNextStep } = useStepperContext();
 
   const validateOrganizationName = useCallback((name: string) => {
     return new Promise<{ valid: boolean }>((resolve) => {
@@ -163,6 +166,7 @@ const ApplicantInformationForm = () => {
   const {
     register,
     unregister,
+    setValue,
     formState: { errors },
     watch,
     control,
@@ -211,11 +215,24 @@ const ApplicantInformationForm = () => {
         ).some((value) => !value));
 
   const onEnterManualAddress = useCallback(() => {
-    resetField("address", { defaultValue: "" });
     setEnterManualAddress(true);
-  }, [resetField]);
+    const conditionalKeys = [
+      "postalCode",
+      "city",
+      "country",
+      "province",
+      "streetAddress",
+    ] as (keyof WithManualAddress)[];
 
-  const handleFormSubmit = useCallback(
+    conditionalKeys.forEach((key) => {
+      register(key);
+      setValue(key, "");
+    });
+    setValue("address", "");
+    unregister("address");
+  }, [register, unregister, setValue]);
+
+  const trimData = useCallback(
     (data: ApplicantInformationFormModel) => {
       data.name = data.name.trim();
       if (enterManualAddress) {
@@ -225,7 +242,7 @@ const ApplicantInformationForm = () => {
         dataWithManualAddress.streetAddress =
           dataWithManualAddress.streetAddress.trim();
         dataWithManualAddress.country = dataWithManualAddress.country.trim();
-        dataWithManualAddress.province = dataWithManualAddress.province.trim();
+        dataWithManualAddress.province = dataWithManualAddress.province?.trim();
         dataWithManualAddress.postalCode =
           dataWithManualAddress.postalCode.trim();
         data = { ...data, ...dataWithManualAddress };
@@ -235,27 +252,21 @@ const ApplicantInformationForm = () => {
         dataWithAddress.address = dataWithAddress.address.trim();
         data = { ...data, ...dataWithAddress };
       }
-      setFormValues((prev) => ({ ...prev, applicantInformationForm: data }));
-      goToNextStep();
+      return data;
     },
-    [enterManualAddress, setFormValues, goToNextStep],
+    [enterManualAddress],
   );
 
-  useEffect(() => {
-    const conditionalKeys = [
-      "postalCode",
-      "city",
-      "country",
-      "province",
-      "streetAddress",
-    ] as (keyof WithManualAddress)[];
-
-    if (enterManualAddress) {
-      conditionalKeys.forEach((key) => register(key));
-    } else {
-      conditionalKeys.forEach((key) => unregister(key));
-    }
-  }, [register, unregister, enterManualAddress]);
+  const handleFormSubmit = useCallback(
+    (data: ApplicantInformationFormModel) => {
+      setFormValues((prev) => ({
+        ...prev,
+        applicantInformationForm: trimData(data),
+      }));
+      goToNextStep();
+    },
+    [setFormValues, goToNextStep, trimData],
+  );
 
   useEffect(() => {
     if (selectedCountry) {
@@ -265,17 +276,32 @@ const ApplicantInformationForm = () => {
           selectedCountry as keyof typeof COUNTRY_PROVINCE_LIST
         ].provinces.find((province) => province.en === currentProvince)
       ) {
-        resetField("province");
+        resetField("province", { defaultValue: "" });
       }
     }
   }, [selectedCountry, watch, resetField]);
 
+  useEffect(() => {
+    if (changingRouteTo) {
+      const trimmedData = trimData(watch());
+      setFormValues((prev) => ({
+        ...prev,
+        applicantInformationForm: Object.fromEntries(
+          Object.entries(trimmedData).filter(
+            ([key]) => !errors[key as keyof ApplicantInformationFormModel],
+          ),
+        ) as ApplicantInformationFormModel,
+      }));
+      switchRoute();
+    }
+  }, [changingRouteTo, watch, errors, switchRoute, trimData, setFormValues]);
+
   return (
     <form
-      className="flex flex-col gap-y-6 lg:mr-auto lg:w-4/5"
+      className="flex flex-col gap-y-6 lg:mb-64 lg:mr-auto lg:w-4/5"
       onSubmit={handleSubmit(handleFormSubmit)}
     >
-      <div className="">
+      <div className="space-y-2">
         <h2 className="font-segoe text-3xl font-bold text-primary">
           {pageContent.pageTitle}
         </h2>
@@ -313,6 +339,7 @@ const ApplicantInformationForm = () => {
         />
         {errors.name?.message && (
           <span className="error-warning" id="name-error">
+            <AlertDanger className="fill-alert" />
             {t(errors.name.message)}
           </span>
         )}
@@ -340,6 +367,7 @@ const ApplicantInformationForm = () => {
         />
         {errorWithAddress.address?.message && (
           <span className="error-warning" id="address-error">
+            <AlertDanger className="fill-alert" />
             {t(errorWithAddress.address.message)}
           </span>
         )}
@@ -347,7 +375,7 @@ const ApplicantInformationForm = () => {
           <Button
             variant={ButtonVariant.TRANSPARENT}
             onClick={onEnterManualAddress}
-            className="w-fit p-0 pt-2 text-left font-bold text-primary hover:underline"
+            className="w-fit p-0 pt-2 text-left font-bold text-primary underline"
             type={ButtonType.BUTTON}
           >
             {pageContent.addAddressManually}
@@ -357,8 +385,8 @@ const ApplicantInformationForm = () => {
 
       {enterManualAddress && (
         <>
-          <h4 className="font-segoe text-xl font-semibold text-primary">
-            {pageContent.addAddressManually}
+          <h4 className="font-segoe text-xl font-medium text-primary">
+            {pageContent.addingAddressManually}
           </h4>
 
           <div
@@ -384,6 +412,7 @@ const ApplicantInformationForm = () => {
             />
             {errorWithManualAddress.postalCode?.message && (
               <span className="error-warning" id="postalCode-error">
+                <AlertDanger className="fill-alert" />
                 {t(errorWithManualAddress.postalCode.message)}
               </span>
             )}
@@ -412,6 +441,7 @@ const ApplicantInformationForm = () => {
             />
             {errorWithManualAddress.streetAddress?.message && (
               <span className="error-warning" id="streetAddress-error">
+                <AlertDanger className="fill-alert" />
                 {t(errorWithManualAddress.streetAddress.message)}
               </span>
             )}
@@ -438,6 +468,7 @@ const ApplicantInformationForm = () => {
             />
             {errorWithManualAddress.city?.message && (
               <span className="error-warning" id="city-error">
+                <AlertDanger className="fill-alert" />
                 {t(errorWithManualAddress.city.message)}
               </span>
             )}
@@ -478,6 +509,7 @@ const ApplicantInformationForm = () => {
 
             {errorWithManualAddress.country?.message && (
               <span className="error-warning" id="country-error">
+                <AlertDanger className="fill-alert" />
                 {t(errorWithManualAddress.country.message)}
               </span>
             )}
@@ -521,6 +553,7 @@ const ApplicantInformationForm = () => {
             />
             {errorWithManualAddress.province?.message && (
               <span className="error-warning" id="province-error">
+                <AlertDanger className="fill-alert" />
                 {t(errorWithManualAddress.province.message)}
               </span>
             )}
@@ -564,27 +597,14 @@ const ApplicantInformationForm = () => {
         </label>
       </div>
 
-      <div className="!mt-8 flex gap-x-4 ">
-        <Button
-          className="flex gap-x-1 rounded-md text-xl"
-          variant={ButtonVariant.SECONDARY}
-          onClick={goToPreviousStep}
-          type={ButtonType.BUTTON}
-        >
-          <UpArrow className="stroke-primary" />
-          <span className="hidden lg:inline">{pageContent.back}</span>
-        </Button>
-        <Button
-          disabled={formDisabled}
-          className="w-full rounded-md text-xl lg:w-auto lg:px-20"
-          variant={
-            formDisabled ? ButtonVariant.DISABLED : ButtonVariant.PRIMARY
-          }
-          type={ButtonType.SUBMIT}
-        >
-          {pageContent.confirm}
-        </Button>
-      </div>
+      <Button
+        disabled={formDisabled}
+        className="lg:w !mt-8 w-full rounded-md text-xl font-medium"
+        variant={formDisabled ? ButtonVariant.DISABLED : ButtonVariant.PRIMARY}
+        type={ButtonType.SUBMIT}
+      >
+        {pageContent.confirm}
+      </Button>
     </form>
   );
 };

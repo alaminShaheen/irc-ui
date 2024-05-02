@@ -26,6 +26,7 @@ import GraphiteAlertInfo from "@/components/AppIcons/GraphiteAlertInfo";
 import { ButtonType, ButtonVariant } from "@/models/enums/ButtonVariant";
 import { IBasicInformationSectionProps } from "@/components/AddEvent/components/BasicInformationSection/BasicInformationSection.d";
 import { useTranslation } from "react-i18next";
+import AlertDanger from "@/components/AppIcons/AlertDanger";
 
 const BasicInformationSection = (props: IBasicInformationSectionProps) => {
   const {
@@ -79,6 +80,7 @@ const BasicInformationSection = (props: IBasicInformationSectionProps) => {
         />
         {errors.eventName?.message && (
           <span className="error-warning" aria-live="assertive">
+            <AlertDanger className="fill-alert" />
             {t(errors.eventName.message)}
           </span>
         )}
@@ -113,6 +115,7 @@ const BasicInformationSection = (props: IBasicInformationSectionProps) => {
           />
           {errors.rentalFacilityAgreementNumber?.message && (
             <span className="error-warning" aria-live="assertive">
+              <AlertDanger className="fill-alert" />
               {t(errors.rentalFacilityAgreementNumber.message)}
             </span>
           )}
@@ -133,6 +136,7 @@ const BasicInformationSection = (props: IBasicInformationSectionProps) => {
           />
           {errors.facility?.message && (
             <span className="error-warning" aria-live="assertive">
+              <AlertDanger className="fill-alert" />
               {t(errors.facility.message)}
             </span>
           )}
@@ -166,6 +170,7 @@ const BasicInformationSection = (props: IBasicInformationSectionProps) => {
             />
             {errors.startDate?.message && (
               <span className="error-warning" aria-live="assertive">
+                <AlertDanger className="fill-alert" />
                 {t(errors.startDate.message)}
               </span>
             )}
@@ -206,6 +211,7 @@ const BasicInformationSection = (props: IBasicInformationSectionProps) => {
             />
             {errors.startTime?.message && (
               <span className="error-warning" aria-live="assertive">
+                <AlertDanger className="fill-alert" />
                 {t(errors.startTime.message)}
               </span>
             )}
@@ -236,6 +242,7 @@ const BasicInformationSection = (props: IBasicInformationSectionProps) => {
             />
             {errors.endDate?.message && (
               <span className="error-warning" aria-live="assertive">
+                <AlertDanger className="fill-alert" />
                 {t(errors.endDate.message)}
               </span>
             )}
@@ -263,6 +270,7 @@ const BasicInformationSection = (props: IBasicInformationSectionProps) => {
             />
             {errors.endTime?.message && (
               <span className="error-warning" aria-live="assertive">
+                <AlertDanger className="fill-alert" />
                 {t(errors.endTime.message)}
               </span>
             )}
