@@ -1,8 +1,8 @@
+import { CommonCheckboxes } from "@/models/CommonCheckboxes";
+
 export type CommonApplicantInformation = {
   name: string;
-  bestAbilityAcknowledgement: boolean;
-  personalInformationCollectionAgreement: boolean;
-};
+} & CommonCheckboxes;
 
 export type WithAddress = {
   address: string;

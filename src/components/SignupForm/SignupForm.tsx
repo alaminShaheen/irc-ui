@@ -2,21 +2,19 @@ import * as yup from "yup";
 import { useCallback } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { ObjectSchema } from "yup";
+import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
-import { Trans, useTranslation } from "react-i18next";
 import { useForm, FormProvider } from "react-hook-form";
 
 import Email from "@/components/FormElements/Email";
 import { cn } from "@/utils/helper";
 import ROUTES from "@/constants/Routes";
 import Button from "@/components/ui/Button";
-import Checkbox from "@/components/ui/Checkbox";
 import Password from "@/components/FormElements/Password";
 import AppleLogo from "@/components/AppIcons/AppleLogo";
 import SmallTick from "@/components/AppIcons/SmallTick";
 import GoogleLogo from "@/components/AppIcons/GoogleLogo";
 import PhoneNumber from "@/components/FormElements/PhoneNumber";
-import ExternalLink from "@/components/AppIcons/ExternalLink";
 import MicrosoftLogo from "@/components/AppIcons/MicrosoftLogo";
 import NeutralCircle from "@/components/AppIcons/NeutralCircle";
 import { SignupFormModel } from "@/models/form/SignupFormModel";
@@ -28,6 +26,7 @@ import {
   phoneNumberValidationSchema,
 } from "@/components/FormElements/ValidationSchemas";
 import AlertDanger from "@/components/AppIcons/AlertDanger";
+import AgreementCheckboxes from "@/components/AgreementCheckboxes";
 
 const SignupForm = () => {
   const { t } = useTranslation();
@@ -50,31 +49,6 @@ const SignupForm = () => {
     numbers: t("pages.signup.signupForm.form.numbers"),
     uppercase: t("pages.signup.signupForm.form.uppercase"),
     minimumCharacters: t("pages.signup.signupForm.form.minimumCharacters"),
-    checkbox1Label: (
-      <Trans i18nKey="common.disclaimer.checkbox1Label">
-        I understand and agree to the use of
-        <a
-          href="#"
-          className="inline-flex items-center gap-x-1 font-bold text-primary underline"
-        >
-          application agreement
-          <ExternalLink />
-        </a>
-      </Trans>
-    ),
-    checkbox2Label: (
-      <Trans i18nKey="common.disclaimer.checkbox2Label">
-        I understand and agree the information submitted will be used in line
-        with our
-        <a
-          href="#"
-          className="inline-flex items-center gap-x-1 font-bold text-primary underline"
-        >
-          privacy policy
-          <ExternalLink />
-        </a>
-      </Trans>
-    ),
     signUp: t("pages.signup.signupForm.form.signUp"),
   };
 
@@ -346,41 +320,7 @@ const SignupForm = () => {
             </div>
           </div>
 
-          <div className="form-radio-checkbox-group !items-start">
-            <div className="flex items-center justify-center">
-              <Checkbox
-                {...register("bestAbilityAcknowledgement")}
-                id="bestAbilityAcknowledgement"
-                aria-invalid={!!errors.bestAbilityAcknowledgement}
-              />
-            </div>
-            <label
-              htmlFor="bestAbilityAcknowledgement"
-              className="border-primary-300 text-black"
-            >
-              {pageContent.checkbox1Label}
-            </label>
-          </div>
-
-          <div
-            className={cn(`ml-auto h-1 border-t border-primary-300 md:hidden`)}
-          />
-
-          <div className="form-radio-checkbox-group !items-start">
-            <div className="flex items-center justify-center">
-              <Checkbox
-                {...register("personalInformationCollectionAgreement")}
-                id="personalInformationCollectionAgreement"
-                aria-invalid={!!errors.personalInformationCollectionAgreement}
-              />
-            </div>
-            <label
-              htmlFor="personalInformationCollectionAgreement"
-              className="border-primary-300 text-black"
-            >
-              {pageContent.checkbox2Label}
-            </label>
-          </div>
+          <AgreementCheckboxes />
 
           <Button
             disabled={formDisabled}

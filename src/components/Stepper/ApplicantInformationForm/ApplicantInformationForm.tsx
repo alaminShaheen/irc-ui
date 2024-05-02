@@ -2,13 +2,14 @@ import {
   Control,
   Controller,
   FieldErrors,
+  FormProvider,
   Resolver,
   useForm,
 } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useTranslation } from "react-i18next";
 import { useDebounceCallback } from "usehooks-ts";
-import { Trans, useTranslation } from "react-i18next";
 import { useCallback, useEffect, useState } from "react";
 
 import {
@@ -20,9 +21,7 @@ import {
 import { cn } from "@/utils/helper";
 import Button from "@/components/ui/Button";
 import Search from "@/components/AppIcons/Search";
-import Checkbox from "@/components/ui/Checkbox";
 import AlertDanger from "@/components/AppIcons/AlertDanger";
-import ExternalLink from "@/components/AppIcons/ExternalLink";
 import InputWithIcon from "@/components/ui/InputWithIcon";
 import SelectDropdown from "@/components/ui/SelectDropdown/SelectDropdown";
 import { LanguageCode } from "@/models/enums/LanguageCode";
@@ -33,6 +32,7 @@ import {
   ButtonVariant,
   IconPosition,
 } from "@/models/enums/ButtonVariant";
+import AgreementCheckboxes from "@/components/AgreementCheckboxes/AgreementCheckboxes";
 
 const ApplicantInformationForm = () => {
   const {
@@ -136,32 +136,16 @@ const ApplicantInformationForm = () => {
     streetAddressWrong: t(
       "pages.applicantInformation.form.errors.streetAddressWrong",
     ),
-    checkbox1Label: (
-      <Trans i18nKey="common.disclaimer.checkbox1Label">
-        I understand and agree to the use of
-        <a
-          href="#"
-          className="inline-flex items-center gap-x-1 font-bold text-primary underline"
-        >
-          application agreement
-          <ExternalLink />
-        </a>
-      </Trans>
-    ),
-    checkbox2Label: (
-      <Trans i18nKey="common.disclaimer.checkbox2Label">
-        I understand and agree the information submitted will be used in line
-        with our
-        <a
-          href="#"
-          className="inline-flex items-center gap-x-1 font-bold text-primary underline"
-        >
-          privacy policy
-          <ExternalLink />
-        </a>
-      </Trans>
-    ),
   };
+
+  const methods = useForm({
+    defaultValues: formValues.applicantInformationForm,
+    mode: "onBlur",
+    resolver: yupResolver(
+      formValidationSchema,
+    ) as Resolver<ApplicantInformationFormModel>,
+    context: { enterManualAddress },
+  });
 
   const {
     register,
@@ -173,14 +157,8 @@ const ApplicantInformationForm = () => {
     setError,
     resetField,
     handleSubmit,
-  } = useForm({
-    defaultValues: formValues.applicantInformationForm,
-    mode: "onBlur",
-    resolver: yupResolver(
-      formValidationSchema,
-    ) as Resolver<ApplicantInformationFormModel>,
-    context: { enterManualAddress },
-  });
+  } = methods;
+
   const errorWithAddress = errors as FieldErrors<
     CommonApplicantInformation & WithAddress
   >;
@@ -297,315 +275,287 @@ const ApplicantInformationForm = () => {
   }, [changingRouteTo, watch, errors, switchRoute, trimData, setFormValues]);
 
   return (
-    <form
-      className="flex flex-col gap-y-6 lg:mb-64 lg:mr-auto lg:w-4/5"
-      onSubmit={handleSubmit(handleFormSubmit)}
-    >
-      <div className="space-y-2">
-        <h2 className="font-segoe text-3xl font-bold text-primary">
-          {pageContent.pageTitle}
-        </h2>
-        <p className="text-lg font-normal text-graphite-700">
-          {pageContent.pagePolicy}
-        </p>
-      </div>
+    <FormProvider {...methods}>
+      <form
+        className="flex flex-col gap-y-6 lg:mb-64 lg:mr-auto lg:w-4/5"
+        onSubmit={handleSubmit(handleFormSubmit)}
+      >
+        <div className="space-y-2">
+          <h2 className="font-segoe text-3xl font-bold text-primary">
+            {pageContent.pageTitle}
+          </h2>
+          <p className="text-lg font-normal text-graphite-700">
+            {pageContent.pagePolicy}
+          </p>
+        </div>
 
-      <div className={cn("form-group", { "has-error": errors.name })}>
-        <label htmlFor="name" className="form-label">
-          {pageContent.name}
-        </label>
-        <input
-          {...register("name", {
-            onChange: async (event) => {
-              if (event.target.value) {
-                const response = await debouncedNameValidation(
-                  event.target.value,
-                );
-                if (response?.valid) {
-                  setError("name", {
-                    message:
-                      "pages.applicantInformation.form.errors.invalidName",
-                  });
+        <div className={cn("form-group", { "has-error": errors.name })}>
+          <label htmlFor="name" className="form-label">
+            {pageContent.name}
+          </label>
+          <input
+            {...register("name", {
+              onChange: async (event) => {
+                if (event.target.value) {
+                  const response = await debouncedNameValidation(
+                    event.target.value,
+                  );
+                  if (response?.valid) {
+                    setError("name", {
+                      message:
+                        "pages.applicantInformation.form.errors.invalidName",
+                    });
+                  }
                 }
-              }
-            },
+              },
+            })}
+            id="name"
+            className="input p-4"
+            placeholder={pageContent.nameOrCompanyName}
+            type="text"
+            aria-invalid={!!errors.name}
+            aria-describedby={errors.name ? "name-error" : undefined}
+          />
+          {errors.name?.message && (
+            <span className="error-warning" id="name-error">
+              <AlertDanger className="fill-alert" />
+              {t(errors.name.message)}
+            </span>
+          )}
+        </div>
+
+        <div
+          className={cn("form-group", {
+            "has-error": errorWithAddress.address,
           })}
-          id="name"
-          className="input p-4"
-          placeholder={pageContent.nameOrCompanyName}
-          type="text"
-          aria-invalid={!!errors.name}
-          aria-describedby={errors.name ? "name-error" : undefined}
-        />
-        {errors.name?.message && (
-          <span className="error-warning" id="name-error">
-            <AlertDanger className="fill-alert" />
-            {t(errors.name.message)}
-          </span>
-        )}
-      </div>
+        >
+          <label htmlFor="address" className="form-label">
+            {pageContent.address}
+          </label>
+          <InputWithIcon
+            icon={<Search />}
+            iconPosition={IconPosition.LEFT}
+            {...register("address")}
+            id="address"
+            disabled={enterManualAddress}
+            className="input w-full p-4"
+            placeholder={pageContent.startTyping}
+            type="text"
+            aria-invalid={!!errorWithAddress.address}
+            aria-describedby={
+              errorWithAddress.address ? "address-error" : undefined
+            }
+          />
+          {errorWithAddress.address?.message && (
+            <span className="error-warning" id="address-error">
+              <AlertDanger className="fill-alert" />
+              {t(errorWithAddress.address.message)}
+            </span>
+          )}
+          {!enterManualAddress && (
+            <Button
+              variant={ButtonVariant.TRANSPARENT}
+              onClick={onEnterManualAddress}
+              className="w-fit p-0 pt-2 text-left font-bold text-primary underline"
+              type={ButtonType.BUTTON}
+            >
+              {pageContent.addAddressManually}
+            </Button>
+          )}
+        </div>
 
-      <div
-        className={cn("form-group", { "has-error": errorWithAddress.address })}
-      >
-        <label htmlFor="address" className="form-label">
-          {pageContent.address}
-        </label>
-        <InputWithIcon
-          icon={<Search />}
-          iconPosition={IconPosition.LEFT}
-          {...register("address")}
-          id="address"
-          disabled={enterManualAddress}
-          className="input w-full p-4"
-          placeholder={pageContent.startTyping}
-          type="text"
-          aria-invalid={!!errorWithAddress.address}
-          aria-describedby={
-            errorWithAddress.address ? "address-error" : undefined
-          }
-        />
-        {errorWithAddress.address?.message && (
-          <span className="error-warning" id="address-error">
-            <AlertDanger className="fill-alert" />
-            {t(errorWithAddress.address.message)}
-          </span>
-        )}
-        {!enterManualAddress && (
-          <Button
-            variant={ButtonVariant.TRANSPARENT}
-            onClick={onEnterManualAddress}
-            className="w-fit p-0 pt-2 text-left font-bold text-primary underline"
-            type={ButtonType.BUTTON}
-          >
-            {pageContent.addAddressManually}
-          </Button>
-        )}
-      </div>
+        {enterManualAddress && (
+          <>
+            <h4 className="font-segoe text-xl font-medium text-primary">
+              {pageContent.addingAddressManually}
+            </h4>
 
-      {enterManualAddress && (
-        <>
-          <h4 className="font-segoe text-xl font-medium text-primary">
-            {pageContent.addingAddressManually}
-          </h4>
+            <div
+              className={cn("form-group lg:w-1/2", {
+                "has-error": errorWithManualAddress.postalCode,
+              })}
+            >
+              <label htmlFor="postalCode" className="form-label">
+                {pageContent.postalCode}
+              </label>
+              <input
+                {...register("postalCode")}
+                id="postalCode"
+                className="input p-4"
+                placeholder={pageContent.enterPostalCode}
+                type="text"
+                aria-invalid={!!errorWithManualAddress.postalCode}
+                aria-describedby={
+                  errorWithManualAddress.postalCode
+                    ? "postalCode-error"
+                    : undefined
+                }
+              />
+              {errorWithManualAddress.postalCode?.message && (
+                <span className="error-warning" id="postalCode-error">
+                  <AlertDanger className="fill-alert" />
+                  {t(errorWithManualAddress.postalCode.message)}
+                </span>
+              )}
+            </div>
 
-          <div
-            className={cn("form-group lg:w-1/2", {
-              "has-error": errorWithManualAddress.postalCode,
-            })}
-          >
-            <label htmlFor="postalCode" className="form-label">
-              {pageContent.postalCode}
-            </label>
-            <input
-              {...register("postalCode")}
-              id="postalCode"
-              className="input p-4"
-              placeholder={pageContent.enterPostalCode}
-              type="text"
-              aria-invalid={!!errorWithManualAddress.postalCode}
-              aria-describedby={
-                errorWithManualAddress.postalCode
-                  ? "postalCode-error"
-                  : undefined
-              }
-            />
-            {errorWithManualAddress.postalCode?.message && (
-              <span className="error-warning" id="postalCode-error">
-                <AlertDanger className="fill-alert" />
-                {t(errorWithManualAddress.postalCode.message)}
-              </span>
-            )}
-          </div>
+            <div
+              className={cn("form-group", {
+                "has-error": errorWithManualAddress.streetAddress,
+              })}
+            >
+              <label htmlFor="streetAddress" className="form-label">
+                {pageContent.streetAddress}
+              </label>
+              <input
+                {...register("streetAddress")}
+                id="streetAddress"
+                className="input p-4"
+                placeholder={pageContent.enterStreetName}
+                type="text"
+                aria-invalid={!!errorWithManualAddress.streetAddress}
+                aria-describedby={
+                  errorWithManualAddress.streetAddress
+                    ? "streetAddress-error"
+                    : undefined
+                }
+              />
+              {errorWithManualAddress.streetAddress?.message && (
+                <span className="error-warning" id="streetAddress-error">
+                  <AlertDanger className="fill-alert" />
+                  {t(errorWithManualAddress.streetAddress.message)}
+                </span>
+              )}
+            </div>
 
-          <div
-            className={cn("form-group", {
-              "has-error": errorWithManualAddress.streetAddress,
-            })}
-          >
-            <label htmlFor="streetAddress" className="form-label">
-              {pageContent.streetAddress}
-            </label>
-            <input
-              {...register("streetAddress")}
-              id="streetAddress"
-              className="input p-4"
-              placeholder={pageContent.enterStreetName}
-              type="text"
-              aria-invalid={!!errorWithManualAddress.streetAddress}
-              aria-describedby={
-                errorWithManualAddress.streetAddress
-                  ? "streetAddress-error"
-                  : undefined
-              }
-            />
-            {errorWithManualAddress.streetAddress?.message && (
-              <span className="error-warning" id="streetAddress-error">
-                <AlertDanger className="fill-alert" />
-                {t(errorWithManualAddress.streetAddress.message)}
-              </span>
-            )}
-          </div>
+            <div
+              className={cn("form-group", {
+                "has-error": errorWithManualAddress.city,
+              })}
+            >
+              <label htmlFor="city" className="form-label">
+                {pageContent.city}
+              </label>
+              <input
+                {...register("city")}
+                id="city"
+                className="input p-4"
+                placeholder={pageContent.enterCityName}
+                type="text"
+                aria-invalid={!!errorWithManualAddress.city}
+                aria-describedby={
+                  errorWithManualAddress.city ? "city-error" : undefined
+                }
+              />
+              {errorWithManualAddress.city?.message && (
+                <span className="error-warning" id="city-error">
+                  <AlertDanger className="fill-alert" />
+                  {t(errorWithManualAddress.city.message)}
+                </span>
+              )}
+            </div>
 
-          <div
-            className={cn("form-group", {
-              "has-error": errorWithManualAddress.city,
-            })}
-          >
-            <label htmlFor="city" className="form-label">
-              {pageContent.city}
-            </label>
-            <input
-              {...register("city")}
-              id="city"
-              className="input p-4"
-              placeholder={pageContent.enterCityName}
-              type="text"
-              aria-invalid={!!errorWithManualAddress.city}
-              aria-describedby={
-                errorWithManualAddress.city ? "city-error" : undefined
-              }
-            />
-            {errorWithManualAddress.city?.message && (
-              <span className="error-warning" id="city-error">
-                <AlertDanger className="fill-alert" />
-                {t(errorWithManualAddress.city.message)}
-              </span>
-            )}
-          </div>
+            <div
+              className={cn("form-group", {
+                "has-error": errorWithManualAddress.country,
+              })}
+            >
+              <label htmlFor="country" className="form-label">
+                {pageContent.country}
+              </label>
+              <Controller
+                control={
+                  control as Control<
+                    CommonApplicantInformation & WithManualAddress
+                  >
+                }
+                name="country"
+                defaultValue=""
+                render={({ field: { value, name, onChange } }) => (
+                  <SelectDropdown
+                    options={Object.entries(COUNTRY_PROVINCE_LIST).map(
+                      ([key, value], index) => ({
+                        id: index,
+                        label: value[language as LanguageCode],
+                        value: key,
+                      }),
+                    )}
+                    placeholderText={pageContent.enterCountryName}
+                    value={value}
+                    name={name}
+                    onChange={onChange}
+                  />
+                )}
+              />
 
-          <div
-            className={cn("form-group", {
-              "has-error": errorWithManualAddress.country,
-            })}
-          >
-            <label htmlFor="country" className="form-label">
-              {pageContent.country}
-            </label>
-            <Controller
-              control={
-                control as Control<
-                  CommonApplicantInformation & WithManualAddress
-                >
-              }
-              name="country"
-              defaultValue=""
-              render={({ field: { value, name, onChange } }) => (
-                <SelectDropdown
-                  options={Object.entries(COUNTRY_PROVINCE_LIST).map(
-                    ([key, value], index) => ({
+              {errorWithManualAddress.country?.message && (
+                <span className="error-warning" id="country-error">
+                  <AlertDanger className="fill-alert" />
+                  {t(errorWithManualAddress.country.message)}
+                </span>
+              )}
+            </div>
+
+            <div
+              className={cn("form-group", {
+                "has-error": errorWithManualAddress.province,
+              })}
+            >
+              <label htmlFor="province" className="form-label">
+                {pageContent.province}
+              </label>
+              <Controller
+                control={
+                  control as Control<
+                    CommonApplicantInformation & WithManualAddress
+                  >
+                }
+                disabled={!selectedCountry}
+                name="province"
+                defaultValue=""
+                render={({ field: { value, name, onChange, disabled } }) => (
+                  <SelectDropdown
+                    disabled={disabled}
+                    options={(
+                      COUNTRY_PROVINCE_LIST[
+                        selectedCountry as keyof typeof COUNTRY_PROVINCE_LIST
+                      ]?.provinces ?? []
+                    ).map((province, index) => ({
                       id: index,
-                      label: value[language as LanguageCode],
-                      value: key,
-                    }),
-                  )}
-                  placeholderText={pageContent.enterCountryName}
-                  value={value}
-                  name={name}
-                  onChange={onChange}
-                />
+                      label: province[language as LanguageCode],
+                      value: province["en"],
+                    }))}
+                    placeholderText={pageContent.enterProvinceName}
+                    value={value!}
+                    name={name}
+                    onChange={onChange}
+                  />
+                )}
+              />
+              {errorWithManualAddress.province?.message && (
+                <span className="error-warning" id="province-error">
+                  <AlertDanger className="fill-alert" />
+                  {t(errorWithManualAddress.province.message)}
+                </span>
               )}
-            />
+            </div>
+          </>
+        )}
 
-            {errorWithManualAddress.country?.message && (
-              <span className="error-warning" id="country-error">
-                <AlertDanger className="fill-alert" />
-                {t(errorWithManualAddress.country.message)}
-              </span>
-            )}
-          </div>
+        <AgreementCheckboxes />
 
-          <div
-            className={cn("form-group", {
-              "has-error": errorWithManualAddress.province,
-            })}
-          >
-            <label htmlFor="province" className="form-label">
-              {pageContent.province}
-            </label>
-            <Controller
-              control={
-                control as Control<
-                  CommonApplicantInformation & WithManualAddress
-                >
-              }
-              disabled={!selectedCountry}
-              name="province"
-              defaultValue=""
-              render={({ field: { value, name, onChange, disabled } }) => (
-                <SelectDropdown
-                  disabled={disabled}
-                  options={(
-                    COUNTRY_PROVINCE_LIST[
-                      selectedCountry as keyof typeof COUNTRY_PROVINCE_LIST
-                    ]?.provinces ?? []
-                  ).map((province, index) => ({
-                    id: index,
-                    label: province[language as LanguageCode],
-                    value: province["en"],
-                  }))}
-                  placeholderText={pageContent.enterProvinceName}
-                  value={value!}
-                  name={name}
-                  onChange={onChange}
-                />
-              )}
-            />
-            {errorWithManualAddress.province?.message && (
-              <span className="error-warning" id="province-error">
-                <AlertDanger className="fill-alert" />
-                {t(errorWithManualAddress.province.message)}
-              </span>
-            )}
-          </div>
-        </>
-      )}
-
-      <div className="form-radio-checkbox-group !items-start">
-        <div className="flex items-center justify-center">
-          <Checkbox
-            {...register("bestAbilityAcknowledgement")}
-            id="bestAbilityAcknowledgement"
-            aria-invalid={!!errors.bestAbilityAcknowledgement}
-          />
-        </div>
-        <label
-          htmlFor="bestAbilityAcknowledgement"
-          className="border-primary-300 text-black"
+        <Button
+          disabled={formDisabled}
+          className="lg:w !mt-8 w-full rounded-md text-xl font-medium"
+          variant={
+            formDisabled ? ButtonVariant.DISABLED : ButtonVariant.PRIMARY
+          }
+          type={ButtonType.SUBMIT}
         >
-          {pageContent.checkbox1Label}
-        </label>
-      </div>
-
-      <div
-        className={cn(`ml-auto h-1 border-t border-primary-300 md:hidden`)}
-      />
-
-      <div className="form-radio-checkbox-group !items-start">
-        <div className="flex items-center justify-center">
-          <Checkbox
-            {...register("personalInformationCollectionAgreement")}
-            id="personalInformationCollectionAgreement"
-            aria-invalid={!!errors.personalInformationCollectionAgreement}
-          />
-        </div>
-        <label
-          htmlFor="personalInformationCollectionAgreement"
-          className="border-primary-300 text-black"
-        >
-          {pageContent.checkbox2Label}
-        </label>
-      </div>
-
-      <Button
-        disabled={formDisabled}
-        className="lg:w !mt-8 w-full rounded-md text-xl font-medium"
-        variant={formDisabled ? ButtonVariant.DISABLED : ButtonVariant.PRIMARY}
-        type={ButtonType.SUBMIT}
-      >
-        {pageContent.confirm}
-      </Button>
-    </form>
+          {pageContent.confirm}
+        </Button>
+      </form>
+    </FormProvider>
   );
 };
 
