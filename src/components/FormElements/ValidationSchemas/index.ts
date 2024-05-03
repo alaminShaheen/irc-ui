@@ -8,16 +8,37 @@ export const emailValidationSchema = yup
     "common.form.errors.invalidEmail",
   );
 
+export const passwordValidationRegEx = {
+  uppercase: /[A-Z]+/,
+  lowercase: /[a-z]+/,
+  numbers: /[0-9]+/,
+  minimumSpecialCharacter: /[\^$*.()[\]{}?"!@#%&/\\,><':;|_~`=+-]/,
+  noEmoji: /^(?!.*[\uD83C-\uDBFF\uDC00-\uDFFF]).*$/u,
+};
+
 export const passwordValidationSchema = yup
   .string()
-  .required("common.form.errors.fieldRequired")
-  .min(8, "common.form.errors.passwordMinCharacters")
-  .matches(/[A-Z]+/, "common.form.errors.passwordUppercaseCharacters")
-  .matches(/[a-z]+/, "common.form.errors.passwordLowerCharacters")
-  .matches(/[0-9]+/, "common.form.errors.passwordNumericCharacters")
+  .required("pages.signup.signupForm.form.errors.fieldRequired")
+  .min(8, "pages.signup.signupForm.form.errors.passwordMinCharacters")
   .matches(
-    /^[\w^$*.[\]{}()?"!@#%&/\\,><':;|_~`=+-]*$/,
-    "common.form.errors.passwordInvalidCharacters",
+    passwordValidationRegEx.uppercase,
+    "pages.signup.signupForm.form.errors.passwordUppercaseCharacters",
+  )
+  .matches(
+    passwordValidationRegEx.lowercase,
+    "pages.signup.signupForm.form.errors.passwordLowerCharacters",
+  )
+  .matches(
+    passwordValidationRegEx.numbers,
+    "pages.signup.signupForm.form.errors.passwordNumericCharacters",
+  )
+  .matches(
+    passwordValidationRegEx.minimumSpecialCharacter,
+    "pages.signup.signupForm.form.errors.passwordMinSpecialCharacter",
+  )
+  .matches(
+    passwordValidationRegEx.noEmoji,
+    "pages.signup.signupForm.form.errors.passwordNoEmoji",
   );
 
 export const phoneNumberValidationSchema = yup

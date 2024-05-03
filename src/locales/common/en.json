@@ -53,6 +53,7 @@
       "passwordUppercaseCharacters": "Password must contain at least 1 uppercase alphabet",
       "passwordLowerCharacters": "Password must contain at least 1 lowercase alphabet",
       "passwordNumericCharacters": "Password must contain at least 1 numeric character",
+      "passwordNoEmojis": "Password should not contain any emoji",
       "phoneNumberMinLength": "Phone number must be 10 digits long."
     }
   }

@@ -56,11 +56,32 @@ describe("Password component", () => {
     const passwordInput = screen.getByLabelText(labelText);
 
     await act(async () => {
+      fireEvent.focus(passwordInput);
       fireEvent.blur(passwordInput);
     });
 
-    const errorMessage = screen.queryByText("common.form.errors.fieldRequired");
-    expect(errorMessage).toBeInTheDocument();
+    () => {
+      const errorMessage = screen.queryByText(
+        "common.form.errors.fieldRequired",
+      );
+      expect(errorMessage).toBeInTheDocument();
+    };
+  });
+
+  it("shows an error when an emoji is entered in the password field", async () => {
+    const passwordInput = screen.getByLabelText(labelText);
+
+    await userEvent.type(passwordInput, "😊");
+
+    await act(async () => {
+      fireEvent.blur(passwordInput);
+    });
+
+    () => {
+      expect(
+        screen.getByText("common.form.errors.passwordNoEmojis"),
+      ).toBeInTheDocument();
+    };
   });
 
   it("shows error for invalid password", async () => {
@@ -71,43 +92,48 @@ describe("Password component", () => {
       fireEvent.blur(passwordInput);
     });
 
-    const minCharactersErrorMessage = screen.getByText(
-      "common.form.errors.passwordMinCharacters",
-    );
-    expect(minCharactersErrorMessage).toBeInTheDocument();
-
+    () => {
+      const minCharactersErrorMessage = screen.getByText(
+        "common.form.errors.passwordMinCharacters",
+      );
+      expect(minCharactersErrorMessage).toBeInTheDocument();
+    };
     await userEvent.clear(passwordInput);
     await userEvent.type(passwordInput, "n0uppercase");
     await act(async () => {
       fireEvent.blur(passwordInput);
     });
 
-    const noUppercaseErrorMessage = screen.getByText(
-      "common.form.errors.passwordUppercaseCharacters",
-    );
-    expect(noUppercaseErrorMessage).toBeInTheDocument();
-
+    () => {
+      const noUppercaseErrorMessage = screen.getByText(
+        "common.form.errors.passwordUppercaseCharacters",
+      );
+      expect(noUppercaseErrorMessage).toBeInTheDocument();
+    };
     await userEvent.clear(passwordInput);
     await userEvent.type(passwordInput, "N0LOWERCASE");
     await act(async () => {
       fireEvent.blur(passwordInput);
     });
 
-    const noLowercaseErrorMessage = screen.getByText(
-      "common.form.errors.passwordLowerCharacters",
-    );
-    expect(noLowercaseErrorMessage).toBeInTheDocument();
-
+    () => {
+      const noLowercaseErrorMessage = screen.getByText(
+        "common.form.errors.passwordLowerCharacters",
+      );
+      expect(noLowercaseErrorMessage).toBeInTheDocument();
+    };
     await userEvent.clear(passwordInput);
     await userEvent.type(passwordInput, "noDigits");
     await act(async () => {
       fireEvent.blur(passwordInput);
     });
 
-    const noDigitsErrorMessage = screen.getByText(
-      "common.form.errors.passwordNumericCharacters",
-    );
-    expect(noDigitsErrorMessage).toBeInTheDocument();
+    () => {
+      const noDigitsErrorMessage = screen.getByText(
+        "common.form.errors.passwordNumericCharacters",
+      );
+      expect(noDigitsErrorMessage).toBeInTheDocument();
+    };
 
     await userEvent.clear(passwordInput);
     await userEvent.type(passwordInput, "Inval1d😃");
@@ -115,9 +141,11 @@ describe("Password component", () => {
       fireEvent.blur(passwordInput);
     });
 
-    const invalidCharacterPassword = screen.getByText(
-      "common.form.errors.passwordInvalidCharacters",
-    );
-    expect(invalidCharacterPassword).toBeInTheDocument();
+    () => {
+      const invalidCharacterPassword = screen.getByText(
+        "common.form.errors.passwordInvalidCharacters",
+      );
+      expect(invalidCharacterPassword).toBeInTheDocument();
+    };
   });
 });
