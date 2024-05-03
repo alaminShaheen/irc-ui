@@ -1,5 +1,5 @@
 import { Transition } from "@headlessui/react";
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 
 import Tick from "@/components/AppIcons/Tick";
 import { cn } from "@/utils/helper";
@@ -11,11 +11,16 @@ import { ButtonVariant } from "@/models/enums/ButtonVariant";
 const StepperSidebar = () => {
   const {
     stepperStepInformation: steps,
-    activeStepIndex,
+    currentStepIndex,
     changeRouteTo,
   } = useStepperContext();
   const [hoveredIndex, setHoveredIndex] = useState(-1);
-  const completedPercentage = ((activeStepIndex + 1) / steps.length) * 100;
+  const [activeStepIndex, setActiveStepIndex] = useState(0);
+  const completedPercentage = ((currentStepIndex + 1) / steps.length) * 100;
+
+  useEffect(() => {
+    setActiveStepIndex((prev) => Math.max(prev, currentStepIndex));
+  }, [currentStepIndex]);
 
   return (
     <div className="order-1 h-full lg:order-2">
@@ -31,25 +36,26 @@ const StepperSidebar = () => {
                 className={cn(
                   "group transition-all duration-200 hover:rounded-md hover:bg-secondary hover:opacity-100",
                   {
-                    "opacity-70": index < activeStepIndex,
+                    "opacity-70": index < currentStepIndex,
                   },
                 )}
-                aria-current={activeStepIndex === index}
+                aria-current={currentStepIndex === index}
                 onMouseEnter={() => setHoveredIndex(index)}
                 onMouseLeave={() => setHoveredIndex(-1)}
               >
                 <Button
+                  disabled={index > activeStepIndex}
                   variant={ButtonVariant.TRANSPARENT}
                   onClick={() => changeRouteTo(index)}
-                  className="flex cursor-pointer items-center justify-start gap-x-3 p-2"
+                  className="flex cursor-pointer items-center justify-start gap-x-3 !border-0 p-2"
                 >
                   <div
                     className={cn(
                       "relative size-10 basis-10 items-center justify-center rounded-full text-lg",
                       {
-                        "bg-secondary text-white": index <= activeStepIndex,
+                        "bg-secondary text-white": index <= currentStepIndex,
                         "border-2 border-dashed border-secondary text-primary":
-                          index > activeStepIndex,
+                          index > currentStepIndex,
                       },
                     )}
                   >
@@ -75,7 +81,7 @@ const StepperSidebar = () => {
                       leaveFrom="opacity-100"
                       leaveTo="opacity-0"
                     >
-                      {index < activeStepIndex ? (
+                      {index < currentStepIndex ? (
                         <Tick height={24} width={24} className="stroke-white" />
                       ) : (
                         index + 1
@@ -98,7 +104,7 @@ const StepperSidebar = () => {
                 <li className="my-2 px-2">
                   <div className="flex h-11 w-10 justify-center">
                     {index < steps.length - 1 &&
-                      (index === activeStepIndex ? (
+                      (index === currentStepIndex ? (
                         <div className="relative h-11 w-1">
                           <div className="absolute z-10 h-1/2 w-1 rounded-md bg-secondary transition-all duration-500" />
                           <div className="absolute h-full w-1 rounded-md bg-primary-100" />
@@ -106,8 +112,8 @@ const StepperSidebar = () => {
                       ) : (
                         <div
                           className={cn("h-11 w-1 rounded-md", {
-                            "bg-secondary": index < activeStepIndex,
-                            "bg-primary-100": index > activeStepIndex,
+                            "bg-secondary": index < currentStepIndex,
+                            "bg-primary-100": index > currentStepIndex,
                           })}
                         />
                       ))}
@@ -133,9 +139,9 @@ const StepperSidebar = () => {
         </div>
         <div className="progress-info flex items-center gap-x-3 px-4 pb-5 pt-4">
           <div className="flex h-10 w-10 items-center justify-center rounded-full bg-secondary text-base">
-            {`${activeStepIndex + 1}/${steps.length}`}
+            {`${currentStepIndex + 1}/${steps.length}`}
           </div>
-          <div className="text-xl">{steps[activeStepIndex].title}</div>
+          <div className="text-xl">{steps[currentStepIndex].title}</div>
         </div>
       </div>
     </div>

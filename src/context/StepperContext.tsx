@@ -23,7 +23,7 @@ type StepperContextType = {
   setIsLoading: Dispatch<SetStateAction<boolean>>;
   setFormValues: Dispatch<SetStateAction<StepperContextType["formValues"]>>;
   stepperStepInformation: StepperStepInformation[];
-  activeStepIndex: number;
+  currentStepIndex: number;
   changingRouteTo: string;
   switchRoute: () => void;
   changeRouteTo: (stepperIndex: number) => void;
@@ -42,7 +42,7 @@ const STEPPER_CONTEXT_DEFAULT_VALUES: StepperContextType = {
   },
   changeRouteTo: () => {},
   switchRoute: () => {},
-  activeStepIndex: -1,
+  currentStepIndex: -1,
   setFormValues: () => {},
   changingRouteTo: "",
   isLoading: false,
@@ -122,7 +122,7 @@ export const StepperContextProvider = (props: StepperContextProviderProps) => {
     }
   }, [navigate, changingRouteTo]);
 
-  const activeStepIndex = useMemo(() => {
+  const currentStepIndex = useMemo(() => {
     return Math.max(
       stepperSteps.findIndex((step) => pathname.search(step.route) >= 0),
       0,
@@ -130,16 +130,16 @@ export const StepperContextProvider = (props: StepperContextProviderProps) => {
   }, [pathname, stepperSteps]);
 
   const goToNextStep = useCallback(() => {
-    if (activeStepIndex < stepperSteps.length - 1) {
-      navigate(stepperSteps[activeStepIndex + 1].route);
+    if (currentStepIndex < stepperSteps.length - 1) {
+      navigate(stepperSteps[currentStepIndex + 1].route);
     }
-  }, [activeStepIndex, navigate, stepperSteps]);
+  }, [currentStepIndex, navigate, stepperSteps]);
 
   const goToPreviousStep = useCallback(() => {
-    if (activeStepIndex > 0) {
-      navigate(stepperSteps[activeStepIndex - 1].route);
+    if (currentStepIndex > 0) {
+      navigate(stepperSteps[currentStepIndex - 1].route);
     }
-  }, [activeStepIndex, navigate, stepperSteps]);
+  }, [currentStepIndex, navigate, stepperSteps]);
 
   return (
     <StepContext.Provider
@@ -151,7 +151,7 @@ export const StepperContextProvider = (props: StepperContextProviderProps) => {
         changingRouteTo,
         setFormValues,
         isLoading,
-        activeStepIndex,
+        currentStepIndex: currentStepIndex,
         formValues,
         setIsLoading,
         stepperStepInformation: stepperSteps,
