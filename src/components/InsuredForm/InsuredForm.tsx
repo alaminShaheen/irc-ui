@@ -10,13 +10,13 @@ import { InsuredFormModel } from "@/models/form/InsuredFormModel";
 import { IInsuredFormProps } from "@/components/InsuredForm/InsuredForm.d";
 import { cn, formatPhoneNumber } from "@/utils/helper";
 import { ButtonType, ButtonVariant } from "@/models/enums/ButtonVariant";
+import FormError from "../FormError";
 import Email from "@/components/FormElements/Email";
 import PhoneNumber from "@/components/FormElements/PhoneNumber";
 import {
   emailValidationSchema,
   phoneNumberValidationSchema,
 } from "@/components/FormElements/ValidationSchemas";
-import AlertDanger from "@/components/AppIcons/AlertDanger";
 
 const InsuredForm = (props: IInsuredFormProps) => {
   const {
@@ -100,10 +100,10 @@ const InsuredForm = (props: IInsuredFormProps) => {
                 type="text"
               />
               {errors.name?.message && (
-                <span className="error-warning" aria-live="assertive">
-                  <AlertDanger className="fill-alert" />
-                  {t(errors.name.message)}
-                </span>
+                <FormError
+                  id="insuredFormName-error"
+                  errorMessage={t(errors.name.message)}
+                />
               )}
             </div>
 
@@ -118,10 +118,10 @@ const InsuredForm = (props: IInsuredFormProps) => {
                 type="text"
               />
               {errors.address?.message && (
-                <span className="error-warning" aria-live="assertive">
-                  <AlertDanger className="fill-alert" />
-                  {t(errors.address.message)}
-                </span>
+                <FormError
+                  id="insuredFormAddress-error"
+                  errorMessage={t(errors.address.message)}
+                />
               )}
             </div>
 

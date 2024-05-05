@@ -21,9 +21,9 @@ import {
 import { cn } from "@/utils/helper";
 import Button from "@/components/ui/Button";
 import Search from "@/components/AppIcons/Search";
-import AlertDanger from "@/components/AppIcons/AlertDanger";
 import InputWithIcon from "@/components/ui/InputWithIcon";
 import SelectDropdown from "@/components/ui/SelectDropdown/SelectDropdown";
+import FormError from "@/components/FormError";
 import { LanguageCode } from "@/models/enums/LanguageCode";
 import { useStepperContext } from "@/context/StepperContext";
 import { COUNTRY_PROVINCE_LIST } from "@/constants/CountryProvinceList";
@@ -317,10 +317,7 @@ const ApplicantInformationForm = () => {
             aria-describedby={errors.name ? "name-error" : undefined}
           />
           {errors.name?.message && (
-            <span className="error-warning" id="name-error">
-              <AlertDanger className="fill-alert" />
-              {t(errors.name.message)}
-            </span>
+            <FormError id="name-error" errorMessage={t(errors.name.message)} />
           )}
         </div>
 
@@ -347,10 +344,10 @@ const ApplicantInformationForm = () => {
             }
           />
           {errorWithAddress.address?.message && (
-            <span className="error-warning" id="address-error">
-              <AlertDanger className="fill-alert" />
-              {t(errorWithAddress.address.message)}
-            </span>
+            <FormError
+              id="address-error"
+              errorMessage={t(errorWithAddress.address.message)}
+            />
           )}
           {!enterManualAddress && (
             <Button
@@ -392,10 +389,10 @@ const ApplicantInformationForm = () => {
                 }
               />
               {errorWithManualAddress.postalCode?.message && (
-                <span className="error-warning" id="postalCode-error">
-                  <AlertDanger className="fill-alert" />
-                  {t(errorWithManualAddress.postalCode.message)}
-                </span>
+                <FormError
+                  id="postalCode-error"
+                  errorMessage={t(errorWithManualAddress.postalCode.message)}
+                />
               )}
             </div>
 
@@ -421,10 +418,10 @@ const ApplicantInformationForm = () => {
                 }
               />
               {errorWithManualAddress.streetAddress?.message && (
-                <span className="error-warning" id="streetAddress-error">
-                  <AlertDanger className="fill-alert" />
-                  {t(errorWithManualAddress.streetAddress.message)}
-                </span>
+                <FormError
+                  id="streetAddress-error"
+                  errorMessage={t(errorWithManualAddress.streetAddress.message)}
+                />
               )}
             </div>
 
@@ -448,10 +445,10 @@ const ApplicantInformationForm = () => {
                 }
               />
               {errorWithManualAddress.city?.message && (
-                <span className="error-warning" id="city-error">
-                  <AlertDanger className="fill-alert" />
-                  {t(errorWithManualAddress.city.message)}
-                </span>
+                <FormError
+                  id="city-error"
+                  errorMessage={t(errorWithManualAddress.city.message)}
+                />
               )}
             </div>
 
@@ -489,10 +486,10 @@ const ApplicantInformationForm = () => {
               />
 
               {errorWithManualAddress.country?.message && (
-                <span className="error-warning" id="country-error">
-                  <AlertDanger className="fill-alert" />
-                  {t(errorWithManualAddress.country.message)}
-                </span>
+                <FormError
+                  id="country-error"
+                  errorMessage={t(errorWithManualAddress.country.message)}
+                />
               )}
             </div>
 
@@ -533,10 +530,10 @@ const ApplicantInformationForm = () => {
                 )}
               />
               {errorWithManualAddress.province?.message && (
-                <span className="error-warning" id="province-error">
-                  <AlertDanger className="fill-alert" />
-                  {t(errorWithManualAddress.province.message)}
-                </span>
+                <FormError
+                  id="province-error"
+                  errorMessage={t(errorWithManualAddress.province.message)}
+                />
               )}
             </div>
           </>
