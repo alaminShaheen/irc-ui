@@ -59,7 +59,7 @@ describe("PhoneNumber component", () => {
       fireEvent.blur(phoneNumberInput);
     });
 
-    const errorMessage = screen.queryByTestId("phoneNumber-error");
+    const errorMessage = screen.queryByTestId("formError-body");
     expect(errorMessage).toBeInTheDocument();
   });
 
@@ -71,7 +71,7 @@ describe("PhoneNumber component", () => {
       fireEvent.blur(phoneNumberInput);
     });
 
-    const errorMessage = screen.queryByTestId("phoneNumber-error");
+    const errorMessage = screen.queryByTestId("formError-body");
     expect(errorMessage).toBeInTheDocument();
   });
 

@@ -14,7 +14,7 @@ import Email from "@/components/FormElements/Email";
 import { cn } from "@/utils/helper";
 import ROUTES from "@/constants/Routes";
 import Button from "@/components/ui/Button";
-import AlertDanger from "@/components/AppIcons/AlertDanger";
+import FormError from "@/components/FormError";
 import PhoneNumber from "@/components/FormElements/PhoneNumber";
 import AlertInfoOutline from "@/components/AppIcons/AlertInfoOutline";
 import AgreementCheckboxes from "@/components/AgreementCheckboxes/AgreementCheckboxes";
@@ -123,14 +123,10 @@ const ConfirmIdentityForm = () => {
           </div>
 
           {errors.firstName?.message && (
-            <span
-              className="error-warning"
+            <FormError
               id="firstName-error"
-              aria-live="assertive"
-            >
-              <AlertDanger className="fill-alert" />
-              {t(errors.firstName.message)}
-            </span>
+              errorMessage={t(errors.firstName.message)}
+            />
           )}
         </div>
 
@@ -151,14 +147,10 @@ const ConfirmIdentityForm = () => {
             aria-describedby={errors.lastName ? "lastName-error" : undefined}
           />
           {errors.lastName?.message && (
-            <span
-              className="error-warning"
+            <FormError
               id="lastName-error"
-              aria-live="assertive"
-            >
-              <AlertDanger className="fill-alert" />
-              {t(errors.lastName.message)}
-            </span>
+              errorMessage={t(errors.lastName.message)}
+            />
           )}
         </div>
 

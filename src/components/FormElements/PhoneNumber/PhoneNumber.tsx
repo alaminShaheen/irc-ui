@@ -2,10 +2,10 @@ import { useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { InputMask } from "@react-input/mask";
 
+import FormError from "@/components/FormError";
 import AlertInfoOutline from "@/components/AppIcons/AlertInfoOutline";
 import { cn } from "@/utils/helper";
 import { IPhoneNumberProps, TPhoneNumberModel } from "./PhoneNumber.d";
-import AlertDanger from "@/components/AppIcons/AlertDanger";
 
 const PhoneNumber = ({
   label,
@@ -49,15 +49,10 @@ const PhoneNumber = ({
         )}
       </div>
       {errors.phoneNumber?.message && (
-        <span
-          className="error-warning"
+        <FormError
           id="phoneNumber-error"
-          data-testid="phoneNumber-error"
-          aria-live="assertive"
-        >
-          <AlertDanger className="fill-alert" />
-          {t(errors.phoneNumber.message)}
-        </span>
+          errorMessage={t(errors.phoneNumber.message)}
+        />
       )}
     </div>
   );

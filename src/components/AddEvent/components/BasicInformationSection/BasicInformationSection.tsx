@@ -77,6 +77,9 @@ const BasicInformationSection = (props: IBasicInformationSectionProps) => {
           className="input p-4"
           placeholder={nameYourEventPlaceholder}
           type="text"
+          aria-describedby={
+            errors.eventName?.message ? "message-error" : undefined
+          }
         />
         {errors.eventName?.message && (
           <FormError
@@ -112,6 +115,11 @@ const BasicInformationSection = (props: IBasicInformationSectionProps) => {
             className="input p-4"
             placeholder={rentalFacilityPlaceholder}
             type="text"
+            aria-describedby={
+              errors.rentalFacilityAgreementNumber?.message
+                ? "facilityAgreementNumber-error"
+                : undefined
+            }
           />
           {errors.rentalFacilityAgreementNumber?.message && (
             <FormError
@@ -133,6 +141,9 @@ const BasicInformationSection = (props: IBasicInformationSectionProps) => {
             className="input p-4"
             placeholder={facilityPlaceholder}
             type="text"
+            aria-describedby={
+              errors.facility?.message ? "facility-error" : undefined
+            }
           />
           {errors.facility?.message && (
             <FormError

@@ -98,6 +98,9 @@ const InsuredForm = (props: IInsuredFormProps) => {
                 id="name"
                 className="input w-full py-5 lg:w-1/2"
                 type="text"
+                aria-describedby={
+                  errors.name?.message ? "insuredFormName-error" : undefined
+                }
               />
               {errors.name?.message && (
                 <FormError
@@ -116,6 +119,11 @@ const InsuredForm = (props: IInsuredFormProps) => {
                 id="address"
                 className="input w-full py-5 lg:w-1/2"
                 type="text"
+                aria-describedby={
+                  errors.address?.message
+                    ? "insuredFormAddress-error"
+                    : undefined
+                }
               />
               {errors.address?.message && (
                 <FormError
