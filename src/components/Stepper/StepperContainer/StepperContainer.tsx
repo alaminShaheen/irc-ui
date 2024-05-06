@@ -6,8 +6,8 @@ import { StepperContextProvider } from "@/context/StepperContext";
 const StepperContainer = () => {
   return (
     <StepperContextProvider>
-      <div className="mx-auto grid h-full w-full lg:w-11/12 lg:grid-cols-[1fr_600px] lg:grid-rows-1">
-        <div className="order-2 lg:order-1 lg:my-0 lg:px-9 lg:py-8">
+      <div className="flex size-full flex-col-reverse lg:flex-row lg:justify-center">
+        <div className="lg:my-0 lg:px-9 lg:py-8">
           <Outlet />
         </div>
         <StepperSidebar />

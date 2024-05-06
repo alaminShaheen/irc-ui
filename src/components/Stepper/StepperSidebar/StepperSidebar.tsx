@@ -23,7 +23,7 @@ const StepperSidebar = () => {
   }, [currentStepIndex]);
 
   return (
-    <div className="order-1 h-full lg:order-2">
+    <div>
       {/* LG version */}
       <ul
         className="sticky top-[100px] hidden px-14 py-16 text-white lg:block"
@@ -51,7 +51,7 @@ const StepperSidebar = () => {
                 >
                   <div
                     className={cn(
-                      "relative size-10 basis-10 items-center justify-center rounded-full text-lg",
+                      "relative size-10 shrink-0 items-center justify-center rounded-full text-lg",
                       {
                         "bg-secondary text-white": index <= currentStepIndex,
                         "border-2 border-dashed border-secondary text-primary":
@@ -88,7 +88,7 @@ const StepperSidebar = () => {
                       )}
                     </Transition>
                   </div>
-                  <div className="basis-auto text-left text-primary group-hover:text-white">
+                  <div className="text-left text-primary group-hover:text-white">
                     <div
                       className={cn(
                         "font-segoe text-lg font-semibold opacity-95",
