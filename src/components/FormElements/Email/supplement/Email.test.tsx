@@ -59,7 +59,7 @@ describe("Email component", () => {
       fireEvent.blur(emailInput);
     });
 
-    const errorMessage = screen.queryByTestId("email-error");
+    const errorMessage = screen.queryByTestId("formError-body");
     expect(errorMessage).toBeInTheDocument();
   });
 
@@ -68,7 +68,7 @@ describe("Email component", () => {
 
     await userEvent.type(emailInput, "abc@gmail.com");
 
-    const errorMessage = screen.queryByTestId("email-error");
+    const errorMessage = screen.queryByTestId("formError-body");
     expect(errorMessage).not.toBeInTheDocument();
   });
 
@@ -80,7 +80,7 @@ describe("Email component", () => {
       fireEvent.blur(emailInput);
     });
 
-    const errorMessage = screen.queryByTestId("email-error");
+    const errorMessage = screen.queryByTestId("formError-body");
     expect(errorMessage).toBeInTheDocument();
   });
 });

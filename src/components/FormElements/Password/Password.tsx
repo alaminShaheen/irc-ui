@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 
 import useToggle from "@/hooks/useToggle";
 import InputWithIcon from "@/components/ui/InputWithIcon";
+import FormError from "@/components/FormError";
 import { cn } from "@/utils/helper";
 import { IPasswordProps, TPasswordModel } from "./Password.d";
 import { IconPosition } from "@/models/enums/ButtonVariant";
@@ -47,14 +48,10 @@ const Password = ({
         aria-describedby={errors.password ? "password-error" : undefined}
       />
       {errors.password?.message && (
-        <span
-          className="error-warning"
+        <FormError
           id="password-error"
-          aria-live="assertive"
-          data-testid="password-error"
-        >
-          {t(errors.password.message)}
-        </span>
+          errorMessage={t(errors.password.message)}
+        />
       )}
     </div>
   );

@@ -7,6 +7,7 @@ import {
   setYear,
 } from "date-fns";
 import { Controller, useFormContext } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 
 import {
   AddEventModel,
@@ -23,9 +24,9 @@ import EventClock from "@/components/AppIcons/EventClock";
 import AddEventIcon from "@/components/AppIcons/AddEvent";
 import EventCalendar from "@/components/AppIcons/EventCalendar";
 import GraphiteAlertInfo from "@/components/AppIcons/GraphiteAlertInfo";
+import FormError from "@/components/FormError";
 import { ButtonType, ButtonVariant } from "@/models/enums/ButtonVariant";
 import { IBasicInformationSectionProps } from "@/components/AddEvent/components/BasicInformationSection/BasicInformationSection.d";
-import { useTranslation } from "react-i18next";
 
 const BasicInformationSection = (props: IBasicInformationSectionProps) => {
   const {
@@ -76,11 +77,15 @@ const BasicInformationSection = (props: IBasicInformationSectionProps) => {
           className="input p-4"
           placeholder={nameYourEventPlaceholder}
           type="text"
+          aria-describedby={
+            errors.eventName?.message ? "message-error" : undefined
+          }
         />
         {errors.eventName?.message && (
-          <span className="error-warning" aria-live="assertive">
-            {t(errors.eventName.message)}
-          </span>
+          <FormError
+            id="message-error"
+            errorMessage={t(errors.eventName.message)}
+          />
         )}
       </div>
 
@@ -110,11 +115,17 @@ const BasicInformationSection = (props: IBasicInformationSectionProps) => {
             className="input p-4"
             placeholder={rentalFacilityPlaceholder}
             type="text"
+            aria-describedby={
+              errors.rentalFacilityAgreementNumber?.message
+                ? "facilityAgreementNumber-error"
+                : undefined
+            }
           />
           {errors.rentalFacilityAgreementNumber?.message && (
-            <span className="error-warning" aria-live="assertive">
-              {t(errors.rentalFacilityAgreementNumber.message)}
-            </span>
+            <FormError
+              id="facilityAgreementNumber-error"
+              errorMessage={t(errors.rentalFacilityAgreementNumber.message)}
+            />
           )}
         </div>
 
@@ -130,11 +141,15 @@ const BasicInformationSection = (props: IBasicInformationSectionProps) => {
             className="input p-4"
             placeholder={facilityPlaceholder}
             type="text"
+            aria-describedby={
+              errors.facility?.message ? "facility-error" : undefined
+            }
           />
           {errors.facility?.message && (
-            <span className="error-warning" aria-live="assertive">
-              {t(errors.facility.message)}
-            </span>
+            <FormError
+              id="facility-error"
+              errorMessage={t(errors.facility.message)}
+            />
           )}
         </div>
 
@@ -165,9 +180,10 @@ const BasicInformationSection = (props: IBasicInformationSectionProps) => {
               control={control}
             />
             {errors.startDate?.message && (
-              <span className="error-warning" aria-live="assertive">
-                {t(errors.startDate.message)}
-              </span>
+              <FormError
+                id="stardate-error"
+                errorMessage={t(errors.startDate.message)}
+              />
             )}
           </div>
 
@@ -205,9 +221,10 @@ const BasicInformationSection = (props: IBasicInformationSectionProps) => {
               control={control}
             />
             {errors.startTime?.message && (
-              <span className="error-warning" aria-live="assertive">
-                {t(errors.startTime.message)}
-              </span>
+              <FormError
+                id="startTime-error"
+                errorMessage={t(errors.startTime.message)}
+              />
             )}
           </div>
 
@@ -235,9 +252,10 @@ const BasicInformationSection = (props: IBasicInformationSectionProps) => {
               control={control}
             />
             {errors.endDate?.message && (
-              <span className="error-warning" aria-live="assertive">
-                {t(errors.endDate.message)}
-              </span>
+              <FormError
+                id="endDate-error"
+                errorMessage={t(errors.endDate.message)}
+              />
             )}
           </div>
 
@@ -262,9 +280,10 @@ const BasicInformationSection = (props: IBasicInformationSectionProps) => {
               control={control}
             />
             {errors.endTime?.message && (
-              <span className="error-warning" aria-live="assertive">
-                {t(errors.endTime.message)}
-              </span>
+              <FormError
+                id="endTime-error"
+                errorMessage={t(errors.endTime.message)}
+              />
             )}
           </div>
         </div>

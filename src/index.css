@@ -35,7 +35,7 @@
 }
 
 .btn-disabled {
-	@apply text-primary-600 border-2 border-dashed border-primary bg-transparent !important;
+	@apply text-graphite-700 border-2 border-dashed border-primary bg-transparent;
 }
 
 .form-group {
@@ -52,27 +52,27 @@
 
 .form-group.has-error input,
 .form-radio-checkbox-group.has-error input {
-	@apply border-red-500;
+	@apply border-alert shadow-md;
 }
 
 .form-group.has-error label,
 .form-group.has-error .form-label,
 .form-radio-checkbox-group.has-error label {
-	@apply text-red-500;
+	@apply text-alert
 }
 
 .form-group.has-error .error-warning,
 .form-radio-checkbox-group.has-error .error-warning {
-	@apply my-2 text-sm text-red-500;
+	@apply my-2 text-alert flex gap-x-1.5
 }
 
 .input {
 	@apply h-[55px] bg-white border-2 border-primary-100 rounded-lg py-4 px-3 text-primary read-only:bg-gray-200;
 }
 
-.input.has-error {
-	@apply border-red-500
-}
+/*.input.has-error {*/
+/*	@apply border-*/
+/*}*/
 
 input::-webkit-calendar-picker-indicator {
 	display: none;

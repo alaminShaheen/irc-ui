@@ -26,7 +26,7 @@ const Layout = (props: ILayoutProps) => {
         id="main-content"
         className="layout flex flex-grow flex-col bg-primary-25"
       >
-        <div className="sticky top-0 z-40">
+        <div className="sticky top-0 z-50">
           <Navbar sidebarOpen={sidebarOpen} toggleSidebar={toggleSidebarOpen} />
           <Sidebar
             sidebarOpen={sidebarOpen}

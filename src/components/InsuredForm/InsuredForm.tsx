@@ -10,6 +10,7 @@ import { InsuredFormModel } from "@/models/form/InsuredFormModel";
 import { IInsuredFormProps } from "@/components/InsuredForm/InsuredForm.d";
 import { cn, formatPhoneNumber } from "@/utils/helper";
 import { ButtonType, ButtonVariant } from "@/models/enums/ButtonVariant";
+import FormError from "../FormError";
 import Email from "@/components/FormElements/Email";
 import PhoneNumber from "@/components/FormElements/PhoneNumber";
 import {
@@ -97,11 +98,15 @@ const InsuredForm = (props: IInsuredFormProps) => {
                 id="name"
                 className="input w-full py-5 lg:w-1/2"
                 type="text"
+                aria-describedby={
+                  errors.name?.message ? "insuredFormName-error" : undefined
+                }
               />
               {errors.name?.message && (
-                <span className="error-warning" aria-live="assertive">
-                  {t(errors.name.message)}
-                </span>
+                <FormError
+                  id="insuredFormName-error"
+                  errorMessage={t(errors.name.message)}
+                />
               )}
             </div>
 
@@ -114,11 +119,17 @@ const InsuredForm = (props: IInsuredFormProps) => {
                 id="address"
                 className="input w-full py-5 lg:w-1/2"
                 type="text"
+                aria-describedby={
+                  errors.address?.message
+                    ? "insuredFormAddress-error"
+                    : undefined
+                }
               />
               {errors.address?.message && (
-                <span className="error-warning" aria-live="assertive">
-                  {t(errors.address.message)}
-                </span>
+                <FormError
+                  id="insuredFormAddress-error"
+                  errorMessage={t(errors.address.message)}
+                />
               )}
             </div>
 

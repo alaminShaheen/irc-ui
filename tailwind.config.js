@@ -81,6 +81,7 @@ export default {
           DEFAULT: "#FFFFFF",
         },
         focus: "#F8D177",
+        alert: "#CB0404",
       },
     },
   },

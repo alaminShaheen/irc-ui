@@ -1,25 +1,25 @@
 import * as yup from "yup";
-import { ObjectSchema } from "yup";
-import { useForm, FormProvider } from "react-hook-form";
 import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Trans, useTranslation } from "react-i18next";
+import { ObjectSchema } from "yup";
+import { useTranslation } from "react-i18next";
+import { FormProvider, useForm } from "react-hook-form";
 
-import { cn } from "@/utils/helper";
-import ROUTES from "@/constants/Routes";
-import Button from "@/components/ui/Button";
-import ExternalLink from "@/components/AppIcons/ExternalLink";
-import AlertInfoOutline from "@/components/AppIcons/AlertInfoOutline";
-import { ConfirmIdentityFormModel } from "@/models/form/ConfirmIdentityFormModel";
-import { ButtonType, ButtonVariant } from "@/models/enums/ButtonVariant";
-import Checkbox from "@/components/ui/Checkbox";
-import Email from "@/components/FormElements/Email";
-import PhoneNumber from "@/components/FormElements/PhoneNumber";
 import {
   emailValidationSchema,
   phoneNumberValidationSchema,
 } from "@/components/FormElements/ValidationSchemas";
+import Email from "@/components/FormElements/Email";
+import { cn } from "@/utils/helper";
+import ROUTES from "@/constants/Routes";
+import Button from "@/components/ui/Button";
+import FormError from "@/components/FormError";
+import PhoneNumber from "@/components/FormElements/PhoneNumber";
+import AlertInfoOutline from "@/components/AppIcons/AlertInfoOutline";
+import AgreementCheckboxes from "@/components/AgreementCheckboxes/AgreementCheckboxes";
+import { ConfirmIdentityFormModel } from "@/models/form/ConfirmIdentityFormModel";
+import { ButtonType, ButtonVariant } from "@/models/enums/ButtonVariant";
 
 const ConfirmIdentityForm = () => {
   const { t } = useTranslation();
@@ -34,31 +34,6 @@ const ConfirmIdentityForm = () => {
     identityInfo: t("pages.confirmIdentity.form.identityInfo"),
     emailInfo: t("pages.confirmIdentity.form.emailInfo"),
     phoneNumberInfo: t("pages.confirmIdentity.form.phoneNumberInfo"),
-    checkbox1Label: (
-      <Trans i18nKey="common.disclaimer.checkbox1Label">
-        I understand and agree to the use of
-        <a
-          href="#"
-          className="inline-flex items-center gap-x-1 font-bold text-primary underline"
-        >
-          application agreement
-          <ExternalLink />
-        </a>
-      </Trans>
-    ),
-    checkbox2Label: (
-      <Trans i18nKey="common.disclaimer.checkbox2Label">
-        I understand and agree the information submitted will be used in line
-        with our
-        <a
-          href="#"
-          className="inline-flex items-center gap-x-1 font-bold text-primary underline"
-        >
-          privacy policy
-          <ExternalLink />
-        </a>
-      </Trans>
-    ),
     confirm: t("pages.confirmIdentity.form.confirm"),
   };
 
@@ -148,13 +123,10 @@ const ConfirmIdentityForm = () => {
           </div>
 
           {errors.firstName?.message && (
-            <span
-              className="error-warning"
+            <FormError
               id="firstName-error"
-              aria-live="assertive"
-            >
-              {t(errors.firstName.message)}
-            </span>
+              errorMessage={t(errors.firstName.message)}
+            />
           )}
         </div>
 
@@ -175,13 +147,10 @@ const ConfirmIdentityForm = () => {
             aria-describedby={errors.lastName ? "lastName-error" : undefined}
           />
           {errors.lastName?.message && (
-            <span
-              className="error-warning"
+            <FormError
               id="lastName-error"
-              aria-live="assertive"
-            >
-              {t(errors.lastName.message)}
-            </span>
+              errorMessage={t(errors.lastName.message)}
+            />
           )}
         </div>
 
@@ -199,41 +168,10 @@ const ConfirmIdentityForm = () => {
           inputStyle="lg:max-w-[554px]"
         />
 
-        <div className="form-radio-checkbox-group mt-[6px] w-full !items-start lg:mt-4 lg:max-w-[554px]">
-          <div className="flex items-center justify-center">
-            <Checkbox
-              {...register("bestAbilityAcknowledgement")}
-              id="bestAbilityAcknowledgement"
-              aria-invalid={!!errors.bestAbilityAcknowledgement}
-            />
-          </div>
-          <label
-            htmlFor="bestAbilityAcknowledgement"
-            className="mt-1 border-primary-300 text-black"
-          >
-            {pageContent.checkbox1Label}
-          </label>
-        </div>
-
-        <div
-          className={cn(`ml-auto h-1 border-t border-primary-300 md:hidden`)}
+        <AgreementCheckboxes
+          checkbox1ContainerStyle="form-radio-checkbox-group mt-[6px] w-full !items-start lg:mt-4 lg:max-w-[554px]"
+          checkbox2ContainerStyle="form-radio-checkbox-group w-full items-center lg:max-w-[554px]"
         />
-
-        <div className="form-radio-checkbox-group w-full items-center lg:max-w-[554px]">
-          <div className="flex items-center justify-center">
-            <Checkbox
-              {...register("personalInformationCollectionAgreement")}
-              id="personalInformationCollectionAgreement"
-              aria-invalid={!!errors.personalInformationCollectionAgreement}
-            />
-          </div>
-          <label
-            htmlFor="personalInformationCollectionAgreement"
-            className="border-primary-300 text-black"
-          >
-            {pageContent.checkbox2Label}
-          </label>
-        </div>
 
         <Button
           disabled={formDisabled}

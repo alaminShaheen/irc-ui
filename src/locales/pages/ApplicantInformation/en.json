@@ -1,0 +1,33 @@
+{
+  "seo": {
+	"title": "IRC Applicant Information Page"
+  },
+  "pageTitle": "Applicant Information",
+  "pagePolicy": "We need this information to comply with local law.",
+  "form": {
+	"name": "Person / Organization applying for Insurance Coverage:",
+	"address": "Address of the person / organization named above:",
+	"nameOrCompanyName": "e.g. John Doe or Your Company Name Inc.",
+	"startTyping": "Start typing...",
+	"addAddressManually": "Add Address Manually",
+	"addingAddressManually": "Adding Address Manually",
+	"postalCode": "Postal / Zip code:",
+	"enterPostalCode": "Enter Postal / Zip code",
+	"streetAddress": "Street Address / Range Road / Box Information",
+	"enterStreetName": "Enter Street Name...",
+	"city": "City:",
+	"enterCityName": "Enter City Name...",
+	"province": "Province:",
+	"enterProvinceName": "Enter Province Name...",
+	"country": "Country:",
+	"enterCountryName": "Enter Country Name...",
+	"back": "Back",
+	"confirm": "Confirm",
+	"errors": {
+	  "somethingWentWrong": "Oops! Something went wrong. Please check your internet connection and try again.",
+	  "streetAddressWrong": "It seems that street address is wrong. Please ensure a proper street address / box information is entered",
+	  "required": "This field is required.",
+	  "invalidName": "Person / Organization can't be a single word."
+	}
+  }
+}
