@@ -1,6 +1,7 @@
 import { Helmet } from "react-helmet-async";
-import ApplicantInformationForm from "@/components/Stepper/ApplicantInformationForm/ApplicantInformationForm";
 import { useTranslation } from "react-i18next";
+
+import ApplicantInformationForm from "@/components/Stepper/ApplicantInformationForm/ApplicantInformationForm";
 
 const ApplicantInformation = () => {
   const { t } = useTranslation();
