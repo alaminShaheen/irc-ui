@@ -1,5 +1,6 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import SidebarContents from "../SidebarContents";
+import { BrowserRouter as Router } from "react-router-dom";
 
 const mockProps = {
   onClose: jest.fn(),
@@ -27,7 +28,11 @@ const mockProps = {
 
 describe("SidebarContents Component", () => {
   beforeEach(() => {
-    render(<SidebarContents {...mockProps} />);
+    render(
+      <Router>
+        <SidebarContents {...mockProps} />
+      </Router>,
+    );
   });
 
   test("renders correctly", () => {

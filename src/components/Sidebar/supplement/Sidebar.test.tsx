@@ -1,5 +1,6 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 import Sidebar from "../Sidebar";
 
 jest.mock("react-i18next", () => ({
@@ -17,7 +18,11 @@ describe("Sidebar", () => {
   const toggleSidebarMock = jest.fn();
 
   beforeEach(() => {
-    render(<Sidebar sidebarOpen={true} toggleSidebar={toggleSidebarMock} />);
+    render(
+      <Router>
+        <Sidebar sidebarOpen={true} toggleSidebar={toggleSidebarMock} />
+      </Router>,
+    );
   });
 
   it("renders open sidebar", () => {
