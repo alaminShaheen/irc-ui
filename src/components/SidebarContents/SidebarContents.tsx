@@ -4,11 +4,14 @@ import Button from "@/components/ui/Button";
 import FocusTrap from "@/components/FocusTrap";
 import { ISidebarContentProps } from "@/components/SidebarContents/SidebarContents.d";
 import { ButtonVariant, IconPosition } from "@/models/enums/ButtonVariant";
+import { Link, useLocation } from "react-router-dom";
+import ROUTES from "@/constants/Routes";
 
 const SidebarContents = (props: ISidebarContentProps) => {
   const { onClose, sidebarOpen, translationContent } = props;
   const {
     close,
+    signout,
     policyInformation,
     frequentlyAskedQuestions,
     policyWording,
@@ -27,6 +30,12 @@ const SidebarContents = (props: ISidebarContentProps) => {
     largeEventApplicationForm,
   } = translationContent;
 
+  const location = useLocation();
+  const path = location.pathname;
+
+  const shouldDisplayAvatar =
+    !path.includes("signin") && !path.includes("signup");
+
   return (
     <FocusTrap className="h-full">
       <div className="text-base-content h-full min-h-full w-[360px] bg-primary p-4 text-left lg:w-[715px] lg:p-8">
@@ -40,6 +49,14 @@ const SidebarContents = (props: ISidebarContentProps) => {
         >
           {close}
         </Button>
+        {shouldDisplayAvatar && (
+          <Link
+            to={ROUTES.SIGNIN}
+            className="text-base font-bold text-secondary underline decoration-1 underline-offset-1 lg:hidden"
+          >
+            {signout}
+          </Link>
+        )}
 
         <ul className="h-[95%] overflow-y-auto">
           <li className="ml-0 mt-6 pl-0">
