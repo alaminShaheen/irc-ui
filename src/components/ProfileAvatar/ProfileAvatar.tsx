@@ -14,7 +14,8 @@ const ProfileAvatar = ({ fullName }: IProfileAvatar) => {
   return (
     <div className="hidden items-center justify-center gap-x-2 lg:flex">
       <div className="flex h-12 w-12 items-center justify-center rounded-full bg-secondary text-xl font-bold text-white">
-        {initials}
+        <span className="sr-only">{fullName}</span>
+        <span aria-hidden={true}>{initials}</span>
       </div>
       <Link
         to={ROUTES.SIGNIN}
