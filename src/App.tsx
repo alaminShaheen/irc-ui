@@ -77,11 +77,11 @@ function App() {
 
                     <Route
                       Component={TransportAndInsuranceForm}
-                      path={ROUTES.STEPPER_FORM.TRANSPORT_AND_INSURANCE}
+                    path={ROUTES.STEPPER_FORM.TRANSPORT_AND_INSURANCE}
                     />
 
                     <Route
-                      Component={AddEventForm}
+                    Component={AddEventForm}
                       path={ROUTES.STEPPER_FORM.ADD_EVENTS}
                     />
 
