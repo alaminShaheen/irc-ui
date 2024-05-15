@@ -98,6 +98,27 @@ input[type='time']::-webkit-calendar-picker-indicator {
 	@apply min-w-[934px];
 }
 
+.pac-container {
+	@apply rounded;
+}
+
+.pac-container .pac-item {
+	@apply p-2 cursor-pointer text-base hover:bg-primary hover:text-white;
+}
+
+
+.pac-container .pac-item .pac-item-query {
+	@apply text-base;
+}
+
+.pac-container .pac-item:hover .pac-item-query {
+	@apply text-white;
+}
+
+.pac-container .pac-item .pac-icon {
+	@apply text-primary;
+}
+
 * {
 	padding: 0;
 	margin: 0;

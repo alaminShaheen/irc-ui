@@ -28,6 +28,7 @@
 	"errors": {
 	  "somethingWentWrong": "FR-Oops! Something went wrong. Please check your internet connection and try again.",
 	  "streetAddressWrong": "FR-It seems that street address is wrong. Please ensure a proper street address / box information is entered",
+	  "provinceCharacterLength": "FR-Province must be minimum 4 characters long.",
 	  "required": "FR-This field is required.",
 	  "invalidName": "FR-Person / Organization can't be a single word."
 	}
