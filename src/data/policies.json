@@ -1,54 +1,54 @@
 {
   "en": [
-	{
-	  "id": 1,
-	  "name": "Multiple Vendors or Inflatables",
-	  "subtitle": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores culpa dolorum ducimus earum error ex fugit harum id illum, maxime natus nemo nesciunt numquam perferendis provident repellendus sequi ullam vitae.",
-	  "iconPath": "/policy-icons/market.svg"
-	},
-	{
-	  "id": 2,
-	  "name": "Room Rental / Banquet Hall / Park Events / Public Events",
-	  "subtitle": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores culpa dolorum ducimus earum error ex fugit harum id illum, maxime natus nemo nesciunt numquam perferendis provident repellendus sequi ullam vitae.",
-	  "iconPath": "/policy-icons/balloon.svg"
-	},
-	{
-	  "id": 3,
-	  "name": "Sporting Hourly Events / Leagues/ Seasonal Coverage / Tournaments and Camps",
-	  "subtitle": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores culpa dolorum ducimus earum error ex fugit harum id illum, maxime natus nemo nesciunt numquam perferendis provident repellendus sequi ullam vitae.",
-	  "iconPath": "/policy-icons/tshirt.svg"
-	},
-	{
-	  "id": 4,
-	  "name": "Sporting Coach / Instructor",
-	  "subtitle": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores culpa dolorum ducimus earum error ex fugit harum id illum, maxime natus nemo nesciunt numquam perferendis provident repellendus sequi ullam vitae.",
-	  "iconPath": "/policy-icons/user.svg"
-	}
+    {
+      "id": "vendorCoverage",
+      "name": "Vendor(s) Coverage",
+      "subtitle": "Coverage for vendors operating or offering a service at your event without their own insurance",
+      "iconPath": "/policy-icons/market.svg"
+    },
+    {
+      "id": "roomCoverage",
+      "name": "Room / Space Rental Event Coverage",
+      "subtitle": "Coverage for events that are renting a space such as a birthday party room, meeting room, wedding, park event etc",
+      "iconPath": "/policy-icons/balloon.svg"
+    },
+    {
+      "id": "sportingCoverage",
+      "name": "Sporting Event Coverage",
+      "subtitle": "Coverage for sporting events ranging from hourly coverage, to seasonal / league coverage, camps and tournaments.",
+      "iconPath": "/policy-icons/tshirt.svg"
+    },
+    {
+      "id": "coachCoverage",
+      "name": "Coach / Instructor Coverage",
+      "subtitle": "Coverage for events where an instructor / coach is teaching participants.",
+      "iconPath": "/policy-icons/user.svg"
+    }
   ],
   "fr": [
-	{
-	  "id": 1,
-	  "name_fr": "Plusieurs vendeurs ou gonflables",
-	  "subtitle_fr": "FR-Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores culpa dolorum ducimus earum error ex fugit harum id illum, maxime natus nemo nesciunt numquam perferendis provident repellendus sequi ullam vitae.",
-	  "iconPath": "/policy-icons/market.svg"
-	},
-	{
-	  "id": 2,
-	  "name_fr": "Location de salle / Salle de banquet / Événements dans le parc / Événements publics",
-	  "subtitle_fr": "FR-Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores culpa dolorum ducimus earum error ex fugit harum id illum, maxime natus nemo nesciunt numquam perferendis provident repellendus sequi ullam vitae.",
-	  "iconPath": "/policy-icons/balloon.svg"
-	},
-	{
-	  "id": 3,
-	  "name_fr": "Événements sportifs horaires / Ligues / Couverture saisonnière / Tournois et camps",
-	  "subtitle_fr": "FR-Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores culpa dolorum ducimus earum error ex fugit harum id illum, maxime natus nemo nesciunt numquam perferendis provident repellendus sequi ullam vitae.",
-	  "iconPath": "/policy-icons/tshirt.svg"
-	},
-	{
-	  "id": 4,
-	  "name_fr": "Entraîneur / Instructeur Sportif",
-	  "subtitle_fr": "FR-Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores culpa dolorum ducimus earum error ex fugit harum id illum, maxime natus nemo nesciunt numquam perferendis provident repellendus sequi ullam vitae.",
-	  "iconPath": "/policy-icons/user.svg"
-	}
+    {
+      "id": "vendorCoverage",
+      "name": "Plusieurs vendeurs ou gonflables",
+      "subtitle": "FR-Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores culpa dolorum ducimus earum error ex fugit harum id illum, maxime natus nemo nesciunt numquam perferendis provident repellendus sequi ullam vitae.",
+      "iconPath": "/policy-icons/market.svg"
+    },
+    {
+      "id": "roomCoverage",
+      "name": "Location de salle / Salle de banquet / Événements dans le parc / Événements publics",
+      "subtitle": "FR-Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores culpa dolorum ducimus earum error ex fugit harum id illum, maxime natus nemo nesciunt numquam perferendis provident repellendus sequi ullam vitae.",
+      "iconPath": "/policy-icons/balloon.svg"
+    },
+    {
+      "id": "sportingCoverage",
+      "name": "Événements sportifs horaires / Ligues / Couverture saisonnière / Tournois et camps",
+      "subtitle": "FR-Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores culpa dolorum ducimus earum error ex fugit harum id illum, maxime natus nemo nesciunt numquam perferendis provident repellendus sequi ullam vitae.",
+      "iconPath": "/policy-icons/tshirt.svg"
+    },
+    {
+      "id": "coachCoverage",
+      "name": "Entraîneur / Instructeur Sportif",
+      "subtitle": "FR-Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores culpa dolorum ducimus earum error ex fugit harum id illum, maxime natus nemo nesciunt numquam perferendis provident repellendus sequi ullam vitae.",
+      "iconPath": "/policy-icons/user.svg"
+    }
   ]
 }

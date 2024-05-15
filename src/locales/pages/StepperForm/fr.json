@@ -5,18 +5,18 @@
   },
   "applicantInformation": {
     "title": "FR-Applicant Information",
-    "subtitle": "FR-lorem ipsum"
-  },
-  "transportAndInsurance": {
-    "title": "FR-Transport & Insurance",
-    "subtitle": "FR-lorem ipsum"
+    "subtitle": "FR-Information about the person / entity applying for insurance coverage"
   },
   "addEvents": {
-    "title": "FR-Add Events",
-    "subtitle": "FR-lorem ipsum"
+    "title": "FR-Event Information",
+    "subtitle": "FR-Add the coverage details for your event(s)"
+  },
+  "transportAndInsurance": {
+    "title": "FR-Non-Owned Auto Coverage",
+    "subtitle": "FR-Confirm coverage details for non-owned auto"
   },
   "reviewAndSubmit": {
     "title": "FR-Review & Submit",
-    "subtitle": "FR-lorem ipsum"
+    "subtitle": "FR-Review information to submit for instant price"
   }
 }
