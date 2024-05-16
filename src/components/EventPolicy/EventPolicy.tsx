@@ -9,7 +9,7 @@ import {
   ICoverageInfo,
   IEventPolicy,
 } from "@/components/EventPolicy/EventPolicy.d";
-import { mockCoverageInfo } from "@/constants/MockData";
+import { getEventList } from "@/services/getEventList";
 
 const EventPolicy = (props: IEventPolicy) => {
   const [coverageInfo, setCoverageInfo] = useState<ICoverageInfo>({});
@@ -22,8 +22,8 @@ const EventPolicy = (props: IEventPolicy) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        await new Promise((resolve) => setTimeout(resolve, 500));
-        setCoverageInfo(mockCoverageInfo);
+        const coverageInfoList: ICoverageInfo = await getEventList();
+        setCoverageInfo(coverageInfoList);
       } catch (error) {
         console.error("Failed to fetch Coverage data:", error);
         setCoverageInfo({});
