@@ -1,7 +1,15 @@
 import userEvent from "@testing-library/user-event";
+import { ReactNode } from "react";
+import { QueryClient, QueryClientContext } from "@tanstack/react-query";
 import { act, fireEvent, render, screen, within } from "@testing-library/react";
+import { APIProvider as GooglePlacesAPIProvider } from "@vis.gl/react-google-maps";
 
 import ApplicantInformationForm from "@/components/Stepper/ApplicantInformationForm";
+import {
+  STEPPER_CONTEXT_DEFAULT_VALUES,
+  StepperContext,
+  StepperContextType,
+} from "@/context/StepperContext";
 
 type FormElement = HTMLInputElement | HTMLButtonElement | HTMLLabelElement;
 
@@ -22,6 +30,24 @@ jest.mock("react-router-dom", () => ({
   useNavigate: jest.fn(),
 }));
 
+const contextWrappedCustomRender = (
+  children: ReactNode,
+  stepperContextProps: StepperContextType,
+) => {
+  const queryClient = new QueryClient();
+  return render(
+    <QueryClientContext.Provider value={queryClient}>
+      <GooglePlacesAPIProvider
+        apiKey={process.env.GOOGLE_MAPS_API_KEY as string}
+      >
+        <StepperContext.Provider value={stepperContextProps}>
+          {children}
+        </StepperContext.Provider>
+      </GooglePlacesAPIProvider>
+    </QueryClientContext.Provider>,
+  );
+};
+
 describe("ApplicantInformationForm", () => {
   let nameField: FormElement;
   let addressField: FormElement;
@@ -31,7 +57,10 @@ describe("ApplicantInformationForm", () => {
   let manualAddressToggler: FormElement;
 
   beforeEach(() => {
-    render(<ApplicantInformationForm />);
+    contextWrappedCustomRender(
+      <ApplicantInformationForm />,
+      STEPPER_CONTEXT_DEFAULT_VALUES,
+    );
 
     nameField = screen.getByRole("textbox", {
       name: "pages.applicantInformation.form.name",
@@ -127,6 +156,8 @@ describe("ApplicantInformationForm", () => {
     let postalCodeField: FormElement;
     let cityField: FormElement;
     let streetAddressField: FormElement;
+    let provinceField: FormElement;
+    let countrySelectDropdown: FormElement;
 
     beforeEach(async () => {
       act(() => {
@@ -142,6 +173,10 @@ describe("ApplicantInformationForm", () => {
       streetAddressField = (await screen.findByRole("textbox", {
         name: "pages.applicantInformation.form.streetAddress",
       })) as FormElement;
+      provinceField = (await screen.findByRole("textbox", {
+        name: "pages.applicantInformation.form.province",
+      })) as FormElement;
+      countrySelectDropdown = screen.getByTestId("country-select-dropdown");
     });
 
     test("postal code field renders, shows errors and functions properly", async () => {
@@ -191,146 +226,57 @@ describe("ApplicantInformationForm", () => {
       expect(cityField).toHaveValue("hello");
     });
 
-    test("province dropdown remains disabled until a country has been selected", async () => {
-      const provinceSelectDropdown = screen.getByTestId(
-        "province-select-dropdown",
-      );
+    test("province field renders, shows errors and functions properly", async () => {
+      await act(async () => {
+        fireEvent.blur(provinceField);
+      });
 
-      const provinceTriggerBtn = within(provinceSelectDropdown).getByRole(
-        "button",
-      );
+      expect(
+        screen.queryByText("pages.applicantInformation.form.errors.required"),
+      ).not.toBeInTheDocument();
 
-      expect(provinceTriggerBtn).toBeDisabled();
-
-      // Select a country
-      const countrySelectDropdown = screen.getByTestId(
-        "country-select-dropdown",
-      );
-      const countryTriggerBtn = within(countrySelectDropdown).getByRole(
-        "button",
-      );
-      await userEvent.click(countryTriggerBtn);
-      const countryOptionsWrapper = await within(
-        countrySelectDropdown,
-      ).findByTestId("select-dropdown-options-wrapper");
-      await userEvent.click(countryOptionsWrapper.children[0]);
-
-      expect(provinceTriggerBtn).toBeEnabled();
+      await userEvent.type(provinceField, "hel");
+      await act(async () => {
+        fireEvent.blur(provinceField);
+      });
+      expect(
+        screen.queryByText(
+          "pages.applicantInformation.form.errors.provinceCharacterLength",
+        ),
+      ).not.toBeInTheDocument();
+      await userEvent.type(provinceField, "lo");
+      expect(provinceField).toHaveValue("hello");
     });
 
     test("country dropdown renders and functions properly", async () => {
-      const countrySelectDropdown = screen.getByTestId(
-        "country-select-dropdown",
-      );
       expect(countrySelectDropdown).toBeInTheDocument();
 
       const triggerBtn = within(countrySelectDropdown).getByRole("button");
       expect(triggerBtn).toBeInTheDocument();
 
-      await userEvent.click(triggerBtn);
+      const selectCountryFromDropdown = async (optionIndex: number) => {
+        await userEvent.click(triggerBtn);
 
-      const countryOptionsWrapper = await within(
-        countrySelectDropdown,
-      ).findByTestId("select-dropdown-options-wrapper");
+        const countryOptionsWrapper = await within(
+          countrySelectDropdown,
+        ).findByTestId("select-dropdown-options-wrapper");
 
-      expect(countryOptionsWrapper).toBeInTheDocument();
+        expect(countryOptionsWrapper).toBeInTheDocument();
 
-      const optionLabel = countryOptionsWrapper.children[0]
-        .textContent as string;
-      await userEvent.click(countryOptionsWrapper.children[0]);
+        const optionLabel = countryOptionsWrapper.children[optionIndex]
+          .textContent as string;
+        await userEvent.click(countryOptionsWrapper.children[optionIndex]);
 
-      const selectDisplay = await within(countrySelectDropdown).findByTestId(
-        "select-dropdown-display",
-      );
+        const selectDisplay = await within(countrySelectDropdown).findByTestId(
+          "select-dropdown-display",
+        );
 
-      expect(selectDisplay).toHaveTextContent(optionLabel);
-    });
+        expect(selectDisplay).toHaveTextContent(optionLabel);
+        expect(countryOptionsWrapper).not.toBeInTheDocument();
+      };
 
-    test("province dropdown renders and functions properly", async () => {
-      const provinceSelectDropdown = screen.getByTestId(
-        "province-select-dropdown",
-      );
-      expect(provinceSelectDropdown).toBeInTheDocument();
-
-      const provinceTriggerBtn = within(provinceSelectDropdown).getByRole(
-        "button",
-      );
-      expect(provinceTriggerBtn).toBeInTheDocument();
-      expect(provinceTriggerBtn).toBeDisabled();
-
-      // Select a country
-      const countrySelectDropdown = screen.getByTestId(
-        "country-select-dropdown",
-      );
-      const countryTriggerBtn = within(countrySelectDropdown).getByRole(
-        "button",
-      );
-      await userEvent.click(countryTriggerBtn);
-      const countryOptionsWrapper = await within(
-        countrySelectDropdown,
-      ).findByTestId("select-dropdown-options-wrapper");
-      await userEvent.click(countryOptionsWrapper.children[0]);
-
-      // Select a province
-      expect(provinceTriggerBtn).toBeEnabled();
-
-      await userEvent.click(provinceTriggerBtn);
-      const provinceOptionsWrapper = await within(
-        provinceSelectDropdown,
-      ).findByTestId("select-dropdown-options-wrapper");
-
-      const optionLabel = provinceOptionsWrapper.children[0]
-        .textContent as string;
-      await userEvent.click(provinceOptionsWrapper.children[0]);
-
-      const selectDisplay = await within(provinceSelectDropdown).findByTestId(
-        "select-dropdown-display",
-      );
-
-      expect(selectDisplay).toHaveTextContent(optionLabel);
-    });
-
-    test("changing selected country clears selected province", async () => {
-      // Select a country
-      const countrySelectDropdown = screen.getByTestId(
-        "country-select-dropdown",
-      );
-      const countryTriggerBtn = within(countrySelectDropdown).getByRole(
-        "button",
-      );
-      await userEvent.click(countryTriggerBtn);
-      let countryOptionsWrapper = await within(
-        countrySelectDropdown,
-      ).findByTestId("select-dropdown-options-wrapper");
-      await userEvent.click(countryOptionsWrapper.children[0]);
-
-      const provinceSelectDropdown = screen.getByTestId(
-        "province-select-dropdown",
-      );
-      const provinceTriggerBtn = within(provinceSelectDropdown).getByRole(
-        "button",
-      );
-      await userEvent.click(provinceTriggerBtn);
-
-      const provinceOptionsWrapper = await within(
-        provinceSelectDropdown,
-      ).findByTestId("select-dropdown-options-wrapper");
-      await userEvent.click(provinceOptionsWrapper.children[0]);
-
-      const provinceSelectDisplay = await within(
-        provinceSelectDropdown,
-      ).findByTestId("select-dropdown-display");
-
-      // change country
-      await userEvent.click(countryTriggerBtn);
-      countryOptionsWrapper = await within(countrySelectDropdown).findByTestId(
-        "select-dropdown-options-wrapper",
-      );
-      await userEvent.click(countryOptionsWrapper.children[1]);
-
-      expect(provinceSelectDisplay).toHaveTextContent(
-        "pages.applicantInformation.form.enterProvinceName",
-      );
+      await selectCountryFromDropdown(0);
+      await selectCountryFromDropdown(4);
     });
   });
 });

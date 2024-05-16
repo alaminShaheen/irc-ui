@@ -1,5 +1,7 @@
 import { Helmet } from "react-helmet-async";
+import { Bounce, ToastContainer } from "react-toastify";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { APIProvider as GooglePlacesAPIProvider } from "@vis.gl/react-google-maps";
 
 import Quote from "@/pages/Quote";
 import Signup from "@/pages/Signup";
@@ -17,6 +19,7 @@ import TransportAndInsuranceForm from "@/components/Stepper/TransportAndInsuranc
 
 // Custom styling
 import "./styles/global.css";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
@@ -37,60 +40,76 @@ function App() {
         />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
       </Helmet>
-      <BrowserRouter>
-        <AppContextProvider>
-          <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
-            <Layout>
-              <Routes>
-                <Route
-                  path={ROUTES.HOME}
-                  element={<Navigate to={ROUTES.SIGNUP} replace />}
-                />
-                <Route path={ROUTES.SIGNIN} element={<Signin />} />
-                <Route path={ROUTES.SIGNUP} element={<Signup />} />
-                <Route path={ROUTES.QUOTE} element={<Quote />} />
-                <Route
-                  path={ROUTES.IDENTITY_CONFIRM}
-                  element={<ConfirmIdentity />}
-                />
-                <Route
-                  path={ROUTES.STEPPER_FORM.BASE}
-                  Component={StepperContainer}
-                >
+      <ToastContainer
+        position="top-right"
+        autoClose={false}
+        hideProgressBar={true}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        transition={Bounce}
+      />
+      <GooglePlacesAPIProvider
+        apiKey={process.env.GOOGLE_MAPS_API_KEY as string}
+      >
+        <BrowserRouter>
+          <AppContextProvider>
+            <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
+              <Layout>
+                <Routes>
                   <Route
-                    index
-                    Component={() => (
-                      <Navigate
-                        to={ROUTES.STEPPER_FORM.APPLICANT_INFORMATION}
-                        replace
-                      />
-                    )}
+                    path={ROUTES.HOME}
+                    element={<Navigate to={ROUTES.SIGNUP} replace />}
+                  />
+                  <Route path={ROUTES.SIGNIN} element={<Signin />} />
+                  <Route path={ROUTES.SIGNUP} element={<Signup />} />
+                  <Route path={ROUTES.QUOTE} element={<Quote />} />
+                  <Route
+                    path={ROUTES.IDENTITY_CONFIRM}
+                    element={<ConfirmIdentity />}
                   />
                   <Route
-                    Component={ApplicantInformation}
-                    path={ROUTES.STEPPER_FORM.APPLICANT_INFORMATION}
-                  />
+                    path={ROUTES.STEPPER_FORM.BASE}
+                    Component={StepperContainer}
+                  >
+                    <Route
+                      index
+                      Component={() => (
+                        <Navigate
+                          to={ROUTES.STEPPER_FORM.APPLICANT_INFORMATION}
+                          replace
+                        />
+                      )}
+                    />
+                    <Route
+                      Component={ApplicantInformation}
+                      path={ROUTES.STEPPER_FORM.APPLICANT_INFORMATION}
+                    />
 
-                  <Route
-                    Component={TransportAndInsuranceForm}
-                    path={ROUTES.STEPPER_FORM.TRANSPORT_AND_INSURANCE}
-                  />
+                    <Route
+                      Component={TransportAndInsuranceForm}
+                      path={ROUTES.STEPPER_FORM.TRANSPORT_AND_INSURANCE}
+                    />
 
-                  <Route
-                    Component={AddEventForm}
-                    path={ROUTES.STEPPER_FORM.ADD_EVENTS}
-                  />
+                    <Route
+                      Component={AddEventForm}
+                      path={ROUTES.STEPPER_FORM.ADD_EVENTS}
+                    />
 
-                  <Route
-                    Component={ReviewAndSubmitSection}
-                    path={ROUTES.STEPPER_FORM.REVIEW_AND_SUBMIT}
-                  />
-                </Route>
-              </Routes>
-            </Layout>
-          </ThemeProvider>
-        </AppContextProvider>
-      </BrowserRouter>
+                    <Route
+                      Component={ReviewAndSubmitSection}
+                      path={ROUTES.STEPPER_FORM.REVIEW_AND_SUBMIT}
+                    />
+                  </Route>
+                </Routes>
+              </Layout>
+            </ThemeProvider>
+          </AppContextProvider>
+        </BrowserRouter>
+      </GooglePlacesAPIProvider>
     </>
   );
 }

@@ -4,13 +4,10 @@ import { Helmet } from "react-helmet-async";
 
 import Alert from "@/components/ui/Alert/Alert";
 import Button from "@/components/ui/Button";
-import policies from "@/data/policies.json";
-import { Policy } from "@/models/Policy";
-import PolicyCard from "@/components/PolicyCard/PolicyCard";
+import EventPolicy from "@/components/EventPolicy/EventPolicy";
 import InsuredForm from "@/components/InsuredForm/InsuredForm";
 import { useToggle } from "@/hooks/index";
 import AddEventModal from "@/components/AddEvent/components/AddEventModal";
-import { LanguageCode } from "@/models/enums/LanguageCode";
 import { ButtonVariant } from "@/models/enums/ButtonVariant";
 import EventConfirmationCard from "@/components/EventConfirmationCard/EventConfirmationCard";
 
@@ -19,10 +16,7 @@ const Quote = () => {
   const [showAddEventModal, toggleAddEventModal] = useToggle(false);
   const [selectedEventName, setSelectedEventName] = useState("");
 
-  const {
-    t,
-    i18n: { language: currentLanguage },
-  } = useTranslation();
+  const { t } = useTranslation();
 
   // const addEvent = useCallback(() => {
   //   // TODO: Add event functionality
@@ -45,7 +39,7 @@ const Quote = () => {
       fieldRequiredKey: "pages.quote.insured.fieldRequired",
     },
     yourPolicies: {
-      addAnotherEvent: t("pages.quote.yourPolicies.addAnotherEvent"),
+      clickToAddEvent: t("pages.quote.yourPolicies.clickToAddEvent"),
       showMore: t("common.showMore"),
       showLess: t("common.showLess"),
       edit: t("common.edit"),
@@ -158,19 +152,10 @@ const Quote = () => {
           <h1 className="my-8 font-segoe text-2xl font-semibold text-primary">
             {t("pages.quote.yourPolicies.title")}
           </h1>
-
-          <ul className="space-y-6">
-            {(policies[currentLanguage as LanguageCode] as Policy[]).map(
-              (policy) => (
-                <PolicyCard
-                  onAddEventClick={onAddEventClick}
-                  key={policy.id}
-                  policy={policy}
-                  translationContent={pageContent.yourPolicies}
-                />
-              ),
-            )}
-          </ul>
+          <EventPolicy
+            onAddEventClick={onAddEventClick}
+            translationContent={pageContent.yourPolicies}
+          />
         </div>
       </div>
       <div className="col-span-2">

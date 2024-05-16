@@ -7,10 +7,13 @@ import {
   useForm,
 } from "react-hook-form";
 import * as yup from "yup";
+import DOMPurify from "dompurify";
+import { Popover } from "@headlessui/react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useTranslation } from "react-i18next";
+import { useMapsLibrary } from "@vis.gl/react-google-maps";
 import { useDebounceCallback } from "usehooks-ts";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 import {
   ApplicantInformationFormModel,
@@ -20,32 +23,48 @@ import {
 } from "@/models/form/ApplicantInformationFormModel";
 import { cn } from "@/utils/helper";
 import Button from "@/components/ui/Button";
-import Search from "@/components/AppIcons/Search";
-import InputWithIcon from "@/components/ui/InputWithIcon";
-import SelectDropdown from "@/components/ui/SelectDropdown/SelectDropdown";
 import FormError from "@/components/FormError";
-import { LanguageCode } from "@/models/enums/LanguageCode";
-import { useStepperContext } from "@/context/StepperContext";
-import { COUNTRY_PROVINCE_LIST } from "@/constants/CountryProvinceList";
-import {
-  ButtonType,
-  ButtonVariant,
-  IconPosition,
-} from "@/models/enums/ButtonVariant";
+import useGetCountry from "@/hooks/queries/useGetCountry";
+import SelectDropdown from "@/components/ui/SelectDropdown/SelectDropdown";
 import AgreementCheckboxes from "@/components/AgreementCheckboxes/AgreementCheckboxes";
+import { useStepperContext } from "@/context/StepperContext";
+import { ButtonType, ButtonVariant } from "@/models/enums/ButtonVariant";
+import { toast } from "react-toastify";
 
 const ApplicantInformationForm = () => {
-  const {
-    t,
-    i18n: { language },
-  } = useTranslation();
+  const { t, i18n } = useTranslation();
+
   const { setFormValues, formValues, changingRouteTo, switchRoute } =
     useStepperContext();
+
+  const [googleAddress, setGoogleAddress] = useState<WithManualAddress>(() => {
+    const formValueWithAddress =
+      formValues.applicantInformationForm as CommonApplicantInformation &
+        WithManualAddress;
+    return {
+      country: formValueWithAddress.country ?? "",
+      streetAddress: formValueWithAddress.streetAddress ?? "",
+      postalCode: formValueWithAddress.postalCode ?? "",
+      city: formValueWithAddress.city ?? "",
+      province: formValueWithAddress.province ?? "",
+    };
+  });
+
+  const places = useMapsLibrary("places");
+
   const [enterManualAddress, setEnterManualAddress] = useState(
-    ["postalCode", "city", "country", "province", "streetAddress"].some(
-      (key) => key in formValues.applicantInformationForm,
-    ),
+    formValues.applicantInformationForm.enterManualAddress,
   );
+  const {
+    data: countryList,
+    isLoading: fetchingCountryList,
+    isSuccess: countryFetchSuccessful,
+    error: countryListError,
+    isError: countryFetchUnsuccessful,
+  } = useGetCountry({
+    enabled: enterManualAddress,
+  });
+
   const { goToNextStep } = useStepperContext();
 
   const validateOrganizationName = useCallback((name: string) => {
@@ -95,8 +114,13 @@ const ApplicantInformationForm = () => {
     }),
     province: yup.string().when("$enterManualAddress", (condition, schema) => {
       return condition[0]
-        ? schema.required("pages.applicantInformation.form.errors.required")
-        : schema.optional();
+        ? schema.optional()
+        : // .required("pages.applicantInformation.form.errors.required")
+          // .length(
+          //   4,
+          //   "pages.applicantInformation.form.errors.provinceCharacterLength",
+          // )
+          schema.optional();
     }),
     city: yup.string().when("$enterManualAddress", (condition, schema) => {
       return condition[0]
@@ -149,15 +173,85 @@ const ApplicantInformationForm = () => {
 
   const {
     register,
-    unregister,
     setValue,
     formState: { errors },
     watch,
-    control,
     setError,
-    resetField,
     handleSubmit,
+    control,
   } = methods;
+
+  const { ref, ...rest } = register("address");
+  const addressFieldRef = useRef<HTMLInputElement | null>(null);
+
+  const [placeAutocomplete, setPlaceAutocomplete] =
+    useState<google.maps.places.Autocomplete | null>(null);
+
+  const onPlaceSelected = useCallback(() => {
+    if (placeAutocomplete) {
+      const addressComponents = placeAutocomplete.getPlace().address_components;
+      const manualAddress = {
+        streetAddress: "",
+        postalCode: "",
+        city: "",
+        country: "",
+        province: "",
+      };
+
+      addressComponents?.forEach((addressComponent) => {
+        const componentType = addressComponent.types[0];
+
+        switch (componentType) {
+          case "street_number": {
+            manualAddress.streetAddress = `${addressComponent.long_name} ${manualAddress.streetAddress}`;
+            break;
+          }
+
+          case "route": {
+            manualAddress.streetAddress += addressComponent.short_name;
+            break;
+          }
+
+          case "postal_code": {
+            manualAddress.postalCode = addressComponent.long_name;
+            break;
+          }
+
+          case "locality":
+            manualAddress.city = addressComponent.long_name;
+            break;
+
+          case "administrative_area_level_1": {
+            manualAddress.province = addressComponent.long_name;
+            break;
+          }
+
+          case "country":
+            manualAddress.country = addressComponent.long_name;
+            break;
+        }
+      });
+      setGoogleAddress({ ...manualAddress });
+
+      setFormValues((prev) => ({
+        ...prev,
+        applicantInformationForm: {
+          ...prev.applicantInformationForm,
+          ...manualAddress,
+          enterManualAddress,
+        },
+      }));
+
+      if (enterManualAddress) {
+        Object.keys(manualAddress).forEach((key) => {
+          setValue(
+            key as keyof WithManualAddress,
+            manualAddress?.[key as keyof WithManualAddress] || "",
+          );
+        });
+      }
+    }
+  }, [enterManualAddress, placeAutocomplete, setFormValues, setValue]);
 
   const errorWithAddress = errors as FieldErrors<
     CommonApplicantInformation & WithAddress
@@ -165,8 +259,6 @@ const ApplicantInformationForm = () => {
   const errorWithManualAddress = errors as FieldErrors<
     CommonApplicantInformation & WithManualAddress
   >;
-
-  const selectedCountry = watch("country");
 
   const formDisabled =
     Object.entries(errors).length > 0 ||
@@ -194,40 +286,36 @@ const ApplicantInformationForm = () => {
 
   const onEnterManualAddress = useCallback(() => {
     setEnterManualAddress(true);
-    const conditionalKeys = [
-      "postalCode",
-      "city",
-      "country",
-      "province",
-      "streetAddress",
-    ] as (keyof WithManualAddress)[];
+  }, []);
 
-    conditionalKeys.forEach((key) => {
-      register(key);
-      setValue(key, "");
-    });
-    setValue("address", "");
-    unregister("address");
-  }, [register, unregister, setValue]);
-
-  const trimData = useCallback(
+  const sanitizeFormData = useCallback(
     (data: ApplicantInformationFormModel) => {
-      data.name = data.name.trim();
+      data.name = DOMPurify.sanitize(data.name.trim());
       if (enterManualAddress) {
         const dataWithManualAddress = data as CommonApplicantInformation &
           WithManualAddress;
-        dataWithManualAddress.city = dataWithManualAddress.city.trim();
-        dataWithManualAddress.streetAddress =
-          dataWithManualAddress.streetAddress.trim();
-        dataWithManualAddress.country = dataWithManualAddress.country.trim();
-        dataWithManualAddress.province = dataWithManualAddress.province?.trim();
-        dataWithManualAddress.postalCode =
-          dataWithManualAddress.postalCode.trim();
+        dataWithManualAddress.city = DOMPurify.sanitize(
+          dataWithManualAddress.city.trim(),
+        );
+        dataWithManualAddress.streetAddress = DOMPurify.sanitize(
+          dataWithManualAddress.streetAddress.trim(),
+        );
+        dataWithManualAddress.country = DOMPurify.sanitize(
+          dataWithManualAddress.country.trim(),
+        );
+        dataWithManualAddress.province = DOMPurify.sanitize(
+          dataWithManualAddress.province?.trim(),
+        );
+        dataWithManualAddress.postalCode = DOMPurify.sanitize(
+          dataWithManualAddress.postalCode.trim(),
+        );
         data = { ...data, ...dataWithManualAddress };
       } else {
         const dataWithAddress = data as CommonApplicantInformation &
           WithAddress;
-        dataWithAddress.address = dataWithAddress.address.trim();
+        dataWithAddress.address = DOMPurify.sanitize(
+          dataWithAddress.address.trim(),
+        );
         data = { ...data, ...dataWithAddress };
       }
       return data;
@@ -239,40 +327,107 @@ const ApplicantInformationForm = () => {
     (data: ApplicantInformationFormModel) => {
       setFormValues((prev) => ({
         ...prev,
-        applicantInformationForm: trimData(data),
+        applicantInformationForm: {
+          ...sanitizeFormData(data),
+          enterManualAddress,
+        },
       }));
       goToNextStep();
     },
-    [setFormValues, goToNextStep, trimData],
+    [setFormValues, goToNextStep, sanitizeFormData, enterManualAddress],
   );
 
   useEffect(() => {
-    if (selectedCountry) {
-      const currentProvince = watch("province");
-      if (
-        !COUNTRY_PROVINCE_LIST[
-          selectedCountry as keyof typeof COUNTRY_PROVINCE_LIST
-        ].provinces.find((province) => province.en === currentProvince)
-      ) {
-        resetField("province", { defaultValue: "" });
-      }
-    }
-  }, [selectedCountry, watch, resetField]);
-
-  useEffect(() => {
     if (changingRouteTo) {
-      const trimmedData = trimData(watch());
-      setFormValues((prev) => ({
-        ...prev,
-        applicantInformationForm: Object.fromEntries(
-          Object.entries(trimmedData).filter(
-            ([key]) => !errors[key as keyof ApplicantInformationFormModel],
-          ),
-        ) as ApplicantInformationFormModel,
-      }));
+      const sanitizedData = sanitizeFormData(watch());
+      setFormValues((prev) => {
+        return {
+          ...prev,
+          applicantInformationForm: {
+            ...(Object.fromEntries(
+              Object.entries(sanitizedData).map(([key, value]) => {
+                const typedKey = key as keyof ApplicantInformationFormModel;
+                return [
+                  key,
+                  errors[typedKey]
+                    ? prev.applicantInformationForm[typedKey]
+                    : value,
+                ];
+              }),
+            ) as ApplicantInformationFormModel),
+            enterManualAddress,
+          },
+        };
+      });
       switchRoute();
     }
-  }, [changingRouteTo, watch, errors, switchRoute, trimData, setFormValues]);
+  }, [
+    changingRouteTo,
+    errors,
+    setFormValues,
+    switchRoute,
+    sanitizeFormData,
+    watch,
+    enterManualAddress,
+  ]);
+
+  useEffect(() => {
+    if (countryFetchSuccessful) {
+      const conditionalKeys = [
+        "postalCode",
+        "city",
+        "country",
+        "province",
+        "streetAddress",
+      ] as (keyof WithManualAddress)[];
+
+      conditionalKeys.forEach((key) => {
+        if (key === "country" && countryList) {
+          setValue(
+            key,
+            googleAddress[key]
+              ? countryList?.find((country) =>
+                  country.en.includes(googleAddress[key]),
+                )?.[i18n.language as "en" | "fr"] ?? ""
+              : "",
+          );
+        } else {
+          setValue(key, googleAddress?.[key] ?? "");
+        }
+      });
+    }
+  }, [
+    countryFetchSuccessful,
+    countryList,
+    googleAddress,
+    i18n.language,
+    register,
+    setValue,
+  ]);
+
+  useEffect(() => {
+    if (countryFetchUnsuccessful) {
+      toast(countryListError.message || "An unexpected error occurred");
+    }
+  }, [countryFetchUnsuccessful, countryListError]);
+
+  useEffect(() => {
+    if (!places || !addressFieldRef.current) return;
+
+    const options = {
+      fields: ["address_components", "formatted_address"],
+    };
+
+    setPlaceAutocomplete(
+      new places.Autocomplete(addressFieldRef.current, options),
+    );
+  }, [places]);
+
+  useEffect(() => {
+    if (!placeAutocomplete) return;
+
+    placeAutocomplete.addListener("place_changed", onPlaceSelected);
+  }, [onPlaceSelected, placeAutocomplete]);
 
   return (
     <FormProvider {...methods}>
@@ -321,47 +476,52 @@ const ApplicantInformationForm = () => {
           )}
         </div>
 
-        <div
-          className={cn("form-group", {
-            "has-error": errorWithAddress.address,
-          })}
-        >
-          <label htmlFor="address" className="form-label">
-            {pageContent.address}
-          </label>
-          <InputWithIcon
-            icon={<Search />}
-            iconPosition={IconPosition.LEFT}
-            {...register("address")}
-            id="address"
-            disabled={enterManualAddress}
-            className="input w-full p-4"
-            placeholder={pageContent.startTyping}
-            type="text"
-            aria-invalid={!!errorWithAddress.address}
-            aria-describedby={
-              errorWithAddress.address ? "address-error" : undefined
-            }
-          />
-          {errorWithAddress.address?.message && (
-            <FormError
-              id="address-error"
-              errorMessage={t(errorWithAddress.address.message)}
-            />
-          )}
-          {!enterManualAddress && (
-            <Button
-              variant={ButtonVariant.TRANSPARENT}
-              onClick={onEnterManualAddress}
-              className="w-fit p-0 pt-2 text-left font-bold text-primary underline"
-              type={ButtonType.BUTTON}
-            >
-              {pageContent.addAddressManually}
-            </Button>
-          )}
-        </div>
+        <Popover className="relative">
+          <div
+            className={cn("form-group relative", {
+              "has-error": errorWithAddress.address,
+            })}
+          >
+            <label htmlFor="address" className="form-label">
+              {pageContent.address}
+            </label>
 
-        {enterManualAddress && (
+            <input
+              {...rest}
+              ref={(e) => {
+                ref(e);
+                addressFieldRef.current = e;
+              }}
+              id="address"
+              className="input p-4"
+              placeholder={pageContent.enterStreetName}
+              type="text"
+              aria-invalid={!!errorWithAddress.address}
+              aria-describedby={
+                errorWithAddress.address ? "address-error" : undefined
+              }
+            />
+
+            {errorWithAddress.address?.message && (
+              <FormError
+                id="address-error"
+                errorMessage={t(errorWithAddress.address.message)}
+              />
+            )}
+            {!enterManualAddress && (
+              <Button
+                variant={ButtonVariant.TRANSPARENT}
+                onClick={onEnterManualAddress}
+                className="w-fit p-0 pt-2 text-left font-bold text-primary underline"
+                type={ButtonType.BUTTON}
+              >
+                {pageContent.addAddressManually}
+              </Button>
+            )}
+          </div>
+        </Popover>
+
+        {enterManualAddress && countryList && (
           <>
             <h4 className="font-segoe text-xl font-medium text-primary">
               {pageContent.addingAddressManually}
@@ -461,6 +621,7 @@ const ApplicantInformationForm = () => {
                 {pageContent.country}
               </label>
               <Controller
+                disabled={fetchingCountryList}
                 control={
                   control as Control<
                     CommonApplicantInformation & WithManualAddress
@@ -470,13 +631,11 @@ const ApplicantInformationForm = () => {
                 defaultValue=""
                 render={({ field: { value, name, onChange } }) => (
                   <SelectDropdown
-                    options={Object.entries(COUNTRY_PROVINCE_LIST).map(
-                      ([key, value], index) => ({
-                        id: index,
-                        label: value[language as LanguageCode],
-                        value: key,
-                      }),
-                    )}
+                    options={(countryList ?? []).map((country, index) => ({
+                      id: index,
+                      label: country[i18n.language as "en" | "fr"],
+                      value: country.en,
+                    }))}
                     placeholderText={pageContent.enterCountryName}
                     value={value}
                     name={name}
@@ -484,7 +643,6 @@ const ApplicantInformationForm = () => {
                   />
                 )}
               />
-
               {errorWithManualAddress.country?.message && (
                 <FormError
                   id="country-error"
@@ -501,33 +659,16 @@ const ApplicantInformationForm = () => {
               <label htmlFor="province" className="form-label">
                 {pageContent.province}
               </label>
-              <Controller
-                control={
-                  control as Control<
-                    CommonApplicantInformation & WithManualAddress
-                  >
+              <input
+                {...register("province")}
+                id="province"
+                className="input p-4"
+                placeholder={pageContent.enterProvinceName}
+                type="text"
+                aria-invalid={!!errorWithManualAddress.province}
+                aria-describedby={
+                  errorWithManualAddress.province ? "province-error" : undefined
                 }
-                disabled={!selectedCountry}
-                name="province"
-                defaultValue=""
-                render={({ field: { value, name, onChange, disabled } }) => (
-                  <SelectDropdown
-                    disabled={disabled}
-                    options={(
-                      COUNTRY_PROVINCE_LIST[
-                        selectedCountry as keyof typeof COUNTRY_PROVINCE_LIST
-                      ]?.provinces ?? []
-                    ).map((province, index) => ({
-                      id: index,
-                      label: province[language as LanguageCode],
-                      value: province["en"],
-                    }))}
-                    placeholderText={pageContent.enterProvinceName}
-                    value={value!}
-                    name={name}
-                    onChange={onChange}
-                  />
-                )}
               />
               {errorWithManualAddress.province?.message && (
                 <FormError

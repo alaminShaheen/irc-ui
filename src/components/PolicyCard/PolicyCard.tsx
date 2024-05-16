@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useState, useRef, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
 import Icon from "@/components/ui/Icon";
@@ -8,15 +8,17 @@ import useToggle from "@/hooks/useToggle";
 import EventCard from "@/components/EventCard/EventCard";
 import AddEventIcon from "@/components/AppIcons/AddEvent";
 import { IPolicyCard } from "@/components/PolicyCard/PolicyCard.d";
-import { LanguageCode } from "@/models/enums/LanguageCode";
 import AddEventFilledIcon from "@/components/AppIcons/AddEventFilled";
 import { ButtonVariant, IconPosition } from "@/models/enums/ButtonVariant";
+import EventPagination from "@/components/EventPagination/EventPagination";
+import AppConstants from "@/constants/AppConstants";
 
 const PolicyCard = (props: IPolicyCard) => {
   const {
-    policy: { iconPath, subtitle_fr, subtitle, name, name_fr },
+    listOfEvents = [],
+    policy: { iconPath, subtitle, name },
     translationContent: {
-      addAnotherEvent,
+      clickToAddEvent,
       showMore,
       showLess,
       edit,
@@ -29,15 +31,34 @@ const PolicyCard = (props: IPolicyCard) => {
     onAddEventClick,
   } = props;
 
-  const {
-    t,
-    i18n: { language: currentLanguage },
-  } = useTranslation();
+  const { t } = useTranslation();
   const [showMoreSubtitle, toggleShowMoreSubtitle] = useToggle(false);
+  const [currentPage, setCurrentPage] = useState(0);
+
+  const totalPage = Math.ceil(
+    listOfEvents.length / AppConstants.EVENTS_PER_PAGE,
+  );
+
+  const displayEvents = listOfEvents.slice(
+    currentPage * AppConstants.EVENTS_PER_PAGE,
+    (currentPage + 1) * AppConstants.EVENTS_PER_PAGE,
+  );
+
+  const eventsContainerRef = useRef<HTMLUListElement>(null);
+
+  useEffect(() => {
+    if (eventsContainerRef.current) {
+      eventsContainerRef.current.focus();
+    }
+  }, [currentPage]);
+
+  const handlePageClick = (selectedItem: { selected: number }) => {
+    setCurrentPage(selectedItem.selected);
+  };
 
   const addEvent = useCallback(() => {
-    onAddEventClick(currentLanguage === LanguageCode.ENGLISH ? name : name_fr);
-  }, [currentLanguage, name, name_fr, onAddEventClick]);
+    onAddEventClick(name);
+  }, [name, onAddEventClick]);
 
   return (
     <li className="flex w-full flex-col items-start gap-x-3 gap-y-4 rounded-md bg-primary-5 px-4 py-6">
@@ -51,7 +72,7 @@ const PolicyCard = (props: IPolicyCard) => {
         </div>
         <div className="title-section w-full min-w-0 truncate">
           <h2 className="policy-title text-wrap font-segoe text-lg font-semibold text-primary">
-            {currentLanguage === LanguageCode.ENGLISH ? name : name_fr}
+            {name}
           </h2>
           <div
             className={cn("policy-subtitle text-wrap text-base", {
@@ -64,9 +85,7 @@ const PolicyCard = (props: IPolicyCard) => {
               })}
               role="contentinfo"
             >
-              {currentLanguage === LanguageCode.ENGLISH
-                ? subtitle
-                : subtitle_fr}
+              {subtitle}
             </p>
             <span
               className={cn(
@@ -81,24 +100,19 @@ const PolicyCard = (props: IPolicyCard) => {
           </div>
         </div>
       </div>
+
       <div className="grid w-full grid-cols-1 gap-x-4 lg:grid-cols-[60px_1fr]">
         <div className="hidden lg:block" />
-        <ul>
-          {/*/!* TODO: Will be a list of event cards *!/*/}
-          <EventCard
-            content={{
-              edit,
-              removePolicy,
-              calendarIconAltText,
-              clockIconAltText,
-              doorIconAltText,
-            }}
-          />
 
+        {/* ADD EVENT*/}
+        <ul
+          ref={eventsContainerRef}
+          tabIndex={-1}
+          className="flex flex-col gap-4 outline-none"
+        >
           <li
-            className="group mt-4 flex cursor-pointer rounded border-2 border-dashed border-gray-400 bg-primary-25 hover:border-primary"
+            className="group flex cursor-pointer rounded border-2 border-dashed border-gray-400 bg-primary-25 hover:border-primary"
             onClick={addEvent}
-            role="button"
             tabIndex={0}
           >
             <Button
@@ -124,9 +138,37 @@ const PolicyCard = (props: IPolicyCard) => {
                 </>
               }
             >
-              {addAnotherEvent}
+              {clickToAddEvent}
             </Button>
           </li>
+
+          {/* EVENT CARD*/}
+          {displayEvents?.map((_, idx: number) => {
+            return (
+              <li key={`policyEvent-${idx}`}>
+                <EventCard
+                  content={{
+                    edit,
+                    showMore,
+                    showLess,
+                    removePolicy,
+                    calendarIconAltText,
+                    clockIconAltText,
+                    doorIconAltText,
+                  }}
+                />
+              </li>
+            );
+          })}
+
+          {/* PAGINATION */}
+          {listOfEvents.length > 2 && (
+            <EventPagination
+              currentPage={currentPage}
+              pageCount={totalPage}
+              onPageChange={handlePageClick}
+            />
+          )}
         </ul>
       </div>
     </li>

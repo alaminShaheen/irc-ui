@@ -15,9 +15,11 @@ import ROUTES from "@/constants/Routes";
 import { StepperStepInformation } from "@/models/StepperStepInformation";
 import { ApplicantInformationFormModel } from "@/models/form/ApplicantInformationFormModel";
 
-type StepperContextType = {
+export type StepperContextType = {
   formValues: {
-    applicantInformationForm: ApplicantInformationFormModel;
+    applicantInformationForm: ApplicantInformationFormModel & {
+      enterManualAddress: boolean;
+    };
   };
   isLoading: boolean;
   setIsLoading: Dispatch<SetStateAction<boolean>>;
@@ -31,13 +33,14 @@ type StepperContextType = {
   goToPreviousStep: () => void;
 };
 
-const STEPPER_CONTEXT_DEFAULT_VALUES: StepperContextType = {
+export const STEPPER_CONTEXT_DEFAULT_VALUES: StepperContextType = {
   formValues: {
     applicantInformationForm: {
       address: "",
       name: "",
       bestAbilityAcknowledgement: false,
       personalInformationCollectionAgreement: false,
+      enterManualAddress: false,
     },
   },
   changeRouteTo: () => {},
@@ -51,7 +54,7 @@ const STEPPER_CONTEXT_DEFAULT_VALUES: StepperContextType = {
   goToNextStep: () => {},
   goToPreviousStep: () => {},
 };
-export const StepContext = createContext<StepperContextType>(
+export const StepperContext = createContext<StepperContextType>(
   STEPPER_CONTEXT_DEFAULT_VALUES,
 );
 
@@ -72,6 +75,7 @@ export const StepperContextProvider = (props: StepperContextProviderProps) => {
       bestAbilityAcknowledgement: false,
       personalInformationCollectionAgreement: false,
       address: "",
+      enterManualAddress: false,
     },
   });
 
@@ -82,9 +86,15 @@ export const StepperContextProvider = (props: StepperContextProviderProps) => {
     () => [
       {
         id: 1,
-        title: t("pages.stepperForm.applicationAgreement.title"),
-        subtitle: t("pages.stepperForm.applicationAgreement.subtitle"),
+        title: t("pages.stepperForm.applicantInformation.title"),
+        subtitle: t("pages.stepperForm.applicantInformation.subtitle"),
         route: ROUTES.STEPPER_FORM.APPLICANT_INFORMATION,
+      },
+      {
+        id: 2,
+        title: t("pages.stepperForm.addEvents.title"),
+        subtitle: t("pages.stepperForm.addEvents.subtitle"),
+        route: ROUTES.STEPPER_FORM.ADD_EVENTS,
       },
       {
         id: 3,
@@ -94,12 +104,6 @@ export const StepperContextProvider = (props: StepperContextProviderProps) => {
       },
       {
         id: 4,
-        title: t("pages.stepperForm.addEvents.title"),
-        subtitle: t("pages.stepperForm.addEvents.subtitle"),
-        route: ROUTES.STEPPER_FORM.ADD_EVENTS,
-      },
-      {
-        id: 5,
         title: t("pages.stepperForm.reviewAndSubmit.title"),
         subtitle: t("pages.stepperForm.reviewAndSubmit.subtitle"),
         route: ROUTES.STEPPER_FORM.REVIEW_AND_SUBMIT,
@@ -142,7 +146,7 @@ export const StepperContextProvider = (props: StepperContextProviderProps) => {
   }, [currentStepIndex, navigate, stepperSteps]);
 
   return (
-    <StepContext.Provider
+    <StepperContext.Provider
       value={{
         goToPreviousStep,
         goToNextStep,
@@ -158,10 +162,10 @@ export const StepperContextProvider = (props: StepperContextProviderProps) => {
       }}
     >
       {children}
-    </StepContext.Provider>
+    </StepperContext.Provider>
   );
 };
 
 export const useStepperContext = () => {
-  return useContext(StepContext);
+  return useContext(StepperContext);
 };
