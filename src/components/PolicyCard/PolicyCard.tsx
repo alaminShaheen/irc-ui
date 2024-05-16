@@ -11,6 +11,7 @@ import { IPolicyCard } from "@/components/PolicyCard/PolicyCard.d";
 import AddEventFilledIcon from "@/components/AppIcons/AddEventFilled";
 import { ButtonVariant, IconPosition } from "@/models/enums/ButtonVariant";
 import EventPagination from "@/components/EventPagination/EventPagination";
+import AppConstants from "@/constants/AppConstants";
 
 const PolicyCard = (props: IPolicyCard) => {
   const {
@@ -34,12 +35,13 @@ const PolicyCard = (props: IPolicyCard) => {
   const [showMoreSubtitle, toggleShowMoreSubtitle] = useToggle(false);
   const [currentPage, setCurrentPage] = useState(0);
 
-  const eventsPerPage = 2;
-  const totalPage = Math.ceil(listOfEvents.length / eventsPerPage);
+  const totalPage = Math.ceil(
+    listOfEvents.length / AppConstants.EVENTS_PER_PAGE,
+  );
 
   const displayEvents = listOfEvents.slice(
-    currentPage * eventsPerPage,
-    (currentPage + 1) * eventsPerPage,
+    currentPage * AppConstants.EVENTS_PER_PAGE,
+    (currentPage + 1) * AppConstants.EVENTS_PER_PAGE,
   );
 
   const eventsContainerRef = useRef<HTMLUListElement>(null);

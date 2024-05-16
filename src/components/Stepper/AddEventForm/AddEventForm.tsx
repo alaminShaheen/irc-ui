@@ -147,8 +147,8 @@ const AddEventForm = () => {
       />
       <div className="flex gap-x-4 px-4 pb-10 pt-2 lg:px-0 lg:pb-0 lg:pt-0">
         <Button
-          className="lg:w flex items-center justify-center gap-0 rounded-md border-2 border-primary bg-transparent !text-primary hover:bg-primary hover:text-white"
-          variant={ButtonVariant.VANILLA}
+          className="button-secondary flex items-center justify-center gap-0 "
+          variant={ButtonVariant.SECONDARY}
           type={ButtonType.SUBMIT}
         >
           <span>
@@ -157,7 +157,6 @@ const AddEventForm = () => {
           <span className="hidden lg:block">{pageContent.back}</span>
         </Button>
         <Button
-          // disabled={formDisabled}
           className="lg:w rounded-md text-base font-bold"
           variant={ButtonVariant.DISABLED}
           type={ButtonType.SUBMIT}

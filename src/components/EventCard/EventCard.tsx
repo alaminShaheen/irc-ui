@@ -80,13 +80,12 @@ const EventCard = ({ content }: IEventCardProps) => {
           </span>
         </div>
         <div className="mt-4 hidden justify-between gap-x-3 align-bottom text-base text-primary underline lg:flex">
-          <p
+          <button
             onClick={toggleShowMoreEventDetails}
-            tabIndex={0}
             className="cursor-pointer text-sm font-bold text-primary underline focus-visible:outline-focus lg:text-base"
           >
             {showMoreEventDetails ? "Show less details" : "Show more details"}
-          </p>
+          </button>
           <div className="flex gap-x-6">
             <Button className="p-0" variant={ButtonVariant.TRANSPARENT}>
               {edit}

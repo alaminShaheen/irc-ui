@@ -9,6 +9,7 @@ import {
   ICoverageInfo,
   IEventPolicy,
 } from "@/components/EventPolicy/EventPolicy.d";
+import { mockCoverageInfo } from "@/constants/MockData";
 
 const EventPolicy = (props: IEventPolicy) => {
   const [coverageInfo, setCoverageInfo] = useState<ICoverageInfo>({});
@@ -18,127 +19,11 @@ const EventPolicy = (props: IEventPolicy) => {
 
   const policyList = policies[currentLanguage as LanguageCode] as Policy[];
 
-  // Mock fetch function that simulates fetching user data
-  const getListOfEvents = (): Promise<ICoverageInfo> => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve({
-          vendorCoverage: {
-            listOfEvents: [
-              {
-                eventName: "[Vendor 1] - Reoccurring Activity",
-                eventData: [
-                  { eventDataValue: "test 1" },
-                  { eventDataValue: "test 2" },
-                ],
-              },
-              {
-                eventName: "[Vendor 2] - Reoccurring Activity",
-                eventData: [
-                  { eventDataValue: "test 1" },
-                  { eventDataValue: "test 2" },
-                ],
-              },
-              {
-                eventName: "[Vendor 2] - Reoccurring Activity",
-                eventData: [
-                  { eventDataValue: "test 1" },
-                  { eventDataValue: "test 2" },
-                ],
-              },
-              {
-                eventName: "[Vendor 2] - Reoccurring Activity",
-                eventData: [
-                  { eventDataValue: "test 1" },
-                  { eventDataValue: "test 2" },
-                ],
-              },
-              {
-                eventName: "[Vendor 2] - Reoccurring Activity",
-                eventData: [
-                  { eventDataValue: "test 1" },
-                  { eventDataValue: "test 2" },
-                ],
-              },
-              {
-                eventName: "[Vendor 2] - Reoccurring Activity",
-                eventData: [
-                  { eventDataValue: "test 1" },
-                  { eventDataValue: "test 2" },
-                ],
-              },
-              {
-                eventName: "[Vendor 2] - Reoccurring Activity",
-                eventData: [
-                  { eventDataValue: "test 1" },
-                  { eventDataValue: "test 2" },
-                ],
-              },
-              {
-                eventName: "[Vendor 2] - Reoccurring Activity",
-                eventData: [
-                  { eventDataValue: "test 1" },
-                  { eventDataValue: "test 2" },
-                ],
-              },
-              {
-                eventName: "[Vendor 2] - Reoccurring Activity",
-                eventData: [
-                  { eventDataValue: "test 1" },
-                  { eventDataValue: "test 2" },
-                ],
-              },
-              {
-                eventName: "[Vendor 2] - Reoccurring Activity",
-                eventData: [
-                  { eventDataValue: "test 1" },
-                  { eventDataValue: "test 2" },
-                ],
-              },
-              {
-                eventName: "[Vendor 2] - Reoccurring Activity",
-                eventData: [
-                  { eventDataValue: "test 1" },
-                  { eventDataValue: "test 2" },
-                ],
-              },
-            ],
-          },
-          roomCoverage: {
-            listOfEvents: [
-              {
-                eventName: "Hockey Match",
-                eventData: [
-                  { eventDataValue: "test 1" },
-                  { eventDataValue: "test 2" },
-                ],
-              },
-              {
-                eventName: "[Room] - Reoccurring Activity",
-                eventData: [
-                  { eventDataValue: "test 1" },
-                  { eventDataValue: "test 2" },
-                ],
-              },
-              {
-                eventName: "[Room] - Reoccurring Activity",
-                eventData: [
-                  { eventDataValue: "test 1" },
-                  { eventDataValue: "test 2" },
-                ],
-              },
-            ],
-          },
-        });
-      }, 500);
-    });
-  };
-
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const result: ICoverageInfo = await getListOfEvents();
-        setCoverageInfo(result);
+        await new Promise((resolve) => setTimeout(resolve, 500));
+        setCoverageInfo(mockCoverageInfo);
       } catch (error) {
         console.error("Failed to fetch Coverage data:", error);
         setCoverageInfo({});
