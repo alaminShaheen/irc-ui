@@ -1,8 +1,6 @@
 export type Policy = {
-  id: number;
+  id: string;
   name: string;
-  name_fr: string;
   subtitle: string;
-  subtitle_fr: string;
   iconPath: string;
 };

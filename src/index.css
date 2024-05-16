@@ -1,73 +1,77 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @font-face {
-	font-family: "Segoe UI";
-	font-style: normal;
-	font-weight: normal;
-	src: url("fonts/Segoe UI/Segoe UI.ttf");
+  font-family: "Segoe UI";
+  font-style: normal;
+  font-weight: normal;
+  src: url("fonts/Segoe UI/Segoe UI.ttf");
 }
 
 @font-face {
-	font-family: "Segoe UI";
-	font-style: normal;
-	font-weight: bold;
-	src: url("fonts/Segoe UI/Segoe UI Bold.ttf");
+  font-family: "Segoe UI";
+  font-style: normal;
+  font-weight: bold;
+  src: url("fonts/Segoe UI/Segoe UI Bold.ttf");
 }
 
 .btn {
 }
 
 .btn-primary {
-	@apply bg-primary text-white !important;
-	@apply font-bold;
+  @apply bg-primary text-white !important;
+  @apply font-bold;
 }
 
 .btn-secondary {
-	@apply border-2 border-primary rounded-md text-primary bg-transparent font-bold !important;
+  @apply rounded-md border-2 border-primary bg-transparent font-bold text-primary  !important;
 }
 
 .btn-transparent {
-	@apply bg-transparent text-primary !important;
+  @apply bg-transparent text-primary !important;
 }
 
 .btn-disabled {
-	@apply text-graphite-700 border-2 border-dashed border-primary bg-transparent;
+  @apply border-2 border-dashed border-primary bg-transparent text-graphite-700;
+}
+
+.btn-link {
+  @apply cursor-pointer bg-transparent py-0 text-sm font-bold text-primary underline focus-visible:outline-focus lg:text-base;
 }
 
 .form-group {
-	@apply flex flex-col gap-y-1;
+  @apply flex flex-col gap-y-1;
 }
 
 .form-radio-checkbox-group {
-	@apply flex items-center gap-x-3;
+  @apply flex items-center gap-x-3;
 }
 
 .form-label {
-	@apply text-white-5 text-base;
+  @apply text-base text-white-5;
 }
 
 .form-group.has-error input,
 .form-radio-checkbox-group.has-error input {
-	@apply border-alert shadow-md;
+  @apply border-alert shadow-md;
 }
 
 .form-group.has-error label,
 .form-group.has-error .form-label,
 .form-radio-checkbox-group.has-error label {
-	@apply text-alert
+  @apply text-alert;
 }
 
 .form-group.has-error .error-warning,
 .form-radio-checkbox-group.has-error .error-warning {
-	@apply my-2 text-alert flex gap-x-1.5
+  @apply my-2 flex gap-x-1.5 text-alert;
 }
 
 .input {
-	@apply h-[55px] bg-white border-2 border-primary-100 rounded-lg py-4 px-3 text-primary read-only:bg-gray-200;
+  @apply h-[55px] rounded-lg border-2 border-primary-100 bg-white px-3 py-4 text-primary read-only:bg-gray-200;
 }
 
 /*.input.has-error {*/
@@ -75,51 +79,54 @@
 /*}*/
 
 input::-webkit-calendar-picker-indicator {
-	display: none;
+  display: none;
 }
 
 /* Remove native HTML date-time picker icon */
-input[type='date']::-webkit-calendar-picker-indicator,
-input[type='time']::-webkit-calendar-picker-indicator {
-	visibility: hidden !important;
-	background: transparent;
-	bottom: 0;
-	color: transparent;
-	cursor: pointer;
-	height: auto;
-	left: 0;
-	position: absolute;
-	right: 0;
-	top: 0;
-	width: auto;
+input[type="date"]::-webkit-calendar-picker-indicator,
+input[type="time"]::-webkit-calendar-picker-indicator {
+  visibility: hidden !important;
+  background: transparent;
+  bottom: 0;
+  color: transparent;
+  cursor: pointer;
+  height: auto;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: auto;
 }
 
 .modal.modal-lg .modal-body {
-	@apply min-w-[934px];
+  @apply min-w-[934px];
 }
 
 .pac-container {
-	@apply rounded;
+  @apply rounded;
 }
 
 .pac-container .pac-item {
-	@apply p-2 cursor-pointer text-base hover:bg-primary hover:text-white;
+  @apply cursor-pointer p-2 text-base hover:bg-primary hover:text-white;
 }
 
-
 .pac-container .pac-item .pac-item-query {
-	@apply text-base;
+  @apply text-base;
 }
 
 .pac-container .pac-item:hover .pac-item-query {
-	@apply text-white;
+  @apply text-white;
 }
 
 .pac-container .pac-item .pac-icon {
-	@apply text-primary;
+  @apply text-primary;
 }
 
 * {
-	padding: 0;
-	margin: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.button-secondary:hover {
+  @apply bg-primary text-white !important;
 }

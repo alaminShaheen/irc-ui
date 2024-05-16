@@ -13,7 +13,7 @@
   },
   "yourPolicies": {
     "title": "Vos Politiques",
-    "addAnotherEvent": "FR-Add another event",
+    "clickToAddEvent": "FR-Click to add event",
     "removePolicy": "FR-Remove policy"
   },
   "eventConfirmation": {

@@ -14,7 +14,7 @@
   },
   "yourPolicies": {
     "title": "Your Policies",
-    "addAnotherEvent": "Add another event",
+    "clickToAddEvent": "Click to add event",
     "removePolicy": "Remove policy"
   },
   "eventConfirmation": {

@@ -15,15 +15,14 @@ jest.mock("react-i18next", () => ({
 
 const mockProps = {
   policy: {
-    id: 123,
+    id: "123",
     iconPath: "icon/path",
-    subtitle_fr: "Sous-titre en français",
-    subtitle: "Subtitle in English",
+    subtitle: "Sous-titre en français",
     name: "Policy Name",
-    name_fr: "Nom de la politique",
+    // listOfEvents: [],
   },
   translationContent: {
-    addAnotherEvent: "Add Another Event",
+    clickToAddEvent: "Click to add event",
     showMore: "Show More",
     showLess: "Show Less",
     edit: "Edit",
@@ -34,6 +33,7 @@ const mockProps = {
     addEventIconAltText: "Add Event",
   },
   onAddEventClick: jest.fn(),
+  listOfEvents: [],
 };
 
 describe("PolicyCard Component", () => {
@@ -55,7 +55,9 @@ describe("PolicyCard Component", () => {
   });
 
   it("calls onAddEventClick when the add event button is clicked", () => {
-    fireEvent.click(screen.getByText("Add Another Event"));
+    fireEvent.click(
+      screen.getByText(mockProps.translationContent.clickToAddEvent),
+    );
     expect(mockProps.onAddEventClick).toHaveBeenCalled();
   });
 });

@@ -23,7 +23,7 @@ import { ButtonType, ButtonVariant } from "@/models/enums/ButtonVariant";
 const AddEventModal = (props: IAddEventModalProps) => {
   const { isOpen, toggle, onConfirm, translationContent, eventName } = props;
   const {
-    title,
+    addEventModalTitle,
     basicInfo,
     nameYourEventLabel,
     nameYourEventPlaceholder,
@@ -172,7 +172,7 @@ const AddEventModal = (props: IAddEventModalProps) => {
 
   return (
     <Modal
-      title={title as string}
+      title={addEventModalTitle as string}
       isOpen={isOpen}
       size={isMobile || isTab ? ModalSize.SMALL : ModalSize.LARGE}
       toggle={onClose}

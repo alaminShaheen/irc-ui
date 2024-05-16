@@ -86,9 +86,15 @@ export const StepperContextProvider = (props: StepperContextProviderProps) => {
     () => [
       {
         id: 1,
-        title: t("pages.stepperForm.applicationAgreement.title"),
-        subtitle: t("pages.stepperForm.applicationAgreement.subtitle"),
+        title: t("pages.stepperForm.applicantInformation.title"),
+        subtitle: t("pages.stepperForm.applicantInformation.subtitle"),
         route: ROUTES.STEPPER_FORM.APPLICANT_INFORMATION,
+      },
+      {
+        id: 2,
+        title: t("pages.stepperForm.addEvents.title"),
+        subtitle: t("pages.stepperForm.addEvents.subtitle"),
+        route: ROUTES.STEPPER_FORM.ADD_EVENTS,
       },
       {
         id: 3,
@@ -98,12 +104,6 @@ export const StepperContextProvider = (props: StepperContextProviderProps) => {
       },
       {
         id: 4,
-        title: t("pages.stepperForm.addEvents.title"),
-        subtitle: t("pages.stepperForm.addEvents.subtitle"),
-        route: ROUTES.STEPPER_FORM.ADD_EVENTS,
-      },
-      {
-        id: 5,
         title: t("pages.stepperForm.reviewAndSubmit.title"),
         subtitle: t("pages.stepperForm.reviewAndSubmit.subtitle"),
         route: ROUTES.STEPPER_FORM.REVIEW_AND_SUBMIT,

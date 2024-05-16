@@ -13,6 +13,8 @@ import { IEventCardProps } from "@/components/EventCard/EventCard.d";
 const EventCard = ({ content }: IEventCardProps) => {
   const {
     edit,
+    showMore,
+    showLess,
     removePolicy,
     calendarIconAltText,
     clockIconAltText,
@@ -41,15 +43,6 @@ const EventCard = ({ content }: IEventCardProps) => {
       </div>
 
       <div className="event-details w-full">
-        <div className="hidden justify-end gap-x-3 text-base text-primary underline lg:flex">
-          <Button className="p-0" variant={ButtonVariant.TRANSPARENT}>
-            {edit}
-          </Button>
-          <Button className="p-0" variant={ButtonVariant.TRANSPARENT}>
-            {removePolicy}
-          </Button>
-        </div>
-
         <h3 className="text-xl text-primary">
           [Event name] - reoccurring activity
         </h3>
@@ -88,14 +81,22 @@ const EventCard = ({ content }: IEventCardProps) => {
             <span className="font-bold text-primary">+3 other</span>
           </span>
         </div>
-
-        <p
-          onClick={toggleShowMoreEventDetails}
-          tabIndex={0}
-          className="mt-4 cursor-pointer text-sm font-bold text-primary underline focus-visible:outline-focus lg:text-base"
-        >
-          {showMoreEventDetails ? "Show less details" : "Show more details"}
-        </p>
+        <div className="mt-4 hidden justify-between gap-x-3 align-bottom text-base text-primary underline lg:flex">
+          <Button
+            onClick={toggleShowMoreEventDetails}
+            variant={ButtonVariant.LINK}
+          >
+            {showMoreEventDetails ? showLess : showMore}
+          </Button>
+          <div className="flex gap-x-6">
+            <Button className="p-0" variant={ButtonVariant.TRANSPARENT}>
+              {edit}
+            </Button>
+            <Button className="p-0" variant={ButtonVariant.TRANSPARENT}>
+              {removePolicy}
+            </Button>
+          </div>
+        </div>
       </div>
     </div>
   );
