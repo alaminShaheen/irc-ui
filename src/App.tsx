@@ -1,5 +1,7 @@
 import { Helmet } from "react-helmet-async";
+import { Bounce, ToastContainer } from "react-toastify";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { APIProvider as GooglePlacesAPIProvider } from "@vis.gl/react-google-maps";
 
 import Quote from "@/pages/Quote";
 import Signup from "@/pages/Signup";
@@ -17,7 +19,7 @@ import TransportAndInsuranceForm from "@/components/Stepper/TransportAndInsuranc
 
 // Custom styling
 import "./styles/global.css";
-import { APIProvider as GooglePlacesAPIProvider } from "@vis.gl/react-google-maps";
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
@@ -38,6 +40,18 @@ function App() {
         />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
       </Helmet>
+      <ToastContainer
+        position="top-right"
+        autoClose={false}
+        hideProgressBar={true}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        transition={Bounce}
+      />
       <GooglePlacesAPIProvider
         apiKey={process.env.GOOGLE_MAPS_API_KEY as string}
       >

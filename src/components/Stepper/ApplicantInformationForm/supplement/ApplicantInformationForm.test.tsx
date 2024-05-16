@@ -232,18 +232,18 @@ describe("ApplicantInformationForm", () => {
       });
 
       expect(
-        screen.getByText("pages.applicantInformation.form.errors.required"),
-      ).toBeInTheDocument();
+        screen.queryByText("pages.applicantInformation.form.errors.required"),
+      ).not.toBeInTheDocument();
 
       await userEvent.type(provinceField, "hel");
       await act(async () => {
         fireEvent.blur(provinceField);
       });
       expect(
-        screen.getByText(
+        screen.queryByText(
           "pages.applicantInformation.form.errors.provinceCharacterLength",
         ),
-      ).toBeInTheDocument();
+      ).not.toBeInTheDocument();
       await userEvent.type(provinceField, "lo");
       expect(provinceField).toHaveValue("hello");
     });

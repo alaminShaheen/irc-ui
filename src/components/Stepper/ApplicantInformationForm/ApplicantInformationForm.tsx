@@ -29,6 +29,7 @@ import SelectDropdown from "@/components/ui/SelectDropdown/SelectDropdown";
 import AgreementCheckboxes from "@/components/AgreementCheckboxes/AgreementCheckboxes";
 import { useStepperContext } from "@/context/StepperContext";
 import { ButtonType, ButtonVariant } from "@/models/enums/ButtonVariant";
+import { toast } from "react-toastify";
 
 const ApplicantInformationForm = () => {
   const { t, i18n } = useTranslation();
@@ -58,6 +59,8 @@ const ApplicantInformationForm = () => {
     data: countryList,
     isLoading: fetchingCountryList,
     isSuccess: countryFetchSuccessful,
+    error: countryListError,
+    isError: countryFetchUnsuccessful,
   } = useGetCountry({
     enabled: enterManualAddress,
   });
@@ -111,14 +114,13 @@ const ApplicantInformationForm = () => {
     }),
     province: yup.string().when("$enterManualAddress", (condition, schema) => {
       return condition[0]
-        ? schema
-            .optional()
-            // .required("pages.applicantInformation.form.errors.required")
-            // .length(
-            //   4,
-            //   "pages.applicantInformation.form.errors.provinceCharacterLength",
-            // )
-        : schema.optional();
+        ? schema.optional()
+        : // .required("pages.applicantInformation.form.errors.required")
+          // .length(
+          //   4,
+          //   "pages.applicantInformation.form.errors.provinceCharacterLength",
+          // )
+          schema.optional();
     }),
     city: yup.string().when("$enterManualAddress", (condition, schema) => {
       return condition[0]
@@ -394,7 +396,20 @@ const ApplicantInformationForm = () => {
         }
       });
     }
-  }, [countryFetchSuccessful, countryList, googleAddress, register, setValue]);
+  }, [
+    countryFetchSuccessful,
+    countryList,
+    googleAddress,
+    i18n.language,
+    register,
+    setValue,
+  ]);
+
+  useEffect(() => {
+    if (countryFetchUnsuccessful) {
+      toast(countryListError.message || "An unexpected error occurred");
+    }
+  }, [countryFetchUnsuccessful, countryListError]);
 
   useEffect(() => {
     if (!places || !addressFieldRef.current) return;
