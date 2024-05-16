@@ -31,7 +31,7 @@ import { useStepperContext } from "@/context/StepperContext";
 import { ButtonType, ButtonVariant } from "@/models/enums/ButtonVariant";
 
 const ApplicantInformationForm = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const { setFormValues, formValues, changingRouteTo, switchRoute } =
     useStepperContext();
@@ -112,11 +112,12 @@ const ApplicantInformationForm = () => {
     province: yup.string().when("$enterManualAddress", (condition, schema) => {
       return condition[0]
         ? schema
-            .required("pages.applicantInformation.form.errors.required")
-            .length(
-              4,
-              "pages.applicantInformation.form.errors.provinceCharacterLength",
-            )
+            .optional()
+            // .required("pages.applicantInformation.form.errors.required")
+            // .length(
+            //   4,
+            //   "pages.applicantInformation.form.errors.provinceCharacterLength",
+            // )
         : schema.optional();
     }),
     city: yup.string().when("$enterManualAddress", (condition, schema) => {
@@ -384,8 +385,8 @@ const ApplicantInformationForm = () => {
             key,
             googleAddress[key]
               ? countryList?.find((country) =>
-                  country.includes(googleAddress[key]),
-                ) ?? ""
+                  country.en.includes(googleAddress[key]),
+                )?.[i18n.language as "en" | "fr"] ?? ""
               : "",
           );
         } else {
@@ -617,8 +618,8 @@ const ApplicantInformationForm = () => {
                   <SelectDropdown
                     options={(countryList ?? []).map((country, index) => ({
                       id: index,
-                      label: country,
-                      value: country,
+                      label: country[i18n.language as "en" | "fr"],
+                      value: country.en,
                     }))}
                     placeholderText={pageContent.enterCountryName}
                     value={value}
