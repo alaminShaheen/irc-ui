@@ -4,7 +4,16 @@ import EventCard from "../EventCard";
 const mockContent = {
   edit: "Edit",
   removePolicy: "Remove Policy",
+  showMore: "Show more details",
+  showLess: "Show less details",
 };
+
+jest.mock("react-i18next", () => ({
+  useTranslation: () => ({
+    t: (key: string) => key,
+    i18n: { language: "en" },
+  }),
+}));
 
 describe("EventCard", () => {
   beforeEach(() => {
@@ -21,13 +30,11 @@ describe("EventCard", () => {
       screen.getByText("[Event name] - reoccurring activity"),
     ).toBeInTheDocument();
   });
-
   it("toggles more details on click", () => {
     const toggleButton = screen.getByText("Show more details");
     fireEvent.click(toggleButton);
-
     expect(screen.getByText("Show less details")).toBeInTheDocument();
-    fireEvent.click(toggleButton);
+    fireEvent.click(screen.getByText("Show less details"));
     expect(screen.getByText("Show more details")).toBeInTheDocument();
   });
 

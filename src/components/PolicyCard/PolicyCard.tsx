@@ -149,6 +149,8 @@ const PolicyCard = (props: IPolicyCard) => {
                 <EventCard
                   content={{
                     edit,
+                    showMore,
+                    showLess,
                     removePolicy,
                     calendarIconAltText,
                     clockIconAltText,

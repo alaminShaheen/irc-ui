@@ -8,7 +8,7 @@ const AddEvent = () => {
 
   return (
     <>
-      <Helmet title={t("pages.applicantInformation.seo.title")} />
+      <Helmet title={t("pages.addEventForm.seo.title")} />
       <section className="mx-4 mb-10 mt-6 flex justify-center lg:my-0">
         <AddEventForm />
       </section>

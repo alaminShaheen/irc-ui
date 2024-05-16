@@ -1,4 +1,7 @@
 {
+  "seo": {
+    "title": "IRC Add Event Page"
+  },
   "title": "Add events",
   "subTitle": "Select all the activities and events that you want to insure.",
   "saveOneEvent": "Save at Least One Event",

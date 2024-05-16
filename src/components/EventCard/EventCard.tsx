@@ -13,6 +13,8 @@ import { IEventCardProps } from "@/components/EventCard/EventCard.d";
 const EventCard = ({ content }: IEventCardProps) => {
   const {
     edit,
+    showMore,
+    showLess,
     removePolicy,
     calendarIconAltText,
     clockIconAltText,
@@ -80,12 +82,12 @@ const EventCard = ({ content }: IEventCardProps) => {
           </span>
         </div>
         <div className="mt-4 hidden justify-between gap-x-3 align-bottom text-base text-primary underline lg:flex">
-          <button
+          <Button
             onClick={toggleShowMoreEventDetails}
-            className="cursor-pointer text-sm font-bold text-primary underline focus-visible:outline-focus lg:text-base"
+            variant={ButtonVariant.LINK}
           >
-            {showMoreEventDetails ? "Show less details" : "Show more details"}
-          </button>
+            {showMoreEventDetails ? showLess : showMore}
+          </Button>
           <div className="flex gap-x-6">
             <Button className="p-0" variant={ButtonVariant.TRANSPARENT}>
               {edit}

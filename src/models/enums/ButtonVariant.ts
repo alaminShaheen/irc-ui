@@ -4,6 +4,7 @@ export enum ButtonVariant {
   DISABLED = "DISABLED",
   TRANSPARENT = "TRANSPARENT",
   VANILLA = "VANILLA",
+  LINK = "LINK",
 }
 
 export enum ButtonType {

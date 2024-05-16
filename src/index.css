@@ -38,6 +38,10 @@
   @apply border-2 border-dashed border-primary bg-transparent text-graphite-700;
 }
 
+.btn-link {
+  @apply cursor-pointer bg-transparent py-0 text-sm font-bold text-primary underline focus-visible:outline-focus lg:text-base;
+}
+
 .form-group {
   @apply flex flex-col gap-y-1;
 }
