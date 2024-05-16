@@ -19,7 +19,7 @@ import TransportAndInsuranceForm from "@/components/Stepper/TransportAndInsuranc
 
 // Custom styling
 import "./styles/global.css";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
@@ -91,11 +91,11 @@ function App() {
 
                     <Route
                       Component={TransportAndInsuranceForm}
-                    path={ROUTES.STEPPER_FORM.TRANSPORT_AND_INSURANCE}
+                      path={ROUTES.STEPPER_FORM.TRANSPORT_AND_INSURANCE}
                     />
 
                     <Route
-                    Component={AddEventForm}
+                      Component={AddEventForm}
                       path={ROUTES.STEPPER_FORM.ADD_EVENTS}
                     />
 

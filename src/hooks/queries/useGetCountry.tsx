@@ -14,7 +14,10 @@ const useGetCountry = (props: useGetCountryProps) => {
     enabled,
     select: (response) =>
       response.data
-        .map((country) => ({en: country.name.common, fr: country.translations.fra.common}))
+        .map((country) => ({
+          en: country.name.common,
+          fr: country.translations.fra.common,
+        }))
         .sort((a, b) => a.en.localeCompare(b.en)),
   });
 };

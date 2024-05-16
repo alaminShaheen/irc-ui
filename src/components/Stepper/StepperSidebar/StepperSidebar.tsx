@@ -33,13 +33,11 @@ const StepperSidebar = () => {
           return (
             <Fragment key={`${step.title}-${step.id}`}>
               <li
-                className={cn(
-                  "group transition-all duration-200",
-                  {
-                    "opacity-70": index < currentStepIndex,
-                    "hover:rounded-md hover:bg-secondary hover:opacity-100": index <= activeStepIndex
-                  },
-                )}
+                className={cn("group transition-all duration-200", {
+                  "opacity-70": index < currentStepIndex,
+                  "hover:rounded-md hover:bg-secondary hover:opacity-100":
+                    index <= activeStepIndex,
+                })}
                 aria-current={currentStepIndex === index}
                 onMouseEnter={() => {
                   if (index <= activeStepIndex) {
@@ -74,15 +72,13 @@ const StepperSidebar = () => {
                       leaveFrom="opacity-100"
                       leaveTo="opacity-0"
                     >
-                      {
-                        index < activeStepIndex ? (
-                          <Return height={30} width={30} />
-                        ) : (
-                          <span className="font-segoe font-semibold">
-                            {index + 1}
-                          </span>
-                        )
-                      }
+                      {index < activeStepIndex ? (
+                        <Return height={30} width={30} />
+                      ) : (
+                        <span className="font-segoe font-semibold">
+                          {index + 1}
+                        </span>
+                      )}
                     </Transition>
                     <Transition
                       className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform font-segoe font-semibold"
@@ -101,9 +97,11 @@ const StepperSidebar = () => {
                       )}
                     </Transition>
                   </div>
-                  <div className={cn("text-left text-primary", {
-                    "group-hover:text-white": index <= activeStepIndex,
-                  })}>
+                  <div
+                    className={cn("text-left text-primary", {
+                      "group-hover:text-white": index <= activeStepIndex,
+                    })}
+                  >
                     <div
                       className={cn(
                         "font-segoe text-lg font-semibold opacity-95",
