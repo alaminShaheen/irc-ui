@@ -8,11 +8,11 @@ import Signup from "@/pages/Signup";
 import Signin from "@/pages/Signin";
 import ROUTES from "@/constants/Routes";
 import Layout from "@/components/Layout/Layout";
-import AddEventForm from "@/components/Stepper/AddEventForm/AddEventForm";
 import ConfirmIdentity from "@/pages/ConfirmIdentity";
 import StepperContainer from "@/components/Stepper/StepperContainer/StepperContainer";
 import { ThemeProvider } from "@/context/ThemeContext";
 import ApplicantInformation from "@/pages/ApplicantInformation";
+import AddEvent from "@/pages/AddEvent";
 import { AppContextProvider } from "@/context/AppContext";
 import ReviewAndSubmitSection from "@/components/Stepper/ReviewAndSubmitSection/ReviewAndSubmitSection";
 import TransportAndInsuranceForm from "@/components/Stepper/TransportAndInsuranceForm/TransportAndInsuranceForm";
@@ -90,13 +90,13 @@ function App() {
                     />
 
                     <Route
-                      Component={TransportAndInsuranceForm}
-                      path={ROUTES.STEPPER_FORM.TRANSPORT_AND_INSURANCE}
+                      Component={AddEvent}
+                      path={ROUTES.STEPPER_FORM.ADD_EVENTS}
                     />
 
                     <Route
-                      Component={AddEventForm}
-                      path={ROUTES.STEPPER_FORM.ADD_EVENTS}
+                      Component={TransportAndInsuranceForm}
+                      path={ROUTES.STEPPER_FORM.TRANSPORT_AND_INSURANCE}
                     />
 
                     <Route

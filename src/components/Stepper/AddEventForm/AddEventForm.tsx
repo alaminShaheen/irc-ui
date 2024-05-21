@@ -23,7 +23,7 @@ const AddEventForm = () => {
   );
 
   const pageContent = {
-    pageTitle: t("pages.addEventForm.title"),
+    pageTitle: t("pages.addEventForm.pageTitle"),
     pageSubTitle: t("pages.addEventForm.subTitle"),
     saveOneEvent: t("pages.addEventForm.saveOneEvent"),
     back: t("pages.addEventForm.back"),
