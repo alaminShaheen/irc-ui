@@ -2,7 +2,7 @@
   "seo": {
     "title": "FR-IRC Add Event Page"
   },
-  "title": "FR-Add events",
+  "pageTitle": "FR-Add events",
   "subTitle": "FR-Select all the activities and events that you want to insure.",
   "saveOneEvent": "FR-Save at Least One Event",
   "back": "FR-Back",
