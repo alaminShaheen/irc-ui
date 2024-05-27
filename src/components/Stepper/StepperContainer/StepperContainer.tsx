@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom";
 
 import StepperSidebar from "@/components/Stepper/StepperSidebar/StepperSidebar";
+import HubspotChatContainer from "@/components/HubspotChatContainer/HubspotChatContainer";
 import { StepperContextProvider } from "@/context/StepperContext";
 
 const StepperContainer = () => {
@@ -11,6 +12,7 @@ const StepperContainer = () => {
           <Outlet />
         </div>
         <StepperSidebar />
+        <HubspotChatContainer />
       </div>
     </StepperContextProvider>
   );
