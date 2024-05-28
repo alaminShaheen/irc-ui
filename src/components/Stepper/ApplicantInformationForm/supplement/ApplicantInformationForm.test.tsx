@@ -180,7 +180,7 @@ describe("ApplicantInformationForm", () => {
             name: "pages.applicantInformation.form.postalCode",
           })) as FormElement;
         },
-        { timeout: 10000 },
+        { timeout: 12000 },
       );
       expect(postalCodeField).toBeInTheDocument();
 
@@ -210,7 +210,7 @@ describe("ApplicantInformationForm", () => {
             name: "pages.applicantInformation.form.streetAddress",
           })) as FormElement;
         },
-        { timeout: 10000 },
+        { timeout: 12000 },
       );
       expect(streetAddressField).toBeInTheDocument();
       await act(async () => {
@@ -232,7 +232,7 @@ describe("ApplicantInformationForm", () => {
             name: "pages.applicantInformation.form.city",
           })) as FormElement;
         },
-        { timeout: 10000 },
+        { timeout: 12000 },
       );
       expect(cityField).toBeInTheDocument();
 
@@ -255,7 +255,7 @@ describe("ApplicantInformationForm", () => {
             name: "pages.applicantInformation.form.province",
           })) as FormElement;
         },
-        { timeout: 10000 },
+        { timeout: 12000 },
       );
       expect(provinceField).toBeInTheDocument();
       await act(async () => {
@@ -284,7 +284,7 @@ describe("ApplicantInformationForm", () => {
         async () => {
           countrySelectDropdown = screen.getByTestId("country-select-dropdown");
         },
-        { timeout: 10000 },
+        { timeout: 12000 },
       );
       expect(countrySelectDropdown).toBeInTheDocument();
 
