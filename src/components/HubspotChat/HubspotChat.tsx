@@ -1,11 +1,9 @@
 import { Helmet } from "react-helmet-async";
+import AppConstants from "@/constants/AppConstants";
 
-type HubspotChatProps = {
-  trackingCode: number;
-};
+const HubspotChat = () => {
+  const trackingCode = AppConstants.HUBSPOT_TRACKING_CODE;
 
-export const HubspotChat = (props: HubspotChatProps) => {
-  const { trackingCode } = props;
   return (
     <Helmet>
       <script
@@ -18,3 +16,5 @@ export const HubspotChat = (props: HubspotChatProps) => {
     </Helmet>
   );
 };
+
+export default HubspotChat;
