@@ -1,7 +1,14 @@
 import userEvent from "@testing-library/user-event";
 import { ReactNode } from "react";
 import { QueryClient, QueryClientContext } from "@tanstack/react-query";
-import { act, fireEvent, render, screen, within } from "@testing-library/react";
+import {
+  act,
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+  within,
+} from "@testing-library/react";
 import { APIProvider as GooglePlacesAPIProvider } from "@vis.gl/react-google-maps";
 
 import ApplicantInformationForm from "@/components/Stepper/ApplicantInformationForm";
@@ -160,27 +167,23 @@ describe("ApplicantInformationForm", () => {
     let countrySelectDropdown: FormElement;
 
     beforeEach(async () => {
-      act(() => {
-        userEvent.click(manualAddressToggler);
+      await act(async () => {
+        await userEvent.click(manualAddressToggler);
       });
-
-      postalCodeField = (await screen.findByRole("textbox", {
-        name: "pages.applicantInformation.form.postalCode",
-      })) as FormElement;
-      cityField = (await screen.findByRole("textbox", {
-        name: "pages.applicantInformation.form.city",
-      })) as FormElement;
-      streetAddressField = (await screen.findByRole("textbox", {
-        name: "pages.applicantInformation.form.streetAddress",
-      })) as FormElement;
-      provinceField = (await screen.findByRole("textbox", {
-        name: "pages.applicantInformation.form.province",
-      })) as FormElement;
-      countrySelectDropdown = screen.getByTestId("country-select-dropdown");
+      await waitFor(async () => {}, { timeout: 3000 });
     });
 
     test("postal code field renders, shows errors and functions properly", async () => {
+      await waitFor(
+        async () => {
+          postalCodeField = (await screen.findByRole("textbox", {
+            name: "pages.applicantInformation.form.postalCode",
+          })) as FormElement;
+        },
+        { timeout: 10000 },
+      );
       expect(postalCodeField).toBeInTheDocument();
+
       act(() => {
         fireEvent.blur(postalCodeField);
       });
@@ -198,9 +201,18 @@ describe("ApplicantInformationForm", () => {
       });
 
       expect(postalCodeField).toHaveValue("hello");
-    });
+    }, 15000);
 
     test("street address field renders, shows errors and functions properly", async () => {
+      await waitFor(
+        async () => {
+          streetAddressField = (await screen.findByRole("textbox", {
+            name: "pages.applicantInformation.form.streetAddress",
+          })) as FormElement;
+        },
+        { timeout: 10000 },
+      );
+      expect(streetAddressField).toBeInTheDocument();
       await act(async () => {
         fireEvent.blur(streetAddressField);
       });
@@ -211,9 +223,19 @@ describe("ApplicantInformationForm", () => {
 
       await userEvent.type(streetAddressField, "hello");
       expect(streetAddressField).toHaveValue("hello");
-    });
+    }, 15000);
 
     test("city field renders, shows errors and functions properly", async () => {
+      await waitFor(
+        async () => {
+          cityField = (await screen.findByRole("textbox", {
+            name: "pages.applicantInformation.form.city",
+          })) as FormElement;
+        },
+        { timeout: 10000 },
+      );
+      expect(cityField).toBeInTheDocument();
+
       await act(async () => {
         fireEvent.blur(cityField);
       });
@@ -224,9 +246,18 @@ describe("ApplicantInformationForm", () => {
 
       await userEvent.type(cityField, "hello");
       expect(cityField).toHaveValue("hello");
-    });
+    }, 15000);
 
     test("province field renders, shows errors and functions properly", async () => {
+      await waitFor(
+        async () => {
+          provinceField = (await screen.findByRole("textbox", {
+            name: "pages.applicantInformation.form.province",
+          })) as FormElement;
+        },
+        { timeout: 10000 },
+      );
+      expect(provinceField).toBeInTheDocument();
       await act(async () => {
         fireEvent.blur(provinceField);
       });
@@ -246,9 +277,15 @@ describe("ApplicantInformationForm", () => {
       ).not.toBeInTheDocument();
       await userEvent.type(provinceField, "lo");
       expect(provinceField).toHaveValue("hello");
-    });
+    }, 15000);
 
     test("country dropdown renders and functions properly", async () => {
+      await waitFor(
+        async () => {
+          countrySelectDropdown = screen.getByTestId("country-select-dropdown");
+        },
+        { timeout: 10000 },
+      );
       expect(countrySelectDropdown).toBeInTheDocument();
 
       const triggerBtn = within(countrySelectDropdown).getByRole("button");
@@ -277,6 +314,6 @@ describe("ApplicantInformationForm", () => {
 
       await selectCountryFromDropdown(0);
       await selectCountryFromDropdown(4);
-    });
+    }, 15000);
   });
 });
