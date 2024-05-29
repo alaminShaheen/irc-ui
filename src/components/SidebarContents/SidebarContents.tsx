@@ -2,16 +2,15 @@ import Icon from "@/components/ui/Icon";
 import Cross from "../AppIcons/Cross";
 import Button from "@/components/ui/Button";
 import FocusTrap from "@/components/FocusTrap";
+import SidebaProfile from "@/components/SidebarProfile/SidebarProfile";
 import { ISidebarContentProps } from "@/components/SidebarContents/SidebarContents.d";
 import { ButtonVariant, IconPosition } from "@/models/enums/ButtonVariant";
-import { Link, useLocation } from "react-router-dom";
-import ROUTES from "@/constants/Routes";
+import { useLocation } from "react-router-dom";
 
 const SidebarContents = (props: ISidebarContentProps) => {
   const { onClose, sidebarOpen, translationContent } = props;
   const {
     close,
-    signout,
     policyInformation,
     frequentlyAskedQuestions,
     policyWording,
@@ -49,14 +48,7 @@ const SidebarContents = (props: ISidebarContentProps) => {
         >
           {close}
         </Button>
-        {shouldDisplayAvatar && (
-          <Link
-            to={ROUTES.SIGNIN}
-            className="text-base font-bold text-secondary underline decoration-1 underline-offset-1 lg:hidden"
-          >
-            {signout}
-          </Link>
-        )}
+        {shouldDisplayAvatar && <SidebaProfile fullName="John Doe" />}
 
         <ul className="h-[95%] overflow-y-auto">
           <li className="ml-0 mt-6 pl-0">

@@ -23,6 +23,7 @@
     "checked": "FR-checked"
   },
   "sidebar": {
+    "applicationHistory": "FR-Application History",
     "policyInformation": "FR-Policy Information",
     "frequentlyAskedQuestions": "FR-Frequently Asked Questions",
     "policyWording": "FR-Policy Wording",

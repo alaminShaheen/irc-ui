@@ -12,7 +12,6 @@ const Sidebar = (props: ISidebarProps) => {
 
   const sidebarTranslationContent = {
     close: t("common.close"),
-    signout: t("common.signout"),
     policyInformation: t("common.sidebar.policyInformation"),
     frequentlyAskedQuestions: t("common.sidebar.frequentlyAskedQuestions"),
     policyWording: t("common.sidebar.policyWording"),
