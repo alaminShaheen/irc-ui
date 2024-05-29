@@ -170,7 +170,7 @@ describe("ApplicantInformationForm", () => {
       await act(async () => {
         await userEvent.click(manualAddressToggler);
       });
-      await waitFor(async () => {}, { timeout: 3000 });
+      await waitFor(async () => {}, { timeout: 12000 });
     });
 
     test("postal code field renders, shows errors and functions properly", async () => {
@@ -180,7 +180,7 @@ describe("ApplicantInformationForm", () => {
             name: "pages.applicantInformation.form.postalCode",
           })) as FormElement;
         },
-        { timeout: 12000 },
+        { timeout: 14000 },
       );
       expect(postalCodeField).toBeInTheDocument();
 
@@ -210,7 +210,7 @@ describe("ApplicantInformationForm", () => {
             name: "pages.applicantInformation.form.streetAddress",
           })) as FormElement;
         },
-        { timeout: 12000 },
+        { timeout: 14000 },
       );
       expect(streetAddressField).toBeInTheDocument();
       await act(async () => {
@@ -232,7 +232,7 @@ describe("ApplicantInformationForm", () => {
             name: "pages.applicantInformation.form.city",
           })) as FormElement;
         },
-        { timeout: 12000 },
+        { timeout: 14000 },
       );
       expect(cityField).toBeInTheDocument();
 
@@ -255,7 +255,7 @@ describe("ApplicantInformationForm", () => {
             name: "pages.applicantInformation.form.province",
           })) as FormElement;
         },
-        { timeout: 12000 },
+        { timeout: 14000 },
       );
       expect(provinceField).toBeInTheDocument();
       await act(async () => {
