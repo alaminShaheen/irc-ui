@@ -23,6 +23,7 @@
     "checked": "checked"
   },
   "sidebar": {
+    "applicationHistory": "Application History",
     "policyInformation": "Policy Information",
     "frequentlyAskedQuestions": "Frequently Asked Questions",
     "policyWording": "Policy Wording",
