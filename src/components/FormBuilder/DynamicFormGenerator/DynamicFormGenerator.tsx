@@ -63,6 +63,7 @@ const DynamicFormGenerator = (props: IDynamicFormGeneratorProps) => {
                     key={field.name}
                     name={field.name}
                     label={field.label}
+                    value={field.value}
                     type={field.type}
                     validations={field.validations}
                     placeholder={field.placeholder}

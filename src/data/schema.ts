@@ -2,6 +2,7 @@ import { FormSection } from "@/models/form/DynamicJsonFormTypes";
 
 export const surveyForm: FormSection[] = [
   {
+    id: "survey",
     key: "js",
     title: "",
     renderLogic: [],

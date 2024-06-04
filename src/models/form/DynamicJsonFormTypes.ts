@@ -26,6 +26,7 @@ export type Validations = Pick<
 >;
 
 export type FormSection = {
+  id: string;
   key: string;
   title?: string;
   description?: string;
@@ -35,13 +36,10 @@ export type FormSection = {
 };
 
 export type FormInput = {
-  type: ControlType;
   name: string;
   value?: InputValue;
   placeholder?: string;
   label?: string;
-  required?: boolean;
-  options?: SelectOption[];
   validations?: Validations;
 
   depRenderConditionMode?: ConditionMode;
@@ -49,6 +47,21 @@ export type FormInput = {
 
   depValueConditionMode?: ConditionMode;
   valueLogic?: ConditionalValue[];
+} & (SelectFormInput | RadioFormInput | GenericFormInput);
+
+type SelectFormInput = {
+  type: Extract<ControlType, "select">;
+  options: SelectOption<InputValue>[];
+};
+
+type RadioFormInput = {
+  type: Extract<ControlType, "radio">;
+  options: SelectOption<string | number | readonly string[]>[];
+};
+
+type GenericFormInput = {
+  type: Exclude<ControlType, "select" | "radio">;
+  options?: never;
 };
 
 export type ConditionalLogic = {

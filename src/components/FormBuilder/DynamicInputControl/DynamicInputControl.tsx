@@ -20,6 +20,7 @@ const DynamicInputControl = (props: IDynamicInputControlProps) => {
     validations,
     valueLogicConditionMode,
     placeholder,
+    value: defaultValue,
   } = props;
   const { t } = useTranslation();
   const {
@@ -57,7 +58,9 @@ const DynamicInputControl = (props: IDynamicInputControlProps) => {
             valueLogicConditionMode,
             logicEntry.logic,
           );
-        })?.value ?? undefined;
+        })?.value ??
+        defaultValue ??
+        undefined;
       setValue(name, value);
     }
   }, [
@@ -68,6 +71,7 @@ const DynamicInputControl = (props: IDynamicInputControlProps) => {
     valueLogic,
     valueLogicConditionMode,
     watch,
+    defaultValue,
   ]);
 
   if (!shouldRender) return null;
@@ -110,11 +114,13 @@ const DynamicInputControl = (props: IDynamicInputControlProps) => {
           <RadioGroup
             className="flex gap-x-4"
             name={name}
-            radioProps={(options ?? []).map(({ label, value }) => ({
-              value,
-              label,
-              checked: watch()[name] === value,
-            }))}
+            radioProps={(options ?? []).map(
+              ({ label, value: optionValue }) => ({
+                value: optionValue,
+                label,
+                checked: watch()[name] === optionValue,
+              }),
+            )}
           />
           {errors[name]?.message && (
             <FormError

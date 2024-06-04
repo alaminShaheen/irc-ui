@@ -1,0 +1,255 @@
+{
+  "formId": {
+    "brokerId": "general",
+    "policyCategory": "non-sport"
+  },
+  "schema": {
+    "type": "object",
+    "title": "",
+    "properties": {
+      "number-of-participants": {
+        "title": "What is the maximum number of participants attending the event?",
+        "type": "integer",
+        "minimum": 1,
+        "default": 0
+      },
+      "number-of-vehicles": {
+        "title": "How many rental short term rental vehicles require physical damage coverage?",
+        "type": "integer",
+        "minimum": 1,
+        "default": 0
+      },
+      "social-alcohol": {
+        "title": "Will the event have alcohol being served?",
+        "type": "radiobuttons",
+        "titleMap": [
+          { "value": "alcohol-caterer", "name": "Yes - With Licenced Caterer" },
+          {
+            "value": "alcohol-no-caterer",
+            "name": "Yes - Without Licenced Caterer"
+          },
+          { "value": "no-alcohol", "name": "No - No Alcohol" }
+        ],
+        "default": null
+      }
+    }
+  },
+  "form": [
+    {
+      "key": "requires-5-mil",
+      "title": "Please select the amount of insurance coverage required:",
+      "type": "select",
+      "titleMap": [
+        { "value": false, "name": "$2,000,000" },
+        { "value": true, "name": "$5,000,000" }
+      ],
+      "default": false,
+      "required": true
+    },
+    {
+      "key": "social-alcohol",
+      "title": "Will the event have alcohol or cannabis being served?",
+      "type": "select",
+      "fieldHtmlClass": "input-border",
+      "titleMap": [
+        { "value": "alcohol-caterer", "name": "Yes - Alcohol Served by Venue or Licenced Caterer" },
+        {
+          "value": "alcohol-no-caterer",
+          "name": "Yes - Self Served Alcohol"
+        },
+        { "value": "cannabis-caterer", "name": "Yes - Cannabis Served by Licensed Caterer"},
+        { "value": "no-alcohol", "name": "No - No Alcohol or Cannabis" }
+      ],
+      "condition": "model.VALID_ACTIVITIES.alcohol.enabled == true && (model.selectedActivityType == 'public-class-1' || model.selectedActivityType == 'public-class-2')",
+      "required": true
+    },
+    {
+      "key": "social-alcohol",
+      "title": "Will the event have alcohol or cannabis being served?",
+      "type": "select",
+      "fieldHtmlClass": "input-border",
+      "titleMap": [
+        { "value": "no-alcohol", "name": "No - No Alcohol" }
+      ],
+      "condition": "model.VALID_ACTIVITIES.alcohol.enabled == false && (model.selectedActivityType == 'public-class-1' || model.selectedActivityType == 'public-class-2')",
+      "required": true
+    },
+    {
+      "key": "number-of-participants",
+      "fieldHtmlClass": "signup-button",
+      "required": true
+    },
+
+    {
+      "key": "sop",
+      "title": "I acknowledge that I must submit my Liquor License to facility staff. I also acknowledge that if the Liquor License is not submitted to facility staff before the booking insurance will not be in effect and the booking may be cancelled.",
+      "type": "radiobuttons",
+      "titleMap": [
+        { "value": true, "name": "Yes" },
+        { "value": false, "name": "No" }
+      ],
+      "required": true,
+      "description": "<a href='https://support.instantriskcoverage.com/en/knowledge-base/what-is-a-liquor-licence-in-my-province' target='_blank' class='mt-3'>What is a liquor license in my province <i class='fa-solid fa-circle-question'></i></a>",
+      "condition": "model['social-alcohol'] != 'no-alcohol' && model['social-alcohol'] != 'cannabis-caterer' && model['social-alcohol'] != null"
+    },
+
+    {
+      "key": "server-ai",
+      "title": "I acknowledge that any third-party bartenders carrying their own insurance must name the insured as an additional insured.",
+      "type": "radiobuttons",
+      "titleMap": [
+        { "value": true, "name": "Yes" },
+        { "value": false, "name": "No" }
+      ],
+      "required": true,
+      "condition": "model['social-alcohol'] != 'no-alcohol' && model['social-alcohol'] != 'cannabis-caterer' && model['social-alcohol'] != null"
+    },
+
+    {
+      "key": "smart-serve",
+      "title": "I acknowledge that alcohol will be sold/served by a professional/trained bartender or that all volunteer bartenders have/will have appropriate training prior to this event.",
+      "type": "radiobuttons",
+      "titleMap": [
+        { "value": true, "name": "Yes" },
+        { "value": false, "name": "No" },
+        { "value": "na", "name": "N/A" }
+      ],
+      "required": true,
+      "description": "If participants are self serving alcohol then bartending certification is not required. If this is the case select N/A. <a href='https://support.instantriskcoverage.com/en/knowledge-base/what-is-a-bartending-certification-in-my-province' target='_blank' class='mt-3'>Click here to find out what the bartending certification in my province is<i class='ml-1 fa-solid fa-circle-question'></i></a>",
+      "condition": "model['social-alcohol'] == 'alcohol-no-caterer' && model['social-alcohol'] != 'cannabis-caterer' && model['social-alcohol'] != null"
+    },
+
+    {
+      "key": "smart-serve",
+      "title": "I acknowledge that alcohol will be sold/served by a professional/trained bartender or that all volunteer bartenders have/will have appropriate training prior to this event.",
+      "type": "radiobuttons",
+      "titleMap": [
+        { "value": true, "name": "Yes" },
+        { "value": false, "name": "No" }
+      ],
+      "required": true,
+      "description": "If participants are self serving alcohol then bartending certification is not required. If this is the case select N/A. <a href='https://support.instantriskcoverage.com/en/knowledge-base/what-is-a-bartending-certification-in-my-province' target='_blank' class='mt-3'>Click here to find out what the bartending certification in my province is<i class='ml-1 fa-solid fa-circle-question'></i></a>",
+      "condition": "model['social-alcohol'] == 'alcohol-caterer' && model['social-alcohol'] != 'cannabis-caterer' && model['social-alcohol'] != null"
+    },
+
+    {
+      "key": "cannabis-certification",
+      "title": "I acknowledge those serving cannabis to others have proper certification and have provided you with a copy.",
+      "type": "radiobuttons",
+      "titleMap": [
+        { "value": true, "name": "Yes" },
+        { "value": false, "name": "No" }
+      ],
+      "required": true,
+      "condition": "model['social-alcohol'] == 'cannabis-caterer' && model['social-alcohol'] != null"
+    },
+
+    {
+      "key": "alcohol-receipts",
+      "title": "I acknowledge that alcohol receipts will not exceed $10,000 per day.",
+      "type": "radiobuttons",
+      "default": false,
+      "titleMap": [
+        { "value": true, "name": "Yes" },
+        { "value": false, "name": "No" }
+      ],
+      "required": true,
+      "condition": "model['social-alcohol'] != 'no-alcohol' && model['social-alcohol'] != 'cannabis-caterer' && model['social-alcohol'] != null"
+    },
+
+    
+
+    {
+      "key": "non-owned-liability",
+      "title": "Please select the amount of non-owned auto insurance coverage you wish to add:",
+      "type": "select",
+      "titleMap": [
+        { "value": 1, "name": "$1,000,000" },
+        { "value": 2, "name": "$2,000,000" },
+        { "value": 5, "name": "$5,000,000" }
+      ],
+      "default": 1,
+      "required": true,
+      "condition": "model['non-owned-auto'] == true"
+    },
+
+    {
+      "key": "non-owned-valid-license",
+      "title": "Does every driver of the vehicles have a valid drivers' license?",
+      "type": "radiobuttons",
+      "default": false,
+      "titleMap": [
+        { "value": true, "name": "Yes" },
+        { "value": false, "name": "No" }
+      ],
+      "required": true,
+      "condition": "model['non-owned-auto'] == true"
+    },
+
+    {
+      "key": "non-owned-transport",
+      "title": "Are you responsible for providing transportation and/or chauffeuring services, or transporting attendees?",
+      "type": "radiobuttons",
+      "default": false,
+      "titleMap": [
+        { "value": true, "name": "Yes" },
+        { "value": false, "name": "No" }
+      ],
+      "required": true,
+      "condition": "model['non-owned-auto'] == true"
+    },
+
+    {
+      "key": "non-owned-renting",
+      "title": "Do you have any short term rental vehicles (less than 30 days)?",
+      "type": "radiobuttons",
+      "default": false,
+      "titleMap": [
+        { "value": true, "name": "Yes" },
+        { "value": false, "name": "No" }
+      ],
+      "required": true,
+      "condition": "model['non-owned-auto'] == true"
+    },
+
+    {
+      "key": "non-owned-physical-damage",
+      "title": "Do you require physical damage coverage for the short term rental vehicles?",
+      "type": "radiobuttons",
+      "default": false,
+      "titleMap": [
+        { "value": true, "name": "Yes" },
+        { "value": false, "name": "No" }
+      ],
+      "required": true,
+      "condition": "model['non-owned-auto'] == true && model['non-owned-renting'] == true"
+    },
+
+    {
+      "key": "number-of-vehicles",
+      "fieldHtmlClass": "signup-button",
+      "required": true,
+      "condition": "model['non-owned-auto'] == true && model['non-owned-physical-damage'] == true"
+    },    
+
+    {
+      "key": "non-owned-physical-damage-amount",
+      "title": "What limit of physical damage coverage is required per vehicle?",
+      "type": "select",
+      "titleMap": [
+        { "value": 25, "name": "$25,000" },
+        { "value": 50, "name": "$50,000" },
+        { "value": 100, "name": "$100,000" }
+      ],
+      "default": 25,
+      "required": true,
+      "condition": "model['non-owned-auto'] == true && model['non-owned-physical-damage'] == true"
+    },
+
+    {
+      "type": "submit",
+      "style": "hidden FormSubmitButton",
+      "title": "OK"
+    }
+  ]
+}

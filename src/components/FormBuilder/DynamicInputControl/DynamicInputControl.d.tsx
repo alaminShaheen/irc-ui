@@ -3,6 +3,7 @@ import {
   ConditionalLogic,
   ConditionalValue,
   ConditionMode,
+  InputValue,
   Validations,
 } from "@/models/form/DynamicJsonFormTypes";
 
@@ -11,8 +12,9 @@ export interface IDynamicInputControlProps {
   label?: string;
   type: string;
   placeholder?: string;
-  options?: SelectOption[];
+  options?: SelectOption<any>[];
   validations?: Validations;
+  value?: InputValue;
 
   renderLogic?: ConditionalLogic[];
   renderLogicConditionMode?: ConditionMode;

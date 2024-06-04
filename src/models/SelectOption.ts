@@ -1,5 +1,5 @@
-export type SelectOption = {
-  id?: number;
+export type SelectOption<T> = {
+  id: number;
   label: string;
-  value: string;
+  value: T;
 };

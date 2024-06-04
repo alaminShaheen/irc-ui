@@ -1,0 +1,268 @@
+{
+  "formId": {
+    "brokerId": "general",
+    "policyCategory": "non-sport"
+  },
+  "schema": {
+    "type": "object",
+    "title": "",
+    "properties": {
+      "public-event-attendance": {
+        "title": "What is the number of people who will be in attendance at this event?",
+        "type": "integer",
+        "minimum": 1,
+        "default": 0,
+        "maximum": 10000
+      },
+      "number-of-vehicles": {
+        "title": "How many rental short term rental vehicles require physical damage coverage?",
+        "type": "integer",
+        "minimum": 1,
+        "default": 0
+      },
+      "public-event-food-alcohol-vendors": {
+        "title": "What is the number of vendors serving food or alcohol at the event?",
+        "type": "integer",
+        "minimum": 0,
+        "default": 0,
+        "maximum": 100
+      },
+      "public-event-inflatables": {
+        "title": "What is the number of vendors defined as high risk (definition below) at the event?",
+        "type": "integer",
+        "minimum": 0,
+        "default": 0,
+        "maximum": 100
+      },
+      "public-event-vendors": {
+        "title": "What is the number of other vendors at the event?",
+        "type": "integer",
+        "minimum": 0,
+        "default": 0,
+        "maximum": 100
+      },
+      "public-event-liquor-served": {
+        "title": "Will alcohol be served by any of the vendors?",
+        "type": "radiobuttons",
+        "titleMap": [
+          { "value": true, "name": "<p>Yes</p>" },
+          { "value": false, "name": "<p>No</p>" }
+        ]
+      }
+    }
+  },
+  "form": [
+
+    {
+      "key": "public-event-increased-vendor-insurance",
+      "title": "Please select the amount of insurance coverage required for the vendors:",
+      "type": "select",
+      "titleMap": [
+        { "value": false, "name": "$2,000,000" },
+        { "value": true, "name": "$5,000,000" }
+      ],
+      "default": false,
+      "required": true,
+      "condition": "model.VALID_ACTIVITIES.multi_vendors.limits['2'] == true && model.VALID_ACTIVITIES.multi_vendors.limits['5'] == true"
+    },
+    {
+      "key": "public-event-increased-vendor-insurance",
+      "title": "Please select the amount of insurance coverage required for the vendors:",
+      "type": "select",
+      "titleMap": [
+        { "value": true, "name": "$5,000,000" }
+      ],
+      "default": false,
+      "required": true,
+      "condition": "model.VALID_ACTIVITIES.multi_vendors.limits['2'] == false && model.VALID_ACTIVITIES.multi_vendors.limits['5'] == true"
+    },
+    {
+      "key": "public-event-increased-vendor-insurance",
+      "title": "Please select the amount of insurance coverage required for the vendors:",
+      "type": "select",
+      "titleMap": [
+        { "value": false, "name": "$2,000,000" }
+      ],
+      "default": false,
+      "required": true,
+      "condition": "model.VALID_ACTIVITIES.multi_vendors.limits['2'] == true && model.VALID_ACTIVITIES.multi_vendors.limits['5'] == false"
+    },
+    
+    {
+      "key": "public-event-attendance",
+      "fieldHtmlClass": "input-border",
+      "required": true
+    },
+    {
+      "type": "help",
+      "helpvalue": "<i>A Vendor is any individual, partnership, and/or corporation (for-Profit and not-for-profit) who provides either a product, service, appearance, or presence before, during, or after your event, regardless of the dollar value.  It includes those selling products, demonstrating product, performing, providing equipment, providing security service, giving out information, etc</i>",
+      "condition": "model['policyType'] == 'public-event'"
+    },
+    {
+      "key": "public-event-food-alcohol-vendors",
+      "fieldHtmlClass": "input-border",
+      "required": true
+    },
+    {
+      "key": "public-event-liquor-served",
+      "title": "Will alcohol be served by any of the vendors?",
+      "type": "radiobuttons",
+      "titleMap": [
+        { "value": true, "name": "<p>Yes</p>" },
+        { "value": false, "name": "<p>No</p>" }
+      ],
+      "required": true,
+      "condition": "model['public-event-food-alcohol-vendors'] > 0"
+    },
+    {
+      "key": "public-event-liquor-license",
+      "title": "Does the event have a liquor license?",
+      "type": "radiobuttons",
+      "titleMap": [
+        { "value": true, "name": "<p>Yes</p>" },
+        { "value": false, "name": "<p>No</p>" }
+      ],
+      "required": true,
+      "condition": "model['public-event-food-alcohol-vendors'] > 0 && model['public-event-liquor-served']"
+    },
+    {
+      "key": "public-event-smart-serve",
+      "title": "Do all those serving alcohol have their bartending certification?",
+      "type": "radiobuttons",
+      "titleMap": [
+        { "value": true, "name": "<p>Yes</p>" },
+        { "value": false, "name": "<p>No</p>" }
+      ],
+      "required": true,
+      "description": "<a href='https://support.instantriskcoverage.com/en/knowledge-base/what-is-a-bartending-certification-in-my-province' target='_blank' class='mt-3'>What is the bartending certification in my province <i class='fa-solid fa-circle-question'></i></a>",
+      "condition": "model['public-event-food-alcohol-vendors'] > 0 && model['public-event-liquor-served']"
+    },
+    {
+      "key": "public-event-inflatables",
+      "fieldHtmlClass": "input-border",
+      "required": true,
+      "description":"A high risk vendor is any of the following vendors: animal rides or dunk tanks",
+      "condition": "model.VALID_ACTIVITIES.multi_vendors.disable_inflatables == true"
+    },
+    {
+      "key": "public-event-inflatables",
+      "fieldHtmlClass": "input-border",
+      "required": true,
+      "description":"A high risk vendor is any of the following vendors: inflatables, animal rides or dunk tanks",
+      "condition": "model.VALID_ACTIVITIES.multi_vendors.disable_inflatables == false"
+    },
+    {
+      "key": "public-event-vendors",
+      "fieldHtmlClass": "input-border",
+      "required": true
+    },
+
+    {
+      "key": "acknowledge-exclusions",
+      "title": "I acknowledge that this policy will not cover events with more than 10,000 attendees. If you do have an event with more attendees than 10,000 please contact the broker.",
+      "type": "radiobuttons",
+      "default": false,
+      "htmlClass": "top-margin",
+      "titleMap": [
+        { "value": true, "name": "<p>Yes</p>" },
+        { "value": false, "name": "<p>No</p>" }
+      ],
+      "required": true
+    },
+
+    
+
+    {
+      "key": "non-owned-liability",
+      "title": "Please select the amount of non-owned auto insurance coverage you wish to add:",
+      "type": "select",
+      "titleMap": [
+        { "value": 1, "name": "$1,000,000" },
+        { "value": 2, "name": "$2,000,000" },
+        { "value": 5, "name": "$5,000,000" }
+      ],
+      "default": 1,
+      "required": true,
+      "condition": "model['non-owned-auto'] == true"
+    },
+
+    {
+      "key": "non-owned-valid-license",
+      "title": "Does every driver of the vehicles have a valid drivers' license?",
+      "type": "radiobuttons",
+      "default": false,
+      "titleMap": [
+        { "value": true, "name": "Yes" },
+        { "value": false, "name": "No" }
+      ],
+      "required": true,
+      "condition": "model['non-owned-auto'] == true"
+    },
+
+    {
+      "key": "non-owned-transport",
+      "title": "Are you responsible for providing transportation and/or chauffeuring services, or transporting attendees?",
+      "type": "radiobuttons",
+      "default": false,
+      "titleMap": [
+        { "value": true, "name": "Yes" },
+        { "value": false, "name": "No" }
+      ],
+      "required": true,
+      "condition": "model['non-owned-auto'] == true"
+    },
+
+    {
+      "key": "non-owned-renting",
+      "title": "Do you have any short term rental vehicles (less than 30 days)?",
+      "type": "radiobuttons",
+      "default": false,
+      "titleMap": [
+        { "value": true, "name": "Yes" },
+        { "value": false, "name": "No" }
+      ],
+      "required": true,
+      "condition": "model['non-owned-auto'] == true"
+    },
+
+    {
+      "key": "non-owned-physical-damage",
+      "title": "Do you require physical damage coverage for the short term rental vehicles?",
+      "type": "radiobuttons",
+      "default": false,
+      "titleMap": [
+        { "value": true, "name": "Yes" },
+        { "value": false, "name": "No" }
+      ],
+      "required": true,
+      "condition": "model['non-owned-auto'] == true && model['non-owned-renting'] == true"
+    },
+
+    {
+      "key": "number-of-vehicles",
+      "fieldHtmlClass": "signup-button",
+      "required": true,
+      "condition": "model['non-owned-auto'] == true && model['non-owned-physical-damage'] == true"
+    },    
+
+    {
+      "key": "non-owned-physical-damage-amount",
+      "title": "What limit of physical damage coverage is required per vehicle?",
+      "type": "select",
+      "titleMap": [
+        { "value": 25, "name": "$25,000" },
+        { "value": 50, "name": "$50,000" },
+        { "value": 100, "name": "$100,000" }
+      ],
+      "default": 25,
+      "required": true,
+      "condition": "model['non-owned-auto'] == true && model['non-owned-physical-damage'] == true"
+    },
+
+    {
+      "type": "submit",
+      "style": "hidden FormSubmitButton",
+      "title": "OK"
+    }
+  ]
+}
