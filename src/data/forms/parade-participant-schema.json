@@ -1,0 +1,209 @@
+{
+  "formId": {
+    "brokerId": "general",
+    "policyCategory": "non-sport"
+  },
+  "schema": {
+    "type": "object",
+    "title": "",
+    "properties": {
+      "parade-participant-type": {
+        "title": "Select the option which most accurately describes how your organization will be participating in the parade:",
+        "type": "select",
+        "titleMap": [
+          { "value": "float", "name": "Operating a Float" },
+          { "value": "walking-group", "name": "Walking Group" },
+          { "value": "other-parade", "name": "Cars with Riders" },
+          { "value": "animal", "name": "Horse Riders / Carriage" },
+          { "value": "band", "name": "Walking Band" }
+        ]
+      },
+      "participants": {
+        "title": "What is the maximum number of players in active play during the game?",
+        "type": "integer",
+        "minimum": 1,
+        "default": 0
+      }
+    }
+  },
+  "form": [
+    {
+      "key": "non-profit",
+      "title": "Is your organization a registered non-profit?",
+      "type": "radiobuttons",
+      "default": false,
+      "htmlClass": "top-margin",
+      "titleMap": [
+        { "value": true, "name": "<p>Yes</p>" },
+        { "value": false, "name": "<p>No</p>" }
+      ],
+      "required": true
+    },
+    {
+      "key": "parade-participant-type",
+      "title": "Select the option which most accurately describes how your organization will be participating in the parade:",
+      "type": "select",
+      "default": "event",
+      "titleMap": [
+        { "value": "float", "name": "Operating a Float" },
+        { "value": "walking-group", "name": "Walking Group" },
+        { "value": "other-parade", "name": "Cars with Riders" },
+        { "value": "animal", "name": "Horse Riders / Carriage" },
+        { "value": "band", "name": "Walking Band" }
+      ],
+      "required": true
+    },
+
+    {
+      "key": "requires-5-mil",
+      "title": "Please select the amount of insurance coverage required:",
+      "type": "select",
+      "titleMap": [
+        { "value": false, "name": "$2,000,000" },
+        { "value": true, "name": "$5,000,000" }
+      ],
+      "default": false,
+      "required": true,
+      "condition": "model.VALID_ACTIVITIES.parades.limits['2'] == true && model.VALID_ACTIVITIES.parades.limits['5'] == true"
+    },
+    {
+      "key": "requires-5-mil",
+      "title": "Please select the amount of insurance coverage required:",
+      "type": "select",
+      "titleMap": [
+        { "value": true, "name": "$5,000,000" }
+      ],
+      "default": false,
+      "required": true,
+      "condition": "model.VALID_ACTIVITIES.parades.limits['2'] == false && model.VALID_ACTIVITIES.parades.limits['5'] == true"
+    },
+    {
+      "key": "requires-5-mil",
+      "title": "Please select the amount of insurance coverage required:",
+      "type": "select",
+      "titleMap": [
+        { "value": false, "name": "$2,000,000" }
+      ],
+      "default": false,
+      "required": true,
+      "condition": "model.VALID_ACTIVITIES.parades.limits['2'] == true && model.VALID_ACTIVITIES.parades.limits['5'] == false"
+    },
+    {
+      "key": "items-thrown",
+      "title": "Will items be thrown into the crowd?",
+      "type": "radiobuttons",
+      "default": false,
+      "htmlClass": "top-margin",
+      "titleMap": [
+        { "value": true, "name": "<p>Yes</p>" },
+        { "value": false, "name": "<p>No</p>" }
+      ],
+      "required": true
+    },
+    
+    {
+      "key": "acknowledge-exclusions",
+      "title": "I that I have registered with the parade organizers and meet all requirements to participate in the parade.",
+      "type": "radiobuttons",
+      "default": false,
+      "htmlClass": "top-margin",
+      "titleMap": [
+        { "value": true, "name": "<p>Yes</p>" },
+        { "value": false, "name": "<p>No</p>" }
+      ],
+      "required": true
+    },
+
+    {
+      "key": "non-owned-liability",
+      "title": "Please select the amount of non-owned auto insurance coverage you wish to add:",
+      "type": "select",
+      "titleMap": [
+        { "value": 1, "name": "$1,000,000" },
+        { "value": 2, "name": "$2,000,000" },
+        { "value": 5, "name": "$5,000,000" }
+      ],
+      "default": 1,
+      "required": true,
+      "condition": "model['non-owned-auto'] == true"
+    },
+
+    {
+      "key": "non-owned-valid-license",
+      "title": "Does every driver of the vehicles have a valid drivers' license?",
+      "type": "radiobuttons",
+      "default": false,
+      "titleMap": [
+        { "value": true, "name": "Yes" },
+        { "value": false, "name": "No" }
+      ],
+      "required": true,
+      "condition": "model['non-owned-auto'] == true"
+    },
+
+    {
+      "key": "non-owned-transport",
+      "title": "Are you responsible for providing transportation and/or chauffeuring services, or transporting attendees?",
+      "type": "radiobuttons",
+      "default": false,
+      "titleMap": [
+        { "value": true, "name": "Yes" },
+        { "value": false, "name": "No" }
+      ],
+      "required": true,
+      "condition": "model['non-owned-auto'] == true"
+    },
+
+    {
+      "key": "non-owned-renting",
+      "title": "Do you have any short term rental vehicles (less than 30 days)?",
+      "type": "radiobuttons",
+      "default": false,
+      "titleMap": [
+        { "value": true, "name": "Yes" },
+        { "value": false, "name": "No" }
+      ],
+      "required": true,
+      "condition": "model['non-owned-auto'] == true"
+    },
+
+    {
+      "key": "non-owned-physical-damage",
+      "title": "Do you require physical damage coverage for the short term rental vehicles?",
+      "type": "radiobuttons",
+      "default": false,
+      "titleMap": [
+        { "value": true, "name": "Yes" },
+        { "value": false, "name": "No" }
+      ],
+      "required": true,
+      "condition": "model['non-owned-auto'] == true && model['non-owned-renting'] == true"
+    },
+
+    {
+      "key": "number-of-vehicles",
+      "fieldHtmlClass": "signup-button",
+      "required": true,
+      "condition": "model['non-owned-auto'] == true && model['non-owned-physical-damage'] == true"
+    },    
+
+    {
+      "key": "non-owned-physical-damage-amount",
+      "title": "What limit of physical damage coverage is required per vehicle?",
+      "type": "select",
+      "titleMap": [
+        { "value": 25, "name": "$25,000" },
+        { "value": 50, "name": "$50,000" },
+        { "value": 100, "name": "$100,000" }
+      ],
+      "default": 25,
+      "required": true,
+      "condition": "model['non-owned-auto'] == true && model['non-owned-physical-damage'] == true"
+    },
+    {
+      "type": "submit",
+      "style": "hidden FormSubmitButton",
+      "title": "OK"
+    }
+  ]
+}

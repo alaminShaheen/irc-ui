@@ -1,0 +1,288 @@
+{
+  "formId": {
+    "brokerId": "general",
+    "policyCategory": "sport"
+  },
+  "schema": {
+    "type": "object",
+    "title": "",
+    "properties": {
+      "policyType": {
+        "title": "Select the type of sporting event that is being hosted:",
+        "type": "select",
+        "titleMap": [
+          { "value": "league", "name": "Sports League / Seasonal Coverage" },
+          { "value": "tournament", "name": "Sports Tournament" },
+          { "value": "camp", "name": "Sports Camp / School" },
+          {
+            "value": "event",
+            "name": "Hourly Rental / Other Sporting Event (i.e. One Time Event)"
+          }
+        ]
+      },
+      "number-of-vehicles": {
+        "title": "How many rental short term rental vehicles require physical damage coverage?",
+        "type": "integer",
+        "minimum": 1,
+        "default": 0
+      },
+      "participants": {
+        "title": "What is the maximum number of players in active play during the game?",
+        "type": "integer",
+        "minimum": 1,
+        "default": 0
+      },
+      "teams-league": {
+        "title": "What is the maximum number of teams (or groups of 25 players as defined below) that require coverage?",
+        "type": "integer",
+        "minimum": 1,
+        "default": 0
+      },
+      "teams-tournament": {
+        "title": "What is the maximum number of teams in the tournament?",
+        "type": "integer",
+        "minimum": 1,
+        "default": 0
+      },
+      "players": {
+        "title": "What is the maximum number of players in the sports camp / school?",
+        "type": "integer",
+        "minimum": 1,
+        "default": 0
+      }
+    }
+  },
+  "form": [
+    {
+      "key": "policyType",
+      "title": "Select the type of sporting event that is being hosted:",
+      "description": "<a href='https://support.instantriskcoverage.com/en/knowledge-base/what-type-of-sporting-event-should-i-select' target='_blank' class='mt-3'>Click here to get help selecting the type of sporting event <i class='fa-solid fa-circle-question'></i></a>",
+      "type": "select",
+      "default": "event",
+      "titleMap": [
+        { "value": "league", "name": "Sports League / Seasonal Coverage" },
+        { "value": "tournament", "name": "Sports Tournament" },
+        { "value": "camp", "name": "Sports Camp / School" },
+        { "value": "event", "name": "Hourly Rental / One Time Event (Other)" }
+      ],
+      "required": true,
+      "condition": "model.selectedActivityType != null && model.selectedActivityType != 'sports-class-1' && model.selectedActivityType != 'sports-class-2'"
+    },
+
+    {
+      "key": "requires-5-mil",
+      "title": "Please select the amount of insurance coverage required:",
+      "type": "select",
+      "titleMap": [
+        { "value": false, "name": "$2,000,000" },
+        { "value": true, "name": "$5,000,000" }
+      ],
+      "default": false,
+      "required": true,
+      "condition": "model.VALID_ACTIVITIES.sports.limits['2'] == true && model.VALID_ACTIVITIES.sports.limits['5'] == true && model.selectedActivityType != null && (model['selectedActivityType'] === 'low' || model['selectedActivityType'] === 'medium')"
+    },
+    {
+      "key": "requires-5-mil",
+      "title": "Please select the amount of insurance coverage required:",
+      "type": "select",
+      "titleMap": [
+        { "value": true, "name": "$5,000,000" }
+      ],
+      "default": false,
+      "required": true,
+      "condition": "model.VALID_ACTIVITIES.sports.limits['2'] == false && model.VALID_ACTIVITIES.sports.limits['5'] == true && model.selectedActivityType != null && (model['selectedActivityType'] === 'low' || model['selectedActivityType'] === 'medium')"
+    },
+    {
+      "key": "requires-5-mil",
+      "title": "Please select the amount of insurance coverage required:",
+      "type": "select",
+      "titleMap": [
+        { "value": false, "name": "$2,000,000" }
+      ],
+      "default": false,
+      "required": true,
+      "condition": "model.VALID_ACTIVITIES.sports.limits['2'] == true && model.VALID_ACTIVITIES.sports.limits['5'] == false && model.selectedActivityType != null && (model['selectedActivityType'] === 'low' || model['selectedActivityType'] === 'medium')"
+    },
+
+    {
+      "key": "policyType",
+      "title": "Select the type of sporting event that is being hosted:",
+      "type": "select",
+      "default": "event",
+      "titleMap": [{ "value": "event", "name": "One time event" }],
+      "required": true,
+      "condition": "model.selectedActivityType !== null && ( model.selectedActivityType == 'sports-class-1' || model.selectedActivityType == 'sports-class-2' )"
+    },
+
+    {
+      "key": "participants",
+      "condition": "model.policyType == 'event'",
+      "required": true
+    },
+    {
+      "key": "teams-league",
+      "description": "A <b>team</b> is made up of a <b>maximum of 25 players</b>. For sports such as pickleball or smaller team activities, divide the number of players by 25 and round up to get the number of teams. If you are purchasing on behalf of your own team enter 1, otherwise if purchasing for the entire league enter the number of teams.",
+      "condition": "model.policyType == 'league'",
+      "required": true
+    },
+    {
+      "key": "coach-concussion",
+      "title": "Do all coaches in the league have formal training regarding concussion recognition?",
+      "type": "radiobuttons",
+      "default": false,
+      "htmlClass": "top-margin",
+      "titleMap": [
+        { "value": true, "name": "<p>Yes</p>" },
+        { "value": false, "name": "<p>No</p>" },
+        { "value": "na", "name": "<p>N/A</p>" }
+      ],
+      "required": true,
+      "description": "<a href='https://rise.articulate.com/share/7m7dZI7BbiuCOsiT9ATV-zahc9YQYXB5#/' target='_blank' class='mt-3'>Concussion training can be accessed through the Tools / Forms dropdown or clicking this link</a>",
+      "condition": "model.policyType == 'league'"
+    },
+    {
+      "key": "concussion-management",
+      "title": "Do you have written concussion management policy that is compliant with current Health Canada / federal legislation?",
+      "description": "Resources concerning concussion management can be found in the top bar under tools",
+      "type": "radiobuttons",
+      "default": false,
+      "htmlClass": "top-margin",
+      "titleMap": [
+        { "value": true, "name": "<p>Yes</p>" },
+        { "value": false, "name": "<p>No</p>" }
+      ],
+      "required": true,
+      "condition": "model.policyType == 'league'"
+    },
+    {
+      "key": "concussion-management-distribute",
+      "title": "Do you distribute the written policy to coaches, parents and players and require parents’ written acknowledgment that they have received and reviewed?",
+      "description": "Resources concerning concussion management can be found in the top bar under tools",
+      "type": "radiobuttons",
+      "default": false,
+      "htmlClass": "top-margin",
+      "titleMap": [
+        { "value": true, "name": "<p>Yes</p>" },
+        { "value": false, "name": "<p>No</p>" }
+      ],
+      "required": true,
+      "condition": "model.policyType == 'league'"
+    },
+    {
+      "key": "teams-tournament",
+      "condition": "model.policyType == 'tournament'",
+      "required": true
+    },
+    {
+      "key": "players",
+      "condition": "model.policyType == 'camp'",
+      "required": true
+    },
+    {
+      "key": "acknowledge-exclusions",
+      "title": "I acknowledge that participants suspected of a head injury must be removed from play immediately. The participants must be cleared by a licensed healthcare provider to rejoin play. ",
+      "type": "radiobuttons",
+      "default": false,
+      "htmlClass": "top-margin",
+      "titleMap": [
+        { "value": true, "name": "<p>Yes</p>" },
+        { "value": false, "name": "<p>No</p>" }
+      ],
+      "required": true
+    },
+
+    
+
+    {
+      "key": "non-owned-liability",
+      "title": "Please select the amount of non-owned auto insurance coverage you wish to add:",
+      "type": "select",
+      "titleMap": [
+        { "value": 1, "name": "$1,000,000" },
+        { "value": 2, "name": "$2,000,000" },
+        { "value": 5, "name": "$5,000,000" }
+      ],
+      "default": 1,
+      "required": true,
+      "condition": "model['non-owned-auto'] == true"
+    },
+
+    {
+      "key": "non-owned-valid-license",
+      "title": "Does every driver of the vehicles have a valid drivers' license?",
+      "type": "radiobuttons",
+      "default": false,
+      "titleMap": [
+        { "value": true, "name": "Yes" },
+        { "value": false, "name": "No" }
+      ],
+      "required": true,
+      "condition": "model['non-owned-auto'] == true"
+    },
+
+    {
+      "key": "non-owned-transport",
+      "title": "Are you responsible for providing transportation and/or chauffeuring services, or transporting attendees?",
+      "type": "radiobuttons",
+      "default": false,
+      "titleMap": [
+        { "value": true, "name": "Yes" },
+        { "value": false, "name": "No" }
+      ],
+      "required": true,
+      "condition": "model['non-owned-auto'] == true"
+    },
+
+    {
+      "key": "non-owned-renting",
+      "title": "Do you have any short term rental vehicles (less than 30 days)?",
+      "type": "radiobuttons",
+      "default": false,
+      "titleMap": [
+        { "value": true, "name": "Yes" },
+        { "value": false, "name": "No" }
+      ],
+      "required": true,
+      "condition": "model['non-owned-auto'] == true"
+    },
+
+    {
+      "key": "non-owned-physical-damage",
+      "title": "Do you require physical damage coverage for the short term rental vehicles?",
+      "type": "radiobuttons",
+      "default": false,
+      "titleMap": [
+        { "value": true, "name": "Yes" },
+        { "value": false, "name": "No" }
+      ],
+      "required": true,
+      "condition": "model['non-owned-auto'] == true && model['non-owned-renting'] == true"
+    },
+
+    {
+      "key": "number-of-vehicles",
+      "fieldHtmlClass": "signup-button",
+      "required": true,
+      "condition": "model['non-owned-auto'] == true && model['non-owned-physical-damage'] == true"
+    },    
+
+    {
+      "key": "non-owned-physical-damage-amount",
+      "title": "What limit of physical damage coverage is required per vehicle?",
+      "type": "select",
+      "titleMap": [
+        { "value": 25, "name": "$25,000" },
+        { "value": 50, "name": "$50,000" },
+        { "value": 100, "name": "$100,000" }
+      ],
+      "default": 25,
+      "required": true,
+      "condition": "model['non-owned-auto'] == true && model['non-owned-physical-damage'] == true"
+    },
+    {
+      "type": "submit",
+      "style": "hidden FormSubmitButton",
+      "title": "OK"
+    }
+  ]
+}

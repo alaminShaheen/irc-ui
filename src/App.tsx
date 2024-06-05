@@ -20,6 +20,7 @@ import TransportAndInsuranceForm from "@/components/Stepper/TransportAndInsuranc
 // Custom styling
 import "./styles/global.css";
 import "react-toastify/dist/ReactToastify.css";
+import Builder from "@/components/FormBuilder/Builder";
 
 function App() {
   return (
@@ -60,6 +61,7 @@ function App() {
             <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
               <Layout>
                 <Routes>
+                  <Route path={"/builder"} element={<Builder />} />
                   <Route
                     path={ROUTES.HOME}
                     element={<Navigate to={ROUTES.SIGNUP} replace />}

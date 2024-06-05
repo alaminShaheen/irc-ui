@@ -1,0 +1,285 @@
+{
+  "formId": {
+    "brokerId": "general",
+    "policyCategory": "golf"
+  },
+  "schema": {
+    "type": "object",
+    "title": "",
+    "properties": {
+      "name-of-event": {
+        "title": "Name of the event:",
+        "type": "string",
+        "minLength": 2,
+        "maxLength": 64,
+        "required": true
+      },
+      "previous-experience-description": {
+        "title": "Please provide the details of the previous experience:",
+        "type": "string",
+        "minLength": 2,
+        "maxLength": 512,
+        "required": true,
+        "default": ""
+      },
+      "prize-amount": {
+        "title": "What is the total value of the prize for this competition? (Round up to the nearest dollar)?",
+        "type": "integer",
+        "minimum": 1,
+        "default": 0
+      },
+      "played-rounds": {
+        "title": "How many attempts will each participant get to win the prize over the entire event?",
+        "type": "integer",
+        "minimum": 1,
+        "default": 0
+      },
+      "million-dollar-shot-yards": {
+        "title": "Yardage for the million dollar shot:",
+        "type": "integer",
+        "minimum": 1,
+        "default": 0
+      },
+      "million-dollar-shot-num-attempts": {
+        "title": "How many attempts will be made for the million dollar shot?",
+        "type": "integer",
+        "minimum": 1,
+        "default": 0
+      },
+      "putt-num-attempts": {
+        "title": "How many attempts will each player have while putting?",
+        "type": "integer",
+        "minimum": 1,
+        "default": 0
+      },
+      "number-amateur-participants": {
+        "title": "Number of amateur participants:",
+        "type": "integer",
+        "minimum": 1,
+        "default": 0
+      },
+      "number-pro-participants": {
+        "title": "Number of professional participants:",
+        "type": "integer",
+        "minimum": 0,
+        "default": 0
+      }
+    }
+  },
+  "form": [
+    {
+      "key": "policyType",
+      "title": "Select the type of golf prize contest that is being hosted:",
+      "type": "select",
+      "default": "hole-in-one",
+      "titleMap": [
+        { "value": "hole-in-one", "name": "Hole in One Competition" },
+        { "value": "million-dollar-shot", "name": "Million Dollar Shot" },
+        { "value": "putting", "name": "Putting Competition" },
+        { "value": "shootout", "name": "Shootout Competition" }
+      ],
+      "required": true
+    },
+
+    {
+      "key": "name-of-event",
+      "fieldHtmlClass": "input-border",
+      "type": "textarea",
+      "required": true
+    },
+
+    {
+      "key": "prize-amount",
+      "fieldHtmlClass": "input-border",
+      "required": true,
+      "condition": "model['policyType'] === 'putting' || model['policyType'] === 'shootout'"
+    },
+
+    {
+      "key": "million-dollar-shot-yards",
+      "fieldHtmlClass": "input-border",
+      "required": true,
+      "condition": "model['policyType'] === 'million-dollar-shot'"
+    },
+
+    {
+      "key": "million-dollar-shot-num-attempts",
+      "fieldHtmlClass": "input-border",
+      "required": true,
+      "condition": "model['policyType'] === 'million-dollar-shot'"
+    },
+
+    {
+      "key": "number-amateur-participants",
+      "fieldHtmlClass": "input-border",
+      "required": true
+    },
+
+    {
+      "key": "number-pro-participants",
+      "fieldHtmlClass": "input-border",
+      "required": true
+    },
+
+    {
+      "key": "putt-length",
+      "title": "Select the length of the putt that will be completed in the competition:",
+      "type": "select",
+      "default": "event",
+      "titleMap": [
+        { "value": "0", "name": "Less than 20 foot putt" },
+        { "value": "20", "name": "20 foot putt" },
+        { "value": "30", "name": "30 foot putt" },
+        { "value": "40", "name": "40 foot putt" },
+        { "value": "50", "name": "50 foot putt" },
+        { "value": "60", "name": "60 foot putt" },
+        { "value": "70", "name": "70 foot putt" },
+        { "value": "80", "name": "80 foot putt" },
+        { "value": "100", "name": "100 foot putt" },
+        { "value": "-1", "name": "Over 100 foot putt" }
+      ],
+      "required": true,
+      "condition": "model['policyType'] === 'putting'"
+    },
+
+    {
+      "key": "putt-num-attempts",
+      "fieldHtmlClass": "input-border",
+      "required": true,
+      "condition": "model['policyType'] === 'putting'"
+    },
+
+    {
+      "key": "played-rounds",
+      "fieldHtmlClass": "input-border",
+      "required": true,
+      "condition": "model['policyType'] === 'hole-in-one' || model['policyType'] === 'shootout'"
+    },
+
+    {
+      "key": "previous-event-experience",
+      "title": "Do you have previous experience holding events/promotions of this kind?",
+      "type": "radiobuttons",
+      "default": false,
+      "titleMap": [
+        { "value": true, "name": "Yes" },
+        { "value": false, "name": "No" }
+      ],
+      "required": true
+    },
+
+    {
+      "key": "previous-experience-description",
+      "fieldHtmlClass": "input-border",
+      "type": "textarea",
+      "required": true,
+      "condition": "model['previous-event-experience'] === true"
+    },
+
+    {
+      "key": "non-owned-liability",
+      "title": "Please select the amount of non-owned auto insurance coverage you wish to add:",
+      "type": "select",
+      "titleMap": [
+        { "value": 1, "name": "$1,000,000" },
+        { "value": 2, "name": "$2,000,000" },
+        { "value": 5, "name": "$5,000,000" }
+      ],
+      "default": 1,
+      "required": true,
+      "condition": "model['non-owned-auto'] == true"
+    },
+
+    {
+      "key": "non-owned-valid-license",
+      "title": "Does every driver of the vehicles have a valid drivers' license?",
+      "type": "radiobuttons",
+      "default": false,
+      "titleMap": [
+        { "value": true, "name": "Yes" },
+        { "value": false, "name": "No" }
+      ],
+      "required": true,
+      "condition": "model['non-owned-auto'] == true"
+    },
+
+    {
+      "key": "non-owned-transport",
+      "title": "Are you responsible for providing transportation and/or chauffeuring services, or transporting attendees?",
+      "type": "radiobuttons",
+      "default": false,
+      "titleMap": [
+        { "value": true, "name": "Yes" },
+        { "value": false, "name": "No" }
+      ],
+      "required": true,
+      "condition": "model['non-owned-auto'] == true"
+    },
+
+    {
+      "key": "non-owned-renting",
+      "title": "Do you have any short term rental vehicles (less than 30 days)?",
+      "type": "radiobuttons",
+      "default": false,
+      "titleMap": [
+        { "value": true, "name": "Yes" },
+        { "value": false, "name": "No" }
+      ],
+      "required": true,
+      "condition": "model['non-owned-auto'] == true"
+    },
+
+    {
+      "key": "non-owned-physical-damage",
+      "title": "Do you require physical damage coverage for the short term rental vehicles?",
+      "type": "radiobuttons",
+      "default": false,
+      "titleMap": [
+        { "value": true, "name": "Yes" },
+        { "value": false, "name": "No" }
+      ],
+      "required": true,
+      "condition": "model['non-owned-auto'] == true && model['non-owned-renting'] == true"
+    },
+
+    {
+      "key": "number-of-vehicles",
+      "fieldHtmlClass": "signup-button",
+      "required": true,
+      "condition": "model['non-owned-auto'] == true && model['non-owned-physical-damage'] == true"
+    },    
+
+    {
+      "key": "non-owned-physical-damage-amount",
+      "title": "What limit of physical damage coverage is required per vehicle?",
+      "type": "select",
+      "titleMap": [
+        { "value": 25, "name": "$25,000" },
+        { "value": 50, "name": "$50,000" },
+        { "value": 100, "name": "$100,000" }
+      ],
+      "default": 25,
+      "required": true,
+      "condition": "model['non-owned-auto'] == true && model['non-owned-physical-damage'] == true"
+    },
+
+    {
+      "key": "acknowledge-exclusions",
+      "title": "I acknowledge that there are rules and stipulations listed in the policy that must be adhered to. Failure to comply with these requirements wil result in a voiding of the policy.",
+      "type": "radiobuttons",
+      "default": false,
+      "htmlClass": "top-margin",
+      "titleMap": [
+        { "value": true, "name": "<p>Yes</p>" },
+        { "value": false, "name": "<p>No</p>" }
+      ],
+      "required": true
+    },
+
+    {
+      "type": "submit",
+      "style": "hidden FormSubmitButton",
+      "title": "OK"
+    }
+  ]
+}
