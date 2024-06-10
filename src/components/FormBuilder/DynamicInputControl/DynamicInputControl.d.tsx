@@ -12,6 +12,7 @@ export interface IDynamicInputControlProps {
   label?: string;
   type: string;
   placeholder?: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   options?: SelectOption<any>[];
   validations?: Validations;
   value?: InputValue;
