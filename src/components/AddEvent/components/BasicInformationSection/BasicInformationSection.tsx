@@ -25,6 +25,7 @@ import EventClock from "@/components/AppIcons/EventClock";
 import AddEventIcon from "@/components/AppIcons/AddEvent";
 import EventCalendar from "@/components/AppIcons/EventCalendar";
 import { ButtonType, ButtonVariant } from "@/models/enums/ButtonVariant";
+import { useEffect } from "react";
 
 const BasicInformationSection = () => {
   const {
@@ -32,6 +33,7 @@ const BasicInformationSection = () => {
     formState: { errors },
     control,
     watch,
+    setValue,
   } = useFormContext<AddEventModel>();
   const { t } = useTranslation();
 
@@ -106,6 +108,10 @@ const BasicInformationSection = () => {
         "pages.addEventForm.addEventModal.errors.startTimeInvalid",
     } as { [key: string]: string },
   };
+
+  useEffect(() => {
+    setValue("repeatEvent", false);
+  }, [setValue]);
 
   return (
     <>

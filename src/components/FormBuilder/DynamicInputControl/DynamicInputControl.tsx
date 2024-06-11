@@ -42,7 +42,6 @@ const DynamicInputControl = (props: IDynamicInputControlProps) => {
   const shouldRender = useMemo(() => {
     return checkConditionalLogic(
       name,
-
       watchList,
       validActivities,
       renderLogicConditionMode,
@@ -51,7 +50,7 @@ const DynamicInputControl = (props: IDynamicInputControlProps) => {
   }, [name, watchList, validActivities, renderLogicConditionMode, renderLogic]);
 
   useEffect(() => {
-    if (!shouldRender) {
+    if (type === "submit" || !shouldRender) {
       unregister(name);
     } else {
       const value =
@@ -78,11 +77,14 @@ const DynamicInputControl = (props: IDynamicInputControlProps) => {
     watch,
     defaultValue,
     validActivities,
+    type,
   ]);
 
   const formDisabled =
     Object.entries(errors).length > 0 ||
-    Object.values(watch()).some((value) => !value);
+    Object.values(watch()).some((value) => value === undefined);
+
+  console.log(watch(), errors);
 
   if (!shouldRender) return null;
 
