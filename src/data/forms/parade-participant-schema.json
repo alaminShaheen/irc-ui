@@ -100,7 +100,7 @@
       ],
       "required": true
     },
-    
+
     {
       "key": "acknowledge-exclusions",
       "title": "I that I have registered with the parade organizers and meet all requirements to participate in the parade.",
@@ -185,7 +185,7 @@
       "fieldHtmlClass": "signup-button",
       "required": true,
       "condition": "model['non-owned-auto'] == true && model['non-owned-physical-damage'] == true"
-    },    
+    },
 
     {
       "key": "non-owned-physical-damage-amount",

@@ -1,0 +1,70 @@
+{
+  "key" : "VALID_ACTIVITIES",
+  "value" : {
+	"non_owned_auto": {
+	  "enabled": "true"
+	},
+	"non_sports" : {
+	  "enabled" : "true",
+	  "limits" : {
+		"2" : "true",
+		"5" : "true"
+	  },
+	  "allow_weekly" : "true"
+	},
+	"alcohol" : {
+	  "enabled" : "true",
+	  "limits" : {
+		"2" : "false",
+		"5" : "true"
+	  },
+	  "allow_cannabis": "true"
+	},
+	"sports" : {
+	  "enabled" : "true",
+	  "limits" : {
+		"2" : "true",
+		"5" : "true"
+	  }
+	},
+	"instructors" : {
+	  "enabled" : "true",
+	  "limits" : {
+		"2" : "true",
+		"5" : "true"
+	  }
+	},
+	"multi_vendors" : {
+	  "enabled" : "true",
+	  "limits" : {
+		"2" : "true",
+		"5" : "true"
+	  },
+	  "disable_inflatables" : "false"
+	},
+	"individual_vendors" : {
+	  "enabled" : "true",
+	  "limits" : {
+		"2" : "true",
+		"5" : "true"
+	  }
+	},
+	"parades" : {
+	  "enabled" : "false",
+	  "limits" : {
+		"2" : "true",
+		"5" : "true"
+	  }
+	},
+	"cooking" : {
+	  "enabled" : "false",
+	  "limits" : {
+		"2" : "false",
+		"5" : "true"
+	  }
+	},
+	"golf_events" : {
+	  "enabled": "false"
+	}
+  }
+}

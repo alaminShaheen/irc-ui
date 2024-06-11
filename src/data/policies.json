@@ -4,15 +4,15 @@
       "id": "parade-participant",
       "name": "Parade Participant",
       "subtitle": "Coverage for parade participants",
-      "iconPath": "/policy-icons/market.svg",
+      "iconPath": "/policy-icons/parade.svg",
       "$schemaRef": "parade-participant-schema"
     },
     {
       "id": "golf",
       "name": "Golf",
       "subtitle": "Coverage for golf",
-      "iconPath": "/policy-icons/market.svg",
-      "$schemaRef": "parade-participant-schema"
+      "iconPath": "/policy-icons/golf.svg",
+      "$schemaRef": "golf-schema"
     },
     {
       "id": "vendorCoverage",

@@ -1,0 +1,22 @@
+{
+  "title": "Parade Participant Form",
+  "description": "Coverage for Parade Participants",
+  "autoNonOwnedLabel": "Is your auto non-owned?",
+  "nonProfitLabel": "Is your organization a registered non-profit?",
+  "paradeParticipantLabel": "Select the option which most accurately describes how your organization will be participating in the parade:",
+  "paradeParticipantLabel1": "Operating a Float",
+  "paradeParticipantLabel2": "Walking Group",
+  "paradeParticipantLabel3": "Cars with Riders",
+  "paradeParticipantLabel4": "Horse Riders / Carriage",
+  "paradeParticipantLabel5": "Walking Band",
+  "requires5MilLabel": "Please select the amount of insurance coverage required:",
+  "itemsThrownLabel": "Will items be thrown into the crowd?",
+  "acknowledgeExclusionLabel": "I acknowledge that I have registered with the parade organizers and meet all requirements to participate in the parade.",
+  "nonOwnedLiabilityLabel": "Please select the amount of non-owned auto insurance coverage you wish to add:",
+  "nonOwnedValidLicenseLabel": "Does every driver of the vehicles have a valid drivers' license?",
+  "nonOwnedTransportLabel": "Are you responsible for providing transportation and/or chauffeuring services, or transporting attendees?",
+  "nonOwnedRentingLabel": "Do you have any short term rental vehicles (less than 30 days)?",
+  "nonOwnedPhysicalDamageLabel": "Do you require physical damage coverage for the short term rental vehicles?",
+  "numberOfVehiclesLabel": "Number of vehicles",
+  "nonOwnedPhysicalDamageAmountLabel": "What limit of physical damage coverage is required per vehicle?"
+}

@@ -17,43 +17,16 @@ import Icon from "@/components/ui/Icon";
 import { cn } from "@/utils/helper";
 import Button from "@/components/ui/Button";
 import Checkbox from "@/components/ui/Checkbox";
+import FormError from "@/components/FormError";
 import Datepicker from "@/components/ui/DatePicker";
 import TimePicker from "@/components/ui/TimePicker";
 import RadioGroup from "@/components/ui/Radio/components/RadioGroup/RadioGroup";
 import EventClock from "@/components/AppIcons/EventClock";
 import AddEventIcon from "@/components/AppIcons/AddEvent";
 import EventCalendar from "@/components/AppIcons/EventCalendar";
-import GraphiteAlertInfo from "@/components/AppIcons/GraphiteAlertInfo";
-import FormError from "@/components/FormError";
 import { ButtonType, ButtonVariant } from "@/models/enums/ButtonVariant";
-import { IBasicInformationSectionProps } from "@/components/AddEvent/components/BasicInformationSection/BasicInformationSection.d";
 
-const BasicInformationSection = (props: IBasicInformationSectionProps) => {
-  const {
-    translationContents: {
-      basicInfo,
-      nameYourEventLabel,
-      nameYourEventPlaceholder,
-      infoText,
-      rentalFacilityLabel,
-      rentalFacilityPlaceholder,
-      facilityLabel,
-      facilityPlaceholder,
-      startDate,
-      startTime,
-      endDate,
-      endTime,
-      chooseDate,
-      chooseTime,
-      repeatEvent,
-      repeatLabel,
-      addTime,
-      daily,
-      weekly,
-      monthly,
-      addEventIconAltText,
-    },
-  } = props;
+const BasicInformationSection = () => {
   const {
     register,
     formState: { errors },
@@ -62,58 +35,94 @@ const BasicInformationSection = (props: IBasicInformationSectionProps) => {
   } = useFormContext<AddEventModel>();
   const { t } = useTranslation();
 
+  const pageContent = {
+    basicInfo: t("pages.addEventForm.addEventModal.basicInfo"),
+    nameYourEventLabel: t(
+      "pages.addEventForm.addEventModal.nameYourEventLabel",
+    ),
+    nameYourEventPlaceholder: t(
+      "pages.addEventForm.addEventModal.nameYourEventPlaceholder",
+    ),
+    infoText: t("pages.addEventForm.addEventModal.infoText"),
+    rentalFacilityLabel: t(
+      "pages.addEventForm.addEventModal.rentalFacilityLabel",
+    ),
+    rentalFacilityPlaceholder: t(
+      "pages.addEventForm.addEventModal.rentalFacilityPlaceholder",
+    ),
+    facilityLabel: t("pages.addEventForm.addEventModal.facilityLabel"),
+    facilityPlaceholder: t(
+      "pages.addEventForm.addEventModal.facilityPlaceholder",
+    ),
+    repeatLabel: t("pages.addEventForm.addEventModal.repeatLabel"),
+    startDate: t("pages.addEventForm.addEventModal.startDate"),
+    startTime: t("pages.addEventForm.addEventModal.startTime"),
+    endDate: t("pages.addEventForm.addEventModal.endDate"),
+    endTime: t("pages.addEventForm.addEventModal.endTime"),
+    chooseDate: t("pages.addEventForm.addEventModal.chooseDate"),
+    chooseTime: t("pages.addEventForm.addEventModal.chooseTime"),
+    repeatEvent: t("pages.addEventForm.addEventModal.repeatEvent"),
+    addTime: t("pages.addEventForm.addEventModal.addTime"),
+    additionalQuestions: t(
+      "pages.addEventForm.addEventModal.additionalQuestions",
+    ),
+    insuranceCoverageLabel: t(
+      "pages.addEventForm.addEventModal.insuranceCoverageLabel",
+    ),
+    foodAndBeverages: t("pages.addEventForm.addEventModal.foodAndBeverages"),
+    foodBeingSoldLabel: t(
+      "pages.addEventForm.addEventModal.foodBeingSoldLabel",
+    ),
+    foodByThirdPartyLabel: t(
+      "pages.addEventForm.addEventModal.foodByThirdPartyLabel",
+    ),
+    alcoholCoverageLabel: t(
+      "pages.addEventForm.addEventModal.alcoholCoverageLabel",
+    ),
+    transport: t("pages.addEventForm.addEventModal.transport"),
+    driverLicenceLabel: t(
+      "pages.addEventForm.addEventModal.driverLicenceLabel",
+    ),
+    selfTransportation: t(
+      "pages.addEventForm.addEventModal.selfTransportation",
+    ),
+    rentalVehicleOwnage: t(
+      "pages.addEventForm.addEventModal.rentalVehicleOwnage",
+    ),
+    yes: t("pages.addEventForm.addEventModal.yes"),
+    no: t("pages.addEventForm.addEventModal.no"),
+    confirm: t("pages.addEventForm.addEventModal.confirm"),
+    daily: t("pages.addEventForm.addEventModal.daily"),
+    weekly: t("pages.addEventForm.addEventModal.weekly"),
+    monthly: t("pages.addEventForm.addEventModal.monthly"),
+    addEventIconAltText: t("common.iconAltText.addEvent"),
+    errorKeys: {
+      fieldRequired: "pages.addEventForm.addEventModal.errors.fieldRequired",
+      endDateInvalid: "pages.addEventForm.addEventModal.errors.endDateInvalid",
+      endTimeInvalid: "pages.addEventForm.addEventModal.errors.endTimeInvalid",
+      startDateInvalid:
+        "pages.addEventForm.addEventModal.errors.startDateInvalid",
+      startTimeInvalid:
+        "pages.addEventForm.addEventModal.errors.startTimeInvalid",
+    } as { [key: string]: string },
+  };
+
   return (
     <>
-      <h2 className="font-segoe text-2xl font-bold text-primary">
-        {basicInfo}
-      </h2>
-      <div className={cn("form-group mt-6", { "has-error": errors.eventName })}>
-        <label htmlFor="eventName" className="form-label">
-          {nameYourEventLabel}
-        </label>
-        <input
-          {...register("eventName")}
-          id="eventName"
-          className="input p-4"
-          placeholder={nameYourEventPlaceholder}
-          type="text"
-          aria-describedby={
-            errors.eventName?.message ? "message-error" : undefined
-          }
-        />
-        {errors.eventName?.message && (
-          <FormError
-            id="message-error"
-            errorMessage={t(errors.eventName.message)}
-          />
-        )}
-      </div>
-
-      <div className="mt-2 flex">
-        <div>
-          <Icon
-            src={<GraphiteAlertInfo />}
-            size={24}
-            className="text-primary"
-          />
-        </div>
-        <span className="ml-2 text-graphite-700">{infoText}</span>
-      </div>
-
-      <div className="mt-6 rounded-md border-2 border-dashed border-primary-200 bg-primary-25 p-4">
+      <div className="rounded-md border-2 border-dashed border-primary-200 bg-primary-25 p-4">
         <div
           className={cn("form-group", {
             "has-error": errors.rentalFacilityAgreementNumber,
           })}
         >
           <label htmlFor="rentalFacilityAgreementNumber" className="form-label">
-            {rentalFacilityLabel}
+            {pageContent.rentalFacilityLabel}
           </label>
           <input
             {...register("rentalFacilityAgreementNumber")}
             id="rentalFacilityAgreementNumber"
             className="input p-4"
-            placeholder={rentalFacilityPlaceholder}
+            placeholder={pageContent.rentalFacilityPlaceholder}
             type="text"
             aria-describedby={
               errors.rentalFacilityAgreementNumber?.message
@@ -133,13 +142,13 @@ const BasicInformationSection = (props: IBasicInformationSectionProps) => {
           className={cn("form-group mt-4", { "has-error": errors.facility })}
         >
           <label htmlFor="facility" className="form-label">
-            {facilityLabel}
+            {pageContent.facilityLabel}
           </label>
           <input
             {...register("facility")}
             id="facility"
             className="input p-4"
-            placeholder={facilityPlaceholder}
+            placeholder={pageContent.facilityPlaceholder}
             type="text"
             aria-describedby={
               errors.facility?.message ? "facility-error" : undefined
@@ -158,7 +167,7 @@ const BasicInformationSection = (props: IBasicInformationSectionProps) => {
         <div className="grid grid-cols-1 grid-rows-4 gap-4 lg:grid-cols-2 lg:grid-rows-2">
           <div className={cn("form-group", { "has-error": errors.startDate })}>
             <label htmlFor="startDate" className="form-label">
-              {startDate}
+              {pageContent.startDate}
             </label>
             <Controller
               render={({ field: { onChange, ref, name, value, onBlur } }) => (
@@ -166,7 +175,7 @@ const BasicInformationSection = (props: IBasicInformationSectionProps) => {
                   id={name}
                   icon={<Icon src={<EventCalendar />} size={38} />}
                   name={name}
-                  placeholderText={chooseDate}
+                  placeholderText={pageContent.chooseDate}
                   dateValue={value}
                   hasError={!!errors.startDate?.message}
                   dateOnChange={(date) => {
@@ -189,7 +198,7 @@ const BasicInformationSection = (props: IBasicInformationSectionProps) => {
 
           <div className={cn("form-group", { "has-error": errors.startTime })}>
             <label htmlFor="startTime" className="form-label">
-              {startTime}
+              {pageContent.startTime}
             </label>
             <Controller
               render={({ field: { onChange, ref, name, value, onBlur } }) => (
@@ -197,7 +206,7 @@ const BasicInformationSection = (props: IBasicInformationSectionProps) => {
                   id={name}
                   icon={<Icon src={<EventClock />} size={28} />}
                   name={name}
-                  placeholderText={chooseTime}
+                  placeholderText={pageContent.chooseTime}
                   dateValue={value}
                   hasError={!!errors.startTime?.message}
                   dateOnChange={(startTime) => {
@@ -230,7 +239,7 @@ const BasicInformationSection = (props: IBasicInformationSectionProps) => {
 
           <div className={cn("form-group", { "has-error": errors.endDate })}>
             <label htmlFor="endDate" className="form-label">
-              {endDate}
+              {pageContent.endDate}
             </label>
             <Controller
               render={({ field: { onChange, ref, name, value, onBlur } }) => (
@@ -238,7 +247,7 @@ const BasicInformationSection = (props: IBasicInformationSectionProps) => {
                   id={name}
                   icon={<Icon src={<EventCalendar />} size={28} />}
                   name={name}
-                  placeholderText={chooseDate}
+                  placeholderText={pageContent.chooseDate}
                   dateValue={value}
                   hasError={!!errors.endDate?.message}
                   dateOnChange={(date) => {
@@ -261,7 +270,7 @@ const BasicInformationSection = (props: IBasicInformationSectionProps) => {
 
           <div className={cn("form-group", { "has-error": errors.endTime })}>
             <label htmlFor="endTime" className="form-label">
-              {endTime}
+              {pageContent.endTime}
             </label>
             <Controller
               render={({ field: { onChange, ref, name, value } }) => (
@@ -269,7 +278,7 @@ const BasicInformationSection = (props: IBasicInformationSectionProps) => {
                   id={name}
                   icon={<Icon src={<EventClock />} size={28} />}
                   name={name}
-                  placeholderText={chooseTime}
+                  placeholderText={pageContent.chooseTime}
                   dateValue={value}
                   hasError={!!errors.endDate?.message}
                   dateOnChange={onChange}
@@ -289,13 +298,16 @@ const BasicInformationSection = (props: IBasicInformationSectionProps) => {
         </div>
 
         <div
-          className={cn("form-checkbox-group mt-4", {
-            "has-error": errors.repeatEvent,
-          })}
+          className={cn(
+            "form-checkbox-group mt-6 flex items-center space-x-3",
+            {
+              "has-error": errors.repeatEvent,
+            },
+          )}
         >
           <Checkbox {...register("repeatEvent")} id="repeatEvent" />
           <label htmlFor="repeatEvent" className="form-label">
-            {repeatEvent}
+            {pageContent.repeatEvent}
           </label>
         </div>
 
@@ -304,26 +316,26 @@ const BasicInformationSection = (props: IBasicInformationSectionProps) => {
             "has-error": errors.repeatFrequency,
           })}
         >
-          <p className="form-label flex gap-x-3">{repeatLabel}</p>
+          <p className="form-label flex gap-x-3">{pageContent.repeatLabel}</p>
           <RadioGroup
             className="lg-gap-y-0 flex flex-col items-start gap-y-4 lg:flex-row lg:items-baseline lg:gap-x-4"
             name="repeatFrequency"
             radioProps={[
               {
                 value: EventRepeatFrequency.DAILY,
-                label: daily,
+                label: pageContent.daily,
                 checked:
                   watch("repeatFrequency") === EventRepeatFrequency.DAILY,
               },
               {
                 value: EventRepeatFrequency.WEEKLY,
-                label: weekly,
+                label: pageContent.weekly,
                 checked:
                   watch("repeatFrequency") === EventRepeatFrequency.WEEKLY,
               },
               {
                 value: EventRepeatFrequency.MONTHLY,
-                label: monthly,
+                label: pageContent.monthly,
                 checked:
                   watch("repeatFrequency") === EventRepeatFrequency.MONTHLY,
               },
@@ -336,10 +348,14 @@ const BasicInformationSection = (props: IBasicInformationSectionProps) => {
           variant={ButtonVariant.SECONDARY}
           buttonType={ButtonType.BUTTON}
           icon={
-            <Icon src={<AddEventIcon />} alt={addEventIconAltText} size={24} />
+            <Icon
+              src={<AddEventIcon />}
+              alt={pageContent.addEventIconAltText}
+              size={24}
+            />
           }
         >
-          {addTime}
+          {pageContent.addTime}
         </Button>
       </div>
     </>

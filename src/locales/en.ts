@@ -2,12 +2,14 @@
 import Common from "@/locales/common/en.json";
 
 // Page level language files
+import Golf from "@/locales/dynamicForms/Golf/en.json";
 import Quote from "@/locales/pages/Quote/en.json";
 import AddEventForm from "@/locales/pages/AddEvent/en.json";
 import StepperForm from "@/locales/pages/StepperForm/en.json";
 import Signup from "@/locales/pages/Signup/en.json";
 import Signin from "@/locales/pages/Signin/en.json";
 import ConfirmIdentity from "@/locales/pages/ConfirmIdentity/en.json";
+import ParadeParticipant from "@/locales/dynamicForms/ParadeParticipant/en.json";
 import ApplicantInformation from "@/locales/pages/ApplicantInformation/en.json";
 
 export const en_content = {
@@ -27,5 +29,9 @@ export const en_content = {
     signin: Signin,
     confirmIdentity: ConfirmIdentity,
     applicantInformation: ApplicantInformation,
+  },
+  dynamicForms: {
+    paradeParticipant: ParadeParticipant,
+    golf: Golf,
   },
 };

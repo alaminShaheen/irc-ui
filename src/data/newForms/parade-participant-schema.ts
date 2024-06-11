@@ -55,10 +55,21 @@ export const paradeParticipantSchema: DynamicJsonSchema = {
           ],
           value: "false",
           validations: { required: "This is required." },
-          // condition:
-          //   "model.VALID_ACTIVITIES.parades.limits['2'] == true && model.VALID_ACTIVITIES.parades.limits['5'] == true",
+          renderLogic: [
+            {
+              depFieldName: 'VALID_ACTIVITIES["parades"]["limits"]["2"]',
+              depFieldValueCondition: "=",
+              depFieldValue: "true",
+              andGroup: [
+                {
+                  depFieldName: 'VALID_ACTIVITIES["parades"]["limits"]["5"]',
+                  depFieldValueCondition: "=",
+                  depFieldValue: "true",
+                },
+              ],
+            },
+          ],
         },
-
         {
           name: "requires-5-mil",
           label: "Please select the amount of insurance coverage required:",
@@ -66,7 +77,20 @@ export const paradeParticipantSchema: DynamicJsonSchema = {
           options: [{ value: "true", label: "$5,000,000", id: 1 }],
           value: "false",
           validations: { required: "This is required." },
-          // "condition": "model.VALID_ACTIVITIES.parades.limits['2'] == false && model.VALID_ACTIVITIES.parades.limits['5'] == true"
+          renderLogic: [
+            {
+              depFieldName: 'VALID_ACTIVITIES["parades"]["limits"]["2"]',
+              depFieldValueCondition: "=",
+              depFieldValue: "false",
+              andGroup: [
+                {
+                  depFieldName: 'VALID_ACTIVITIES["parades"]["limits"]["5"]',
+                  depFieldValueCondition: "=",
+                  depFieldValue: "true",
+                },
+              ],
+            },
+          ],
         },
         {
           name: "requires-5-mil",
@@ -75,8 +99,20 @@ export const paradeParticipantSchema: DynamicJsonSchema = {
           options: [{ value: "false", label: "$2,000,000", id: 1 }],
           value: "false",
           validations: { required: "This is required." },
-          // condition:
-          //   "model.VALID_ACTIVITIES.parades.limits['2'] == true && model.VALID_ACTIVITIES.parades.limits['5'] == false",
+          renderLogic: [
+            {
+              depFieldName: 'VALID_ACTIVITIES["parades"]["limits"]["2"]',
+              depFieldValueCondition: "=",
+              depFieldValue: "true",
+              andGroup: [
+                {
+                  depFieldName: 'VALID_ACTIVITIES["parades"]["limits"]["5"]',
+                  depFieldValueCondition: "=",
+                  depFieldValue: "false",
+                },
+              ],
+            },
+          ],
         },
         {
           name: "items-thrown",
@@ -105,7 +141,7 @@ export const paradeParticipantSchema: DynamicJsonSchema = {
         {
           name: "acknowledge-exclusions",
           label:
-            "I that I have registered with the parade organizers and meet all requirements to participate in the parade.",
+            "I acknowledge that I have registered with the parade organizers and meet all requirements to participate in the parade.",
           type: "radio",
           value: "false",
           options: [
