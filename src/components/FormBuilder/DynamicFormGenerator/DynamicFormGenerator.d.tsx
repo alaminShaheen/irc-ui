@@ -1,7 +1,9 @@
-import { FormSection } from "@/models/form/DynamicJsonFormTypes";
+import { DynamicJsonSchema } from "@/models/form/DynamicJsonFormTypes";
 import { Resolver } from "react-hook-form";
 
 export interface IDynamicFormGeneratorProps {
-  schema: FormSection[];
+  schema: DynamicJsonSchema;
   resolver?: Resolver;
+  className?: string;
+  onFormSubmit?: (data: any) => void;
 }

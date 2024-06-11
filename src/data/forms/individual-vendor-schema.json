@@ -149,7 +149,7 @@
       "condition": "model['individual-vendor-alcohol']"
     },
 
-    
+
 
     {
       "key": "non-owned-liability",
@@ -222,7 +222,7 @@
       "fieldHtmlClass": "signup-button",
       "required": true,
       "condition": "model['non-owned-auto'] == true && model['non-owned-physical-damage'] == true"
-    },    
+    },
 
     {
       "key": "non-owned-physical-damage-amount",

@@ -6,6 +6,17 @@ export const golfSchema: FormSection[] = [
     key: "golf",
     fields: [
       {
+        name: "non-owned-auto",
+        label: "Select non owned auto:",
+        type: "radio",
+        value: "true",
+        options: [
+          { id: 1, value: "true", label: "Yes" },
+          { id: 2, value: "false", label: "No" },
+        ],
+        validations: { required: "This is required." },
+      },
+      {
         name: "policyType",
         label: "Select the type of golf prize contest that is being hosted:",
         type: "select",

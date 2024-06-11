@@ -16,7 +16,7 @@ import AppConstants from "@/constants/AppConstants";
 const PolicyCard = (props: IPolicyCard) => {
   const {
     listOfEvents = [],
-    policy: { iconPath, subtitle, name },
+    policy: { iconPath, subtitle, name, $schemaRef, id },
     translationContent: {
       clickToAddEvent,
       showMore,
@@ -57,8 +57,8 @@ const PolicyCard = (props: IPolicyCard) => {
   };
 
   const addEvent = useCallback(() => {
-    onAddEventClick(name);
-  }, [name, onAddEventClick]);
+    onAddEventClick({ name, $schemaRef, id, subtitle, iconPath });
+  }, [$schemaRef, iconPath, id, name, onAddEventClick, subtitle]);
 
   return (
     <li className="flex w-full flex-col items-start gap-x-3 gap-y-4 rounded-md bg-primary-5 px-4 py-6">
@@ -81,22 +81,24 @@ const PolicyCard = (props: IPolicyCard) => {
           >
             <p
               className={cn("text-graphite-700", {
-                "w-2/3 truncate": !showMoreSubtitle,
+                "w-2/3 truncate": !showMoreSubtitle && subtitle.length > 115,
               })}
               role="contentinfo"
             >
               {subtitle}
             </p>
-            <span
-              className={cn(
-                "cursor-pointer text-primary underline focus-visible:outline-focus",
-                { "ml-1": !showMoreSubtitle },
-              )}
-              onClick={toggleShowMoreSubtitle}
-              tabIndex={0}
-            >
-              {showMoreSubtitle ? showLess : showMore}
-            </span>
+            {subtitle.length > 115 && (
+              <button
+                className={cn(
+                  "cursor-pointer text-primary underline focus-visible:outline-focus",
+                  { "ml-1": !showMoreSubtitle },
+                )}
+                onClick={toggleShowMoreSubtitle}
+                tabIndex={0}
+              >
+                {showMoreSubtitle ? showLess : showMore}
+              </button>
+            )}
           </div>
         </div>
       </div>

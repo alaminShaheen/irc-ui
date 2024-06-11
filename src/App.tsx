@@ -8,11 +8,12 @@ import Signup from "@/pages/Signup";
 import Signin from "@/pages/Signin";
 import ROUTES from "@/constants/Routes";
 import Layout from "@/components/Layout/Layout";
+import Builder from "@/components/FormBuilder/Builder";
+import AddEvent from "@/pages/AddEvent";
 import ConfirmIdentity from "@/pages/ConfirmIdentity";
 import StepperContainer from "@/components/Stepper/StepperContainer/StepperContainer";
 import { ThemeProvider } from "@/context/ThemeContext";
 import ApplicantInformation from "@/pages/ApplicantInformation";
-import AddEvent from "@/pages/AddEvent";
 import { AppContextProvider } from "@/context/AppContext";
 import ReviewAndSubmitSection from "@/components/Stepper/ReviewAndSubmitSection/ReviewAndSubmitSection";
 import TransportAndInsuranceForm from "@/components/Stepper/TransportAndInsuranceForm/TransportAndInsuranceForm";
@@ -20,7 +21,6 @@ import TransportAndInsuranceForm from "@/components/Stepper/TransportAndInsuranc
 // Custom styling
 import "./styles/global.css";
 import "react-toastify/dist/ReactToastify.css";
-import Builder from "@/components/FormBuilder/Builder";
 
 function App() {
   return (

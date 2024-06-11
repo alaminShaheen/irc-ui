@@ -17,9 +17,10 @@ const mockProps = {
   policy: {
     id: "123",
     iconPath: "icon/path",
-    subtitle: "Sous-titre en français",
+    subtitle:
+      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad alias aliquid at beatae blanditiis dolor eius esse eum ex excepturi id illo inventore iure, iusto nisi, odit provident reiciendis soluta suscipit tempora. Accusamus aperiam, architecto beatae cum cupiditate dolores eum hic laborum minima possimus provident quibusdam rem repudiandae suscipit veritatis.",
     name: "Policy Name",
-    // listOfEvents: [],
+    $schemaRef: "parade-participant-schema",
   },
   translationContent: {
     clickToAddEvent: "Click to add event",

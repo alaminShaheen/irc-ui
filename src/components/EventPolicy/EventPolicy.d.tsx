@@ -6,9 +6,4 @@ export interface ICoverageInfo {
   };
 }
 
-export interface IEventPolicy {
-  onAddEventClick: (eventName: string) => void;
-  translationContent: {
-    [key: string]: string;
-  };
-}
+export interface IEventPolicy {}

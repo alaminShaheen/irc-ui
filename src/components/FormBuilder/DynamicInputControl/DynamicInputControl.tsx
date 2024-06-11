@@ -7,6 +7,8 @@ import FormError from "@/components/FormError";
 import { useTranslation } from "react-i18next";
 import SelectDropdown from "@/components/ui/SelectDropdown/SelectDropdown";
 import RadioGroup from "@/components/ui/Radio/components/RadioGroup";
+import Button from "@/components/ui/Button";
+import { ButtonType, ButtonVariant } from "@/models/enums/ButtonVariant";
 
 const DynamicInputControl = (props: IDynamicInputControlProps) => {
   const {
@@ -73,6 +75,10 @@ const DynamicInputControl = (props: IDynamicInputControlProps) => {
     watch,
     defaultValue,
   ]);
+
+  const formDisabled =
+    Object.entries(errors).length > 0 ||
+    Object.values(watch()).some((value) => !value);
 
   if (!shouldRender) return null;
 
@@ -168,7 +174,16 @@ const DynamicInputControl = (props: IDynamicInputControlProps) => {
     case "submit":
       return (
         <div key={name} className={`field`}>
-          <input type="submit" value={label} />
+          <Button
+            variant={
+              formDisabled ? ButtonVariant.DISABLED : ButtonVariant.PRIMARY
+            }
+            className="mt-8 rounded-md px-16"
+            type={ButtonType.SUBMIT}
+            disabled={formDisabled}
+          >
+            {label}
+          </Button>
         </div>
       );
   }

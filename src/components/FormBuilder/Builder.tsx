@@ -1,11 +1,24 @@
 import DynamicFormGenerator from "@/components/FormBuilder/DynamicFormGenerator/DynamicFormGenerator";
-import { golfSchema } from "@/data/newForms/golf-schema";
+import { useEffect, useState } from "react";
 
 const Builder = () => {
-  return (
+  const [schema, setSchema] = useState<any>();
+
+  const handle = async () => {
+    const value = (await import(`../../data/newForms/${"golf-schema.json"}`))
+      .default;
+    setSchema(value);
+  };
+
+  useEffect(() => {
+    void handle();
+  }, []);
+  return schema ? (
     <div className="p-10">
-      <DynamicFormGenerator schema={golfSchema} />
+      <DynamicFormGenerator schema={schema} />
     </div>
+  ) : (
+    <div>Loading</div>
   );
 };
 
