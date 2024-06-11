@@ -2,7 +2,7 @@
 import Common from "@/locales/common/fr.json";
 
 // Page level language files
-import Golf from "@/locales/dynamicForms/Golf/en.json";
+import Golf from "@/locales/dynamicForms/Golf/fr.json";
 import Quote from "@/locales/pages/Quote/fr.json";
 import Signup from "@/locales/pages/Signup/fr.json";
 import Signin from "@/locales/pages/Signin/fr.json";
