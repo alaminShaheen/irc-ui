@@ -48,7 +48,7 @@ const getValidActivityFieldValue = (
 };
 
 export const checkConditionalLogic = (
-  rootFieldName: string,
+  _rootFieldName: string,
   watchList: Record<string, InputValue>,
   validActivities: ValidActivities,
   logicTrueIf?: ConditionMode,

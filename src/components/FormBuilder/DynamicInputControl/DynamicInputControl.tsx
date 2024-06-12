@@ -84,8 +84,6 @@ const DynamicInputControl = (props: IDynamicInputControlProps) => {
     Object.entries(errors).length > 0 ||
     Object.values(watch()).some((value) => value === undefined);
 
-  console.log(watch(), errors);
-
   if (!shouldRender) return null;
 
   switch (type) {
