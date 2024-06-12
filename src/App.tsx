@@ -21,6 +21,7 @@ import TransportAndInsuranceForm from "@/components/Stepper/TransportAndInsuranc
 // Custom styling
 import "./styles/global.css";
 import "react-toastify/dist/ReactToastify.css";
+import Builder from "@/components/FormBuilder/Builder";
 
 function App() {
   return (
