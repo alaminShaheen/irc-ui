@@ -1,26 +1,12 @@
-import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import EventModal from "@/components/AddEvent/components/AddEventModal";
-import { useToggle } from "@/hooks/index";
 import EventPolicy from "@/components/EventPolicy/EventPolicy";
 import Button from "@/components/ui/Button";
 import { ButtonType, ButtonVariant } from "@/models/enums/ButtonVariant";
 import UpArrow from "@/components/AppIcons/UpArrow";
 
 const AddEventForm = () => {
-  const [showAddEventModal, toggleAddEventModal] = useToggle(false);
-  const [selectedEventName, setSelectedEventName] = useState("");
-
   const { t } = useTranslation();
-
-  const onAddEventClick = useCallback(
-    (eventName: string) => {
-      setSelectedEventName(eventName);
-      toggleAddEventModal();
-    },
-    [toggleAddEventModal],
-  );
 
   const pageContent = {
     pageTitle: t("pages.addEventForm.pageTitle"),
@@ -132,19 +118,8 @@ const AddEventForm = () => {
         </p>
       </div>
       <div>
-        <EventPolicy
-          onAddEventClick={onAddEventClick}
-          translationContent={pageContent.eventPolicies}
-        />
+        <EventPolicy />
       </div>
-
-      <EventModal
-        eventName={selectedEventName}
-        translationContent={pageContent.addEventForm.addEventModal}
-        onConfirm={() => null}
-        isOpen={showAddEventModal}
-        toggle={toggleAddEventModal}
-      />
       <div className="flex gap-x-4 px-4 pb-10 pt-2 lg:px-0 lg:pb-0 lg:pt-0">
         <Button
           className="button-secondary flex items-center justify-center gap-0 "
