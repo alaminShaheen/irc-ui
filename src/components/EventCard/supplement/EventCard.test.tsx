@@ -1,5 +1,6 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import EventCard from "../EventCard";
+import { Event } from "@/models/Event";
 
 const mockContent = {
   edit: "Edit",
@@ -7,6 +8,12 @@ const mockContent = {
   showMore: "Show more details",
   showLess: "Show less details",
 };
+
+const mockEvent = {
+  name: "hello",
+  age: 2,
+  address: "Canada",
+} as Event;
 
 jest.mock("react-i18next", () => ({
   useTranslation: () => ({
@@ -17,7 +24,15 @@ jest.mock("react-i18next", () => ({
 
 describe("EventCard", () => {
   beforeEach(() => {
-    render(<EventCard content={mockContent} />);
+    render(
+      <EventCard
+        deleteEvent={jest.fn}
+        eventIndex={0}
+        editEvent={jest.fn}
+        event={mockEvent}
+        content={mockContent}
+      />,
+    );
   });
 
   it("renders correctly", () => {

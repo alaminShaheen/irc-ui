@@ -9,8 +9,10 @@ import CalenderTime from "../AppIcons/CalendarTime";
 
 import { ButtonVariant } from "@/models/enums/ButtonVariant";
 import { IEventCardProps } from "@/components/EventCard/EventCard.d";
+import { useCallback } from "react";
 
-const EventCard = ({ content }: IEventCardProps) => {
+const EventCard = (props: IEventCardProps) => {
+  const { content, event, editEvent, eventIndex, deleteEvent } = props;
   const {
     edit,
     showMore,
@@ -22,21 +24,38 @@ const EventCard = ({ content }: IEventCardProps) => {
   } = content;
   const [showMoreEventDetails, toggleShowMoreEventDetails] = useToggle(false);
 
+  const onEdit = useCallback(() => {
+    editEvent(event);
+  }, [editEvent, event]);
+
+  const onDelete = useCallback(() => {
+    deleteEvent(eventIndex);
+  }, [deleteEvent, eventIndex]);
+
   return (
     <div className="event-card flex w-full flex-col items-start gap-y-3 rounded-md border-2 border-primary p-4 lg:flex-row lg:gap-x-3">
       <span className="hidden h-9 w-9 items-center justify-center rounded-md border border-primary bg-primary-50 sm:h-10 sm:w-12 lg:flex">
         <Icon src={<Calender />} alt={calendarIconAltText} size={22} />
       </span>
 
+      {/* Mobile view */}
       <div className="flex w-full items-center justify-between lg:hidden">
         <span className="flex h-9 w-9 items-center justify-center rounded-md border border-primary bg-gray-300 sm:h-12 sm:w-12">
           <Icon src={<Calender />} alt={calendarIconAltText} size={22} />
         </span>
         <div className="flex gap-x-6 text-base text-primary underline">
-          <Button className="p-0" variant={ButtonVariant.TRANSPARENT}>
+          <Button
+            className="p-0"
+            variant={ButtonVariant.TRANSPARENT}
+            onClick={onEdit}
+          >
             {edit}
           </Button>
-          <Button className="p-0" variant={ButtonVariant.TRANSPARENT}>
+          <Button
+            className="p-0"
+            variant={ButtonVariant.TRANSPARENT}
+            onClick={onDelete}
+          >
             {removePolicy}
           </Button>
         </div>
@@ -89,10 +108,18 @@ const EventCard = ({ content }: IEventCardProps) => {
             {showMoreEventDetails ? showLess : showMore}
           </Button>
           <div className="flex gap-x-6">
-            <Button className="p-0" variant={ButtonVariant.TRANSPARENT}>
+            <Button
+              className="p-0"
+              variant={ButtonVariant.TRANSPARENT}
+              onClick={onEdit}
+            >
               {edit}
             </Button>
-            <Button className="p-0" variant={ButtonVariant.TRANSPARENT}>
+            <Button
+              className="p-0"
+              variant={ButtonVariant.TRANSPARENT}
+              onClick={onDelete}
+            >
               {removePolicy}
             </Button>
           </div>

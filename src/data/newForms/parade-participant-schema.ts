@@ -1,6 +1,7 @@
 import { DynamicJsonSchema } from "@/models/form/DynamicJsonFormTypes";
 
 export const paradeParticipantSchema: DynamicJsonSchema = {
+  id: "parade-participant",
   title: "Parade Participant Form",
   description: "Parade Participant Form",
   formSections: [

@@ -1,7 +1,7 @@
 import { mockCoverageInfo } from "@/constants/MockData";
-import { ICoverageInfo } from "@/components/EventPolicy/EventPolicy.d";
+import { PolicyEvents } from "@/models/PolicyEvents";
 
-export const getEventList = (): Promise<ICoverageInfo> => {
+export const getEventList = (): Promise<PolicyEvents> => {
   return new Promise((resolve) =>
     setTimeout(() => resolve(mockCoverageInfo), 500),
   );

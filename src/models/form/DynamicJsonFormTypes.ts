@@ -26,6 +26,7 @@ export type Validations = Pick<
 >;
 
 export type DynamicJsonSchema = {
+  id: string;
   title: string;
   description: string;
   formSections: FormSection[];

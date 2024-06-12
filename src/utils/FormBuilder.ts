@@ -43,6 +43,7 @@ const getValidActivityFieldValue = (
     (currentValue, propertyName) => {
       return currentValue[propertyName];
     },
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     validActivities.value as Record<string, any>,
   );
 };
