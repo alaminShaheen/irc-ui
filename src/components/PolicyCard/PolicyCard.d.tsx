@@ -3,7 +3,7 @@ import { EventDetail } from "../Stepper/AddEventForm/AddEventForm.d";
 export interface IPolicyCard {
   listOfEvents: EventDetail[];
   policy: Policy;
-  onAddEventClick: (eventName: string) => void;
+  onAddEventClick: (event: Policy) => void;
   translationContent: {
     [key: string]: string;
   };

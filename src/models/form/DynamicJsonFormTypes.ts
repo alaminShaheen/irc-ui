@@ -25,6 +25,12 @@ export type Validations = Pick<
   | "disabled"
 >;
 
+export type DynamicJsonSchema = {
+  title: string;
+  description: string;
+  formSections: FormSection[];
+};
+
 export type FormSection = {
   id: string;
   key: string;
@@ -36,6 +42,7 @@ export type FormSection = {
 };
 
 export type FormInput = {
+  id?: string;
   name: string;
   value?: InputValue;
   placeholder?: string;

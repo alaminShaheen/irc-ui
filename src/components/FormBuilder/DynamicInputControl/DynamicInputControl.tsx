@@ -7,9 +7,12 @@ import FormError from "@/components/FormError";
 import { useTranslation } from "react-i18next";
 import SelectDropdown from "@/components/ui/SelectDropdown/SelectDropdown";
 import RadioGroup from "@/components/ui/Radio/components/RadioGroup";
+import Button from "@/components/ui/Button";
+import { ButtonType, ButtonVariant } from "@/models/enums/ButtonVariant";
 
 const DynamicInputControl = (props: IDynamicInputControlProps) => {
   const {
+    validActivities,
     name,
     renderLogic,
     renderLogicConditionMode,
@@ -39,15 +42,15 @@ const DynamicInputControl = (props: IDynamicInputControlProps) => {
   const shouldRender = useMemo(() => {
     return checkConditionalLogic(
       name,
-
       watchList,
+      validActivities,
       renderLogicConditionMode,
       renderLogic,
     );
-  }, [name, watchList, renderLogicConditionMode, renderLogic]);
+  }, [name, watchList, validActivities, renderLogicConditionMode, renderLogic]);
 
   useEffect(() => {
-    if (!shouldRender) {
+    if (type === "submit" || !shouldRender) {
       unregister(name);
     } else {
       const value =
@@ -55,6 +58,7 @@ const DynamicInputControl = (props: IDynamicInputControlProps) => {
           return checkConditionalLogic(
             name,
             watch(),
+            validActivities,
             valueLogicConditionMode,
             logicEntry.logic,
           );
@@ -72,7 +76,13 @@ const DynamicInputControl = (props: IDynamicInputControlProps) => {
     valueLogicConditionMode,
     watch,
     defaultValue,
+    validActivities,
+    type,
   ]);
+
+  const formDisabled =
+    Object.entries(errors).length > 0 ||
+    Object.values(watch()).some((value) => value === undefined);
 
   if (!shouldRender) return null;
 
@@ -84,7 +94,7 @@ const DynamicInputControl = (props: IDynamicInputControlProps) => {
           className={cn("form-group", { "has-error": errors[name] })}
           key={name}
         >
-          <label htmlFor={name}>{label}</label>
+          {label && <label htmlFor={name}>{t(label)}</label>}
           <input
             placeholder={placeholder || ""}
             id={name}
@@ -110,14 +120,14 @@ const DynamicInputControl = (props: IDynamicInputControlProps) => {
           className={cn("form-group", { "has-error": errors[name] })}
           key={name}
         >
-          <p className="form-label flex gap-x-3">{label}</p>
+          {label && <p className="form-label flex gap-x-3">{t(label)}</p>}
           <RadioGroup
             className="flex gap-x-4"
             name={name}
             radioProps={(options ?? []).map(
               ({ label, value: optionValue }) => ({
                 value: optionValue,
-                label,
+                label: t(label),
                 checked: watch()[name] === optionValue,
               }),
             )}
@@ -138,9 +148,11 @@ const DynamicInputControl = (props: IDynamicInputControlProps) => {
           })}
           key={name}
         >
-          <label htmlFor="country" className="form-label">
-            {label}
-          </label>
+          {label && (
+            <label htmlFor={name} className="form-label">
+              {t(label)}
+            </label>
+          )}
           <Controller
             control={control}
             name={name}
@@ -148,7 +160,7 @@ const DynamicInputControl = (props: IDynamicInputControlProps) => {
             render={({ field: { value, name, onChange } }) => (
               <SelectDropdown
                 options={(options ?? []).map(({ label, value, id }) => {
-                  return { id, label, value };
+                  return { id, label: t(label), value };
                 })}
                 placeholderText={placeholder}
                 value={value}
@@ -168,7 +180,16 @@ const DynamicInputControl = (props: IDynamicInputControlProps) => {
     case "submit":
       return (
         <div key={name} className={`field`}>
-          <input type="submit" value={label} />
+          <Button
+            variant={
+              formDisabled ? ButtonVariant.DISABLED : ButtonVariant.PRIMARY
+            }
+            className="mt-8 rounded-md px-16"
+            type={ButtonType.SUBMIT}
+            disabled={formDisabled}
+          >
+            {label ? t(label) : t("common.ok")}
+          </Button>
         </div>
       );
   }

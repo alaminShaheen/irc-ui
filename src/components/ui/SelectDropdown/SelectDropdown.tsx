@@ -33,14 +33,14 @@ const SelectDropdown = (props: ISelectDropdownProps) => {
               setOpen((prev) => !prev);
             }}
             className={cn(
-              "relative w-full cursor-pointer rounded-lg border-2 border-primary-100 bg-white p-4 px-3 py-4 pr-10 text-left focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300",
+              "relative w-full cursor-pointer rounded-lg border-2 border-primary-100 bg-white px-3 py-4 pr-10 text-left focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300",
               { "bg-gray-200": disabled },
             )}
           >
             <span
               data-testid="select-dropdown-display"
               className={cn("block truncate", {
-                "text-gray-400": !selectedOption?.label,
+                "py-3 text-gray-400": !selectedOption?.label,
               })}
             >
               {selectedOption?.label ?? placeholderText}

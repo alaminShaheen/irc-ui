@@ -3,6 +3,7 @@ import {
   ConditionMode,
   InputValue,
 } from "@/models/form/DynamicJsonFormTypes";
+import { ValidActivities } from "@/models/form/ValidActivities";
 
 const evalConditionalLogic = (
   value: InputValue,
@@ -29,12 +30,30 @@ const evalConditionalLogic = (
   }
 };
 
+const getValidActivityFieldValue = (
+  validActivities: ValidActivities,
+  objectString: string,
+) => {
+  const propertyNames = objectString
+    .split(/\[(?:'([^']*)'|"([^"]*)")]/)
+    .filter(Boolean)
+    .slice(1) as (keyof typeof validActivities.value)[];
+
+  return propertyNames.reduce(
+    (currentValue, propertyName) => {
+      return currentValue[propertyName];
+    },
+    validActivities.value as Record<string, any>,
+  );
+};
+
 export const checkConditionalLogic = (
-  rootFieldName: string,
+  _rootFieldName: string,
   watchList: Record<string, InputValue>,
+  validActivities: ValidActivities,
   logicTrueIf?: ConditionMode,
   conditionalLogic?: ConditionalLogic[],
-) => {
+): boolean => {
   if (!conditionalLogic) {
     return true;
   }
@@ -50,9 +69,18 @@ export const checkConditionalLogic = (
   for (let i = 0; i < conditionalLogic.length; i++) {
     const condLogic = conditionalLogic[i];
 
+    const checkingValidActivities = condLogic.depFieldName.includes(
+      validActivities.key,
+    );
+
     const fieldName = condLogic.depFieldName;
     const condOperator = condLogic.depFieldValueCondition;
-    const fieldValue = watchList[fieldName];
+    const fieldValue = checkingValidActivities
+      ? (getValidActivityFieldValue(
+          validActivities,
+          fieldName,
+        ) as unknown as InputValue)
+      : watchList[fieldName];
     const expectedValue = condLogic.depFieldValue;
     const andGroup = condLogic.andGroup;
 
@@ -61,15 +89,24 @@ export const checkConditionalLogic = (
     if (andGroup && andGroup.length > 0) {
       andGroupConditionsMet = true;
       for (const andGroupLogic of andGroup) {
+        const checkingValidActivities = andGroupLogic.depFieldName.includes(
+          validActivities.key,
+        );
         const andFieldName = andGroupLogic.depFieldName;
         const andCondOp = andGroupLogic.depFieldValueCondition;
-        const andFieldValue = watchList[andFieldName];
+        const andFieldValue = checkingValidActivities
+          ? (getValidActivityFieldValue(
+              validActivities,
+              fieldName,
+            ) as unknown as InputValue)
+          : watchList[andFieldName];
         const andExpectedValue = andGroupLogic.depFieldValue;
         andGroupConditionsMet &&=
           evalConditionalLogic(andFieldValue, andCondOp, andExpectedValue) &&
           checkConditionalLogic(
             andFieldName,
             watchList,
+            validActivities,
             "and",
             andGroupLogic.andGroup,
           );

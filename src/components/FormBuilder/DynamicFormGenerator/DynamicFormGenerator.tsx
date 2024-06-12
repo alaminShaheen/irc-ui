@@ -1,20 +1,24 @@
-import { BaseSyntheticEvent, useMemo } from "react";
+import { useTranslation } from "react-i18next";
+import { useCallback, useMemo } from "react";
+import { FormProvider, useForm } from "react-hook-form";
 
 import { InputValue } from "@/models/form/DynamicJsonFormTypes";
 import DynamicInputControl from "@/components/FormBuilder/DynamicInputControl/DynamicInputControl";
 import { checkConditionalLogic } from "@/utils/FormBuilder";
 import { IDynamicFormGeneratorProps } from "@/components/FormBuilder/DynamicFormGenerator/DynamicFormGenerator.d";
-import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
+import { cn } from "@/utils/helper";
+import BasicInformationSection from "@/components/AddEvent/components/BasicInformationSection";
 
 const DynamicFormGenerator = (props: IDynamicFormGeneratorProps) => {
-  const { schema, resolver } = props;
+  const { schema, resolver, className, onFormSubmit, validActivities } = props;
+  const { t } = useTranslation();
 
   type DynamicForm = {
-    [K in (typeof schema)[number]["fields"][number]["name"]]: (typeof schema)[number]["fields"][number]["name"];
+    [K in (typeof schema)["formSections"][number]["fields"][number]["name"]]: (typeof schema)["formSections"][number]["fields"][number]["name"];
   };
 
   const defaultValues = useMemo(() => {
-    return schema.reduce(
+    return schema.formSections.reduce(
       (values, formSection) => {
         return {
           ...values,
@@ -31,12 +35,12 @@ const DynamicFormGenerator = (props: IDynamicFormGeneratorProps) => {
     );
   }, [schema]);
 
-  const onFormSubmit: SubmitHandler<DynamicForm> = (
-    data: DynamicForm,
-    e?: BaseSyntheticEvent,
-  ) => {
-    e?.preventDefault();
-  };
+  const onSubmit = useCallback(
+    (data: DynamicForm) => {
+      onFormSubmit?.(data);
+    },
+    [onFormSubmit],
+  );
 
   const methods = useForm({
     resolver,
@@ -48,19 +52,27 @@ const DynamicFormGenerator = (props: IDynamicFormGeneratorProps) => {
 
   return (
     <FormProvider {...methods}>
-      <form onSubmit={handleSubmit(onFormSubmit)}>
-        {schema
+      <form onSubmit={handleSubmit(onSubmit)} className={className}>
+        {schema.formSections
           .filter((section) =>
-            checkConditionalLogic(section.title ?? "", watch(), "and"),
+            checkConditionalLogic(section.title ?? "", watch(), validActivities, "and"),
           )
-          .map((section) => (
-            <div key={section.key}>
-              {section.title && <h3>{section.title}</h3>}
-              {section.description && <p>{section.description}</p>}
+          .map((section, index) => (
+            <div key={section.key} className={cn({ "mt-6": index > 0 })}>
+              {section.title && (
+                <h2 className="mb-2 font-segoe text-2xl font-bold text-primary">
+                  {t(section.title)}
+                </h2>
+              )}
+              {section.description && (
+                <p className="mb-6">{t(section.description)}</p>
+              )}
               <div className="space-y-6">
+                <BasicInformationSection />
                 {section.fields.map((field, i) => (
                   <DynamicInputControl
-                    key={field.name}
+                    validActivities={validActivities}
+                    key={field.id ? String(field.id) : field.name}
                     name={field.name}
                     label={field.label}
                     value={field.value}

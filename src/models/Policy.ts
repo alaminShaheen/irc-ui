@@ -3,4 +3,5 @@ export type Policy = {
   name: string;
   subtitle: string;
   iconPath: string;
+  $schemaRef: string;
 };
