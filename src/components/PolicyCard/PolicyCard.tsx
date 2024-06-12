@@ -12,11 +12,12 @@ import AddEventFilledIcon from "@/components/AppIcons/AddEventFilled";
 import { ButtonVariant, IconPosition } from "@/models/enums/ButtonVariant";
 import EventPagination from "@/components/EventPagination/EventPagination";
 import AppConstants from "@/constants/AppConstants";
+import { Event } from "@/models/Event";
 
 const PolicyCard = (props: IPolicyCard) => {
   const {
-    listOfEvents = [],
-    policy: { iconPath, subtitle, name, $schemaRef, id },
+    events = [],
+    policy,
     translationContent: {
       clickToAddEvent,
       showMore,
@@ -28,18 +29,18 @@ const PolicyCard = (props: IPolicyCard) => {
       doorIconAltText,
       addEventIconAltText,
     },
-    onAddEventClick,
+    onAddEvent,
+    onEditEvent,
+    onDeleteEvent,
   } = props;
 
   const { t } = useTranslation();
   const [showMoreSubtitle, toggleShowMoreSubtitle] = useToggle(false);
   const [currentPage, setCurrentPage] = useState(0);
 
-  const totalPage = Math.ceil(
-    listOfEvents.length / AppConstants.EVENTS_PER_PAGE,
-  );
+  const totalPage = Math.ceil(events.length / AppConstants.EVENTS_PER_PAGE);
 
-  const displayEvents = listOfEvents.slice(
+  const displayEvents = events.slice(
     currentPage * AppConstants.EVENTS_PER_PAGE,
     (currentPage + 1) * AppConstants.EVENTS_PER_PAGE,
   );
@@ -57,22 +58,36 @@ const PolicyCard = (props: IPolicyCard) => {
   };
 
   const addEvent = useCallback(() => {
-    onAddEventClick({ name, $schemaRef, id, subtitle, iconPath });
-  }, [$schemaRef, iconPath, id, name, onAddEventClick, subtitle]);
+    onAddEvent(policy);
+  }, [policy, onAddEvent]);
+
+  const editEvent = useCallback(
+    (event: Event) => {
+      onEditEvent(event, policy);
+    },
+    [onEditEvent, policy],
+  );
+
+  const deleteEvent = useCallback(
+    (eventIndex: number) => {
+      onDeleteEvent(eventIndex, policy);
+    },
+    [onDeleteEvent, policy],
+  );
 
   return (
     <li className="flex w-full flex-col items-start gap-x-3 gap-y-4 rounded-md bg-primary-5 px-4 py-6">
       <div className="grid w-full grid-cols-[60px_1fr] items-start gap-x-4">
         <div className="flex items-center justify-center rounded-md bg-primary px-3 py-2">
           <Icon
-            src={iconPath}
+            src={policy.iconPath}
             alt={t("common.iconAltText.policyLogo")}
             size={40}
           />
         </div>
         <div className="title-section w-full min-w-0 truncate">
           <h2 className="policy-title text-wrap font-segoe text-lg font-semibold text-primary">
-            {name}
+            {policy.name}
           </h2>
           <div
             className={cn("policy-subtitle text-wrap text-base", {
@@ -81,13 +96,14 @@ const PolicyCard = (props: IPolicyCard) => {
           >
             <p
               className={cn("text-graphite-700", {
-                "w-2/3 truncate": !showMoreSubtitle && subtitle.length > 115,
+                "w-2/3 truncate":
+                  !showMoreSubtitle && policy.subtitle.length > 115,
               })}
               role="contentinfo"
             >
-              {subtitle}
+              {policy.subtitle}
             </p>
-            {subtitle.length > 115 && (
+            {policy.subtitle.length > 115 && (
               <button
                 className={cn(
                   "cursor-pointer text-primary underline focus-visible:outline-focus",
@@ -145,10 +161,14 @@ const PolicyCard = (props: IPolicyCard) => {
           </li>
 
           {/* EVENT CARD*/}
-          {displayEvents?.map((_, idx: number) => {
+          {displayEvents?.map((event, idx: number) => {
             return (
               <li key={`policyEvent-${idx}`}>
                 <EventCard
+                  deleteEvent={deleteEvent}
+                  eventIndex={idx}
+                  editEvent={editEvent}
+                  event={event}
                   content={{
                     edit,
                     showMore,
@@ -164,7 +184,7 @@ const PolicyCard = (props: IPolicyCard) => {
           })}
 
           {/* PAGINATION */}
-          {listOfEvents.length > 2 && (
+          {events.length > 2 && (
             <EventPagination
               currentPage={currentPage}
               pageCount={totalPage}

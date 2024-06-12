@@ -1,4 +1,5 @@
 {
+  "id": "parade-participant",
   "title": "dynamicForms.paradeParticipant.title",
   "description": "dynamicForms.paradeParticipant.description",
   "formSections": [
@@ -51,7 +52,7 @@
 		  "name": "parade-participant-type",
 		  "label": "dynamicForms.paradeParticipant.paradeParticipantLabel",
 		  "type": "select",
-		  "value": "event",
+		  "value": "float",
 		  "options": [
 			{
 			  "value": "float",

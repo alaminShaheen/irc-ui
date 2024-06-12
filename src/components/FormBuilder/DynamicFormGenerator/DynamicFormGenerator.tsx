@@ -10,7 +10,14 @@ import { cn } from "@/utils/helper";
 import BasicInformationSection from "@/components/AddEvent/components/BasicInformationSection";
 
 const DynamicFormGenerator = (props: IDynamicFormGeneratorProps) => {
-  const { schema, resolver, className, onFormSubmit, validActivities } = props;
+  const {
+    schema,
+    resolver,
+    className,
+    onFormSubmit,
+    validActivities,
+    defaultValues: eventValues,
+  } = props;
   const { t } = useTranslation();
 
   type DynamicForm = {
@@ -18,22 +25,30 @@ const DynamicFormGenerator = (props: IDynamicFormGeneratorProps) => {
   };
 
   const defaultValues = useMemo(() => {
-    return schema.formSections.reduce(
-      (values, formSection) => {
-        return {
-          ...values,
-          ...formSection.fields.reduce(
-            (records, field) => {
-              records[field.name] = field.value ?? "";
-              return records;
-            },
-            {} as Record<string, InputValue>,
-          ),
-        };
-      },
-      {} as Record<string, InputValue>,
-    );
-  }, [schema]);
+    const defaultEventValues = { ...eventValues };
+    return {
+      ...schema.formSections.reduce(
+        (values, formSection) => {
+          return {
+            ...values,
+            ...formSection.fields.reduce(
+              (records, field) => {
+                records[field.name] =
+                  defaultEventValues?.[field.name] ?? field.value ?? "";
+                if (defaultEventValues?.[field.name]) {
+                  delete defaultEventValues[field.name];
+                }
+                return records;
+              },
+              {} as Record<string, InputValue>,
+            ),
+          };
+        },
+        {} as Record<string, InputValue>,
+      ),
+      ...defaultEventValues,
+    };
+  }, [eventValues, schema.formSections]);
 
   const onSubmit = useCallback(
     (data: DynamicForm) => {
@@ -55,7 +70,12 @@ const DynamicFormGenerator = (props: IDynamicFormGeneratorProps) => {
       <form onSubmit={handleSubmit(onSubmit)} className={className}>
         {schema.formSections
           .filter((section) =>
-            checkConditionalLogic(section.title ?? "", watch(), validActivities, "and"),
+            checkConditionalLogic(
+              section.title ?? "",
+              watch(),
+              validActivities,
+              "and",
+            ),
           )
           .map((section, index) => (
             <div key={section.key} className={cn({ "mt-6": index > 0 })}>
@@ -75,7 +95,7 @@ const DynamicFormGenerator = (props: IDynamicFormGeneratorProps) => {
                     key={field.id ? String(field.id) : field.name}
                     name={field.name}
                     label={field.label}
-                    value={field.value}
+                    value={eventValues?.[field.name] ?? field.value}
                     type={field.type}
                     validations={field.validations}
                     placeholder={field.placeholder}

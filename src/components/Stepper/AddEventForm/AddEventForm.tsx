@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import AddEventModal from "@/components/AddEvent/components/AddEventModal";
+import EventModal from "@/components/AddEvent/components/AddEventModal";
 import { useToggle } from "@/hooks/index";
 import EventPolicy from "@/components/EventPolicy/EventPolicy";
 import Button from "@/components/ui/Button";
@@ -138,7 +138,7 @@ const AddEventForm = () => {
         />
       </div>
 
-      <AddEventModal
+      <EventModal
         eventName={selectedEventName}
         translationContent={pageContent.addEventForm.addEventModal}
         onConfirm={() => null}

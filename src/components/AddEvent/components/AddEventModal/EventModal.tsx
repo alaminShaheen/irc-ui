@@ -1,16 +1,19 @@
+import { useTranslation } from "react-i18next";
 import { useCallback, useEffect, useState } from "react";
+
 import Modal from "@/components/ui/Modal";
 import useIsTab from "@/hooks/useIsTab";
+import { Event } from "@/models/Event";
 import useIsMobile from "@/hooks/useIsMobile";
 import { ModalSize } from "@/components/ui/Modal/Modal.d";
+import { ValidActivities } from "@/models/form/ValidActivities";
 import DynamicFormGenerator from "@/components/FormBuilder/DynamicFormGenerator/DynamicFormGenerator";
 import { DynamicJsonSchema } from "@/models/form/DynamicJsonFormTypes";
 import { IAddEventModalProps } from "@/components/AddEvent/components/AddEventModal/AddEventModal.d";
-import { useTranslation } from "react-i18next";
-import { ValidActivities } from "@/models/form/ValidActivities";
 
-const AddEventModal = (props: IAddEventModalProps) => {
-  const { isOpen, toggle, onConfirm, translationContent, policy } = props;
+const EventModal = (props: IAddEventModalProps) => {
+  const { isOpen, toggle, onConfirm, translationContent, policy, event } =
+    props;
   const { title } = translationContent;
   const { t } = useTranslation();
   const isMobile = useIsMobile();
@@ -31,10 +34,11 @@ const AddEventModal = (props: IAddEventModalProps) => {
   }, []);
 
   const onSubmit = useCallback(
-    (data: any) => {
+    (data: Event) => {
       onConfirm(data);
+      toggle();
     },
-    [onConfirm],
+    [onConfirm, toggle],
   );
 
   const onClose = useCallback(() => {
@@ -57,6 +61,7 @@ const AddEventModal = (props: IAddEventModalProps) => {
       <div className="flex h-[calc(100vh-15rem)] justify-center overflow-y-auto lg:h-[calc(100vh-14rem)]">
         {schema && validActivities && (
           <DynamicFormGenerator
+            defaultValues={event}
             validActivities={validActivities}
             onFormSubmit={onSubmit}
             schema={schema}
@@ -68,4 +73,4 @@ const AddEventModal = (props: IAddEventModalProps) => {
   );
 };
 
-export default AddEventModal;
+export default EventModal;

@@ -1,6 +1,8 @@
 import { render, fireEvent, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import PolicyCard from "../PolicyCard";
+import { IPolicyCard } from "@/components/PolicyCard/PolicyCard.d";
+import { mockCoverageInfo } from "@/constants/MockData";
 
 jest.mock("react-i18next", () => ({
   useTranslation: () => ({
@@ -13,7 +15,7 @@ jest.mock("react-i18next", () => ({
   },
 }));
 
-const mockProps = {
+const mockProps: IPolicyCard = {
   policy: {
     id: "123",
     iconPath: "icon/path",
@@ -33,8 +35,10 @@ const mockProps = {
     doorIconAltText: "Door",
     addEventIconAltText: "Add Event",
   },
-  onAddEventClick: jest.fn(),
-  listOfEvents: [],
+  onAddEvent: jest.fn(),
+  onDeleteEvent: jest.fn(),
+  onEditEvent: jest.fn(),
+  events: mockCoverageInfo["parade-participant"],
 };
 
 describe("PolicyCard Component", () => {
@@ -51,14 +55,28 @@ describe("PolicyCard Component", () => {
   });
 
   it("toggles the subtitle display on click", () => {
-    fireEvent.click(screen.getByText("Show More"));
-    expect(screen.getByText("Show Less")).toBeInTheDocument();
+    fireEvent.click(screen.getAllByText(mockProps.translationContent.showMore)[0]);
+    expect(
+      screen.getByText(mockProps.translationContent.showLess),
+    ).toBeInTheDocument();
   });
 
-  it("calls onAddEventClick when the add event button is clicked", () => {
+  it("adds events properly", () => {
     fireEvent.click(
       screen.getByText(mockProps.translationContent.clickToAddEvent),
     );
-    expect(mockProps.onAddEventClick).toHaveBeenCalled();
+    expect(mockProps.onAddEvent).toHaveBeenCalled();
+  });
+
+  it("removed events properly", () => {
+    fireEvent.click(
+      screen.getAllByText(mockProps.translationContent.removePolicy)[0],
+    );
+    expect(mockProps.onDeleteEvent).toHaveBeenCalled();
+  });
+
+  it("edits events properly", () => {
+    fireEvent.click(screen.getAllByText(mockProps.translationContent.edit)[0]);
+    expect(mockProps.onEditEvent).toHaveBeenCalled();
   });
 });

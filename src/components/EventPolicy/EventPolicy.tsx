@@ -2,31 +2,41 @@ import { useState, useEffect, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 
 import policies from "@/data/policies.json";
+import { Event } from "@/models/Event";
 import { Policy } from "@/models/Policy";
 import PolicyCard from "@/components/PolicyCard/PolicyCard";
+import EventModal from "@/components/AddEvent/components/AddEventModal";
 import { useToggle } from "@/hooks/index";
-import AddEventModal from "@/components/AddEvent/components/AddEventModal";
+import { PolicyEvents } from "@/models/PolicyEvents";
 import { getEventList } from "@/services/getEventList";
 import { LanguageCode } from "@/models/enums/LanguageCode";
-import { ICoverageInfo } from "@/components/EventPolicy/EventPolicy.d";
 
 const EventPolicy = () => {
-  const [coverageInfo, setCoverageInfo] = useState<ICoverageInfo>({});
-  const [selectedPolicy, setSelectedPolicy] = useState<Policy>();
-  const [showAddEventModal, toggleAddEventModal] = useToggle(false);
   const {
     i18n: { language: currentLanguage },
     t,
   } = useTranslation();
+  const [selectedPolicy, setSelectedPolicy] = useState<Policy>();
+  const [showEventModal, toggleEventModal] = useToggle(false);
+  const [policyWithEvents, setPolicyWithEvents] = useState<PolicyEvents>(() =>
+    (policies[currentLanguage as LanguageCode] as Policy[]).reduce(
+      (currentValue, policy) => {
+        currentValue[policy.id] = [];
+        return currentValue;
+      },
+      {} as PolicyEvents,
+    ),
+  );
+  const [eventToBeEdited, setEventToBeEdited] = useState<Event>();
 
   const policyList = policies[currentLanguage as LanguageCode] as Policy[];
 
   const onAddEventClick = useCallback(
-    (event: Policy) => {
-      setSelectedPolicy(event);
-      toggleAddEventModal();
+    (policy: Policy) => {
+      setSelectedPolicy(policy);
+      toggleEventModal();
     },
-    [toggleAddEventModal],
+    [toggleEventModal],
   );
 
   const pageContent = {
@@ -113,14 +123,57 @@ const EventPolicy = () => {
     },
   };
 
+  const onSubmit = useCallback(
+    (event: Event) => {
+      if (selectedPolicy) {
+        setPolicyWithEvents((prev) => {
+          return {
+            ...prev,
+            [selectedPolicy.id]: [event, ...prev[selectedPolicy.id]],
+          };
+        });
+      }
+    },
+    [selectedPolicy],
+  );
+
+  const onEditEvent = useCallback(
+    (event: Event, policy: Policy) => {
+      setSelectedPolicy(policy);
+      setEventToBeEdited(event);
+      toggleEventModal();
+    },
+    [toggleEventModal],
+  );
+
+  const onDeleteEvent = useCallback((eventIndex: number, policy: Policy) => {
+    setPolicyWithEvents((prev) => ({
+      ...prev,
+      [policy.id]: prev[policy.id].filter((_, index) => index !== eventIndex),
+    }));
+    // TODO: Change to modal confirmation
+    alert("Item deleted successfully");
+  }, []);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const coverageInfoList: ICoverageInfo = await getEventList();
-        setCoverageInfo(coverageInfoList);
+        const result = await getEventList();
+        const policyIds = Object.keys(result);
+        setPolicyWithEvents((prev) => {
+          return policyIds.reduce(
+            (currentPolicyWithEvents, policyId) => {
+              currentPolicyWithEvents[policyId] = [
+                ...currentPolicyWithEvents[policyId],
+                ...result[policyId],
+              ];
+              return currentPolicyWithEvents;
+            },
+            { ...prev },
+          );
+        });
       } catch (error) {
         console.error("Failed to fetch Coverage data:", error);
-        setCoverageInfo({});
       }
     };
 
@@ -131,12 +184,13 @@ const EventPolicy = () => {
     <div>
       <ul className="space-y-6">
         {policyList?.map((policy: Policy) => {
-          const listOfEvents = coverageInfo[policy.id]?.listOfEvents || [];
           return (
             <PolicyCard
+              onDeleteEvent={onDeleteEvent}
+              onEditEvent={onEditEvent}
               key={policy.id}
-              listOfEvents={listOfEvents}
-              onAddEventClick={onAddEventClick}
+              events={policyWithEvents[policy.id]}
+              onAddEvent={onAddEventClick}
               policy={policy}
               translationContent={pageContent.yourPolicies}
             />
@@ -145,12 +199,17 @@ const EventPolicy = () => {
       </ul>
 
       {selectedPolicy && (
-        <AddEventModal
+        <EventModal
+          event={eventToBeEdited}
           policy={selectedPolicy}
           translationContent={pageContent.addEventForm}
-          onConfirm={() => null}
-          isOpen={showAddEventModal}
-          toggle={toggleAddEventModal}
+          onConfirm={onSubmit}
+          isOpen={
+            !!selectedPolicy && showEventModal && eventToBeEdited
+              ? !!eventToBeEdited
+              : !eventToBeEdited
+          }
+          toggle={toggleEventModal}
         />
       )}
     </div>
