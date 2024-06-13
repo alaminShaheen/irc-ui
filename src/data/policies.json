@@ -33,7 +33,7 @@
       "name": "Sporting Event Coverage",
       "subtitle": "Coverage for sporting events ranging from hourly coverage, to seasonal / league coverage, camps and tournaments.",
       "iconPath": "/policy-icons/tshirt.svg",
-      "$schemaRef": "parade-participant-schema"
+      "$schemaRef": "sports-schema"
     },
     {
       "id": "coachCoverage",

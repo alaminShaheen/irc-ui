@@ -39,6 +39,12 @@ const EventPolicy = () => {
     [toggleEventModal],
   );
 
+  const closeEventModal = useCallback(() => {
+    setSelectedPolicy(undefined);
+    setEventToBeEdited(undefined);
+    toggleEventModal();
+  }, [toggleEventModal]);
+
   const pageContent = {
     yourPolicies: {
       clickToAddEvent: t("pages.quote.yourPolicies.clickToAddEvent"),
@@ -205,11 +211,11 @@ const EventPolicy = () => {
           translationContent={pageContent.addEventForm}
           onConfirm={onSubmit}
           isOpen={
-            !!selectedPolicy && showEventModal && eventToBeEdited
+            showEventModal && !!selectedPolicy && eventToBeEdited
               ? !!eventToBeEdited
               : !eventToBeEdited
           }
-          toggle={toggleEventModal}
+          toggle={closeEventModal}
         />
       )}
     </div>

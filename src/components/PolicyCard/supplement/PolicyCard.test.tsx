@@ -55,7 +55,9 @@ describe("PolicyCard Component", () => {
   });
 
   it("toggles the subtitle display on click", () => {
-    fireEvent.click(screen.getAllByText(mockProps.translationContent.showMore)[0]);
+    fireEvent.click(
+      screen.getAllByText(mockProps.translationContent.showMore)[0],
+    );
     expect(
       screen.getByText(mockProps.translationContent.showLess),
     ).toBeInTheDocument();

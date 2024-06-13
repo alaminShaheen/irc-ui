@@ -4,6 +4,7 @@ import Common from "@/locales/common/en.json";
 // Page level language files
 import Golf from "@/locales/dynamicForms/Golf/en.json";
 import Quote from "@/locales/pages/Quote/en.json";
+import Sports from "@/locales/dynamicForms/Sports/en.json";
 import AddEventForm from "@/locales/pages/AddEvent/en.json";
 import StepperForm from "@/locales/pages/StepperForm/en.json";
 import Signup from "@/locales/pages/Signup/en.json";
@@ -33,5 +34,6 @@ export const en_content = {
   dynamicForms: {
     paradeParticipant: ParadeParticipant,
     golf: Golf,
+    sports: Sports,
   },
 };
