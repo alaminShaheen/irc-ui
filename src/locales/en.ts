@@ -4,11 +4,12 @@ import Common from "@/locales/common/en.json";
 // Page level language files
 import Golf from "@/locales/dynamicForms/Golf/en.json";
 import Quote from "@/locales/pages/Quote/en.json";
-import Sports from "@/locales/dynamicForms/Sports/en.json";
-import AddEventForm from "@/locales/pages/AddEvent/en.json";
-import StepperForm from "@/locales/pages/StepperForm/en.json";
 import Signup from "@/locales/pages/Signup/en.json";
 import Signin from "@/locales/pages/Signin/en.json";
+import Sports from "@/locales/dynamicForms/Sports/en.json";
+import Instructor from "@/locales/dynamicForms/Instructor/en.json";
+import StepperForm from "@/locales/pages/StepperForm/en.json";
+import AddEventForm from "@/locales/pages/AddEvent/en.json";
 import ConfirmIdentity from "@/locales/pages/ConfirmIdentity/en.json";
 import ParadeParticipant from "@/locales/dynamicForms/ParadeParticipant/en.json";
 import ApplicantInformation from "@/locales/pages/ApplicantInformation/en.json";
@@ -35,5 +36,6 @@ export const en_content = {
     paradeParticipant: ParadeParticipant,
     golf: Golf,
     sports: Sports,
+    instructor: Instructor,
   },
 };
