@@ -16,7 +16,7 @@ const EventPolicy = () => {
     i18n: { language: currentLanguage },
     t,
   } = useTranslation();
-  const [selectedPolicy, setSelectedPolicy] = useState<Policy>();
+  const [selectedPolicy, setSelectedPolicy] = useState<Policy | null>(null);
   const [showEventModal, toggleEventModal] = useToggle(false);
   const [policyWithEvents, setPolicyWithEvents] = useState<PolicyEvents>(() =>
     (policies[currentLanguage as LanguageCode] as Policy[]).reduce(
@@ -27,7 +27,7 @@ const EventPolicy = () => {
       {} as PolicyEvents,
     ),
   );
-  const [eventToBeEdited, setEventToBeEdited] = useState<Event>();
+  const [eventToBeEdited, setEventToBeEdited] = useState<Event | null>(null);
 
   const policyList = policies[currentLanguage as LanguageCode] as Policy[];
 
@@ -38,6 +38,12 @@ const EventPolicy = () => {
     },
     [toggleEventModal],
   );
+
+  const closeEventModal = useCallback(() => {
+    setSelectedPolicy(null);
+    setEventToBeEdited(null);
+    toggleEventModal();
+  }, [toggleEventModal]);
 
   const pageContent = {
     yourPolicies: {
@@ -204,12 +210,8 @@ const EventPolicy = () => {
           policy={selectedPolicy}
           translationContent={pageContent.addEventForm}
           onConfirm={onSubmit}
-          isOpen={
-            !!selectedPolicy && showEventModal && eventToBeEdited
-              ? !!eventToBeEdited
-              : !eventToBeEdited
-          }
-          toggle={toggleEventModal}
+          isOpen={showEventModal}
+          toggle={closeEventModal}
         />
       )}
     </div>

@@ -4,7 +4,7 @@ import { ValidActivities } from "@/models/form/ValidActivities";
 import { Event } from "@/models/Event";
 
 export interface IDynamicFormGeneratorProps {
-  defaultValues?: Event;
+  defaultValues: Event | null;
   schema: DynamicJsonSchema;
   resolver?: Resolver;
   className?: string;

@@ -1,0 +1,23 @@
+{
+  "title": "Instructor Form",
+  "description": "Coverage for Instructor",
+  "autoNonOwnedLabel": "Is your auto non-owned?",
+  "policyTypeLabel": "Select the type of coaching coverage you wish to purchase:",
+  "policyTypeLabel1": "Hourly Coaching Session",
+  "policyTypeLabel2": "Season Coverage",
+  "requires5MilLabel": "Please select the amount of insurance coverage required:",
+  "numberOfParticipants": "Number of participants?",
+  "coachConcussionLabel": "Do you have formal training regarding concussion recognition?",
+  "concussionManagementLabel": "Do you have written concussion management policy that is compliant with current Health Canada / federal legislation?",
+  "concussionManagementDescription": "Resources concerning concussion management can be found in the top bar under tools.",
+  "concussionManagementDistributeLabel": "Do you distribute the written policy to coaches, parents and players and require parents' written acknowledgment that they have received and reviewed?/ federal legislation?",
+  "concussionManagementDistributeDescription": "Resources concerning concussion management can be found in the top bar under tools.",
+  "acknowledgeExclusionLabel": "I acknowledge that participants suspected of a head injury must be removed from play immediately. The participants must be cleared by a licensed healthcare provider to rejoin play. ",
+  "nonOwnedLiabilityLabel": "Please select the amount of non-owned auto insurance coverage you wish to add:",
+  "nonOwnedValidLicenseLabel": "Does every driver of the vehicles have a valid drivers' license?",
+  "nonOwnedTransportLabel": "Are you responsible for providing transportation and/or chauffeuring services, or transporting attendees?",
+  "nonOwnedRentingLabel": "Do you have any short term rental vehicles (less than 30 days)?",
+  "nonOwnedPhysicalDamageLabel": "Do you require physical damage coverage for the short term rental vehicles?",
+  "numberOfVehiclesLabel": "Number of vehicles",
+  "nonOwnedPhysicalDamageAmountLabel": "What limit of physical damage coverage is required per vehicle?"
+}

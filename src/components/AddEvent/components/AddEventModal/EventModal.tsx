@@ -41,10 +41,6 @@ const EventModal = (props: IAddEventModalProps) => {
     [onConfirm, toggle],
   );
 
-  const onClose = useCallback(() => {
-    toggle();
-  }, [toggle]);
-
   useEffect(() => {
     void getSchema();
     void getValidActivities();
@@ -55,7 +51,7 @@ const EventModal = (props: IAddEventModalProps) => {
       title={schema?.title ? t(schema?.title) : (title as string)}
       isOpen={isOpen}
       size={isMobile || isTab ? ModalSize.SMALL : ModalSize.LARGE}
-      toggle={onClose}
+      toggle={toggle}
       subtitle={schema?.description ? t(schema?.description) : ""}
     >
       <div className="flex h-[calc(100vh-15rem)] justify-center overflow-y-auto lg:h-[calc(100vh-14rem)]">

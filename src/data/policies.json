@@ -33,14 +33,14 @@
       "name": "Sporting Event Coverage",
       "subtitle": "Coverage for sporting events ranging from hourly coverage, to seasonal / league coverage, camps and tournaments.",
       "iconPath": "/policy-icons/tshirt.svg",
-      "$schemaRef": "parade-participant-schema"
+      "$schemaRef": "sports-schema"
     },
     {
       "id": "coachCoverage",
       "name": "Coach / Instructor Coverage",
       "subtitle": "Coverage for events where an instructor / coach is teaching participants.",
       "iconPath": "/policy-icons/user.svg",
-      "$schemaRef": "parade-participant-schema"
+      "$schemaRef": "instructor-schema"
     }
   ],
   "fr": [
@@ -48,15 +48,15 @@
       "id": "parade-participant",
       "name": "Parade Participant",
       "subtitle": "FR-Coverage for parade participants",
-      "iconPath": "/policy-icons/market.svg",
+      "iconPath": "/policy-icons/parade.svg",
       "$schemaRef": "parade-participant-schema"
     },
     {
       "id": "golf",
       "name": "Golf",
       "subtitle": "FR-Coverage for golf",
-      "iconPath": "/policy-icons/market.svg",
-      "$schemaRef": "parade-participant-schema"
+      "iconPath": "/policy-icons/golf.svg",
+      "$schemaRef": "golf-schema"
     },
     {
       "id": "vendorCoverage",
@@ -77,14 +77,14 @@
       "name": "Événements sportifs horaires / Ligues / Couverture saisonnière / Tournois et camps",
       "subtitle": "FR-Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores culpa dolorum ducimus earum error ex fugit harum id illum, maxime natus nemo nesciunt numquam perferendis provident repellendus sequi ullam vitae.",
       "iconPath": "/policy-icons/tshirt.svg",
-      "$schemaRef": "parade-participant-schema"
+      "$schemaRef": "sports-schema"
     },
     {
       "id": "coachCoverage",
       "name": "Entraîneur / Instructeur Sportif",
       "subtitle": "FR-Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores culpa dolorum ducimus earum error ex fugit harum id illum, maxime natus nemo nesciunt numquam perferendis provident repellendus sequi ullam vitae.",
       "iconPath": "/policy-icons/user.svg",
-      "$schemaRef": "parade-participant-schema"
+      "$schemaRef": "instructor-schema"
     }
   ]
 }
