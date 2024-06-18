@@ -13,6 +13,7 @@ import AddEventForm from "@/locales/pages/AddEvent/en.json";
 import ConfirmIdentity from "@/locales/pages/ConfirmIdentity/en.json";
 import ParadeParticipant from "@/locales/dynamicForms/ParadeParticipant/en.json";
 import ApplicantInformation from "@/locales/pages/ApplicantInformation/en.json";
+import IndividualFoodVendor from "@/locales/dynamicForms/IndividualFoodVendor/en.json";
 
 export const en_content = {
   common: Common,
@@ -37,5 +38,6 @@ export const en_content = {
     golf: Golf,
     sports: Sports,
     instructor: Instructor,
+    individualFoodVendor: IndividualFoodVendor,
   },
 };

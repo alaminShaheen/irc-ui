@@ -49,6 +49,7 @@ export type FormInput = {
   placeholder?: string;
   label?: string;
   description?: string;
+  info?: string;
   validations?: Validations;
 
   depRenderConditionMode?: ConditionMode;

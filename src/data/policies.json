@@ -41,6 +41,13 @@
       "subtitle": "Coverage for events where an instructor / coach is teaching participants.",
       "iconPath": "/policy-icons/user.svg",
       "$schemaRef": "instructor-schema"
+    },
+    {
+      "id": "individualFoodVendorCoverage",
+      "name": "Individual Food Vendor Coverage",
+      "subtitle": "Coverage for events food will be served",
+      "iconPath": "/policy-icons/vendor.svg",
+      "$schemaRef": "individual-vendor-schema"
     }
   ],
   "fr": [
@@ -85,6 +92,13 @@
       "subtitle": "FR-Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores culpa dolorum ducimus earum error ex fugit harum id illum, maxime natus nemo nesciunt numquam perferendis provident repellendus sequi ullam vitae.",
       "iconPath": "/policy-icons/user.svg",
       "$schemaRef": "instructor-schema"
+    },
+    {
+      "id": "individualFoodVendorCoverage",
+      "name": "Individual Food Vendor Coverage",
+      "subtitle": "FR-Coverage for events food will be served",
+      "iconPath": "/policy-icons/vendor.svg",
+      "$schemaRef": "individual-vendor-schema"
     }
   ]
 }

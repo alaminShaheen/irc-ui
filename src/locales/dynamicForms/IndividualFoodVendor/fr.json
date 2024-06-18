@@ -1,0 +1,19 @@
+{
+  "title": "FR-Individual Food Vendor Form",
+  "description": "FR-Coverage for Individual Food Vendors",
+  "autoNonOwnedLabel": "FR-Select non owned auto:",
+  "requires5MilLabel": "FR-Please select the amount of insurance coverage required:",
+  "individualFoodVendorLabel": "FR-Are food or beverages being sold?",
+  "individualFoodVendorThirdPartyLabel": "FR-Is all food / non-alcoholic beverages being sold packaged by a third party?",
+  "individualVendorAlcohol": "FR-Do you require alcohol coverage (maximum 50 seat capacity)?",
+  "sopLabel": "FR-I acknowledge that I must submit my Liquor License to facility staff. I also acknowledge that if the Liquor License is not submitted to facility staff before the booking insurance will not be in effect and the booking may be cancelled.",
+  "smartServeLabel": "FR-I acknowledge those serving alcohol have their bartending certification and have provided you with a copy.",
+  "alcoholReceiptsLabel": "FR-I acknowledge that alcohol receipts will not exceed $10,000 per day.",
+  "nonOwnedLiabilityLabel": "FR-Please select the amount of non-owned auto insurance coverage you wish to add:",
+  "nonOwnedValidLicenseLabel": "FR-Does every driver of the vehicles have a valid drivers' license?",
+  "nonOwnedTransportLabel": "FR-Are you responsible for providing transportation and/or chauffeuring services, or transporting attendees?",
+  "nonOwnedRentingLabel": "FR-Do you have any short term rental vehicles (less than 30 days)?",
+  "nonOwnedPhysicalDamageLabel": "FR-Do you require physical damage coverage for the short term rental vehicles?",
+  "numberOfVehiclesLabel": "FR-Number of vehicles",
+  "nonOwnedPhysicalDamageAmountLabel": "FR-What limit of physical damage coverage is required per vehicle?"
+}
