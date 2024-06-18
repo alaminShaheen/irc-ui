@@ -1,17 +1,17 @@
 import { DynamicJsonSchema } from "@/models/form/DynamicJsonFormTypes";
 
-export const publicEventSchema: DynamicJsonSchema = {
-  id: "individual-vendor",
-  title: "dynamicForms.individualFoodVendor.title",
-  description: "dynamicForms.individualFoodVendor.description",
+export const instructorSchema: DynamicJsonSchema = {
+  id: "public-event",
+  title: "dynamicForms.publicEvent.title",
+  description: "dynamicForms.publicEvent.description",
   formSections: [
     {
-      id: "individual-vendor-section",
-      key: "individual-vendor",
+      id: "public-event-section",
+      key: "public-event",
       fields: [
         {
           name: "non-owned-auto",
-          label: "dynamicForms.individualFoodVendor.autoNonOwnedLabel",
+          label: "dynamicForms.publicEvent.autoNonOwnedLabel",
           type: "radio",
           value: "true",
           options: [
@@ -21,8 +21,8 @@ export const publicEventSchema: DynamicJsonSchema = {
           validations: { required: "common.form.errors.fieldRequired" },
         },
         {
-          name: "requires-5-mil",
-          label: "dynamicForms.individualFoodVendor.requires5MilLabel",
+          name: "public-event-increased-vendor-insurance",
+          label: "dynamicForms.publicEvent.vendorInsuranceLabel",
           type: "select",
           options: [
             { value: "false", label: "common.twoMillion", id: 1 },
@@ -49,8 +49,8 @@ export const publicEventSchema: DynamicJsonSchema = {
           ],
         },
         {
-          name: "requires-5-mil",
-          label: "dynamicForms.individualFoodVendor.requires5MilLabel",
+          name: "public-event-increased-vendor-insurance",
+          label: "dynamicForms.publicEvent.vendorInsuranceLabel",
           type: "select",
           options: [{ value: "true", label: "common.fiveMillion", id: 1 }],
           value: "false",
@@ -74,8 +74,8 @@ export const publicEventSchema: DynamicJsonSchema = {
           ],
         },
         {
-          name: "requires-5-mil",
-          label: "dynamicForms.individualFoodVendor.requires5MilLabel",
+          name: "public-event-increased-vendor-insurance",
+          label: "dynamicForms.publicEvent.vendorInsuranceLabel",
           type: "select",
           options: [{ value: "false", label: "common.twoMillion", id: 1 }],
           value: "false",
@@ -99,103 +99,132 @@ export const publicEventSchema: DynamicJsonSchema = {
           ],
         },
         {
-          name: "individual-food-vendor",
-          label: "dynamicForms.individualFoodVendor.individualFoodVendorLabel",
-          type: "radio",
-          options: [
-            { value: "true", label: "common.yes", id: 1 },
-            { value: "false", label: "common.no", id: 2 },
-            { value: "na", label: "common.notAvailable", id: 3 },
-          ],
-          validations: {
-            required: "common.form.errors.fieldRequired",
-          },
+          name: "public-event-attendance",
+          label: "dynamicForms.publicEvent.attendanceLabel",
+          type: "text",
+          validations: { required: "common.form.errors.fieldRequired" },
         },
+        // {
+        //   "type": "help",
+        //   "helpvalue": "<i>A Vendor is any individual, partnership, and/or corporation (for-Profit and not-for-profit) who provides either a product, service, appearance, or presence before, during, or after your event, regardless of the dollar value.  It includes those selling products, demonstrating product, performing, providing equipment, providing security service, giving out information, etc</i>",
+        //   "condition": "model['policyType'] == 'public-event'"
+        // },
         {
-          name: "individual-food-vendor-third-party",
-          label:
-            "dynamicForms.individualFoodVendor.individualFoodVendorThirdPartyLabel",
-          type: "radio",
-          options: [
-            { value: "true", label: "common.yes", id: 1 },
-            { value: "false", label: "common.no", id: 2 },
-          ],
+          name: "public-event-food-alcohol-vendors",
+          label: "dynamicForms.publicEvent.foodAlcoholVendorsLabel",
           validations: {
             required: "common.form.errors.fieldRequired",
           },
-          renderLogic: [
-            {
-              depFieldName: "individual-food-vendor",
-              depFieldValueCondition: "=",
-              depFieldValue: "true",
-            },
-          ],
-        },
-        {
-          name: "individual-vendor-alcohol",
-          label:
-            "dynamicForms.individualFoodVendor.individualFoodVendorAlcohol",
-          type: "radio",
-          value: "false",
-          options: [
-            { value: "true", label: "common.yes", id: 1 },
-            { value: "false", label: "common.no", id: 2 },
-          ],
-          validations: {
-            required: "common.form.errors.fieldRequired",
-          },
-          renderLogic: [
-            {
-              depFieldName: "individual-food-vendor",
-              depFieldValueCondition: "=",
-              depFieldValue: "true",
-            },
-          ],
-        },
-        {
-          name: "sop",
-          label: "dynamicForms.individualFoodVendor.sopLabel",
-          type: "radio",
-          options: [
-            { value: "true", label: "common.yes", id: 1 },
-            { value: "false", label: "common.no", id: 2 },
-          ],
-          validations: {
-            required: "common.form.errors.fieldRequired",
-          },
-          renderLogic: [
-            {
-              depFieldName: "individual-vendor-alcohol",
-              depFieldValueCondition: "NotEmpty",
-              depFieldValue: "",
-            },
-          ],
-          info: "<a href='https://support.instantriskcoverage.com/en/knowledge-base/what-is-a-liquor-licence-in-my-province' target='_blank' class='mt-3'>What is a liquor license in my province <i class='fa-solid fa-circle-question'></i></a>",
-        },
-        {
-          name: "smart-serve",
-          label: "dynamicForms.individualFoodVendor.smartServeLabel",
-          type: "radio",
-          options: [
-            { value: "true", label: "common.yes", id: 1 },
-            { value: "false", label: "common.no", id: 2 },
-          ],
-          validations: {
-            required: "common.form.errors.fieldRequired",
-          },
-          renderLogic: [
-            {
-              depFieldName: "individual-vendor-alcohol",
-              depFieldValueCondition: "NotEmpty",
-              depFieldValue: "",
-            },
-          ],
-          info: "<a href='https://support.instantriskcoverage.com/en/knowledge-base/what-is-a-bartending-certification-in-my-province' target='_blank' class='mt-3'>What is the bartending certification in my province <i class='fa-solid fa-circle-question'></i></a>",
+          type: "number",
         },
 
         {
-          name: "alcohol-receipts",
-          label: "dynamicForms.individualFoodVendor.alcoholReceiptsLabel",
+          name: "public-event-liquor-served",
+          label: "dynamicForms.publicEvent.liquorServedLabel",
+          type: "radio",
+          options: [
+            { id: 1, value: "true", label: "common.yes" },
+            { id: 2, value: "false", label: "common.no" },
+          ],
+          validations: { required: "common.form.errors.fieldRequired" },
+          renderLogic: [
+            {
+              depFieldName: "public-event-food-alcohol-vendors",
+              depFieldValueCondition: ">",
+              depFieldValue: "0",
+            },
+          ],
+        },
+        {
+          type: "radio",
+          name: "public-event-liquor-license",
+          label: "dynamicForms.publicEvent.liquorLicense",
+          options: [
+            { id: 1, value: "true", label: "common.yes" },
+            { id: 2, value: "false", label: "common.no" },
+          ],
+          validations: { required: "common.form.errors.fieldRequired" },
+          renderLogic: [
+            {
+              depFieldName: "public-event-food-alcohol-vendors",
+              depFieldValueCondition: "NotEmpty",
+              depFieldValue: "",
+              andGroup: [
+                {
+                  depFieldName: "public-event-food-alcohol-vendors",
+                  depFieldValueCondition: ">",
+                  depFieldValue: "0",
+                },
+              ],
+            },
+          ],
+        },
+        {
+          type: "radio",
+          name: "public-event-smart-serve",
+          label: "dynamicForms.publicEvent.smartServeLabel",
+          options: [
+            { id: 1, value: "true", label: "common.yes" },
+            { id: 2, value: "false", label: "common.no" },
+          ],
+          validations: { required: "common.form.errors.fieldRequired" },
+          info: "<a href='https://support.instantriskcoverage.com/en/knowledge-base/what-is-a-bartending-certification-in-my-province' target='_blank' class='mt-3'>What is the bartending certification in my province <i class='fa-solid fa-circle-question'></i></a>",
+          renderLogic: [
+            {
+              depFieldName: "public-event-food-alcohol-vendors",
+              depFieldValueCondition: "NotEmpty",
+              depFieldValue: "",
+              andGroup: [
+                {
+                  depFieldName: "public-event-food-alcohol-vendors",
+                  depFieldValueCondition: ">",
+                  depFieldValue: "0",
+                },
+              ],
+            },
+          ],
+        },
+
+        {
+          name: "public-event-inflatables",
+          label: "dynamicForms.publicEvent.inflatablesLabel",
+          type: "text",
+          validations: { required: "common.form.errors.fieldRequired" },
+          info: "A high risk vendor is any of the following vendors: animal rides or dunk tanks",
+          renderLogic: [
+            {
+              depFieldName:
+                'VALID_ACTIVITIES["multi_vendors"]["disable_inflatables"]',
+              depFieldValueCondition: "=",
+              depFieldValue: "true",
+            },
+          ],
+        },
+        {
+          name: "public-event-inflatables",
+          label: "dynamicForms.publicEvent.inflatablesLabel",
+          type: "text",
+          validations: { required: "common.form.errors.fieldRequired" },
+          info: "A high risk vendor is any of the following vendors: animal rides or dunk tanks",
+          renderLogic: [
+            {
+              depFieldName:
+                'VALID_ACTIVITIES["multi_vendors"]["disable_inflatables"]',
+              depFieldValueCondition: "=",
+              depFieldValue: "false",
+            },
+          ],
+        },
+
+        {
+          name: "public-event-vendors",
+          label: "dynamicForms.publicEvent.vendorsLabel",
+          type: "text",
+          validations: { required: "common.form.errors.fieldRequired" },
+        },
+        {
+          name: "acknowledge-exclusions",
+          label: "dynamicForms.publicEvent.acknowledgeExclusionLabel",
           type: "radio",
           value: "false",
           options: [
@@ -205,17 +234,10 @@ export const publicEventSchema: DynamicJsonSchema = {
           validations: {
             required: "common.form.errors.fieldRequired",
           },
-          renderLogic: [
-            {
-              depFieldName: "individual-vendor-alcohol",
-              depFieldValueCondition: "NotEmpty",
-              depFieldValue: "",
-            },
-          ],
         },
         {
           name: "non-owned-liability",
-          label: "dynamicForms.individualFoodVendor.nonOwnedLiabilityLabel",
+          label: "dynamicForms.publicEvent.nonOwnedLiabilityLabel",
           type: "select",
           options: [
             {
@@ -248,7 +270,7 @@ export const publicEventSchema: DynamicJsonSchema = {
         },
         {
           name: "non-owned-valid-license",
-          label: "dynamicForms.individualFoodVendor.nonOwnedValidLicenseLabel",
+          label: "dynamicForms.publicEvent.nonOwnedValidLicenseLabel",
           type: "radio",
           value: "false",
           options: [
@@ -268,7 +290,7 @@ export const publicEventSchema: DynamicJsonSchema = {
         },
         {
           name: "non-owned-transport",
-          label: "dynamicForms.individualFoodVendor.nonOwnedTransportLabel",
+          label: "dynamicForms.publicEvent.nonOwnedTransportLabel",
           type: "radio",
           value: "false",
           options: [
@@ -288,7 +310,7 @@ export const publicEventSchema: DynamicJsonSchema = {
         },
         {
           name: "non-owned-renting",
-          label: "dynamicForms.individualFoodVendor.nonOwnedRentingLabel",
+          label: "dynamicForms.publicEvent.nonOwnedRentingLabel",
           type: "radio",
           value: "false",
           options: [
@@ -308,8 +330,7 @@ export const publicEventSchema: DynamicJsonSchema = {
         },
         {
           name: "non-owned-physical-damage",
-          label:
-            "dynamicForms.individualFoodVendor.nonOwnedPhysicalDamageLabel",
+          label: "dynamicForms.publicEvent.nonOwnedPhysicalDamageLabel",
           type: "radio",
           value: "false",
           options: [
@@ -337,7 +358,7 @@ export const publicEventSchema: DynamicJsonSchema = {
         {
           name: "number-of-vehicles",
           type: "number",
-          label: "dynamicForms.individualFoodVendor.numberOfVehiclesLabel",
+          label: "dynamicForms.publicEvent.numberOfVehiclesLabel",
           validations: {
             required: "common.form.errors.fieldRequired",
           },
@@ -358,8 +379,7 @@ export const publicEventSchema: DynamicJsonSchema = {
         },
         {
           name: "non-owned-physical-damage-amount",
-          label:
-            "dynamicForms.individualFoodVendor.nonOwnedPhysicalDamageAmountLabel",
+          label: "dynamicForms.publicEvent.nonOwnedPhysicalDamageAmountLabel",
           type: "select",
           options: [
             { value: "25", label: "common.twentyFiveK", id: 1 },

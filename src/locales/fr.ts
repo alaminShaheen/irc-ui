@@ -9,6 +9,7 @@ import Signin from "@/locales/pages/Signin/fr.json";
 import Sports from "@/locales/dynamicForms/Sports/fr.json";
 import Instructor from "@/locales/dynamicForms/Instructor/fr.json";
 import StepperForm from "@/locales/pages/StepperForm/fr.json";
+import PublicEvent from "@/locales/dynamicForms/PublicEvent/fr.json";
 import AddEventForm from "@/locales/pages/AddEvent/fr.json";
 import ConfirmIdentity from "@/locales/pages/ConfirmIdentity/fr.json";
 import ParadeParticipant from "@/locales/dynamicForms/ParadeParticipant/fr.json";
@@ -39,5 +40,6 @@ export const fr_content = {
     sports: Sports,
     instructor: Instructor,
     individualFoodVendor: IndividualFoodVendor,
+    publicEvent: PublicEvent,
   },
 };

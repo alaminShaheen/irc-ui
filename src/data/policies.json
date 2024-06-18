@@ -48,6 +48,13 @@
       "subtitle": "Coverage for events food will be served",
       "iconPath": "/policy-icons/vendor.svg",
       "$schemaRef": "individual-vendor-schema"
+    },
+    {
+      "id": "publicEventCoverage",
+      "name": "Public Event Coverage",
+      "subtitle": "Coverage for public events",
+      "iconPath": "/policy-icons/event.svg",
+      "$schemaRef": "public-event-schema"
     }
   ],
   "fr": [
@@ -99,6 +106,13 @@
       "subtitle": "FR-Coverage for events food will be served",
       "iconPath": "/policy-icons/vendor.svg",
       "$schemaRef": "individual-vendor-schema"
+    },
+    {
+      "id": "publicEventCoverage",
+      "name": "Public Event Coverage",
+      "subtitle": "FR-Coverage for public events",
+      "iconPath": "/policy-icons/event.svg",
+      "$schemaRef": "public-event-schema"
     }
   ]
 }
