@@ -7,6 +7,7 @@ import Quote from "@/locales/pages/Quote/fr.json";
 import Signup from "@/locales/pages/Signup/fr.json";
 import Signin from "@/locales/pages/Signin/fr.json";
 import Sports from "@/locales/dynamicForms/Sports/fr.json";
+import RoomRental from "@/locales/dynamicForms/RoomRental/fr.json";
 import Instructor from "@/locales/dynamicForms/Instructor/fr.json";
 import StepperForm from "@/locales/pages/StepperForm/fr.json";
 import PublicEvent from "@/locales/dynamicForms/PublicEvent/fr.json";
@@ -41,5 +42,6 @@ export const fr_content = {
     instructor: Instructor,
     individualFoodVendor: IndividualFoodVendor,
     publicEvent: PublicEvent,
+    roomRental: RoomRental,
   },
 };

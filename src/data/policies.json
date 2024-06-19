@@ -55,6 +55,13 @@
       "subtitle": "Coverage for public events",
       "iconPath": "/policy-icons/event.svg",
       "$schemaRef": "public-event-schema"
+    },
+    {
+      "id": "roomRentalCoverage",
+      "name": "Room Rental Coverage",
+      "subtitle": "Coverage for room rental",
+      "iconPath": "/policy-icons/room.svg",
+      "$schemaRef": "room-rental-schema"
     }
   ],
   "fr": [
