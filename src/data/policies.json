@@ -41,6 +41,34 @@
       "subtitle": "Coverage for events where an instructor / coach is teaching participants.",
       "iconPath": "/policy-icons/user.svg",
       "$schemaRef": "instructor-schema"
+    },
+    {
+      "id": "individualFoodVendorCoverage",
+      "name": "Individual Food Vendor Coverage",
+      "subtitle": "Coverage for events food will be served",
+      "iconPath": "/policy-icons/vendor.svg",
+      "$schemaRef": "individual-vendor-schema"
+    },
+    {
+      "id": "publicEventCoverage",
+      "name": "Public Event Coverage",
+      "subtitle": "Coverage for public events",
+      "iconPath": "/policy-icons/event.svg",
+      "$schemaRef": "public-event-schema"
+    },
+    {
+      "id": "roomRentalCoverage",
+      "name": "Room Rental Coverage",
+      "subtitle": "Coverage for room rental",
+      "iconPath": "/policy-icons/room.svg",
+      "$schemaRef": "room-rental-schema"
+    },
+    {
+      "id": "publicRoomRentalCoverage",
+      "name": "Public Room Rental Coverage",
+      "subtitle": "Coverage for public room rental",
+      "iconPath": "/policy-icons/public-room.svg",
+      "$schemaRef": "public-room-rental-schema"
     }
   ],
   "fr": [
@@ -85,6 +113,20 @@
       "subtitle": "FR-Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores culpa dolorum ducimus earum error ex fugit harum id illum, maxime natus nemo nesciunt numquam perferendis provident repellendus sequi ullam vitae.",
       "iconPath": "/policy-icons/user.svg",
       "$schemaRef": "instructor-schema"
+    },
+    {
+      "id": "individualFoodVendorCoverage",
+      "name": "Individual Food Vendor Coverage",
+      "subtitle": "FR-Coverage for events food will be served",
+      "iconPath": "/policy-icons/vendor.svg",
+      "$schemaRef": "individual-vendor-schema"
+    },
+    {
+      "id": "publicEventCoverage",
+      "name": "Public Event Coverage",
+      "subtitle": "FR-Coverage for public events",
+      "iconPath": "/policy-icons/event.svg",
+      "$schemaRef": "public-event-schema"
     }
   ]
 }

@@ -95,6 +95,7 @@ const DynamicFormGenerator = (props: IDynamicFormGeneratorProps) => {
                     key={field.id ? String(field.id) : field.name}
                     name={field.name}
                     label={field.label}
+                    info={field.info}
                     value={eventValues?.[field.name] ?? field.value}
                     type={field.type}
                     validations={field.validations}

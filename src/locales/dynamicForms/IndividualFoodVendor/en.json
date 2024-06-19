@@ -1,0 +1,19 @@
+{
+  "title": "Individual Food Vendor Form",
+  "description": "Coverage for Individual Food Vendors",
+  "autoNonOwnedLabel": "Select non owned auto:",
+  "requires5MilLabel": "Please select the amount of insurance coverage required:",
+  "individualFoodVendorLabel": "Are food or beverages being sold?",
+  "individualFoodVendorThirdPartyLabel": "Is all food / non-alcoholic beverages being sold packaged by a third party?",
+  "individualVendorAlcohol": "Do you require alcohol coverage (maximum 50 seat capacity)?",
+  "sopLabel": "I acknowledge that I must submit my Liquor License to facility staff. I also acknowledge that if the Liquor License is not submitted to facility staff before the booking insurance will not be in effect and the booking may be cancelled.",
+  "smartServeLabel": "I acknowledge those serving alcohol have their bartending certification and have provided you with a copy.",
+  "alcoholReceiptsLabel": "I acknowledge that alcohol receipts will not exceed $10,000 per day.",
+  "nonOwnedLiabilityLabel": "Please select the amount of non-owned auto insurance coverage you wish to add:",
+  "nonOwnedValidLicenseLabel": "Does every driver of the vehicles have a valid drivers' license?",
+  "nonOwnedTransportLabel": "Are you responsible for providing transportation and/or chauffeuring services, or transporting attendees?",
+  "nonOwnedRentingLabel": "Do you have any short term rental vehicles (less than 30 days)?",
+  "nonOwnedPhysicalDamageLabel": "Do you require physical damage coverage for the short term rental vehicles?",
+  "numberOfVehiclesLabel": "Number of vehicles",
+  "nonOwnedPhysicalDamageAmountLabel": "What limit of physical damage coverage is required per vehicle?"
+}

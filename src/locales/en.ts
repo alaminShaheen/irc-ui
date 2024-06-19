@@ -8,11 +8,15 @@ import Signup from "@/locales/pages/Signup/en.json";
 import Signin from "@/locales/pages/Signin/en.json";
 import Sports from "@/locales/dynamicForms/Sports/en.json";
 import Instructor from "@/locales/dynamicForms/Instructor/en.json";
+import RoomRental from "@/locales/dynamicForms/RoomRental/en.json";
 import StepperForm from "@/locales/pages/StepperForm/en.json";
+import PublicEvent from "@/locales/dynamicForms/PublicEvent/en.json";
 import AddEventForm from "@/locales/pages/AddEvent/en.json";
 import ConfirmIdentity from "@/locales/pages/ConfirmIdentity/en.json";
+import PublicRoomRental from "@/locales/dynamicForms/PublicRoomRental/en.json";
 import ParadeParticipant from "@/locales/dynamicForms/ParadeParticipant/en.json";
 import ApplicantInformation from "@/locales/pages/ApplicantInformation/en.json";
+import IndividualFoodVendor from "@/locales/dynamicForms/IndividualFoodVendor/en.json";
 
 export const en_content = {
   common: Common,
@@ -37,5 +41,9 @@ export const en_content = {
     golf: Golf,
     sports: Sports,
     instructor: Instructor,
+    individualFoodVendor: IndividualFoodVendor,
+    publicEvent: PublicEvent,
+    roomRental: RoomRental,
+    publicRoomRental: PublicRoomRental,
   },
 };

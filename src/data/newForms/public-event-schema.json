@@ -1,15 +1,15 @@
 {
-  "id": "sports",
-  "title": "dynamicForms.sports.title",
-  "description": "dynamicForms.sports.description",
+  "id": "public-event",
+  "title": "dynamicForms.publicEvent.title",
+  "description": "dynamicForms.publicEvent.description",
   "formSections": [
 	{
-	  "id": "sports-section",
-	  "key": "sports",
+	  "id": "public-event-section",
+	  "key": "public-event",
 	  "fields": [
 		{
 		  "name": "non-owned-auto",
-		  "label": "dynamicForms.sports.autoNonOwnedLabel",
+		  "label": "dynamicForms.publicEvent.autoNonOwnedLabel",
 		  "type": "radio",
 		  "value": "true",
 		  "options": [
@@ -29,59 +29,9 @@
 		  }
 		},
 		{
-		  "name": "policyType",
-		  "label": "dynamicForms.sports.policyTypeLabel",
-		  "id": 5,
-		  "type": "select",
-		  "value": "event",
-		  "options": [
-			{
-			  "value": "league",
-			  "label": "dynamicForms.sports.policyTypeLabel1",
-			  "id": 1
-			},
-			{
-			  "value": "tournament",
-			  "label": "dynamicForms.sports.policyTypeLabel2",
-			  "id": 2
-			},
-			{
-			  "value": "camp",
-			  "label": "dynamicForms.sports.policyTypeLabel3",
-			  "id": 3
-			},
-			{
-			  "value": "event",
-			  "label": "dynamicForms.sports.policyTypeLabel4",
-			  "id": 4
-			}
-		  ],
-		  "validations": {
-			"required": "common.form.errors.fieldRequired"
-		  }
-		},
-		{
-		  "name": "policyType",
-		  "label": "dynamicForms.sports.policyTypeLabel",
-		  "id": 4,
-		  "type": "select",
-		  "value": "event",
-		  "options": [
-			{
-			  "value": "event",
-			  "label": "dynamicForms.sports.policyTypeLabel4",
-			  "id": 1
-			}
-		  ],
-		  "info": "<a href='https://support.instantriskcoverage.com/en/knowledge-base/what-type-of-sporting-event-should-i-select' target='_blank' class='mt-10'>Click here to get help selecting the type of sporting event <i class='fa-solid fa-circle-question'></i></a>",
-		  "validations": {
-			"required": "common.form.errors.fieldRequired"
-		  }
-		},
-		{
-		  "name": "requires-5-mil",
-		  "label": "dynamicForms.sports.requires5MilLabel",
-		  "id": 3,
+		  "name": "public-event-increased-vendor-insurance",
+		  "id": 1,
+		  "label": "dynamicForms.publicEvent.vendorInsuranceLabel",
 		  "type": "select",
 		  "options": [
 			{
@@ -101,12 +51,12 @@
 		  },
 		  "renderLogic": [
 			{
-			  "depFieldName": "VALID_ACTIVITIES[\"sports\"][\"limits\"][\"2\"]",
+			  "depFieldName": "VALID_ACTIVITIES[\"instructors\"][\"limits\"][\"2\"]",
 			  "depFieldValue": "true",
 			  "depFieldValueCondition": "=",
 			  "andGroup": [
 				{
-				  "depFieldName": "VALID_ACTIVITIES[\"sports\"][\"limits\"][\"5\"]",
+				  "depFieldName": "VALID_ACTIVITIES[\"instructors\"][\"limits\"][\"5\"]",
 				  "depFieldValue": "true",
 				  "depFieldValueCondition": "="
 				}
@@ -115,10 +65,10 @@
 		  ]
 		},
 		{
-		  "name": "requires-5-mil",
-		  "label": "dynamicForms.sports.requires5MilLabel",
+		  "name": "public-event-increased-vendor-insurance",
+		  "id": 2,
+		  "label": "dynamicForms.publicEvent.vendorInsuranceLabel",
 		  "type": "select",
-		  "id": 1,
 		  "options": [
 			{
 			  "value": "true",
@@ -132,12 +82,12 @@
 		  },
 		  "renderLogic": [
 			{
-			  "depFieldName": "VALID_ACTIVITIES[\"sports\"][\"limits\"][\"2\"]",
+			  "depFieldName": "VALID_ACTIVITIES[\"instructors\"][\"limits\"][\"2\"]",
 			  "depFieldValue": "false",
 			  "depFieldValueCondition": "=",
 			  "andGroup": [
 				{
-				  "depFieldName": "VALID_ACTIVITIES[\"sports\"][\"limits\"][\"5\"]",
+				  "depFieldName": "VALID_ACTIVITIES[\"instructors\"][\"limits\"][\"5\"]",
 				  "depFieldValue": "true",
 				  "depFieldValueCondition": "="
 				}
@@ -146,9 +96,9 @@
 		  ]
 		},
 		{
-		  "name": "requires-5-mil",
-		  "label": "dynamicForms.sports.requires5MilLabel",
-		  "id": 2,
+		  "name": "public-event-increased-vendor-insurance",
+		  "id": 3,
+		  "label": "dynamicForms.publicEvent.vendorInsuranceLabel",
 		  "type": "select",
 		  "options": [
 			{
@@ -163,12 +113,12 @@
 		  },
 		  "renderLogic": [
 			{
-			  "depFieldName": "VALID_ACTIVITIES[\"sports\"][\"limits\"][\"2\"]",
+			  "depFieldName": "VALID_ACTIVITIES[\"instructors\"][\"limits\"][\"2\"]",
 			  "depFieldValueCondition": "=",
-			  "depFieldValue": "false",
+			  "depFieldValue": "true",
 			  "andGroup": [
 				{
-				  "depFieldName": "VALID_ACTIVITIES[\"sports\"][\"limits\"][\"5\"]",
+				  "depFieldName": "VALID_ACTIVITIES[\"instructors\"][\"limits\"][\"5\"]",
 				  "depFieldValueCondition": "=",
 				  "depFieldValue": "false"
 				}
@@ -177,55 +127,35 @@
 		  ]
 		},
 		{
-		  "name": "participants",
-		  "label": "dynamicForms.sports.numberOfParticipants",
-		  "type": "number",
-		  "validations": {
-			"required": "common.form.errors.fieldRequired"
-		  },
-		  "renderLogic": [
-			{
-			  "depFieldName": "policyType",
-			  "depFieldValueCondition": "=",
-			  "depFieldValue": "event"
-			}
-		  ]
-		},
-		{
-		  "name": "teams-league",
-		  "description": "dynamicForms.sports.teamLeaguesDescription",
+		  "name": "public-event-attendance",
+		  "label": "dynamicForms.publicEvent.attendanceLabel",
 		  "type": "text",
-		  "renderLogic": [
-			{
-			  "depFieldName": "policyType",
-			  "depFieldValueCondition": "=",
-			  "depFieldValue": "league"
-			}
-		  ],
 		  "validations": {
 			"required": "common.form.errors.fieldRequired"
 		  }
 		},
 		{
-		  "name": "coach-concussion",
-		  "label": "dynamicForms.sports.coachConcussionLabel",
+		  "name": "public-event-food-alcohol-vendors",
+		  "label": "dynamicForms.publicEvent.foodAlcoholVendorsLabel",
+		  "validations": {
+			"required": "common.form.errors.fieldRequired"
+		  },
+		  "type": "number"
+		},
+		{
+		  "name": "public-event-liquor-served",
+		  "label": "dynamicForms.publicEvent.liquorServedLabel",
 		  "type": "radio",
-		  "value": "false",
 		  "options": [
 			{
+			  "id": 1,
 			  "value": "true",
-			  "label": "common.yes",
-			  "id": 1
+			  "label": "common.yes"
 			},
 			{
+			  "id": 2,
 			  "value": "false",
-			  "label": "common.no",
-			  "id": 2
-			},
-			{
-			  "value": "na",
-			  "label": "common.notAvailable",
-			  "id": 3
+			  "label": "common.no"
 			}
 		  ],
 		  "validations": {
@@ -233,28 +163,26 @@
 		  },
 		  "renderLogic": [
 			{
-			  "depFieldName": "policyType",
-			  "depFieldValueCondition": "=",
-			  "depFieldValue": "league"
+			  "depFieldName": "public-event-food-alcohol-vendors",
+			  "depFieldValueCondition": ">",
+			  "depFieldValue": "0"
 			}
 		  ]
 		},
 		{
-		  "name": "concussion-management-distribute",
-		  "label": "dynamicForms.sports.concussionManagementLabel",
-		  "description": "dynamicForms.sports.concussionManagementDescription",
 		  "type": "radio",
-		  "value": "false",
+		  "name": "public-event-liquor-license",
+		  "label": "dynamicForms.publicEvent.liquorLicense",
 		  "options": [
 			{
+			  "id": 1,
 			  "value": "true",
-			  "label": "common.yes",
-			  "id": 1
+			  "label": "common.yes"
 			},
 			{
+			  "id": 2,
 			  "value": "false",
-			  "label": "common.no",
-			  "id": 2
+			  "label": "common.no"
 			}
 		  ],
 		  "validations": {
@@ -262,45 +190,99 @@
 		  },
 		  "renderLogic": [
 			{
-			  "depFieldName": "policyType",
-			  "depFieldValueCondition": "=",
-			  "depFieldValue": "league"
+			  "depFieldName": "public-event-food-alcohol-vendors",
+			  "depFieldValueCondition": "NotEmpty",
+			  "depFieldValue": "",
+			  "andGroup": [
+				{
+				  "depFieldName": "public-event-food-alcohol-vendors",
+				  "depFieldValueCondition": ">",
+				  "depFieldValue": "0"
+				}
+			  ]
 			}
 		  ]
 		},
 		{
-		  "name": "teams-tournament",
-		  "label": "dynamicForms.sports.teamsTournamentLabel",
-		  "type": "text",
-		  "renderLogic": [
+		  "type": "radio",
+		  "name": "public-event-smart-serve",
+		  "label": "dynamicForms.publicEvent.smartServeLabel",
+		  "options": [
 			{
-			  "depFieldName": "policyType",
-			  "depFieldValueCondition": "=",
-			  "depFieldValue": "tournament"
+			  "id": 1,
+			  "value": "true",
+			  "label": "common.yes"
+			},
+			{
+			  "id": 2,
+			  "value": "false",
+			  "label": "common.no"
 			}
 		  ],
 		  "validations": {
 			"required": "common.form.errors.fieldRequired"
-		  }
-		},
-		{
-		  "name": "players",
-		  "label": "dynamicForms.sports.playersLabel",
-		  "type": "text",
+		  },
+		  "info": "<a href='https://support.instantriskcoverage.com/en/knowledge-base/what-is-a-bartending-certification-in-my-province' target='_blank' class='mt-3'>What is the bartending certification in my province <i class='fa-solid fa-circle-question'></i></a>",
 		  "renderLogic": [
 			{
-			  "depFieldName": "policyType",
-			  "depFieldValueCondition": "=",
-			  "depFieldValue": "camp"
+			  "depFieldName": "public-event-food-alcohol-vendors",
+			  "depFieldValueCondition": "NotEmpty",
+			  "depFieldValue": "",
+			  "andGroup": [
+				{
+				  "depFieldName": "public-event-food-alcohol-vendors",
+				  "depFieldValueCondition": ">",
+				  "depFieldValue": "0"
+				}
+			  ]
 			}
-		  ],
+		  ]
+		},
+		{
+		  "name": "public-event-inflatables",
+		  "label": "dynamicForms.publicEvent.inflatablesLabel",
+		  "type": "text",
+		  "id": 4,
+		  "validations": {
+			"required": "common.form.errors.fieldRequired"
+		  },
+		  "info": "A high risk vendor is any of the following vendors: animal rides or dunk tanks",
+		  "renderLogic": [
+			{
+			  "depFieldName": "VALID_ACTIVITIES[\"multi_vendors\"][\"disable_inflatables\"]",
+			  "depFieldValueCondition": "=",
+			  "depFieldValue": "true"
+			}
+		  ]
+		},
+		{
+		  "name": "public-event-inflatables",
+		  "id": 5,
+		  "label": "dynamicForms.publicEvent.inflatablesLabel",
+		  "type": "text",
+		  "validations": {
+			"required": "common.form.errors.fieldRequired"
+		  },
+		  "info": "A high risk vendor is any of the following vendors: animal rides or dunk tanks",
+		  "renderLogic": [
+			{
+			  "depFieldName": "VALID_ACTIVITIES[\"multi_vendors\"][\"disable_inflatables\"]",
+			  "depFieldValueCondition": "=",
+			  "depFieldValue": "false"
+			}
+		  ]
+		},
+		{
+		  "name": "public-event-vendors",
+		  "label": "dynamicForms.publicEvent.vendorsLabel",
+		  "type": "text",
 		  "validations": {
 			"required": "common.form.errors.fieldRequired"
 		  }
 		},
 		{
 		  "name": "acknowledge-exclusions",
-		  "label": "dynamicForms.sports.acknowledgeExclusionLabel",
+		  "label": "dynamicForms.publicEvent.acknowledgeExclusionLabel",
 		  "type": "radio",
 		  "value": "false",
 		  "options": [
@@ -321,7 +303,7 @@
 		},
 		{
 		  "name": "non-owned-liability",
-		  "label": "dynamicForms.sports.nonOwnedLiabilityLabel",
+		  "label": "dynamicForms.publicEvent.nonOwnedLiabilityLabel",
 		  "type": "select",
 		  "options": [
 			{
@@ -354,7 +336,7 @@
 		},
 		{
 		  "name": "non-owned-valid-license",
-		  "label": "dynamicForms.sports.nonOwnedValidLicenseLabel",
+		  "label": "dynamicForms.publicEvent.nonOwnedValidLicenseLabel",
 		  "type": "radio",
 		  "value": "false",
 		  "options": [
@@ -382,7 +364,7 @@
 		},
 		{
 		  "name": "non-owned-transport",
-		  "label": "dynamicForms.sports.nonOwnedTransportLabel",
+		  "label": "dynamicForms.publicEvent.nonOwnedTransportLabel",
 		  "type": "radio",
 		  "value": "false",
 		  "options": [
@@ -410,7 +392,7 @@
 		},
 		{
 		  "name": "non-owned-renting",
-		  "label": "dynamicForms.sports.nonOwnedRentingLabel",
+		  "label": "dynamicForms.publicEvent.nonOwnedRentingLabel",
 		  "type": "radio",
 		  "value": "false",
 		  "options": [
@@ -438,7 +420,7 @@
 		},
 		{
 		  "name": "non-owned-physical-damage",
-		  "label": "dynamicForms.sports.nonOwnedPhysicalDamageLabel",
+		  "label": "dynamicForms.publicEvent.nonOwnedPhysicalDamageLabel",
 		  "type": "radio",
 		  "value": "false",
 		  "options": [
@@ -474,7 +456,7 @@
 		{
 		  "name": "number-of-vehicles",
 		  "type": "number",
-		  "label": "dynamicForms.sports.numberOfVehiclesLabel",
+		  "label": "dynamicForms.publicEvent.numberOfVehiclesLabel",
 		  "validations": {
 			"required": "common.form.errors.fieldRequired"
 		  },
@@ -495,7 +477,7 @@
 		},
 		{
 		  "name": "non-owned-physical-damage-amount",
-		  "label": "dynamicForms.sports.nonOwnedPhysicalDamageAmountLabel",
+		  "label": "dynamicForms.publicEvent.nonOwnedPhysicalDamageAmountLabel",
 		  "type": "select",
 		  "options": [
 			{

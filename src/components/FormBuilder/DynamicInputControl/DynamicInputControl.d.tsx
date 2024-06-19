@@ -18,6 +18,7 @@ export interface IDynamicInputControlProps {
   options?: SelectOption<any>[];
   validations?: Validations;
   value?: InputValue;
+  info?: string;
 
   renderLogic?: ConditionalLogic[];
   renderLogicConditionMode?: ConditionMode;

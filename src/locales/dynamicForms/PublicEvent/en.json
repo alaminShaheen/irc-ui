@@ -1,0 +1,21 @@
+{
+  "title": "Public Event Form",
+  "description": "Coverage for Public Events",
+  "autoNonOwnedLabel": "Select non owned auto:",
+  "vendorInsuranceLabel": "Please select the amount of insurance coverage required for the vendors:",
+  "attendanceLabel": "Number of people attending",
+  "foodAlcoholVendorsLabel": "Food alcohol vendors",
+  "liquorServedLabel": "Will alcohol be served by any of the vendors?",
+  "liquorLicense": "Does the event have a liquor license?",
+  "smartServeLabel": "Do all those serving alcohol have their bartending certification?",
+  "inflatablesLabel": "Event Inflatables",
+  "vendorsLabel": "Public event vendors",
+  "acknowledgeExclusionLabel": "I acknowledge that this policy will not cover events with more than 10,000 attendees. If you do have an event with more attendees than 10,000 please contact the broker.",
+  "nonOwnedLiabilityLabel": "Please select the amount of non-owned auto insurance coverage you wish to add:",
+  "nonOwnedValidLicenseLabel": "Does every driver of the vehicles have a valid drivers' license?",
+  "nonOwnedTransportLabel": "Are you responsible for providing transportation and/or chauffeuring services, or transporting attendees?",
+  "nonOwnedRentingLabel": "Do you have any short term rental vehicles (less than 30 days)?",
+  "nonOwnedPhysicalDamageLabel": "Do you require physical damage coverage for the short term rental vehicles?",
+  "numberOfVehiclesLabel": "Number of vehicles",
+  "nonOwnedPhysicalDamageAmountLabel": "What limit of physical damage coverage is required per vehicle?"
+}
