@@ -13,6 +13,7 @@ import StepperForm from "@/locales/pages/StepperForm/fr.json";
 import PublicEvent from "@/locales/dynamicForms/PublicEvent/fr.json";
 import AddEventForm from "@/locales/pages/AddEvent/fr.json";
 import ConfirmIdentity from "@/locales/pages/ConfirmIdentity/fr.json";
+import PublicRoomRental from "@/locales/dynamicForms/PublicRoomRental/fr.json";
 import ParadeParticipant from "@/locales/dynamicForms/ParadeParticipant/fr.json";
 import ApplicantInformation from "@/locales/pages/ApplicantInformation/fr.json";
 import IndividualFoodVendor from "@/locales/dynamicForms/IndividualFoodVendor/fr.json";
@@ -43,5 +44,6 @@ export const fr_content = {
     individualFoodVendor: IndividualFoodVendor,
     publicEvent: PublicEvent,
     roomRental: RoomRental,
+    publicRoomRental: PublicRoomRental,
   },
 };

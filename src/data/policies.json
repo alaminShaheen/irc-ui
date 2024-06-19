@@ -62,6 +62,13 @@
       "subtitle": "Coverage for room rental",
       "iconPath": "/policy-icons/room.svg",
       "$schemaRef": "room-rental-schema"
+    },
+    {
+      "id": "publicRoomRentalCoverage",
+      "name": "Public Room Rental Coverage",
+      "subtitle": "Coverage for public room rental",
+      "iconPath": "/policy-icons/public-room.svg",
+      "$schemaRef": "public-room-rental-schema"
     }
   ],
   "fr": [
