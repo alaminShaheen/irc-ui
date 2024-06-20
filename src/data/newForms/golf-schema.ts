@@ -3,7 +3,7 @@ import { DynamicJsonSchema } from "@/models/form/DynamicJsonFormTypes";
 export const golfSchema: DynamicJsonSchema = {
   id: "golf",
   title: "Golf Form",
-  description: "Coverage for golf",
+  description: "Coverage Hole in One Prize",
   formSections: [
     {
       id: "golf-schema",

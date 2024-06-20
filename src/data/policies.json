@@ -3,14 +3,14 @@
     {
       "id": "parade-participant",
       "name": "Parade Participant",
-      "subtitle": "Coverage for parade participants",
+      "subtitle": "Coverage for Parade Organizers and Participants",
       "iconPath": "/policy-icons/parade.svg",
       "$schemaRef": "parade-participant-schema"
     },
     {
       "id": "golf",
       "name": "Golf",
-      "subtitle": "Coverage for golf",
+      "subtitle": "Coverage Hole in One Prize",
       "iconPath": "/policy-icons/golf.svg",
       "$schemaRef": "golf-schema"
     },
@@ -75,14 +75,14 @@
     {
       "id": "parade-participant",
       "name": "Parade Participant",
-      "subtitle": "FR-Coverage for parade participants",
+      "subtitle": "FR-Coverage for Parade Organizers and Participants",
       "iconPath": "/policy-icons/parade.svg",
       "$schemaRef": "parade-participant-schema"
     },
     {
       "id": "golf",
       "name": "Golf",
-      "subtitle": "FR-Coverage for golf",
+      "subtitle": "FR-Coverage Hole in One Prize",
       "iconPath": "/policy-icons/golf.svg",
       "$schemaRef": "golf-schema"
     },
