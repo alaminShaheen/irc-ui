@@ -33,7 +33,10 @@ const RadioButton = forwardRef<HTMLInputElement, IRadioButtonProps>(
         />
         <span
           className={cn(
-            "h-6 w-6 rounded-full border border-graphite-300 peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-yellow-400",
+            "h-6 w-6 rounded-full peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-yellow-400",
+            {
+              "border border-graphite-300": !rest.checked,
+            },
           )}
         >
           <Transition
