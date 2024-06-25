@@ -3,7 +3,7 @@
     {
       "id": "parade-participant",
       "name": "Parade Participant",
-      "subtitle": "Coverage for Parade Organizers and Participants",
+      "subtitle": "Coverage for Parade Participants",
       "iconPath": "/policy-icons/parade.svg",
       "$schemaRef": "parade-participant-schema"
     },
@@ -75,7 +75,7 @@
     {
       "id": "parade-participant",
       "name": "Parade Participant",
-      "subtitle": "FR-Coverage for Parade Organizers and Participants",
+      "subtitle": "FR-Coverage for Parade Participants",
       "iconPath": "/policy-icons/parade.svg",
       "$schemaRef": "parade-participant-schema"
     },
