@@ -1,6 +1,6 @@
 {
   "title": "FR-Parade Participant Form",
-  "description": "FR-Coverage for Parade Participants",
+  "description": "FR-Coverage for Parade Organizers and Participants",
   "autoNonOwnedLabel": "FR-Is your auto non-owned?",
   "nonProfitLabel": "FR-Is your organization a registered non-profit?",
   "paradeParticipantLabel": "FR-Select the option which most accurately describes how your organization will be participating in the parade:",
