@@ -47,6 +47,16 @@ const DynamicFormGenerator = (props: IDynamicFormGeneratorProps) => {
         {} as Record<string, InputValue>,
       ),
       ...defaultEventValues,
+      ...{
+        eventName: "",
+        facilityInfo: [
+          {
+            facility: "",
+            rentalFacilityAgreementNumber: "",
+            dateRanges: [{ endDate: new Date(), startDate: new Date() }],
+          },
+        ],
+      },
     };
   }, [eventValues, schema.formSections]);
 

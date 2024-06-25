@@ -2,7 +2,7 @@ import { Fragment, useCallback, useEffect, useMemo } from "react";
 import { IDynamicInputControlProps } from "@/components/FormBuilder/DynamicInputControl/DynamicInputControl.d";
 import { Controller, useFormContext, useWatch } from "react-hook-form";
 import { checkConditionalLogic } from "@/utils/FormBuilder";
-import { cn } from "@/utils/helper";
+import { cn, hasUndefinedValues } from "@/utils/helper";
 import FormError from "@/components/FormError";
 import { useTranslation } from "react-i18next";
 import SelectDropdown from "@/components/ui/SelectDropdown/SelectDropdown";
@@ -81,12 +81,8 @@ const DynamicInputControl = (props: IDynamicInputControlProps) => {
     type,
   ]);
 
-  const formDisabled = useMemo(() => {
-    return (
-      Object.entries(errors).length > 0 ||
-      Object.values(watch()).some((value) => value === undefined)
-    );
-  }, [errors, watch]);
+  const formDisabled =
+    Object.entries(errors).length > 0 || hasUndefinedValues(watch());
 
   const renderFields = useCallback(() => {
     switch (type) {

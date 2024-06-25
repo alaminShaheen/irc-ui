@@ -61,7 +61,7 @@ const EventModal = (props: IAddEventModalProps) => {
             validActivities={validActivities}
             onFormSubmit={onSubmit}
             schema={schema}
-            className="w-full lg:w-[552px]"
+            className="w-full lg:w-[700px]"
           />
         )}
       </div>
