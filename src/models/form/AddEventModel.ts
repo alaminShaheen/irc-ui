@@ -1,20 +1,12 @@
 export type AddEventModel = {
   eventName: string;
-  rentalFacilityAgreementNumber: string;
-  facility: string;
-  startDate: Date;
-  startTime: Date;
-  endDate: Date;
-  endTime: Date;
+  facilityInfo: {
+    rentalFacilityAgreementNumber: string;
+    facility: string;
+    dateRanges: { startDate: Date; endDate: Date }[];
+  }[];
   repeatEvent: boolean;
   repeatFrequency: EventRepeatFrequency;
-  insuranceCoverageAmount: InsuranceCoverageAmount;
-  foodBeverageSale: BinaryResponse;
-  thirdPartyFoodPackaging: BinaryResponse;
-  requireAlcoholCoverage: BinaryResponse;
-  validDriverLicensesPresent: BinaryResponse;
-  selfTransportation: BinaryResponse;
-  rentalVehicleOwnage: BinaryResponse;
 };
 
 export enum BinaryResponse {

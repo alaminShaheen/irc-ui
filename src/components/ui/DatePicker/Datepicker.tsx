@@ -19,7 +19,6 @@ const Datepicker = forwardRef<DatePicker, IDatePickerProps>((props, ref) => {
       popperClassName="z-20"
       showIcon
       toggleCalendarOnIconClick
-      wrapperClassName="sakib"
       icon={
         <span className="absolute top-1/2 h-7 w-7 -translate-y-1/2 translate-x-1.5 transform cursor-pointer">
           {props.icon}
